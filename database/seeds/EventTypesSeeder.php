@@ -1,6 +1,6 @@
 <?php
-use App\Models\Event\Type;
-use Illuminate\Database\Eloquent\Model;
+
+use App\Repositories\Event\TypeRepository;
 use Illuminate\Database\Seeder;
 
 /**
@@ -8,11 +8,15 @@ use Illuminate\Database\Seeder;
  */
 class EventTypesSeeder extends Seeder
 {
+    private $repository;
+
+    public function __construct(TypeRepository $repository)
+    {
+        $this->repository = $repository;
+    }
 
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run()
     {
@@ -59,10 +63,8 @@ class EventTypesSeeder extends Seeder
             ],
         ];
 
-        Model::unguard();
         foreach ($data as $item) {
-            Type::create($item);
+            $this->repository->create($item);
         }
-//        Model::reguard();
     }
 }
