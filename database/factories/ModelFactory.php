@@ -26,10 +26,26 @@ $factory->define(App\Models\Speaker::class, function (Faker\Generator $faker) {
         'last_name'      => $faker->lastName,
         'email'          => $faker->safeEmail,
         'characteristic' => $faker->sentence(),
-        'job'            => $faker->word(),
+        'job'            => $faker->jobTitle,
         'organization'   => $faker->company(),
         'twitter_name'   => '@' . $faker->userName(),
         'website'        => $faker->url(),
         'avatar'         => $faker->imageUrl(),
+    ];
+});
+
+$factory->define(App\Models\Event::class, function (Faker\Generator $faker) {
+    $start_date = $faker->dateTimeBetween('+5 days', '+8 days');
+    $end_date = $faker->dateTimeBetween($start_date, strtotime('+8 hours', $start_date->getTimestamp()));
+
+    return [
+        'name'       => $faker->title,
+        'text'       => $faker->text(),
+        'start_at'   => $start_date,
+        'end_at'     => $end_date,
+        'place'      => $faker->address,
+        'version'    => $faker->optional()->randomNumber(),
+        'event_type' => $faker->randomElement(App\Models\Event::event_types_available),
+        'url'        => $faker->url,
     ];
 });
