@@ -8,7 +8,7 @@ namespace App\Transformers\Event;
 
 use League\Fractal\TransformerAbstract;
 
-class TypeTransformer extends TransformerAbstract
+class TrackTransformer extends TransformerAbstract
 {
     /**
      * List of resources possible to include
@@ -30,16 +30,15 @@ class TypeTransformer extends TransformerAbstract
      * @var  object
      * @return array
      */
-    public function transform($type)
+    public function transform($track)
     {
-        $data = [
-            'typeId'      => $type->id,
-            'typeName'    => $type->name,
-            'typeIconURL' => $type->icon,
-            'order'       => $type->order,
-            'deleted'     => $type->deleted_at ? 1 : 0,
+        $tracks = [
+            'trackId'   => $track->id,
+            'trackName' => $track->name,
+            'order'     => $track->order,
+            'deleted'   => $track->deleted_at ? 1 : 0,
         ];
 
-        return $data;
+        return $tracks;
     }
 }

@@ -30,15 +30,15 @@ class LevelTransformer extends TransformerAbstract
      * @var  object
      * @return array
      */
-    public function transform($type)
+    public function transform($level)
     {
-        $speakers = [
-            'levelId'   => $type->id,
-            'levelName' => $type->name,
-            'order'     => $type->order,
-            'deleted'   => $type->deleted_at ? 1 : 0,
+        $data = [
+            'levelId'   => $level->id,
+            'levelName' => $level->name,
+            'order'     => $level->order,
+            'deleted'   => $level->deleted_at ? 1 : 0,
         ];
 
-        return $speakers;
+        return $data;
     }
 }

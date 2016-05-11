@@ -23,5 +23,6 @@ $api->version('v2', ['middleware' => ['api'], 'namespace' => 'App\Http\Controlle
         $api->get('getSpeakers', 'SpeakersController@index');
         $api->get('getTypes', 'EventTypesController@index');
         $api->get('getLevels', 'EventLevelsController@index');
+        $api->get('getTracks', 'EventTracksController@index');
 
     });
