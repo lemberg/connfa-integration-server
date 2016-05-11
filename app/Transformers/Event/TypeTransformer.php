@@ -34,7 +34,7 @@ class TypeTransformer extends TransformerAbstract
     {
         $speakers = [
             'typeId'      => $type->id,
-            'typeName'    => $type->id,
+            'typeName'    => $type->name,
             'typeIconURL' => $type->icon,
             'order'       => $type->order,
             'deleted'     => $type->deleted_at ? 1 : 0,
