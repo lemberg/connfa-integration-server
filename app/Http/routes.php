@@ -17,8 +17,10 @@ Route::get('/', function () {
 
 $api = app('Dingo\Api\Routing\Router');
 
-$api->version('v2', ['middleware' => ['api'], 'namespace' => 'App\Http\Controllers\Api', 'prefix' => 'api/v2'],function ($api) {
+$api->version('v2', ['middleware' => ['api'], 'namespace' => 'App\Http\Controllers\Api', 'prefix' => 'api/v2'],
+    function ($api) {
 
-    $api->get('getSpeakers', 'SpeakersController@index');
+        $api->get('getSpeakers', 'SpeakersController@index');
+        $api->get('getTypes', 'EventTypesController@index');
 
-});
+    });

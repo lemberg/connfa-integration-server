@@ -3,11 +3,10 @@
  * @author       Lemberg Solution LAMP Team
  */
 
-namespace app\Http\Controllers\Api;
+namespace App\Http\Controllers\Api;
 
 
 use App\Http\Controllers\ApiController;
-use app\Models\Speaker;
 use App\Repositories\SpeakerRepository;
 use App\Transformers\SpeakerTransformer;
 
