@@ -14,8 +14,9 @@ class EventTracksController extends ApiController
 {
     public function index(TrackRepository $repository)
     {
-        $types = $repository->getTracksWithDeleted($this->since);
+        $tracks = $repository->getTracksWithDeleted($this->since);
+        $this->checkModified($tracks);
 
-        return $this->response->collection($types, new TrackTransformer(), ['key' => 'tracks']);
+        return $this->response->collection($tracks, new TrackTransformer(), ['key' => 'tracks']);
     }
 }

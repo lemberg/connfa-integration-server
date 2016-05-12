@@ -24,5 +24,6 @@ $api->version('v2', ['middleware' => ['api'], 'namespace' => 'App\Http\Controlle
         $api->get('getTypes', 'EventTypesController@index');
         $api->get('getLevels', 'EventLevelsController@index');
         $api->get('getTracks', 'EventTracksController@index');
+        $api->get('getSessions', 'SessionsController@index');
 
     });

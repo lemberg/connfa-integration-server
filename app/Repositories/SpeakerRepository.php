@@ -1,9 +1,8 @@
 <?php namespace App\Repositories;
 
 use App\Models\Role;
-use app\Models\Speaker;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Speaker;
+
 
 class SpeakerRepository extends BaseRepository
 {
