@@ -4,8 +4,6 @@ namespace App\Transformers;
 
 use League\Fractal;
 use League\Fractal\TransformerAbstract;
-use League\Fractal\Resource\Collection;
-use League\Fractal\Resource\Item;
 
 class SpeakerTransformer extends TransformerAbstract
 {

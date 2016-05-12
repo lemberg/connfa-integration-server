@@ -38,17 +38,12 @@ class EventsSeeder extends Seeder
             $types,
             $speakers
         ) {
-            $event->level_id = array_rand($levels);
-            $event->type_id = array_rand($types);
-            $event->track_id = array_rand($tracks);
+            $event->level_id = $this->faker->randomElement($levels);
+            $event->type_id = $this->faker->randomElement($types);
+            $event->track_id = $this->faker->randomElement($tracks);
             $event->speakers()->sync($this->faker->randomElements($speakers));
+            $event->save();
         });
-//        $data = [
-//
-//        ];
-//
-//        foreach ($data as $item) {
-//            $this->repository->create($item);
-//        }
+
     }
 }
