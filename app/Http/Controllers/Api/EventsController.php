@@ -11,11 +11,11 @@ use App\Repositories\EventRepository;
 use App\Transformers\EventTransformer;
 use App\Transformers\Event\SessionTransformer;
 
-class SessionsController extends ApiController
+class EventsController extends ApiController
 {
-    public function index(EventRepository $repository)
+    public function index($type, EventRepository $repository)
     {
-        $events = $repository->getEventsByTypeWithDeleted('program', $this->since);
+        $events = $repository->getEventsByTypeWithDeleted($type, $this->since);
         $this->checkModified($events);
 
         $transformer = new EventTransformer();

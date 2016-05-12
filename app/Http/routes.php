@@ -24,6 +24,8 @@ $api->version('v2', ['middleware' => ['api'], 'namespace' => 'App\Http\Controlle
         $api->get('getTypes', 'EventTypesController@index');
         $api->get('getLevels', 'EventLevelsController@index');
         $api->get('getTracks', 'EventTracksController@index');
-        $api->get('getSessions', 'SessionsController@index');
+        $api->get('getSessions', 'EventsController@index')->defaults('type', 'program');
+        $api->get('getBofs', 'EventsController@index')->defaults('type', 'bof');
+        $api->get('getSocialEvents', 'EventsController@index')->defaults('type', 'social');
 
     });
