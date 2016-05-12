@@ -5,7 +5,7 @@ use Illuminate\Database\Seeder;
 /**
  * @author       Lemberg Solution LAMP Team
  */
-class EventTracksSeeder extends Seeder
+class EventTracksTableSeeder extends Seeder
 {
     private $repository;
 

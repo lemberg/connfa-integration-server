@@ -5,7 +5,7 @@ use Illuminate\Database\Seeder;
 /**
  * @author       Lemberg Solution LAMP Team
  */
-class EventLevelsSeeder extends Seeder
+class EventLevelsTableSeeder extends Seeder
 {
     private $repository;
 

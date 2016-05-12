@@ -12,9 +12,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
          $this->call(SpeakersTableSeeder::class);
-         $this->call(EventLevelsSeeder::class);
-         $this->call(EventTypesSeeder::class);
-         $this->call(EventTracksSeeder::class);
-         $this->call(EventsSeeder::class);
+         $this->call(EventLevelsTableSeeder::class);
+         $this->call(EventTypesTableSeeder::class);
+         $this->call(EventTracksTableSeeder::class);
+         $this->call(EventsTableSeeder::class);
+         $this->call(SettingsTableSeeder::class);
     }
 }

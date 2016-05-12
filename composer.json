@@ -8,7 +8,8 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
         "dingo/api": "1.0.x@dev",
-        "bosnadev/repositories": " 0.*"
+        "bosnadev/repositories": " 0.*",
+        "vendocrat/laravel-settings": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

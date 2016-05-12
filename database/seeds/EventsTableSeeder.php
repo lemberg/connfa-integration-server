@@ -10,7 +10,7 @@ use Illuminate\Database\Seeder;
 /**
  * @author       Lemberg Solution LAMP Team
  */
-class EventsSeeder extends Seeder
+class EventsTableSeeder extends Seeder
 {
     private $repository;
     private $faker;

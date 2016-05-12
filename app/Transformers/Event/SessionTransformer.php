@@ -8,6 +8,7 @@ namespace App\Transformers\Event;
 
 
 use App\Transformers\EmbeddedTransformer as EmbeddedTransformer;
+use vendocrat\Settings\Facades\Setting;
 
 class SessionTransformer implements EmbeddedTransformer
 {
@@ -33,7 +34,8 @@ class SessionTransformer implements EmbeddedTransformer
      */
     public function transform($event)
     {
-        $tz = 'America/Chicago'; //@todo Get timezone from settings
+        $tz = Setting::get('timezone', 'UTC');
+
         $data = [
             'eventId'         => $event->id,
             'text'            => $event->text,
