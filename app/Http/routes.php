@@ -31,4 +31,5 @@ $api->version('v2', ['middleware' => ['api'], 'namespace' => 'App\Http\Controlle
         $api->get('getTwitter', 'SettingsController@getTwitter');
         $api->get('getFloorPlans', 'FloorsController@index');
         $api->get('getInfo', 'PagesController@index');
+        $api->get('getLocations', 'LocationsController@index');
     });

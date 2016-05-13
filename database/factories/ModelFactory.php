@@ -59,8 +59,17 @@ $factory->define(App\Models\Floor::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Models\Page::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->word,
-        'content'  => $faker->text(),
-        'alias'  => $faker->slug(),
+        'name'    => $faker->word,
+        'content' => $faker->text(),
+        'alias'   => $faker->slug(),
+    ];
+});
+
+$factory->define(App\Models\Location::class, function (Faker\Generator $faker) {
+    return [
+        'name'    => $faker->word,
+        'lat'     => $faker->latitude(),
+        'lon'     => $faker->longitude(),
+        'address' => $faker->address(),
     ];
 });
