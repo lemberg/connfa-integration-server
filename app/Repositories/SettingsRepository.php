@@ -1,6 +1,7 @@
 <?php namespace App\Repositories;
 
 
+use Carbon\Carbon;
 use vendocrat\Settings\Models\Setting;
 
 class SettingsRepository extends BaseRepository
@@ -32,4 +33,6 @@ class SettingsRepository extends BaseRepository
 
         return $settings->first();
     }
+
+    
 }
