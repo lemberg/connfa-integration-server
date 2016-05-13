@@ -21,4 +21,15 @@ class SettingsRepository extends BaseRepository
 
         return $settings->get();
     }
+
+    public function getByKeyWithDeleted($setting, $since)
+    {
+        $settings = Setting::withTrashed()->where('key', $setting);
+
+        if ($since) {
+            $settings->where('updated_at', '>=', $since->toDateTimeString());
+        }
+
+        return $settings->first();
+    }
 }
