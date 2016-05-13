@@ -49,3 +49,10 @@ $factory->define(App\Models\Event::class, function (Faker\Generator $faker) {
         'url'        => $faker->url,
     ];
 });
+
+$factory->define(App\Models\Floor::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word,
+        'url'  => $faker->imageUrl(),
+    ];
+});

@@ -29,4 +29,5 @@ $api->version('v2', ['middleware' => ['api'], 'namespace' => 'App\Http\Controlle
         $api->get('getSocialEvents', 'EventsController@index')->defaults('type', 'social');
         $api->get('getSettings', 'SettingsController@index');
         $api->get('getTwitter', 'SettingsController@getTwitter');
+        $api->get('getFloorPlans', 'FloorsController@index');
     });
