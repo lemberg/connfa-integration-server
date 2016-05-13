@@ -56,3 +56,11 @@ $factory->define(App\Models\Floor::class, function (Faker\Generator $faker) {
         'url'  => $faker->imageUrl(),
     ];
 });
+
+$factory->define(App\Models\Page::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word,
+        'content'  => $faker->text(),
+        'alias'  => $faker->slug(),
+    ];
+});
