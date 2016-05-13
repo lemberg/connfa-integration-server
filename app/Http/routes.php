@@ -32,4 +32,5 @@ $api->version('v2', ['middleware' => ['api'], 'namespace' => 'App\Http\Controlle
         $api->get('getFloorPlans', 'FloorsController@index');
         $api->get('getInfo', 'PagesController@index');
         $api->get('getLocations', 'LocationsController@index');
+        $api->get('getPoi', 'PointsController@index');
     });

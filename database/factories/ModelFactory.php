@@ -73,3 +73,12 @@ $factory->define(App\Models\Location::class, function (Faker\Generator $faker) {
         'address' => $faker->address(),
     ];
 });
+
+$factory->define(App\Models\Point::class, function (Faker\Generator $faker) {
+    return [
+        'name'        => $faker->word,
+        'description' => $faker->text(),
+        'image_url'   => $faker->imageUrl(),
+        'details_url' => $faker->url,
+    ];
+});
