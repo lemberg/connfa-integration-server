@@ -1,19 +1,19 @@
-<?php namespace App\Repositories;
+<?php
+namespace App\Repositories;
 
 use App\Models\Event;
-use App\Models\Role;
 
 class EventRepository extends BaseRepository
 {
 
     public function model()
     {
-        return 'App\Models\Event';
+        return Event::class;
     }
 
     public function getEventsByTypeWithDeleted($type, $since = false)
     {
-        $events = Event::withTrashed()->where('event_type', $type);
+        $events = $this->model->withTrashed()->where('event_type', $type);
 
         if ($since) {
             $events->where('updated_at', '>=', $since->toDateTimeString());

@@ -1,5 +1,5 @@
-<?php namespace App\Repositories;
-
+<?php
+namespace App\Repositories;
 
 use App\Models\Location;
 
@@ -8,15 +8,15 @@ class LocationRepository extends BaseRepository
 
     public function model()
     {
-        return 'App\Models\Location';
+        return Location::class;
     }
 
     public function getLocationsWithDeleted($since = false)
     {
         if ($since) {
-            return Location::withTrashed()->where('updated_at', '>=', $since->toDateTimeString())->get();
+            return $this->model->withTrashed()->where('updated_at', '>=', $since->toDateTimeString())->get();
         }
 
-        return Location::withTrashed()->get();
+        return $this->model->withTrashed()->get();
     }
 }
