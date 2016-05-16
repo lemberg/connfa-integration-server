@@ -4,4 +4,9 @@
 Homestead.yaml
 Homestead.json
 .env
+.env.testing
 .idea
+
+tests/_output/*
+tests/_envs/*
+tests/_support/*
