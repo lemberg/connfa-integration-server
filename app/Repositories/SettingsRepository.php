@@ -1,7 +1,6 @@
-<?php namespace App\Repositories;
+<?php
+namespace App\Repositories;
 
-
-use Carbon\Carbon;
 use vendocrat\Settings\Models\Setting;
 
 class SettingsRepository extends BaseRepository
@@ -9,12 +8,12 @@ class SettingsRepository extends BaseRepository
 
     public function model()
     {
-        return 'vendocrat\Settings\Models\Setting';
+        return Setting::class;
     }
 
     public function getSettingsWithDeleted($since = false)
     {
-        $settings = Setting::withTrashed();
+        $settings = $this->model->withTrashed();
 
         if ($since) {
             $settings->where('updated_at', '>=', $since->toDateTimeString());
@@ -25,7 +24,7 @@ class SettingsRepository extends BaseRepository
 
     public function getByKeyWithDeleted($setting, $since)
     {
-        $settings = Setting::withTrashed()->where('key', $setting);
+        $settings = $this->model->withTrashed()->where('key', $setting);
 
         if ($since) {
             $settings->where('updated_at', '>=', $since->toDateTimeString());
@@ -33,6 +32,4 @@ class SettingsRepository extends BaseRepository
 
         return $settings->first();
     }
-
-    
 }

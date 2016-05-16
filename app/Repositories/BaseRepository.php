@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Repositories;
 
 use Bosnadev\Repositories\Contracts\RepositoryInterface;
@@ -36,11 +35,16 @@ class BaseRepository extends Repository implements RepositoryInterface
      * @param array $params
      * @return bool
      */
-    public function getLastUpdate($since, $params = [])
+    public function checkLastUpdate($since, $params = [])
     {
-        $data = $this->model->where('updated_at', '>=', $since->toDateTimeString());
+        $data = $this->model;
+
+        if ($since) {
+            $data = $data->where('updated_at', '>=', $since->toDateTimeString());
+        }
+
         if ($params) {
-            $data->where($params);
+            $data = $data->where($params);
         }
 
         $data = $data->first();

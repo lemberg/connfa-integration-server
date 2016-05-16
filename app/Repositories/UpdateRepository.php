@@ -1,13 +1,11 @@
 <?php
 namespace App\Repositories;
 
-use App\Models\User;
 use App\Repositories\Event\LevelRepository;
 use App\Repositories\Event\TrackRepository;
 use App\Repositories\Event\TypeRepository;
 
-
-class UpdateRepository extends BaseRepository
+class UpdateRepository
 {
 
     protected $objectsMap = array(
@@ -68,11 +66,6 @@ class UpdateRepository extends BaseRepository
         ),
     );
 
-    public function model()
-    {
-        return User::class;
-    }
-
     public function getLastUpdate($since, $params = [])
     {
         $updates = [];
@@ -82,7 +75,7 @@ class UpdateRepository extends BaseRepository
 
             $params = array_get($item, 'params', []);
 
-            if ($repository->getLastUpdate($since, $params)) {
+            if ($repository->checkLastUpdate($since, $params)) {
                 $updates[] = $item['id'];
             }
         }
