@@ -37,7 +37,7 @@ class LevelsCest extends BaseCest
         $I->seeResponseContainsJson(['levelName' => 'beginner']);
     }
 
-    public function tryToGetSpeakerWithFeatureIfModifiedSince(ApiTester $I)
+    public function tryToGetLevelWithFeatureIfModifiedSince(ApiTester $I)
     {
         $since = \Carbon\Carbon::parse('+5 hour');
         $I->haveALevel(['name' => 'beginner']);
