@@ -27,6 +27,11 @@ class UpdatesCest extends BaseCest
         $I->sendGET('v2/checkUpdates');
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson(['idsForUpdate' => [2, 4]]);
+
+        $I->haveAType(['name' => 'test']);
+        $I->sendGET('v2/checkUpdates');
+        $I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson(['idsForUpdate' => [1, 2, 4]]);
     }
 
     public function tryToCheckUpdatesWithFeatureSince(ApiTester $I)
