@@ -1,6 +1,7 @@
 <?php
 
 use App\Repositories\Event\LevelRepository;
+use App\Repositories\Event\TrackRepository;
 use App\Repositories\Event\TypeRepository;
 use App\Repositories\SpeakerRepository;
 use Faker\Factory as Faker;
@@ -40,6 +41,16 @@ class Seeder
         ],$data);
 
         return $this->make(LevelRepository::class)->create($data);
+    }
+
+    public function track($data = [])
+    {
+        $data = array_merge([
+            'name' => $this->faker->word,
+            'order' => $this->faker->randomFloat(),
+        ],$data);
+
+        return $this->make(TrackRepository::class)->create($data);
     }
 
     public function type($data = [])
