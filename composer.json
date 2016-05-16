@@ -33,7 +33,8 @@
             "app/Transformers/Traits",
             "app/Transformers/Interfaces",
             "app/Models",
-            "app/Extensions"
+            "app/Extensions",
+            "tests/api"
         ]
     },
     "scripts": {

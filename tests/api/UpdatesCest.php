@@ -18,5 +18,10 @@ class UpdatesCest extends BaseCest
         $I->sendGET('v2/checkUpdates');
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson(['idsForUpdate' => []]);
+
+        $I->haveAnSpeaker(['first_name' => 'test', 'last_name' => 'Speaker']);
+        $I->sendGET('v2/checkUpdates');
+        $I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson(['idsForUpdate' => [4]]);
     }
 }
