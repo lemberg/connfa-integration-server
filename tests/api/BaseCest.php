@@ -11,14 +11,8 @@ class BaseCest
     {
     }
 
-    private function setup_db() {
-        $db_connection = config('database.default');
-        if ($db_connection == 'sqlite') {
-            $file = config('database.connections.'.$db_connection.'.database');
-            unlink($file);
-            touch($file);
-
-            Artisan::call('migrate');
-        }
+    private function setup_db()
+    {
+        Artisan::call('migrate');
     }
 }
