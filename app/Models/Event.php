@@ -34,6 +34,8 @@ class Event extends Model
         'event_type',
     ];
 
+    protected $dates = ['start_at', 'end_at'];
+
     public function level()
     {
         return $this->belongsTo('App\Models\Event\Level');
@@ -66,7 +68,7 @@ class Event extends Model
 
     public function getDateAttribute()
     {
-        return date('Y-m-d', strtotime($this->start_at));
+        return $this->start_at->format('Y-m-d');
     }
 
 }

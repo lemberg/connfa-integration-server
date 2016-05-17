@@ -3,6 +3,7 @@
 use App\Repositories\Event\LevelRepository;
 use App\Repositories\Event\TrackRepository;
 use App\Repositories\Event\TypeRepository;
+use App\Repositories\EventRepository;
 use App\Repositories\LocationRepository;
 use App\Repositories\SpeakerRepository;
 use Faker\Factory as Faker;
@@ -63,6 +64,25 @@ class Seeder
         ], $data);
 
         return $this->make(TypeRepository::class)->create($data);
+    }
+
+    public function event($data = [])
+    {
+        $start_date = $this->faker->dateTimeBetween('+5 days', '+8 days');
+        $end_date = $this->faker->dateTimeBetween($start_date, strtotime('+8 hours', $start_date->getTimestamp()));
+
+        $data = array_merge([
+            'name'       => $this->faker->words(3),
+            'text'       => $this->faker->text(),
+            'start_at'   => $start_date,
+            'end_at'     => $end_date,
+            'place'      => $this->faker->address,
+            'version'    => $this->faker->optional()->randomNumber(),
+            'event_type' => $this->faker->randomElement(App\Models\Event::event_types_available),
+            'url'        => $this->faker->url,
+        ], $data);
+
+        return $this->make(EventRepository::class)->create($data);
     }
 
     public function location($data = [])

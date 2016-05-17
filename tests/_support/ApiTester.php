@@ -45,6 +45,6 @@ class ApiTester extends \Codeception\Actor
             $method = explode('haveA', $name);
         }
 
-        $this->seeder->$method[1]($arguments[0]);
+        return $this->seeder->$method[1]($arguments[0]);
     }
 }
