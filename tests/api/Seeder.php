@@ -5,6 +5,7 @@ use App\Repositories\Event\TrackRepository;
 use App\Repositories\Event\TypeRepository;
 use App\Repositories\EventRepository;
 use App\Repositories\LocationRepository;
+use App\Repositories\PageRepository;
 use App\Repositories\SpeakerRepository;
 use Faker\Factory as Faker;
 
@@ -83,6 +84,18 @@ class Seeder
         ], $data);
 
         return $this->make(EventRepository::class)->create($data);
+    }
+
+    public function page($data = [])
+    {
+        $data = array_merge([
+            'name'    => $this->faker->word,
+            'content' => $this->faker->text(),
+            'alias'   => $this->faker->slug(),
+            'order'   => $this->faker->randomFloat(),
+        ], $data);
+
+        return $this->make(PageRepository::class)->create($data);
     }
 
     public function location($data = [])
