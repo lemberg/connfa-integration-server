@@ -39,7 +39,7 @@ $factory->define(App\Models\Event::class, function (Faker\Generator $faker) {
     $end_date = $faker->dateTimeBetween($start_date, strtotime('+8 hours', $start_date->getTimestamp()));
 
     return [
-        'name'       => $faker->words(3),
+        'name'       => $faker->sentence(3),
         'text'       => $faker->text(),
         'start_at'   => $start_date,
         'end_at'     => $end_date,

@@ -6,6 +6,9 @@
 namespace App\Models;
 
 
+use App\Models\Event\Level;
+use App\Models\Event\Track;
+use App\Models\Event\Type;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -36,17 +39,17 @@ class Event extends Model
 
     public function level()
     {
-        return $this->belongsTo('App\Models\Event\Level');
+        return $this->belongsTo(Level::class);
     }
 
     public function type()
     {
-        return $this->belongsTo('App\Models\Event\Type');
+        return $this->belongsTo(Type::class);
     }
 
     public function track()
     {
-        return $this->belongsTo('App\Models\Event\Track');
+        return $this->belongsTo(Track::class);
     }
 
     public function speakers()
