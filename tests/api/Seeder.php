@@ -3,6 +3,7 @@
 use App\Repositories\Event\LevelRepository;
 use App\Repositories\Event\TrackRepository;
 use App\Repositories\Event\TypeRepository;
+use App\Repositories\LocationRepository;
 use App\Repositories\SpeakerRepository;
 use Faker\Factory as Faker;
 
@@ -36,9 +37,9 @@ class Seeder
     public function level($data = [])
     {
         $data = array_merge([
-            'name' => $this->faker->word,
+            'name'  => $this->faker->word,
             'order' => $this->faker->randomFloat(),
-        ],$data);
+        ], $data);
 
         return $this->make(LevelRepository::class)->create($data);
     }
@@ -46,9 +47,9 @@ class Seeder
     public function track($data = [])
     {
         $data = array_merge([
-            'name' => $this->faker->word,
+            'name'  => $this->faker->word,
             'order' => $this->faker->randomFloat(),
-        ],$data);
+        ], $data);
 
         return $this->make(TrackRepository::class)->create($data);
     }
@@ -56,12 +57,25 @@ class Seeder
     public function type($data = [])
     {
         $data = array_merge([
-            'name' => $this->faker->word,
-            'icon' => $this->faker->imageUrl(),
+            'name'  => $this->faker->word,
+            'icon'  => $this->faker->imageUrl(),
             'order' => $this->faker->randomFloat(),
-        ],$data);
+        ], $data);
 
         return $this->make(TypeRepository::class)->create($data);
+    }
+
+    public function location($data = [])
+    {
+        $data = array_merge([
+            'name'    => $this->faker->word,
+            'lat'     => $this->faker->latitude(),
+            'lon'     => $this->faker->longitude(),
+            'address' => $this->faker->address(),
+            'order'   => $this->faker->randomFloat(),
+        ], $data);
+
+        return $this->make(LocationRepository::class)->create($data);
     }
 
     protected function make($class, $attributes = [])
