@@ -31,8 +31,7 @@
             "tests/TestCase.php",
             "app/Transformers/Traits",
             "app/Transformers/Interfaces",
-            "app/Models",
-            "app/Extensions"
+            "app/Models"
         ]
     },
     "scripts": {
