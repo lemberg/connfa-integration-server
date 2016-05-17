@@ -6,6 +6,7 @@ use App\Repositories\Event\TypeRepository;
 use App\Repositories\EventRepository;
 use App\Repositories\LocationRepository;
 use App\Repositories\PageRepository;
+use App\Repositories\SettingsRepository;
 use App\Repositories\SpeakerRepository;
 use Faker\Factory as Faker;
 
@@ -109,6 +110,16 @@ class Seeder
         ], $data);
 
         return $this->make(LocationRepository::class)->create($data);
+    }
+
+    public function twitter($data = [])
+    {
+        $data = array_merge([
+            'twitterWidget'      => $this->faker->word,
+            'twitterSearchQuery' => '#' . $this->faker->word(),
+        ], $data);
+
+        return $this->make(SettingsRepository::class)->createTwitter($data);
     }
 
     protected function make($class, $attributes = [])
