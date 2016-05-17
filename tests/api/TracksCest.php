@@ -21,28 +21,28 @@ class TracksCest extends BaseCest
 
     public function tryToGetTrack(ApiTester $I)
     {
-        $I->haveATrack(['name' => 'beginner']);
+        $I->haveATrack(['name' => 'test']);
         $I->sendGET('v2/getTracks');
         $I->seeResponseCodeIs(200);
-        $I->seeResponseContainsJson(['trackName' => 'beginner']);
+        $I->seeResponseContainsJson(['trackName' => 'test']);
     }
 
     public function tryToGetTrackWithIfModifiedSince(ApiTester $I)
     {
         $since = \Carbon\Carbon::parse('-1 hour');
-        $I->haveATrack(['name' => 'beginner']);
+        $I->haveATrack(['name' => 'test']);
         $I->haveHttpHeader('If-modified-since', $since->toIso8601String());
         $I->sendGET('v2/getTracks');
         $I->seeResponseCodeIs(200);
-        $I->seeResponseContainsJson(['trackName' => 'beginner']);
+        $I->seeResponseContainsJson(['trackName' => 'test']);
     }
 
     public function tryToGetTrackWithFeatureIfModifiedSince(ApiTester $I)
     {
         $since = \Carbon\Carbon::parse('+5 hour');
-        $I->haveATrack(['name' => 'beginner']);
+        $I->haveATrack(['name' => 'test']);
         $I->haveHttpHeader('If-modified-since', $since->toIso8601String());
-        $I->sendGET('v2/getLevels');
+        $I->sendGET('v2/getTracks');
         $I->seeResponseCodeIs(304);
     }
 }
