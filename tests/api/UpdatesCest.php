@@ -11,6 +11,7 @@ class UpdatesCest extends BaseCest
     {
         parent::_after($I);
     }
+
     // tests
     public function tryToCheckUpdates(ApiTester $I)
     {
@@ -18,20 +19,26 @@ class UpdatesCest extends BaseCest
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson(['idsForUpdate' => []]);
 
-        $I->haveAnSpeaker(['first_name' => 'test', 'last_name' => 'Speaker']);
+        $I->haveAType(['name' => 'test']);
         $I->sendGET('v2/checkUpdates');
         $I->seeResponseCodeIs(200);
-        $I->seeResponseContainsJson(['idsForUpdate' => [4]]);
+        $I->seeResponseContainsJson(['idsForUpdate' => [1]]);
 
         $I->haveALevel(['name' => 'beginner']);
         $I->sendGET('v2/checkUpdates');
         $I->seeResponseCodeIs(200);
-        $I->seeResponseContainsJson(['idsForUpdate' => [2, 4]]);
+        $I->seeResponseContainsJson(['idsForUpdate' => [1, 2]]);
 
-        $I->haveAType(['name' => 'test']);
+        $I->haveATrack(['name' => 'test']);
         $I->sendGET('v2/checkUpdates');
         $I->seeResponseCodeIs(200);
-        $I->seeResponseContainsJson(['idsForUpdate' => [1, 2, 4]]);
+        $I->seeResponseContainsJson(['idsForUpdate' => [1, 2, 3]]);
+
+        $I->haveAnSpeaker(['first_name' => 'test', 'last_name' => 'Speaker']);
+        $I->sendGET('v2/checkUpdates');
+        $I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson(['idsForUpdate' => [1, 2, 3, 4]]);
+
     }
 
     public function tryToCheckUpdatesWithFeatureSince(ApiTester $I)
