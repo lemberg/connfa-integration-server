@@ -38,12 +38,12 @@ class SessionsCest extends BaseCest
         $I->seeResponseContainsJson(['name' => 'test']);
     }
 
-    public function tryToGetSpeakerWithFeatureIfModifiedSince(ApiTester $I)
+    public function tryToGetSessionWithFeatureIfModifiedSince(ApiTester $I)
     {
         $since = \Carbon\Carbon::parse('+5 hour');
         $I->haveAnEvent(['name' => 'test', 'event_type' => 'program']);
         $I->haveHttpHeader('If-modified-since', $since->toIso8601String());
-        $I->sendGET('v2/getSpeakers');
+        $I->sendGET('v2/getSessions');
         $I->seeResponseCodeIs(304);
     }
 }
