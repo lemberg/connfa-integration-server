@@ -29,7 +29,7 @@ class SettingsTable extends Migration
 		{
 		    $table->increments('id');
 
-            $table->string('group');
+            $table->string('group')->nullable();
             $table->string('key')->unique()->index();
             $table->string('value')->nullable();
 

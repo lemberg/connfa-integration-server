@@ -1,0 +1,12 @@
+class_name: ApiTester
+modules:
+    enabled:
+      - Helper\Api
+      - Asserts
+      - Laravel5:
+          cleanup: true
+          environment_file: .env.testing
+      - REST:
+          depends: Laravel5
+          url: http://local.connfa/api/
+          part: Json
