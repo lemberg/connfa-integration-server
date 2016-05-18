@@ -68,7 +68,7 @@ $factory->define(App\Models\Event::class, function (Faker\Generator $faker) {
         'end_at'     => $end_date,
         'place'      => $faker->address,
         'version'    => $faker->optional()->randomNumber(),
-        'event_type' => $faker->randomElement(App\Models\Event::event_types_available),
+        'event_type' => $faker->randomElement(App\Models\Event::$event_types_available),
         'url'        => $faker->url,
     ];
 });

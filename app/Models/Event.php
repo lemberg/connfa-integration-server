@@ -17,7 +17,7 @@ class Event extends Model
 {
     use SoftDeletes;
 
-    const event_types_available = [
+    public static $event_types_available = [
         'program',
         'bof',
         'social',
