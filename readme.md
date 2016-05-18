@@ -11,16 +11,16 @@ Documentation for Connfa Integration Server API can be found [here](http://connf
 ## Installation
 
 - clone repo
-- run <code>composer install</code> to download all dependencies
-- copy and rename <code>.env.example</code> file to <code>.env</code> and configure domains and database connections.
-- run <code>php artisan migrate</code> to create database structure
-- if you want to seed fake data into your database run <code>php artisan db:seed</code>
+- run ```composer install``` to download all dependencies
+- copy and rename ```.env.example``` file to ```.env``` and configure domains and database connections.
+- run ```php artisan migrate``` to create database structure
+- if you want to seed fake data into your database run ```php artisan db:seed```
 
 ## API Testing
 
-- To run API tests you need to create <code>.env.testing</code> and put there configuration for testing environment.
+- To run API tests you need to create ```.env.testing``` and put there configuration for testing environment.
 - API tests are written on [codeception library](https://github.com/Codeception/Codeception)
-- To run tests you need to run <code>./vendor/bin/codecept run api</code> command
+- To run tests you need to run ```./vendor/bin/codecept run api``` command
 
 ## License
 
