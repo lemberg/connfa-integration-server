@@ -31,6 +31,29 @@ $factory->define(App\Models\Speaker::class, function (Faker\Generator $faker) {
         'twitter_name'   => '@' . $faker->userName(),
         'website'        => $faker->url(),
         'avatar'         => $faker->imageUrl(),
+        'order'          => $faker->randomFloat(),
+    ];
+});
+
+$factory->define(App\Models\Event\Type::class, function (Faker\Generator $faker) {
+    return [
+        'name'  => $faker->word,
+        'icon'  => $faker->imageUrl(),
+        'order' => $faker->randomFloat(),
+    ];
+});
+
+$factory->define(App\Models\Event\Track::class, function (Faker\Generator $faker) {
+    return [
+        'name'  => $faker->word,
+        'order' => $faker->randomFloat(),
+    ];
+});
+
+$factory->define(App\Models\Event\Level::class, function (Faker\Generator $faker) {
+    return [
+        'name'  => $faker->word,
+        'order' => $faker->randomFloat(),
     ];
 });
 
@@ -62,6 +85,7 @@ $factory->define(App\Models\Page::class, function (Faker\Generator $faker) {
         'name'    => $faker->word,
         'content' => $faker->text(),
         'alias'   => $faker->slug(),
+        'order'   => $faker->randomFloat(),
     ];
 });
 
@@ -71,6 +95,7 @@ $factory->define(App\Models\Location::class, function (Faker\Generator $faker) {
         'lat'     => $faker->latitude(),
         'lon'     => $faker->longitude(),
         'address' => $faker->address(),
+        'order'   => $faker->randomFloat(),
     ];
 });
 
