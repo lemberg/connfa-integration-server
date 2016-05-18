@@ -11,11 +11,19 @@
 |
 */
 
-Route::get('/', function () {
+
+$app = app('router');
+$api = app('api.router');
+
+$app->get('/', function () {
     return view('welcome');
 });
 
-$api = app('Dingo\Api\Routing\Router');
+$app->auth();
+
+$app->get('/home', 'HomeController@index');
+
+
 
 $api->version('v2', ['middleware' => ['api'], 'namespace' => 'App\Http\Controllers\Api', 'prefix' => 'api/v2'],
     function ($api) {
@@ -35,3 +43,6 @@ $api->version('v2', ['middleware' => ['api'], 'namespace' => 'App\Http\Controlle
         $api->get('getPoi', 'PointsController@index');
         $api->get('checkUpdates', 'UpdatesController@index');
     });
+
+
+

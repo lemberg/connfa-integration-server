@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PagesTableSeeder::class);
         $this->call(LocationsTableSeeder::class);
         $this->call(PointsTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
     }
 }
