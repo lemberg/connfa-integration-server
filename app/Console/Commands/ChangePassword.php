@@ -50,17 +50,15 @@ class ChangePassword extends Command
         {
             return $this->error('The password must be at least 6 characters.');
         }
-        else
+        if(!$user = $this->findUser($name))
         {
-            if(!$user = $this->findUser($name))
-            {
-                return $this->error('The user is not registered.');
-            }
-            if($this->setNewPassword($password, $user->id))
-            {
-                return $this->info('Set a new password to the user.');
-            }
+            return $this->error('The user is not registered.');
         }
+        if($this->setNewPassword($password, $user->id))
+        {
+            return $this->info('Set a new password to the user.');
+        }
+
     }
 
     /**
@@ -127,7 +125,6 @@ class ChangePassword extends Command
      */
     private function setNewPassword($password, $id)
     {
-
         return $this->userRepository->updateRich(['password' => bcrypt($password)], $id);
     }
 
