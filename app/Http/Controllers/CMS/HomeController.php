@@ -1,9 +1,13 @@
 <?php
+/**
+ * @author       Lemberg Solution LAMP Team
+ */
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\CMS;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {

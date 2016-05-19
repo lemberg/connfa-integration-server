@@ -15,13 +15,20 @@
 $app = app('router');
 $api = app('api.router');
 
-$app->get('/', function () {
-    return view('welcome');
-});
-
 $app->auth();
 
-$app->get('/home', 'HomeController@index');
+$app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function($app)
+{
+    $app->get('/', function () {
+        return view('welcome');
+    });
+
+    $app->get('/home', 'HomeController@index');
+
+});
+
+
+
 
 
 
