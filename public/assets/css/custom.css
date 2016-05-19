@@ -3712,10 +3712,11 @@ a.hiddenanchor {
   border-top: 1px solid #CFD5D9;
   padding: 15px 0;
 }
+/*
 .login_content form input[type="submit"], #content form .submit {
   float: left;
   margin-left: 38px;
-}
+}*/
 .button a {
   background: url(http://cssdeck.com/uploads/media/items/8/8bcLQqF.png) 0 -112px no-repeat;
   color: #7E7E7E;
