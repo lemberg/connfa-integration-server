@@ -8,12 +8,11 @@ use App\Repositories\Event\TrackRepository;
 use App\Repositories\Event\TypeRepository;
 use App\Repositories\EventRepository;
 use App\Repositories\SpeakerRepository;
-use Carbon\Carbon;
 use Faker\Generator;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
-class seedEvents extends Command
+class SeedEvents extends Command
 {
     /**
      * The name and signature of the console command.
