@@ -20,7 +20,7 @@ $app->auth();
 $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function($app)
 {
     $app->get('/', function () {
-        return view('welcome');
+        return redirect('/dashboard');
     });
 
     $app->get('/dashboard', 'DashboardController@index');
