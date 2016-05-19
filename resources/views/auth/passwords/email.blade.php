@@ -1,47 +1,69 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- Main Content -->
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+    <title>Gentallela Alela! | </title>
 
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/email') }}">
-                        {{ csrf_field() }}
+    <!-- Bootstrap -->
+    <link href="{{ URL::asset('assets/vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{{ URL::asset('assets/vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">E-Mail Address</label>
+    <!-- Custom Theme Style -->
+    <link href="{{ URL::asset('assets/css/custom.css') }}" rel="stylesheet">
+</head>
 
-                            <div class="col-md-6">
-                                <input type="email" class="form-control" name="email" value="{{ old('email') }}">
+<body style="background:#F7F7F7;">
+<div class="">
+    <a class="hiddenanchor" id="toregister"></a>
+    <a class="hiddenanchor" id="tologin"></a>
 
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
+    <div id="wrapper">
+        <div id="login" class=" form">
+            <section class="login_content">
+
+                @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
+
+                <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/email') }}">
+                    {{ csrf_field() }}
+
+                    <h1>Reset Password</h1>
+
+                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+
+                            <input type="email" class="form-control" placeholder="E-Mail Address" name="email" value="{{ old('email') }}">
+
+                            @if ($errors->has('email'))
+                                <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
-                                @endif
-                            </div>
-                        </div>
+                            @endif
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-envelope"></i>Send Password Reset Link
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+                    </div>
+
+                    <div class="form-group">
+                            <button type="submit" class="btn btn-default submit">
+                                Send Password Reset Link
+                            </button>
+                    </div>
+                </form>
+            </section>
         </div>
     </div>
 </div>
-@endsection
+</body>
+</html>
+
+
+
+
+
