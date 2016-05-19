@@ -48,15 +48,17 @@ class ChangePassword extends Command
 
         if(strlen($password) < 5)
         {
-            $this->error('The password must be at least 6 characters.');
+            return $this->error('The password must be at least 6 characters.');
         }
         else
         {
-            if($user = $this->findUser($name))
+            if(!$user = $this->findUser($name))
             {
-                if($this->setNewPassword($password, $user->id)){
-                    $this->info('Set a new password to the user.');
-                }
+                return $this->error('The user is not registered.');
+            }
+            if($this->setNewPassword($password, $user->id))
+            {
+                return $this->info('Set a new password to the user.');
             }
         }
     }
@@ -88,9 +90,11 @@ class ChangePassword extends Command
         ];
 
         $validator = Validator::make(['email' => $data], $rules);
-        if ($validator->fails()) {
+        if ($validator->fails())
+        {
             return false;
         }
+
         return true;
     }
 
@@ -109,6 +113,7 @@ class ChangePassword extends Command
         {
             $attribute = 'email';
         }
+
         return $this->userRepository->findBy($attribute, $data);
     }
 
@@ -122,6 +127,7 @@ class ChangePassword extends Command
      */
     private function setNewPassword($password, $id)
     {
+
         return $this->userRepository->updateRich(['password' => bcrypt($password)], $id);
     }
 
