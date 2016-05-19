@@ -46,7 +46,7 @@ class ChangePassword extends Command
         $name = $this->option('name');
         $password = $this->option('password');
 
-        if(strlen($password) < 5)
+        if(strlen($password) < 6)
         {
             return $this->error('The password must be at least 6 characters.');
         }
