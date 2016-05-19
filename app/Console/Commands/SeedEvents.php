@@ -11,6 +11,7 @@ use App\Repositories\SpeakerRepository;
 use Faker\Generator;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\Console\Input\InputOption;
 
 class SeedEvents extends Command
 {
@@ -19,14 +20,14 @@ class SeedEvents extends Command
      *
      * @var string
      */
-    protected $signature = 'seed:events {--count=50} {--start_date=+5 days}';
+    protected $signature = 'events:seed {--count=50} {--start_date=+5 days}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Seed events database';
     protected $faker;
     protected $repository;
 
@@ -97,5 +98,16 @@ class SeedEvents extends Command
         $this->info("{$count} events created");
     }
 
+    /**
+     * Get the console command options.
+     *
+     * @return array
+     */
+    protected function getOptions()
+    {
+        return array(
+            array('count', null, InputOption::VALUE_OPTIONAL, 'count of events to create (50 by default)'),
+        );
+    }
 
 }
