@@ -13,16 +13,12 @@
     <link href="{{ URL::asset('assets/vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="{{ URL::asset('assets/vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
-
     <!-- Custom Theme Style -->
     <link href="{{ URL::asset('assets/css/custom.css') }}" rel="stylesheet">
 </head>
 
 <body style="background:#F7F7F7;">
 <div class="">
-    <a class="hiddenanchor" id="toregister"></a>
-    <a class="hiddenanchor" id="tologin"></a>
-
     <div id="wrapper">
         <div id="login" class=" form">
             <section class="login_content">
