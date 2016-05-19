@@ -9,7 +9,8 @@
         "laravel/framework": "5.2.*",
         "dingo/api": "1.0.x@dev",
         "bosnadev/repositories": " 0.*",
-        "vendocrat/laravel-settings": "dev-master"
+        "vendocrat/laravel-settings": "dev-master",
+        "codeception/codeception": "^2.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -31,7 +32,8 @@
             "tests/TestCase.php",
             "app/Transformers/Traits",
             "app/Transformers/Interfaces",
-            "app/Models"
+            "app/Models",
+            "tests/api"
         ]
     },
     "scripts": {

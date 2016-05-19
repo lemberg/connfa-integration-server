@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Console\Commands\ChangePassword;
+use App\Console\Commands\SeedEvents;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -13,8 +15,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        // Commands\Inspire::class,
-        'App\Console\Commands\ChangePassword'
+        ChangePassword::class,
+        SeedEvents::class,
     ];
 
     /**
@@ -25,7 +27,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+
     }
 }

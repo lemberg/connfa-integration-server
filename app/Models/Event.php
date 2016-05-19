@@ -17,7 +17,7 @@ class Event extends Model
 {
     use SoftDeletes;
 
-    const event_types_available = [
+    public static $event_types_available = [
         'program',
         'bof',
         'social',
@@ -36,6 +36,8 @@ class Event extends Model
         'url',
         'event_type',
     ];
+
+    protected $dates = ['start_at', 'end_at'];
 
     public function level()
     {
@@ -69,7 +71,7 @@ class Event extends Model
 
     public function getDateAttribute()
     {
-        return date('Y-m-d', strtotime($this->start_at));
+        return $this->start_at->format('Y-m-d');
     }
 
 }

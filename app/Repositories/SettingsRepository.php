@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use vendocrat\Settings\Models\Setting;
+use vendocrat\Settings\Facades\Setting as SettingFacade;
 
 class SettingsRepository extends BaseRepository
 {
@@ -31,5 +32,16 @@ class SettingsRepository extends BaseRepository
         }
 
         return $settings->first();
+    }
+
+    public function createTwitter($data)
+    {
+        if (array_get($data, 'twitterSearchQuery')) {
+            SettingFacade::set('twitterSearchQuery', array_get($data, 'twitterSearchQuery'));
+        }
+        if (array_get($data, 'twitterWidget')) {
+            SettingFacade::set('twitterWidget', array_get($data, 'twitterWidget'));
+        }
+        SettingFacade::save();
     }
 }

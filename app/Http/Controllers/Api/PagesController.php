@@ -19,6 +19,7 @@ class PagesController extends ApiController
         $this->checkModified($pages);
 
         $response = [];
+        $response['info'] = [];
         $response['title']['titleMajor'] = Setting::get('titleMajor');
         $response['title']['titleMinor'] = Setting::get('titleMinor');
 
