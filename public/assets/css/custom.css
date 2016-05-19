@@ -3655,7 +3655,7 @@ a.hiddenanchor {
   box-shadow: 0 1px 0 #fff, 0 -2px 5px rgba(0, 0, 0, 0.08) inset;
   border: 1px solid #c8c8c8;
   color: #777;
-  margin: 0 0 20px;
+  margin: 0 0 0px;
   width: 100%;
 }
 .login_content form input[type="text"]:focus, .login_content form input[type="email"]:focus, .login_content form input[type="password"]:focus {

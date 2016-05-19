@@ -23,7 +23,7 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function($app)
         return view('welcome');
     });
 
-    $app->get('/home', 'HomeController@index');
+    $app->get('/dashboard', 'DashboardController@index');
 
 });
 
