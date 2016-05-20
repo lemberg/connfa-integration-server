@@ -11,45 +11,36 @@
 |
 */
 
-
 $app = app('router');
 $api = app('api.router');
 
 $app->auth();
 
-$app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function($app)
-{
+$app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
     $app->get('/', function () {
         return redirect('/dashboard');
     });
 
     $app->get('/dashboard', 'DashboardController@index');
-
 });
 
-
-
-
-
-
-$api->version('v2', ['middleware' => ['api'], 'namespace' => 'App\Http\Controllers\Api', 'prefix' => 'api/v2'],
-    function ($api) {
-
-        $api->get('getSpeakers', 'SpeakersController@index');
-        $api->get('getTypes', 'EventTypesController@index');
-        $api->get('getLevels', 'EventLevelsController@index');
-        $api->get('getTracks', 'EventTracksController@index');
-        $api->get('getSessions', 'EventsController@index')->defaults('type', 'program');
-        $api->get('getBofs', 'EventsController@index')->defaults('type', 'bof');
-        $api->get('getSocialEvents', 'EventsController@index')->defaults('type', 'social');
-        $api->get('getSettings', 'SettingsController@index');
-        $api->get('getTwitter', 'SettingsController@getTwitter');
-        $api->get('getFloorPlans', 'FloorsController@index');
-        $api->get('getInfo', 'PagesController@index');
-        $api->get('getLocations', 'LocationsController@index');
-        $api->get('getPoi', 'PointsController@index');
-        $api->get('checkUpdates', 'UpdatesController@index');
-    });
-
-
-
+$api->version('v2', [
+    'middleware' => ['api'],
+    'namespace'  => 'App\Http\Controllers\Api',
+    'prefix'     => 'api/v2',
+], function ($api) {
+    $api->get('getSpeakers', 'SpeakersController@index');
+    $api->get('getTypes', 'EventTypesController@index');
+    $api->get('getLevels', 'EventLevelsController@index');
+    $api->get('getTracks', 'EventTracksController@index');
+    $api->get('getSessions', 'EventsController@index')->defaults('type', 'program');
+    $api->get('getBofs', 'EventsController@index')->defaults('type', 'bof');
+    $api->get('getSocialEvents', 'EventsController@index')->defaults('type', 'social');
+    $api->get('getSettings', 'SettingsController@index');
+    $api->get('getTwitter', 'SettingsController@getTwitter');
+    $api->get('getFloorPlans', 'FloorsController@index');
+    $api->get('getInfo', 'PagesController@index');
+    $api->get('getLocations', 'LocationsController@index');
+    $api->get('getPoi', 'PointsController@index');
+    $api->get('checkUpdates', 'UpdatesController@index');
+});
