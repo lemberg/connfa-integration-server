@@ -1,10 +1,6 @@
 <?php
-/**
- * @author       Lemberg Solution LAMP Team
- */
 
 namespace App\Http\Controllers\Api;
-
 
 use App\Http\Controllers\ApiController;
 use App\Repositories\SettingsRepository;
@@ -34,9 +30,9 @@ class SettingsController extends ApiController
     public function getTwitter(SettingsRepository $repository)
     {
         $html = $repository->getByKeyWithDeleted('twitterWidget', $this->since);
-        $search_query = $repository->getByKeyWithDeleted('twitterSearchQuery', $this->since);
+        $searchQuery = $repository->getByKeyWithDeleted('twitterSearchQuery', $this->since);
 
-        if (!$html && !$search_query && $this->request->hasHeader('If-Modified-Since')) {
+        if (!$html && !$searchQuery && $this->request->hasHeader('If-Modified-Since')) {
             throw new HttpException(304);
         }
 
@@ -46,8 +42,8 @@ class SettingsController extends ApiController
             $data['twitterWidgetHTML'] = $html->value;
         }
 
-        if ($search_query) {
-            $data['twitterSearchQuery'] = $search_query->value;
+        if ($searchQuery) {
+            $data['twitterSearchQuery'] = $searchQuery->value;
         }
 
         return $this->response->array($data);

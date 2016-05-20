@@ -1,10 +1,6 @@
 <?php
-/**
- * @author       Lemberg Solution LAMP Team
- */
 
 namespace App\Models;
-
 
 use App\Models\Event\Level;
 use App\Models\Event\Track;

@@ -39,5 +39,4 @@ class FloorTransformer extends TransformerAbstract
 
         return $data;
     }
-
 }

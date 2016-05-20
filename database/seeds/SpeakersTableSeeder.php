@@ -1,14 +1,9 @@
 <?php
-/**
- * @author       Lemberg Solution LAMP Team
- */
 
 use Illuminate\Database\Seeder;
 
-
 class SpeakersTableSeeder extends Seeder
 {
-
     /**
      * Run the database seeds.
      *

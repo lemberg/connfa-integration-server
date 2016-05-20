@@ -1,10 +1,6 @@
 <?php
-/**
- * @author       Lemberg Solution LAMP Team
- */
 
 namespace App\Repositories\Event;
-
 
 use app\Models\Event\Type;
 use App\Repositories\BaseRepository;

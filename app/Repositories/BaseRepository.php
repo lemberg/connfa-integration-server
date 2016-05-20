@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories;
 
 use Bosnadev\Repositories\Contracts\RepositoryInterface;

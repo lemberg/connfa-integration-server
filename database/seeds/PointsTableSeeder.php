@@ -1,14 +1,9 @@
 <?php
-/**
- * @author       Lemberg Solution LAMP Team
- */
 
 use Illuminate\Database\Seeder;
 
-
 class PointsTableSeeder extends Seeder
 {
-
     /**
      * Run the database seeds.
      *

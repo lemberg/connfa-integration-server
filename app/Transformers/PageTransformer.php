@@ -39,5 +39,4 @@ class PageTransformer extends TransformerAbstract
 
         return $data;
     }
-
 }

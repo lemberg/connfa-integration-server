@@ -1,8 +1,8 @@
-<?php namespace App\Repositories;
+<?php 
+
+namespace App\Repositories;
 
 use App\Models\Role;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class UserRepository extends BaseRepository
 {

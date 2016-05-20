@@ -45,5 +45,4 @@ class SpeakerTransformer extends TransformerAbstract
 
         return $speakers;
     }
-
 }

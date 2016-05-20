@@ -1,11 +1,6 @@
 <?php
-/**
- * @author       Lemberg Solution LAMP Team
- */
 
 namespace App\Transformers\Event;
-
-
 
 use App\Transformers\EmbeddedTransformer as EmbeddedTransformer;
 use vendocrat\Settings\Facades\Setting;

@@ -3,9 +3,6 @@
 use App\Repositories\Event\TypeRepository;
 use Illuminate\Database\Seeder;
 
-/**
- * @author       Lemberg Solution LAMP Team
- */
 class EventTypesTableSeeder extends Seeder
 {
     private $repository;

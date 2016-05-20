@@ -1,10 +1,6 @@
 <?php
-/**
- * @author       Lemberg Solution LAMP Team
- */
 
 namespace App\Transformers;
-
 
 use League\Fractal\TransformerAbstract;
 
