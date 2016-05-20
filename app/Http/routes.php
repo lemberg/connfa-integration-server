@@ -11,7 +11,6 @@
 |
 */
 
-
 $app = app('router');
 $api = app('api.router');
 
@@ -26,12 +25,7 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function($app)
     $app->get('/dashboard', 'DashboardController@index');
 
     $app->resource('levels', 'LevelsController');
-
-
 });
-
-
-
 
 $api->version('v2', ['middleware' => ['api'], 'namespace' => 'App\Http\Controllers\Api', 'prefix' => 'api/v2'],
     function ($api) {

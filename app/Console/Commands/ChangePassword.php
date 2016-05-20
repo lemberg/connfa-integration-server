@@ -13,7 +13,7 @@ class ChangePassword extends Command
      *
      * @var string
      */
-    protected $signature = 'change-password {--name=} {--password=}';
+    protected $signature = 'password:change {--name=} {--password=}';
 
     /**
      * The console command description.
@@ -22,13 +22,15 @@ class ChangePassword extends Command
      */
     protected $description = 'Change user password';
 
-
+    /**
+     * @var UserRepository
+     */
     private $userRepository;
 
     /**
-     * Create a new command instance.
+     * ChangePassword constructor.
      *
-     * @return void
+     * @param UserRepository $userRepository
      */
     public function __construct(UserRepository $userRepository)
     {
@@ -50,15 +52,16 @@ class ChangePassword extends Command
         {
             return $this->error('The password must be at least 6 characters.');
         }
+
         if(!$user = $this->findUser($name))
         {
             return $this->error('The user is not registered.');
         }
-        if($this->setNewPassword($password, $user->id))
+
+        if($this->setNewPassword($user->id, $password))
         {
             return $this->info('Set a new password to the user.');
         }
-
     }
 
     /**
@@ -68,10 +71,10 @@ class ChangePassword extends Command
      */
     protected function getOptions()
     {
-        return array(
-            array('name', null, InputOption::VALUE_REQUIRED, 'name or email'),
-            array('password', null, InputOption::VALUE_REQUIRED, 'new password')
-        );
+        return [
+            ['name', null, InputOption::VALUE_REQUIRED, 'name or email'],
+            ['password', null, InputOption::VALUE_REQUIRED, 'new password'],
+        ];
     }
 
     /**
@@ -96,7 +99,6 @@ class ChangePassword extends Command
         return true;
     }
 
-    
     /**
      * find user by name or email
      *
@@ -118,14 +120,13 @@ class ChangePassword extends Command
     /**
      * set new password
      *
-     * @param string $password
      * @param int $id
+     * @param string $password
      *
      * @return boolean
      */
-    private function setNewPassword($password, $id)
+    private function setNewPassword($id, $password)
     {
-        return $this->userRepository->updateRich(['password' => bcrypt($password)], $id);
+        return $this->userRepository->changePassword($id, $password);
     }
-
 }
