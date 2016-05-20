@@ -69,6 +69,5 @@ class EmulateEventsUpdates extends Command
         }
 
         return $this->info("Events updated successfully: {$updatedCount} events updated, {$deletedCount} events deleted");
-
     }
 }
