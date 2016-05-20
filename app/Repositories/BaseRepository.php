@@ -5,11 +5,10 @@ namespace App\Repositories;
 use Bosnadev\Repositories\Contracts\RepositoryInterface;
 use Bosnadev\Repositories\Eloquent\Repository;
 use Carbon\Carbon;
-use Illuminate\Container\Container as App;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class BaseRepository extends Repository implements RepositoryInterface
 {
-
     public $errors;
 
     public function model()
@@ -20,7 +19,7 @@ class BaseRepository extends Repository implements RepositoryInterface
         $found = $this->find($id, $columns);
 
         if (!$found) {
-            abort(404);
+            throw new NotFoundHttpException;
         }
 
         return $found;
