@@ -14,13 +14,20 @@ class LevelsController extends BaseController
     protected $viewsFolder = 'levels';
 
     /**
+     * Where to redirect users after create / update.
+     *
+     * @var string
+     */
+    protected $redirectTo = '/levels';
+
+    /**
      * LevelsController constructor.
      * @param LevelRequest $request
      * @param LevelRepository $levelRepository
      */
     public function __construct(LevelRequest $request, LevelRepository $levelRepository)
     {
-        parent::__construct($this->viewsFolder, $request, $levelRepository);
+        parent::__construct($this->viewsFolder, $request, $levelRepository, $this->redirectTo);
     }
 
 }

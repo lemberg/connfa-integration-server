@@ -25,17 +25,26 @@ class BaseController extends Controller
     protected $repository = '';
 
     /**
+     * Where to redirect users after create / update.
+     *
+     * @var string
+     */
+    protected $redirectTo = '';
+
+    /**
      * BaseController constructor.
      *
      * @param string $viewsFolder
      * @param Request $request
      * @param BaseRepository $repository
+     * @param string $redirectTo
      */
-    public function __construct($viewsFolder, Request $request, BaseRepository $repository)
+    public function __construct($viewsFolder, Request $request, BaseRepository $repository, $redirectTo)
     {
         $this->viewsFolder = $viewsFolder;
         $this->request = $request;
         $this->repository = $repository;
+        $this->redirectTo = $redirectTo;
     }
 
     /**
@@ -45,7 +54,7 @@ class BaseController extends Controller
      */
     public function index()
     {
-        return view($this->viewsFolder . '.index', ['data' => $this->repository->paginate(1)]);
+        return view($this->viewsFolder . '.index', ['data' => $this->repository->paginate(25)]);
     }
 
     /**
@@ -65,7 +74,7 @@ class BaseController extends Controller
     {
         $this->repository->create($this->request->all());
 
-        return back();
+        return redirect($this->redirectTo);
     }
 
     /**
@@ -100,7 +109,7 @@ class BaseController extends Controller
     {
         $this->repository->update($this->request->except('_method', '_token'), $id);
 
-        return back();
+        return redirect($this->redirectTo);
     }
 
     /**
