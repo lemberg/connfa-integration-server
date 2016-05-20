@@ -21,7 +21,7 @@ class SessionsCest extends BaseCest
 
     public function tryToGetSession(ApiTester $I)
     {
-        $event = $I->haveAnEvent(['name' => 'test', 'event_type' => 'program']);
+        $event = $I->haveAnEvent(['name' => 'test', 'event_type' => 'session']);
         $I->sendGET('v2/getSessions');
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson(['date' => $event->date]);
@@ -31,7 +31,7 @@ class SessionsCest extends BaseCest
     public function tryToGetSessionWithIfModifiedSince(ApiTester $I)
     {
         $since = \Carbon\Carbon::parse('-1 hour');
-        $event = $I->haveAnEvent(['name' => 'test', 'event_type' => 'program']);
+        $event = $I->haveAnEvent(['name' => 'test', 'event_type' => 'session']);
         $I->haveHttpHeader('If-modified-since', $since->toIso8601String());
         $I->sendGET('v2/getSessions');
         $I->seeResponseCodeIs(200);
@@ -41,7 +41,7 @@ class SessionsCest extends BaseCest
     public function tryToGetSessionWithFeatureIfModifiedSince(ApiTester $I)
     {
         $since = \Carbon\Carbon::parse('+5 hour');
-        $I->haveAnEvent(['name' => 'test', 'event_type' => 'program']);
+        $I->haveAnEvent(['name' => 'test', 'event_type' => 'session']);
         $I->haveHttpHeader('If-modified-since', $since->toIso8601String());
         $I->sendGET('v2/getSessions');
         $I->seeResponseCodeIs(304);
