@@ -2,10 +2,11 @@
 
 namespace App\Transformers;
 
-use League\Fractal;
+use League\Fractal\TransformerAbstract;
 
-class PageTransformer implements EmbeddedTransformer
+class InfoTransformer extends TransformerAbstract
 {
+    use TransformTrait;
     /**
      * List of resources possible to include
      *
@@ -26,14 +27,11 @@ class PageTransformer implements EmbeddedTransformer
      * @var  object
      * @return array
      */
-    public function transform($page)
+    public function transform($info)
     {
         $data = [
-            'infoId'    => $page->id,
-            'infoTitle' => $page->name,
-            'html'      => $page->content,
-            'order'     => $page->order,
-            'deleted'   => $page->deleted_at ? 1 : 0,
+            'title'    => array_get($info, 'title'),
+            'info' => $this->transformEmbedded(array_get($info, 'info'), new PageTransformer()),
         ];
 
         return $data;

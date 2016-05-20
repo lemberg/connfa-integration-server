@@ -33,9 +33,9 @@ $api->version('v2', [
     $api->get('getTypes', 'EventTypesController@index');
     $api->get('getLevels', 'EventLevelsController@index');
     $api->get('getTracks', 'EventTracksController@index');
-    $api->get('getSessions', 'EventsController@index')->defaults('type', 'program');
-    $api->get('getBofs', 'EventsController@index')->defaults('type', 'bof');
-    $api->get('getSocialEvents', 'EventsController@index')->defaults('type', 'social');
+    $api->get('getSessions', 'EventsController@getSessions');
+    $api->get('getBofs', 'EventsController@getBofs');
+    $api->get('getSocialEvents', 'EventsController@getSocialEvents');
     $api->get('getSettings', 'SettingsController@index');
     $api->get('getTwitter', 'SettingsController@getTwitter');
     $api->get('getFloorPlans', 'FloorsController@index');
