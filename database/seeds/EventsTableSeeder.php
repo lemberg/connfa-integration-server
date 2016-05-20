@@ -7,9 +7,6 @@ use App\Models\Speaker;
 use App\Repositories\Event\TypeRepository;
 use Illuminate\Database\Seeder;
 
-/**
- * @author       Lemberg Solution LAMP Team
- */
 class EventsTableSeeder extends Seeder
 {
     private $repository;

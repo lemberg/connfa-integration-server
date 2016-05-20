@@ -2,9 +2,6 @@
 
 use Illuminate\Database\Seeder;
 
-/**
- * @author       Lemberg Solution LAMP Team
- */
 class PagesTableSeeder extends Seeder
 {
     /**

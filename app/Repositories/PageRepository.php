@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Models\Page;
@@ -8,15 +9,15 @@ class PageRepository extends BaseRepository
 
     public function model()
     {
-        return 'App\Models\Page';
+        return Page::class;
     }
 
     public function getPagesWithDeleted($since = false)
     {
         if ($since) {
-            return Page::withTrashed()->where('updated_at', '>=', $since->toDateTimeString())->get();
+            return $this->model->withTrashed()->where('updated_at', '>=', $since->toDateTimeString())->get();
         }
 
-        return Page::withTrashed()->get();
+        return $this->model->withTrashed()->get();
     }
 }

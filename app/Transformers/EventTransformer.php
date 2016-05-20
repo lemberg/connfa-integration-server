@@ -1,12 +1,7 @@
 <?php
-/**
- * @author       Lemberg Solution LAMP Team
- */
 
 namespace App\Transformers;
 
-
-use App\Transformers\Event\SessionTransformer;
 use League\Fractal\TransformerAbstract;
 
 class EventTransformer extends TransformerAbstract
@@ -45,12 +40,12 @@ class EventTransformer extends TransformerAbstract
 
         foreach ($dates as $key => $date) {
 
-            $day_events = array_where($data, function ($key, $event) use ($date) {
+            $dayEvents = array_where($data, function ($key, $event) use ($date) {
                 return $event['date'] == $date;
             });
 
             $result['days'][$key]['date'] = $date;
-            $result['days'][$key]['events'] = $this->transformEmbedded($day_events, $this->embeddedTransformer);
+            $result['days'][$key]['events'] = $this->transformEmbedded($dayEvents, $this->embeddedTransformer);
         }
 
         return $result;

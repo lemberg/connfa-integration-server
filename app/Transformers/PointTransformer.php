@@ -41,5 +41,4 @@ class PointTransformer extends TransformerAbstract
 
         return $data;
     }
-
 }

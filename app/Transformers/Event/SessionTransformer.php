@@ -1,17 +1,21 @@
 <?php
-/**
- * @author       Lemberg Solution LAMP Team
- */
 
 namespace App\Transformers\Event;
 
-
-
 use App\Transformers\EmbeddedTransformer as EmbeddedTransformer;
-use vendocrat\Settings\Facades\Setting;
+use vendocrat\Settings\SettingsManager;
 
 class SessionTransformer implements EmbeddedTransformer
 {
+    /**
+     * @var Setting
+     */
+    protected $settings;
+
+    public function __construct(SettingsManager $setting)
+    {
+        $this->settings = $setting;
+    }
     /**
      * List of resources possible to include
      *
@@ -34,7 +38,7 @@ class SessionTransformer implements EmbeddedTransformer
      */
     public function transform($event)
     {
-        $tz = Setting::get('timezone', 'UTC');
+        $tz = $this->settings->get('timezone', 'UTC');
 
         $data = [
             'eventId'         => $event->id,

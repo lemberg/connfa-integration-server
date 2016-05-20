@@ -47,28 +47,27 @@ class EmulateEventsUpdates extends Command
     {
         $events = $this->eventRepository->all();
 
-        $count_changes = rand(1, $events->count());
-        $events_to_change = array_rand($events->toArray(), $count_changes);
+        $countChanges = rand(1, $events->count());
+        $eventsToChange = array_rand($events->toArray(), $countChanges);
         $changes = ['update', 'delete'];
-        $updated_count = 0;
-        $deleted_count = 0;
+        $updatedCount = 0;
+        $deletedCount = 0;
 
-        foreach ($events_to_change as $event_key) {
+        foreach ($eventsToChange as $eventKey) {
             $action = $changes[array_rand($changes)];
 
             if ($action == 'update') {
-                $events[$event_key]->text .= "<br/>Changed";
-                $events[$event_key]->save();
-                $updated_count++;
+                $events[$eventKey]->text .= "<br/>Changed";
+                $events[$eventKey]->save();
+                $updatedCount++;
             }
 
             if ($action == 'delete') {
-                $events[$event_key]->delete();
-                $deleted_count++;
+                $events[$eventKey]->delete();
+                $deletedCount++;
             }
         }
 
-        return $this->info("Events updated successfuly: {$updated_count} events updated, {$deleted_count} events deleted");
-
+        return $this->info("Events updated successfully: {$updatedCount} events updated, {$deletedCount} events deleted");
     }
 }

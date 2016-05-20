@@ -1,24 +1,21 @@
 <?php
-/**
- * @author       Lemberg Solution LAMP Team
- */
 
 namespace App\Models;
-
 
 use App\Models\Event\Level;
 use App\Models\Event\Track;
 use App\Models\Event\Type;
-use Carbon\Carbon;
+use App\Models\Traits\DateFormatterTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Event extends Model
 {
     use SoftDeletes;
+    use DateFormatterTrait;
 
     public static $event_types_available = [
-        'program',
+        'session',
         'bof',
         'social',
     ];
@@ -59,14 +56,14 @@ class Event extends Model
         return $this->belongsToMany(Speaker::class);
     }
 
-    public function getFormattedStartAt($tz, $format = 'Iso8601String')
+    public function getFormattedStartAt($tz)
     {
-        return Carbon::parse($this->start_at, $tz)->{'to'.$format}();
+        return $this->getFormattedDate($this->start_at, $tz);
     }
 
-    public function getFormattedEndAt($tz, $format = 'Iso8601String')
+    public function getFormattedEndAt($tz)
     {
-        return Carbon::parse($this->end_at, $tz)->{'to'.$format}();
+        return $this->getFormattedDate($this->end_at, $tz);
     }
 
     public function getDateAttribute()

@@ -2,11 +2,11 @@
 
 namespace App\Transformers;
 
-use League\Fractal;
 use League\Fractal\TransformerAbstract;
 
-class FloorTransformer extends TransformerAbstract
+class InfoTransformer extends TransformerAbstract
 {
+    use TransformTrait;
     /**
      * List of resources possible to include
      *
@@ -27,14 +27,11 @@ class FloorTransformer extends TransformerAbstract
      * @var  object
      * @return array
      */
-    public function transform($floor)
+    public function transform($info)
     {
         $data = [
-            'housePlanId'       => $floor->id,
-            'housePlanName'     => $floor->name,
-            'housePlanImageURL' => $floor->url,
-            'order'             => $floor->order,
-            'deleted'           => $floor->deleted_at ? 1 : 0,
+            'title'    => array_get($info, 'title'),
+            'info' => $this->transformEmbedded(array_get($info, 'info'), new PageTransformer()),
         ];
 
         return $data;

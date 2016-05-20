@@ -1,14 +1,10 @@
 <?php
-/**
- * @author       Lemberg Solution LAMP Team
- */
 
 use Illuminate\Database\Seeder;
 use vendocrat\Settings\Facades\Setting;
 
 class SettingsTableSeeder extends Seeder
 {
-
     /**
      * Run the database seeds.
      *

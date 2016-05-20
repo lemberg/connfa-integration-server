@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Transformers;
 
 interface EmbeddedTransformer

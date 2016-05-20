@@ -38,5 +38,4 @@ class AuthentificateTransformer extends TransformerAbstract
 
         return $data;
     }
-
 }

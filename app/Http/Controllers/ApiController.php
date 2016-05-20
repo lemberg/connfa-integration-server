@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use Dingo\Api\Routing\Helpers;
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -11,15 +12,26 @@ class ApiController extends Controller
 {
     use Helpers;
 
+    /**
+     * @var Request
+     */
     protected $request;
-    protected $requestedUser;
 
+    /**
+     * @var Carbon
+     */
     protected $since;
 
-    public function __construct(Request $request)
+    /**
+     * @var Container
+     */
+    protected $app;
+
+    public function __construct(Request $request, Container $app)
     {
         $this->since = false;
         $this->request = $request;
+        $this->app = $app;
 
         $since = $request->header('IF-Modified-Since', false);
         if ($since) {

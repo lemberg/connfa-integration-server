@@ -1,10 +1,6 @@
 <?php
-/**
- * @author       Lemberg Solution LAMP Team
- */
 
 namespace App\Http\Controllers\Api;
-
 
 use App\Http\Controllers\ApiController;
 use App\Repositories\FloorRepository;

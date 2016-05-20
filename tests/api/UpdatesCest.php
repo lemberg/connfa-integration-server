@@ -68,7 +68,6 @@ class UpdatesCest extends BaseCest
         $I->sendGET('v2/checkUpdates');
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson(['idsForUpdate' => [1, 2, 3, 4, 5, 7, 8, 9, 11, 12]]);
-
     }
 
     public function tryToCheckUpdatesWithFeatureSince(ApiTester $I)

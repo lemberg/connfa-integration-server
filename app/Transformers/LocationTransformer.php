@@ -41,5 +41,4 @@ class LocationTransformer extends TransformerAbstract
 
         return $data;
     }
-
 }

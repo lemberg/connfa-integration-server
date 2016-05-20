@@ -1,10 +1,6 @@
 <?php
-/**
- * @author       Lemberg Solution LAMP Team
- */
 
 use Illuminate\Database\Seeder;
-
 
 class LocationsTableSeeder extends Seeder
 {

@@ -28,7 +28,15 @@ class SeedEvents extends Command
      * @var string
      */
     protected $description = 'Seed events database';
+
+    /**
+     * @var Generator
+     */
     protected $faker;
+
+    /**
+     * @var EventRepository
+     */
     protected $repository;
 
     /**
@@ -60,12 +68,12 @@ class SeedEvents extends Command
         SpeakerRepository $speakerRepository
     ) {
         $count = $this->option('count');
-        $start_date = $this->option('start_date');
+        $startDate = $this->option('start_date');
 
-        $clear_events = $this->confirm('Do you want to clear existing events before seeding new?
+        $clearEvents = $this->confirm('Do you want to clear existing events before seeding new?
          Note that tables will be truncated so mobile clients will no receive them as deleted', true);
 
-        if ($clear_events) {
+        if ($clearEvents) {
             DB::table('event_speaker')->truncate();
             DB::table('events')->truncate();
         }
@@ -81,13 +89,13 @@ class SeedEvents extends Command
             $types,
             $tracks,
             $speakers,
-            $start_date
+            $startDate
         ) {
-            $start_date = $this->faker->dateTimeBetween($start_date, strtotime('+3 days', strtotime($start_date)));
-            $end_date = $this->faker->dateTimeBetween($start_date, strtotime('+8 hours', $start_date->getTimestamp()));
+            $startDate = $this->faker->dateTimeBetween($startDate, strtotime('+3 days', strtotime($startDate)));
+            $endDate = $this->faker->dateTimeBetween($startDate, strtotime('+8 hours', $startDate->getTimestamp()));
 
-            $event->start_at = $start_date->format('Y-m-d H:00:00');
-            $event->end_at = $end_date->format('Y-m-d H:00:00');
+            $event->start_at = $startDate->format('Y-m-d H:00:00');
+            $event->end_at = $endDate->format('Y-m-d H:00:00');
             $event->level_id = $this->faker->randomElement($levels);
             $event->type_id = $this->faker->randomElement($types);
             $event->track_id = $this->faker->randomElement($tracks);
@@ -109,5 +117,4 @@ class SeedEvents extends Command
             array('count', null, InputOption::VALUE_OPTIONAL, 'count of events to create (50 by default)'),
         );
     }
-
 }

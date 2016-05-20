@@ -3,9 +3,8 @@
 namespace App\Transformers;
 
 use League\Fractal;
-use League\Fractal\TransformerAbstract;
 
-class PageTransformer extends TransformerAbstract
+class PageTransformer implements EmbeddedTransformer
 {
     /**
      * List of resources possible to include
@@ -39,5 +38,4 @@ class PageTransformer extends TransformerAbstract
 
         return $data;
     }
-
 }

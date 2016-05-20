@@ -1,10 +1,8 @@
 <?php
+
 use App\Repositories\Event\TrackRepository;
 use Illuminate\Database\Seeder;
 
-/**
- * @author       Lemberg Solution LAMP Team
- */
 class EventTracksTableSeeder extends Seeder
 {
     private $repository;
