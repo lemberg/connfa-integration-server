@@ -2,7 +2,6 @@
 
 namespace App\Console;
 
-use App\Console\Commands\ChangePassword;
 use App\Console\Commands\EmulateEventsUpdates;
 use App\Console\Commands\SeedEvents;
 use Illuminate\Console\Scheduling\Schedule;
@@ -16,7 +15,6 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        ChangePassword::class,
         SeedEvents::class,
         EmulateEventsUpdates::class,
     ];

@@ -11,18 +11,7 @@
 |
 */
 
-$app = app('router');
 $api = app('api.router');
-
-$app->auth();
-
-$app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
-    $app->get('/', function () {
-        return redirect('/dashboard');
-    });
-
-    $app->get('/dashboard', 'DashboardController@index');
-});
 
 $api->version('v2', [
     'middleware' => ['api'],
