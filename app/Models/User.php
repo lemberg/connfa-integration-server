@@ -23,4 +23,19 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+
+    /**
+     * Set the user's first name.
+     *
+     * @param  string  $value
+     * @return string
+     */
+   /* public function setFirstNameAttribute($value)
+    {
+   use Hash
+   Hash::make($request->newPassword)
+        $this->attributes['first_name'] = strtolower($value);
+    }*/
 }

@@ -25,9 +25,10 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function($app)
 
     $app->get('/dashboard', 'DashboardController@index');
 
+    $app->resource('levels', 'LevelsController');
+
+
 });
-
-
 
 
 
