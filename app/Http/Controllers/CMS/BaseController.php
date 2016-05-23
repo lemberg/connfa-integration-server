@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\CMS;
 
+use Exception;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Repositories\BaseRepository;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use \Config;
 
 /**
  * Class BaseController
@@ -25,22 +28,37 @@ class BaseController extends Controller
     protected $repository = '';
 
     /**
+     * @var ResponseFactory
+     */
+    protected $responseFactory;
+
+    /**
+     * @var string
+     */
+    protected $viewsFolder = null;
+
+    /**
      * Where to redirect users after create / update.
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $route = null;
 
     /**
      * BaseController constructor.
      *
      * @param Request $request
      * @param BaseRepository $repository
+     * @param ResponseFactory $responseFactory
      */
-    public function __construct(Request $request, BaseRepository $repository)
+    public function __construct(Request $request, BaseRepository $repository, ResponseFactory $responseFactory)
     {
         $this->request = $request;
         $this->repository = $repository;
+        $this->responseFactory = $responseFactory;
+        $this->viewsFolder = $this->getViewsFolder();
+        $this->route = $this->getRoute();
+
     }
 
     /**
@@ -50,7 +68,7 @@ class BaseController extends Controller
      */
     public function index()
     {
-        return view($this->viewsFolder . '.index', ['data' => $this->repository->paginate(25)]);
+        return $this->responseFactory->view($this->viewsFolder . '.index', ['data' => $this->repository->paginate(25)]);
     }
 
     /**
@@ -60,7 +78,7 @@ class BaseController extends Controller
      */
     public function create()
     {
-        return view($this->viewsFolder . '.create');
+        return $this->responseFactory->view($this->viewsFolder . '.create');
     }
 
     /**
@@ -70,7 +88,7 @@ class BaseController extends Controller
     {
         $this->repository->create($this->request->all());
 
-        return redirect($this->redirectTo);
+        return $this->responseFactory->redirectToRoute($this->route.'.index');
     }
 
     /**
@@ -81,7 +99,8 @@ class BaseController extends Controller
      */
     public function show($id)
     {
-        return view($this->viewsFolder . '.show', ['data' => $this->repository->findOrFail($id)]);
+
+        return $this->responseFactory->view($this->viewsFolder . '.show', ['data' => $this->repository->findOrFail($id)]);
     }
 
     /**
@@ -92,7 +111,7 @@ class BaseController extends Controller
      */
     public function edit($id)
     {
-        return view($this->viewsFolder . '.edit', ['data' => $this->repository->findOrFail($id)]);
+        return $this->responseFactory->view($this->viewsFolder . '.edit', ['data' => $this->repository->findOrFail($id)]);
     }
 
     /**
@@ -105,7 +124,7 @@ class BaseController extends Controller
     {
         $this->repository->update($this->request->except('_method', '_token'), $id);
 
-        return redirect($this->redirectTo);
+        return $this->responseFactory->redirectToRoute($this->route.'.index');
     }
 
     /**
@@ -118,6 +137,56 @@ class BaseController extends Controller
     {
         $this->repository->delete($id);
 
-        return redirect($this->redirectTo);
+        return $this->responseFactory->redirectToRoute($this->route.'.index');
+    }
+
+    /**
+     * Get lower class name
+     *
+     * @return string
+     */
+    protected function getBaseClassName()
+    {
+        $namespace = explode('\\', get_class($this));
+
+        return strtolower(str_replace('Controller', '', end($namespace)));
+    }
+
+    /**
+     * Get route by class name
+     *
+     * @return string
+     */
+    protected function getRoute()
+    {
+        $route = $this->route;
+        if(!$route)
+        {
+            $route = $this->getBaseClassName();
+        }
+
+        return $route;
+    }
+
+    /**
+     * Get views folder by class name
+     *
+     * @return null|string
+     * @throws Exception
+     */
+    protected function getViewsFolder()
+    {
+        $paths = Config::get('view.paths')[0];
+        $folder = $this->viewsFolder;
+        if(!$folder)
+        {
+            $folder = $this->getBaseClassName();
+            if(!is_dir($paths.DIRECTORY_SEPARATOR.$folder))
+            {
+                throw new Exception('No directory');
+            }
+        }
+
+        return $folder;
     }
 }

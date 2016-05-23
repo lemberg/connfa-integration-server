@@ -4,32 +4,21 @@ namespace App\Http\Controllers\CMS;
 
 use App\Http\Requests\LevelRequest;
 use App\Repositories\Event\LevelRepository;
+use Illuminate\Contracts\Routing\ResponseFactory;
 
 class LevelsController extends BaseController
 {
-    /**
-     * The views folder
-     *
-     * @var string
-     */
-    protected $viewsFolder = 'levels';
-
-    /**
-     * Where to redirect users after create / update.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/levels';
-
+    
     /**
      * LevelsController constructor.
      *
      * @param LevelRequest $request
      * @param LevelRepository $levelRepository
+     * @param ResponseFactory $responseFactory
      */
-    public function __construct(LevelRequest $request, LevelRepository $levelRepository)
+    public function __construct(LevelRequest $request, LevelRepository $levelRepository, ResponseFactory $responseFactory)
     {
-        parent::__construct($request, $levelRepository);
+        parent::__construct($request, $levelRepository, $responseFactory);
     }
 
 }
