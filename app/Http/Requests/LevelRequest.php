@@ -4,6 +4,10 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
+/**
+ * Class LevelRequest
+ * @package App\Http\Requests
+ */
 class LevelRequest extends Request
 {
     /**
@@ -23,23 +27,13 @@ class LevelRequest extends Request
      */
     public function rules()
     {
-        switch ($this->method()) {
-            case 'POST': {
-                return [
-                    'name' => 'required',
-                ];
-                break;
-            }
-            case 'PUT': {
-                return [
-                    'name' => 'required',
-                ];
-                break;
-            }
-            default: {
-                return [];
-                break;
-            }
+        $validation = [];
+        if (in_array($this->method(), ['POST', 'PUT'])) {
+            $validation = [
+                'name' => 'required',
+            ];
         }
+
+        return $validation;
     }
 }
