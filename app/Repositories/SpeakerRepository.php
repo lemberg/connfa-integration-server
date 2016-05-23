@@ -12,6 +12,12 @@ class SpeakerRepository extends BaseRepository
         return Speaker::class;
     }
 
+    /**
+     * Get speakers with deleted since $since param if passed
+     *
+     * @param string|bool $since
+     * @return mixed
+     */
     public function getSpeakersWithDeleted($since = false)
     {
         if ($since) {

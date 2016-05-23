@@ -8,6 +8,12 @@ use App\Transformers\FloorTransformer;
 
 class FloorsController extends ApiController
 {
+    /**
+     * Get list of Floor plans
+     *
+     * @param FloorRepository $repository
+     * @return \Dingo\Api\Http\Response
+     */
     public function index(FloorRepository $repository)
     {
         $floors = $repository->getFloorsWithDeleted($this->since);

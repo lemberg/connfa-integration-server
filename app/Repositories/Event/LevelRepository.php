@@ -12,6 +12,12 @@ class LevelRepository extends BaseRepository
         return Level::class;
     }
 
+    /**
+     * Get levels with deleted since $since param if passed
+     *
+     * @param string|bool $since
+     * @return mixed
+     */
     public function getLevelsWithDeleted($since = false)
     {
         if ($since) {

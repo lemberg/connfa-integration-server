@@ -9,6 +9,10 @@ use App\Repositories\Event\TypeRepository;
 class UpdateRepository
 {
 
+    /**
+     * ObjectsMap with resource id, repository and additional params
+     * @var array
+     */
     protected $objectsMap = array(
         'settings'  => array(
             'id'         => 0,
@@ -67,6 +71,13 @@ class UpdateRepository
         ),
     );
 
+    /**
+     * Get array of updated resources
+     *
+     * @param $since
+     * @param array $params
+     * @return array
+     */
     public function getLastUpdate($since, $params = [])
     {
         $updates = [];

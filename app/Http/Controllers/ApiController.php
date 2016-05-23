@@ -27,6 +27,12 @@ class ApiController extends Controller
      */
     protected $app;
 
+    /**
+     * ApiController constructor.
+     *
+     * @param Request $request
+     * @param Container $app
+     */
     public function __construct(Request $request, Container $app)
     {
         $this->since = false;
@@ -39,6 +45,11 @@ class ApiController extends Controller
         }
     }
 
+    /**
+     * Check if collection was modified since HTTP header If-Modified-Since
+     *
+     * @param $collection
+     */
     public function checkModified($collection)
     {
         if (!$collection->count() && $this->request->hasHeader('If-Modified-Since')) {

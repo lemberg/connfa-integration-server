@@ -9,6 +9,13 @@ use vendocrat\Settings\SettingsManager;
 
 class PagesController extends ApiController
 {
+    /**
+     * Get lists of info pages and info titles
+     *
+     * @param PageRepository $repository
+     * @param SettingsManager $settings
+     * @return \Dingo\Api\Http\Response
+     */
     public function index(PageRepository $repository, SettingsManager $settings)
     {
         $pages = $repository->getPagesWithDeleted($this->since);

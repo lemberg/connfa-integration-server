@@ -11,7 +11,12 @@ class FloorRepository extends BaseRepository
     {
         return Floor::class;
     }
-
+    /**
+     * Get floors with deleted since $since param if passed
+     *
+     * @param string|bool $since
+     * @return mixed
+     */
     public function getFloorsWithDeleted($since = false)
     {
         if ($since) {

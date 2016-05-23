@@ -12,6 +12,12 @@ class LocationRepository extends BaseRepository
         return Location::class;
     }
 
+    /**
+     * Get locations with deleted since $since param if passed
+     *
+     * @param string|bool $since
+     * @return mixed
+     */
     public function getLocationsWithDeleted($since = false)
     {
         if ($since) {

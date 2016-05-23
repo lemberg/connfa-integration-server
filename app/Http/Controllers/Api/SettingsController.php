@@ -9,6 +9,12 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class SettingsController extends ApiController
 {
+    /**
+     * Get list of Settings
+     *
+     * @param SettingsRepository $repository
+     * @return array
+     */
     public function index(SettingsRepository $repository)
     {
         $settings = $repository->getSettingsWithDeleted($this->since);
@@ -19,6 +25,13 @@ class SettingsController extends ApiController
         return $transformer->transform($settings);
     }
 
+    /**
+     * Get setting by key
+     *
+     * @param $setting
+     * @param SettingsRepository $repository
+     * @return \Dingo\Api\Http\Response
+     */
     public function show($setting, SettingsRepository $repository)
     {
         $value = $repository->getByKeyWithDeleted($setting, $this->since);
@@ -27,6 +40,12 @@ class SettingsController extends ApiController
         return $this->response->array([$setting => $value]);
     }
 
+    /**
+     * Get Twitter HTML and Search Query settings
+     *
+     * @param SettingsRepository $repository
+     * @return \Dingo\Api\Http\Response
+     */
     public function getTwitter(SettingsRepository $repository)
     {
         $html = $repository->getByKeyWithDeleted('twitterWidget', $this->since);

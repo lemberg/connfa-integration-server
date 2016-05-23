@@ -8,6 +8,12 @@ use App\Transformers\SpeakerTransformer;
 
 class SpeakersController extends ApiController
 {
+    /**
+     * Get list of Speakers
+     *
+     * @param SpeakerRepository $speakerRepository
+     * @return \Dingo\Api\Http\Response
+     */
     public function index(SpeakerRepository $speakerRepository)
     {
         $speakers = $speakerRepository->getSpeakersWithDeleted($this->since);
