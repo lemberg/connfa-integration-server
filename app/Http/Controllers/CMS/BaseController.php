@@ -7,12 +7,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Repositories\BaseRepository;
 
+/**
+ * Class BaseController
+ * @package App\Http\Controllers\CMS
+ */
 class BaseController extends Controller
 {
-    /**
-     * @var string
-     */
-    protected $viewsFolder = '';
 
     /**
      * @var Request
@@ -34,17 +34,13 @@ class BaseController extends Controller
     /**
      * BaseController constructor.
      *
-     * @param string $viewsFolder
      * @param Request $request
      * @param BaseRepository $repository
-     * @param string $redirectTo
      */
-    public function __construct($viewsFolder, Request $request, BaseRepository $repository, $redirectTo)
+    public function __construct(Request $request, BaseRepository $repository)
     {
-        $this->viewsFolder = $viewsFolder;
         $this->request = $request;
         $this->repository = $repository;
-        $this->redirectTo = $redirectTo;
     }
 
     /**

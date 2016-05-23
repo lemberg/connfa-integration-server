@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\CMS;
 
-use App\Http\Controllers\CMS\BaseController;
 use App\Http\Requests\LevelRequest;
 use App\Repositories\Event\LevelRepository;
 
 class LevelsController extends BaseController
 {
     /**
+     * The views folder
+     *
      * @var string
      */
     protected $viewsFolder = 'levels';
@@ -22,12 +23,13 @@ class LevelsController extends BaseController
 
     /**
      * LevelsController constructor.
+     *
      * @param LevelRequest $request
      * @param LevelRepository $levelRepository
      */
     public function __construct(LevelRequest $request, LevelRepository $levelRepository)
     {
-        parent::__construct($this->viewsFolder, $request, $levelRepository, $this->redirectTo);
+        parent::__construct($request, $levelRepository);
     }
 
 }
