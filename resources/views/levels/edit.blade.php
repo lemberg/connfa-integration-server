@@ -10,7 +10,7 @@
                 </div>
                 <div class="x_content">
                     <br />
-                    {!! Form::open(array('url' => '/levels/'.$data->id, 'method' => 'put', 'class' => 'form-horizontal form-label-left')) !!}
+                    {!! Form::open(['route' => ['levels.update', 'id' => $data->id], 'method' => 'put', 'class' => 'form-horizontal form-label-left']) !!}
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Name <span class="required">*</span>
                             </label>

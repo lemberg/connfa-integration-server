@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="col-md-12 col-sm-12 col-xs-12">
-        {{ Html::link(url('/levels/create'), 'Create level', ['class' => 'btn btn-primary pull-right']) }}
+        {{ Html::link(route('levels.create'), 'Create level', ['class' => 'btn btn-primary pull-right']) }}
 
         <div class="x_panel">
             <div class="x_title">
@@ -27,20 +27,21 @@
                         </thead>
 
                         <tbody>
-                        @foreach ($data as $user)
+                        @foreach ($data as $level)
                             <tr>
                                 <td>#</td>
                                 <td>
-                                    {{ $user->name }}
+                                    {{ $level->name }}
                                 </td>
                                 <td>
-                                    {{ $user->order }}
+                                    {{ $level->order }}
                                 </td>
                                 <td class="text-right">
-                                    <a href="{{ url('/levels/'.$user->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
-                                    <a href="{{ url('/levels/'.$user->id.'/edit') }}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                                    {!! Form::open(array('url' => '/levels/'.$user->id, 'method' => 'delete', 'style' => 'vertical-align: middle; display: inline-block;')) !!}
-                                    <button type="submit" class="btn btn-danger btn-xs"><i class='fa fa-trash-o'></i> Delete</button>
+                                    <a href="{{ route('levels.show', ['id' => $level->id]) }}" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
+                                    <a href="{{ route('levels.edit', ['id' => $level->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                                    {!! Form::open(['url' => route('levels.destroy', ['id' => $level->id]), 'method' => 'post', 'style' => 'vertical-align: middle; display: inline-block;']) !!}
+                                        {{ method_field('delete') }}
+                                        {{ Form::button("<i class='fa fa-trash-o'></i> Delete", ['type' => 'submit', 'class' => 'btn btn-danger btn-xs']) }}
                                     {!! Form::close() !!}
                                 </td>
                             </tr>

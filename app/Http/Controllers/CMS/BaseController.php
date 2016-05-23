@@ -29,7 +29,7 @@ class BaseController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '';
+    protected $redirectTo = '/';
 
     /**
      * BaseController constructor.
@@ -122,6 +122,6 @@ class BaseController extends Controller
     {
         $this->repository->delete($id);
 
-        return back();
+        return redirect($this->redirectTo);
     }
 }

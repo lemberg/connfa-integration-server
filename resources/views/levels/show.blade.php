@@ -2,10 +2,11 @@
 
 @section('content')
     <div class="col-md-12 col-sm-12 col-xs-12">
-        {!! Form::open(array('url' => '/levels/'.$data->id, 'method' => 'delete', 'class' => 'pull-right')) !!}
-        <button type="submit" class="btn btn-danger "><i class='fa fa-trash-o'></i> Delete</button>
+        {!! Form::open([route('levels.destroy', ['id' => $data->id]), 'method' => 'POST', 'class' => 'pull-right']) !!}
+            {{ method_field('delete') }}
+            {{ Form::button("<i class='fa fa-trash-o'></i> Delete", ['type' => 'submit', 'class' => 'btn btn-danger']) }}
         {!! Form::close() !!}
-        <a href="{{ url('/levels/'.$data->id.'/edit') }}" class="btn btn-info pull-right"><i class="fa fa-pencil"></i> Edit</a>
+        <a href="{{ route('levels.edit', ['id' => $data->id ]) }}" class="btn btn-info pull-right"><i class="fa fa-pencil"></i> Edit</a>
 
         <div class="x_panel">
             <div class="x_title">
