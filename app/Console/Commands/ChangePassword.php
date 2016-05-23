@@ -4,23 +4,33 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Repositories\UserRepository;
-use Validator;
+use Cerbero\CommandValidator\ValidatesInput;
+use Illuminate\Validation\Factory as Validator;
 
+/**
+ * Class ChangePassword
+ * @package App\Console\Commands
+ */
 class ChangePassword extends Command
 {
+    /**
+     * The data validation trait
+     */
+    use ValidatesInput;
+
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'password:change {--name=} {--password=}';
+    protected $signature = 'password:change {--name= : User name or email} {--password= : New password}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Change user password';
+    protected $description = 'Change user password.';
 
     /**
      * @var UserRepository
@@ -28,14 +38,21 @@ class ChangePassword extends Command
     private $userRepository;
 
     /**
+     * @var Validator
+     */
+    private $emailValidator;
+
+    /**
      * ChangePassword constructor.
      *
      * @param UserRepository $userRepository
+     * @param Validator $emailValidator
      */
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserRepository $userRepository, Validator $emailValidator)
     {
         parent::__construct();
         $this->userRepository = $userRepository;
+        $this->emailValidator = $emailValidator;
     }
 
     /**
@@ -47,11 +64,6 @@ class ChangePassword extends Command
     {
         $name = $this->option('name');
         $password = $this->option('password');
-
-        if(strlen($password) < 6)
-        {
-            return $this->error('The password must be at least 6 characters.');
-        }
 
         if(!$user = $this->findUser($name))
         {
@@ -65,15 +77,15 @@ class ChangePassword extends Command
     }
 
     /**
-     * Get the console command options.
+     * The validation rules
      *
      * @return array
      */
-    protected function getOptions()
+    public function rules()
     {
         return [
-            ['name', null, InputOption::VALUE_REQUIRED, 'name or email'],
-            ['password', null, InputOption::VALUE_REQUIRED, 'new password'],
+            'name' => 'required',
+            'password' => 'required|min:6'
         ];
     }
 
@@ -90,7 +102,7 @@ class ChangePassword extends Command
             'email' => 'required|email',
         ];
 
-        $validator = Validator::make(['email' => $data], $rules);
+        $validator = $this->emailValidator->make(['email' => $data], $rules);
         if ($validator->fails())
         {
             return false;
@@ -100,7 +112,7 @@ class ChangePassword extends Command
     }
 
     /**
-     * find user by name or email
+     * Find user by name or email
      *
      * @param string $data
      *
@@ -118,7 +130,7 @@ class ChangePassword extends Command
     }
 
     /**
-     * set new password
+     * Set new password
      *
      * @param int $id
      * @param string $password

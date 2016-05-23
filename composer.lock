@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0e14808b127aea3183406f6870cb047e",
-    "content-hash": "c7d35bff7266dceb1ccdf0550d7ca09e",
+    "hash": "8819cfcc60e6bc0e4b804133bb80f036",
+    "content-hash": "17fe5841fa7fe502ac4f41f8fecd27d2",
     "packages": [
         {
             "name": "bosnadev/repositories",
@@ -60,6 +60,65 @@
                 "repository"
             ],
             "time": "2016-04-08 21:35:31"
+        },
+        {
+            "name": "cerbero/command-validator",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cerbero90/command-validator.git",
+                "reference": "240c7680cdfc9131722cb175137b5e14d4e8a714"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cerbero90/command-validator/zipball/240c7680cdfc9131722cb175137b5e14d4e8a714",
+                "reference": "240c7680cdfc9131722cb175137b5e14d4e8a714",
+                "shasum": ""
+            },
+            "require": {
+                "php": "~5.5|~7.0"
+            },
+            "require-dev": {
+                "behat/behat": "^3.1",
+                "behat/mink": "^1.7",
+                "behat/mink-extension": "^2.2",
+                "cerbero/behat-laravel-extension": "^1.0",
+                "laravel/framework": "5.2.*",
+                "squizlabs/php_codesniffer": "^2.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Cerbero\\CommandValidator\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andrea Marco Sartori",
+                    "email": "andrea.marco.sartori@gmail.com",
+                    "homepage": "https://github.com/cerbero90",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Validates Laravel console commands input.",
+            "homepage": "https://github.com/cerbero90/command-validator",
+            "keywords": [
+                "cerbero",
+                "command-validator",
+                "commands",
+                "console",
+                "validation"
+            ],
+            "time": "2016-04-11 14:25:07"
         },
         {
             "name": "classpreloader/classpreloader",
