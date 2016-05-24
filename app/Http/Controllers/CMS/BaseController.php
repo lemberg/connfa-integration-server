@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\CMS;
 
+use App\Exceptions\DirectoryNotFoundException;
 use Exception;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -100,6 +101,7 @@ class BaseController extends Controller
      * Display the specified resource.
      *
      * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -112,6 +114,7 @@ class BaseController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -123,6 +126,7 @@ class BaseController extends Controller
      * Update the specified resource in storage.
      *
      * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update($id)
@@ -136,6 +140,7 @@ class BaseController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -178,16 +183,16 @@ class BaseController extends Controller
     /**
      * Get views folder by class name
      *
-     * @return null|string
+     * @return string
      * @throws Exception
      */
     protected function getViewsFolder()
     {
         if (is_null($this->viewsFolder)) {
             $folder = strtolower($this->getCurrentCallingControllerName());
-            $paths = resource_path('views');
-            if (!is_dir($paths . DIRECTORY_SEPARATOR . $folder)) {
-                throw new Exception('No views directory');
+            $paths = resource_path('views') . DIRECTORY_SEPARATOR . $folder;
+            if (!is_dir($paths)) {
+                throw new DirectoryNotFoundException("Directory {$paths} not found");
             }
 
             $this->viewsFolder = $folder;
@@ -205,6 +210,6 @@ class BaseController extends Controller
      */
     protected function redirectTo($url)
     {
-        return $this->response->redirectToRoute($this->routeName.$url);
+        return $this->response->redirectToRoute($this->routeName . $url);
     }
 }
