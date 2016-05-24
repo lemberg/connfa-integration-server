@@ -13,12 +13,12 @@ class LevelsController extends BaseController
      * LevelsController constructor.
      *
      * @param LevelRequest $request
-     * @param LevelRepository $levelRepository
+     * @param LevelRepository $repository
      * @param ResponseFactory $response
      */
-    public function __construct(LevelRequest $request, LevelRepository $levelRepository, ResponseFactory $response)
+    public function __construct(LevelRequest $request, LevelRepository $repository, ResponseFactory $response)
     {
-        parent::__construct($request, $levelRepository, $response);
+        parent::__construct($request, $repository, $response);
     }
 
 }
