@@ -4,6 +4,7 @@
         <h3>General</h3>
         <ul class="nav side-menu">
             <li><a href="{{ url('/dashboard') }}"><i class="fa fa-home"></i> Dashboard</a></li>
+            <li><a href="{{ url('/levels') }}"><i class="fa fa-bar-chart-o"></i> Levels</a></li>
         </ul>
     </div>
 </div>

@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Event;
 
-use app\Models\Event\Level;
+use App\Models\Event\Level;
 use App\Repositories\BaseRepository;
 
 class LevelRepository extends BaseRepository

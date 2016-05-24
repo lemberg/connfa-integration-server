@@ -11,4 +11,19 @@ class UserRepository extends BaseRepository
     {
         return User::class;
     }
+
+    /**
+     * Change password to Hash
+     *
+     * @param $id
+     * @param $password
+     *
+     * @return boolean
+     */
+    public function changePassword($id, $password)
+    {
+        $user = $this->findOrFail($id);
+        $user->password = $password;
+        return $user->save();
+    }
 }

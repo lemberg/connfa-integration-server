@@ -11,7 +11,8 @@
         "bosnadev/repositories": " 0.*",
         "vendocrat/laravel-settings": "dev-master",
         "codeception/codeception": "^2.1",
-        "laravelcollective/html": "5.2.*"
+        "laravelcollective/html": "5.2.*",
+        "cerbero/command-validator": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
