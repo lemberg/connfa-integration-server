@@ -8,7 +8,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Repositories\BaseRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use \Config;
 
 /**
  * Class BaseController
@@ -20,17 +19,17 @@ class BaseController extends Controller
     /**
      * @var Request
      */
-    protected $request = '';
+    protected $request = null;
 
     /**
      * @var BaseRepository
      */
-    protected $repository = '';
+    protected $repository = null;
 
     /**
      * @var ResponseFactory
      */
-    protected $responseFactory;
+    protected $response = null;
 
     /**
      * @var string
@@ -42,23 +41,29 @@ class BaseController extends Controller
      *
      * @var string
      */
-    protected $route = null;
+    protected $routeName = null;
+
+    /**
+     * The calling class name
+     *
+     * @var string
+     */
+    protected $currentCallingControllerName = null;
 
     /**
      * BaseController constructor.
      *
      * @param Request $request
      * @param BaseRepository $repository
-     * @param ResponseFactory $responseFactory
+     * @param ResponseFactory $response
      */
-    public function __construct(Request $request, BaseRepository $repository, ResponseFactory $responseFactory)
+    public function __construct(Request $request, BaseRepository $repository, ResponseFactory $response)
     {
         $this->request = $request;
         $this->repository = $repository;
-        $this->responseFactory = $responseFactory;
+        $this->response = $response;
         $this->viewsFolder = $this->getViewsFolder();
-        $this->route = $this->getRoute();
-
+        $this->routeName = $this->getRouteName();
     }
 
     /**
@@ -68,7 +73,7 @@ class BaseController extends Controller
      */
     public function index()
     {
-        return $this->responseFactory->view($this->viewsFolder . '.index', ['data' => $this->repository->paginate(25)]);
+        return $this->response->view($this->viewsFolder . '.index', ['data' => $this->repository->paginate(25)]);
     }
 
     /**
@@ -78,7 +83,7 @@ class BaseController extends Controller
      */
     public function create()
     {
-        return $this->responseFactory->view($this->viewsFolder . '.create');
+        return $this->response->view($this->viewsFolder . '.create');
     }
 
     /**
@@ -88,7 +93,7 @@ class BaseController extends Controller
     {
         $this->repository->create($this->request->all());
 
-        return $this->responseFactory->redirectToRoute($this->route.'.index');
+        return $this->redirectTo('index');
     }
 
     /**
@@ -100,7 +105,7 @@ class BaseController extends Controller
     public function show($id)
     {
 
-        return $this->responseFactory->view($this->viewsFolder . '.show', ['data' => $this->repository->findOrFail($id)]);
+        return $this->response->view($this->viewsFolder . '.show', ['data' => $this->repository->findOrFail($id)]);
     }
 
     /**
@@ -111,7 +116,7 @@ class BaseController extends Controller
      */
     public function edit($id)
     {
-        return $this->responseFactory->view($this->viewsFolder . '.edit', ['data' => $this->repository->findOrFail($id)]);
+        return $this->response->view($this->viewsFolder . '.edit', ['data' => $this->repository->findOrFail($id)]);
     }
 
     /**
@@ -124,7 +129,7 @@ class BaseController extends Controller
     {
         $this->repository->update($this->request->except('_method', '_token'), $id);
 
-        return $this->responseFactory->redirectToRoute($this->route.'.index');
+        return $this->redirectTo('index');
     }
 
     /**
@@ -137,35 +142,37 @@ class BaseController extends Controller
     {
         $this->repository->delete($id);
 
-        return $this->responseFactory->redirectToRoute($this->route.'.index');
+        return $this->redirectTo('index');
     }
 
     /**
-     * Get lower class name
+     * Get lower current calling class name
      *
      * @return string
      */
-    protected function getBaseClassName()
+    protected function getCurrentCallingControllerName()
     {
-        $namespace = explode('\\', get_class($this));
+        if (is_null($this->currentCallingControllerName)) {
+            $namespace = explode('\\', get_class($this));
+            $this->currentCallingControllerName = strtolower(str_replace('Controller', '', end($namespace)));
+        }
 
-        return strtolower(str_replace('Controller', '', end($namespace)));
+        return $this->currentCallingControllerName;
     }
+
 
     /**
      * Get route by class name
      *
      * @return string
      */
-    protected function getRoute()
+    protected function getRouteName()
     {
-        $route = $this->route;
-        if(!$route)
-        {
-            $route = $this->getBaseClassName();
+        if (is_null($this->routeName)) {
+            $this->routeName = $this->getCurrentCallingControllerName();
         }
 
-        return $route;
+        return $this->routeName;
     }
 
     /**
@@ -176,17 +183,28 @@ class BaseController extends Controller
      */
     protected function getViewsFolder()
     {
-        $paths = Config::get('view.paths')[0];
-        $folder = $this->viewsFolder;
-        if(!$folder)
-        {
-            $folder = $this->getBaseClassName();
-            if(!is_dir($paths.DIRECTORY_SEPARATOR.$folder))
-            {
-                throw new Exception('No directory');
+        if (is_null($this->viewsFolder)) {
+            $folder = strtolower($this->getCurrentCallingControllerName());
+            $paths = resource_path('views');
+            if (!is_dir($paths . DIRECTORY_SEPARATOR . $folder)) {
+                throw new Exception('No views directory');
             }
+
+            $this->viewsFolder = $folder;
         }
 
-        return $folder;
+        return $this->viewsFolder;
+    }
+
+    /**
+     * Redirect to url
+     *
+     * @param string $url
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    protected function redirectTo($url)
+    {
+        return $this->response->redirectToRoute($this->routeName.$url);
     }
 }
