@@ -74,7 +74,7 @@ class BaseController extends Controller
      */
     public function index()
     {
-        return $this->response->view($this->viewsFolder . '.index', ['data' => $this->repository->paginate(25)]);
+        return $this->response->view($this->getViewName('index'), ['data' => $this->repository->paginate(25)]);
     }
 
     /**
@@ -84,7 +84,7 @@ class BaseController extends Controller
      */
     public function create()
     {
-        return $this->response->view($this->viewsFolder . '.create');
+        return $this->response->view($this->getViewName('create'));
     }
 
     /**
@@ -107,7 +107,7 @@ class BaseController extends Controller
     public function show($id)
     {
 
-        return $this->response->view($this->viewsFolder . '.show', ['data' => $this->repository->findOrFail($id)]);
+        return $this->response->view($this->getViewName('show'), ['data' => $this->repository->findOrFail($id)]);
     }
 
     /**
@@ -119,7 +119,7 @@ class BaseController extends Controller
      */
     public function edit($id)
     {
-        return $this->response->view($this->viewsFolder . '.edit', ['data' => $this->repository->findOrFail($id)]);
+        return $this->response->view($this->getViewName('edit'), ['data' => $this->repository->findOrFail($id)]);
     }
 
     /**
@@ -210,6 +210,18 @@ class BaseController extends Controller
      */
     protected function redirectTo($url)
     {
-        return $this->response->redirectToRoute($this->routeName . $url);
+        return $this->response->redirectToRoute($this->getRouteName() . "." . $url);
+    }
+
+    /**
+     * Get view name
+     *
+     * @param string $viewName
+     *
+     * @return string
+     */
+    protected function getViewName($viewName)
+    {
+        return $this->getViewsFolder() . '.' . $viewName;
     }
 }
