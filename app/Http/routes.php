@@ -20,8 +20,8 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
     $app->get('/', function () {
         return redirect('/dashboard');
     });
-
     $app->get('/dashboard', 'DashboardController@index');
+    $app->resource('levels', 'LevelsController');
 });
 
 $api->version('v2', [

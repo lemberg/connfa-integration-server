@@ -4,36 +4,55 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Repositories\UserRepository;
-use Validator;
+use Cerbero\CommandValidator\ValidatesInput;
+use Illuminate\Validation\Factory as Validator;
 
+/**
+ * Class ChangePassword
+ * @package App\Console\Commands
+ */
 class ChangePassword extends Command
 {
+    /**
+     * The data validation trait
+     */
+    use ValidatesInput;
+
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'change-password {--name=} {--password=}';
+    protected $signature = 'password:change {--name= : User name or email} {--password= : New password}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Change user password';
+    protected $description = 'Change user password.';
 
-
+    /**
+     * @var UserRepository
+     */
     private $userRepository;
 
     /**
-     * Create a new command instance.
-     *
-     * @return void
+     * @var Validator
      */
-    public function __construct(UserRepository $userRepository)
+    private $emailValidator;
+
+    /**
+     * ChangePassword constructor.
+     *
+     * @param UserRepository $userRepository
+     * @param Validator $emailValidator
+     */
+    public function __construct(UserRepository $userRepository, Validator $emailValidator)
     {
         parent::__construct();
         $this->userRepository = $userRepository;
+        $this->emailValidator = $emailValidator;
     }
 
     /**
@@ -46,32 +65,28 @@ class ChangePassword extends Command
         $name = $this->option('name');
         $password = $this->option('password');
 
-        if(strlen($password) < 6)
-        {
-            return $this->error('The password must be at least 6 characters.');
-        }
         if(!$user = $this->findUser($name))
         {
             return $this->error('The user is not registered.');
         }
-        if($this->setNewPassword($password, $user->id))
+
+        if($this->setNewPassword($user->id, $password))
         {
             return $this->info('Set a new password to the user.');
         }
-
     }
 
     /**
-     * Get the console command options.
+     * The validation rules
      *
      * @return array
      */
-    protected function getOptions()
+    public function rules()
     {
-        return array(
-            array('name', null, InputOption::VALUE_REQUIRED, 'name or email'),
-            array('password', null, InputOption::VALUE_REQUIRED, 'new password')
-        );
+        return [
+            'name' => 'required',
+            'password' => 'required|min:6'
+        ];
     }
 
     /**
@@ -87,7 +102,7 @@ class ChangePassword extends Command
             'email' => 'required|email',
         ];
 
-        $validator = Validator::make(['email' => $data], $rules);
+        $validator = $this->emailValidator->make(['email' => $data], $rules);
         if ($validator->fails())
         {
             return false;
@@ -96,9 +111,8 @@ class ChangePassword extends Command
         return true;
     }
 
-    
     /**
-     * find user by name or email
+     * Find user by name or email
      *
      * @param string $data
      *
@@ -116,16 +130,15 @@ class ChangePassword extends Command
     }
 
     /**
-     * set new password
+     * Set new password
      *
-     * @param string $password
      * @param int $id
+     * @param string $password
      *
      * @return boolean
      */
-    private function setNewPassword($password, $id)
+    private function setNewPassword($id, $password)
     {
-        return $this->userRepository->updateRich(['password' => bcrypt($password)], $id);
+        return $this->userRepository->changePassword($id, $password);
     }
-
 }
