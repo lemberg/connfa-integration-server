@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\ApiController;
 use App\Repositories\UpdateRepository;
+use Carbon\Carbon;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class UpdatesController extends ApiController
@@ -25,6 +26,6 @@ class UpdatesController extends ApiController
 
         return $this->response->array([
             'idsForUpdate' => $changes
-        ]);
+        ])->withHeader('Last-Modified', Carbon::now()->toRfc2822String());
     }
 }
