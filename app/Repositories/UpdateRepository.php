@@ -45,7 +45,7 @@ class UpdateRepository
         'sessions'  => array(
             'id'         => 7,
             'repository' => EventRepository::class,
-            'params'     => ['event_type' => 'program'],
+            'params'     => ['event_type' => 'session'],
         ),
         'bofs'      => array(
             'id'         => 8,
