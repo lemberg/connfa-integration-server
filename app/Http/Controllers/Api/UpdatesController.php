@@ -26,6 +26,6 @@ class UpdatesController extends ApiController
 
         return $this->response->array([
             'idsForUpdate' => $changes
-        ])->withHeader('Last-Modified', Carbon::now()->toRfc2822String());
+        ]);
     }
 }
