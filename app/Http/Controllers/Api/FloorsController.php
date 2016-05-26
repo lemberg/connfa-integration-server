@@ -19,7 +19,6 @@ class FloorsController extends ApiController
         $floors = $repository->getFloorsWithDeleted($this->since);
         $this->checkModified($floors);
 
-        return $this->response->collection($floors, new FloorTransformer(), ['key' => 'housePlans']);
+        return $this->response->collection($floors, new FloorTransformer(), ['key' => 'floorPlans']);
     }
-
 }
