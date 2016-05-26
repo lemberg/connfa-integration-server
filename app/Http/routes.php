@@ -21,10 +21,10 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
         return redirect('/dashboard');
     });
     $app->get('/dashboard', 'DashboardController@index');
-    $app->resource('levels', 'LevelsController');
-    $app->resource('tracks', 'TracksController');
-    $app->resource('types', 'TypesController');
-    $app->delete('types/{id}/icon', 'TypesController@iconDelete');
+    $app->resource('levels', 'Events\LevelsController');
+    $app->resource('tracks', 'Events\TracksController');
+    $app->resource('types', 'Events\TypesController');
+    $app->delete('types/{id}/icon', 'Events\TypesController@iconDelete');
 
 });
 

@@ -1,21 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\CMS;
+namespace App\Http\Controllers\CMS\Events;
 
 use App\Http\Requests\TypeRequest;
 use App\Repositories\Event\TypeRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use App\Http\Controllers\CMS\BaseController;
 
 class TypesController extends BaseController
 {
 
-    /**
-     * TracksController constructor.
-     *
-     * @param TypeRequest $request
-     * @param TypeRepository $repository
-     * @param ResponseFactory $response
-     */
+    protected $viewsFolder = 'events.types';
+
     public function __construct(TypeRequest $request, TypeRepository $repository, ResponseFactory $response)
     {
         parent::__construct($request, $repository, $response);
@@ -57,15 +53,13 @@ class TypesController extends BaseController
     {
         $type = $this->repository->findOrFail($id);
         if ($image = $type->icon) {
-            if ($this->repository->deleteImage($image)) {
-                $type->icon = "";
-                $type->save();
-
-                return ['result' => true];
-            }
+            $this->repository->deleteImage($image);
         }
 
-        return ['result' => false];
+        $type->icon = "";
+        $type->save();
+
+        return ['result' => true];
     }
 
 
