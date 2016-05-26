@@ -32,6 +32,7 @@ class Event extends Model
         'track_id',
         'url',
         'event_type',
+        'order',
     ];
 
     protected $dates = ['start_at', 'end_at'];
