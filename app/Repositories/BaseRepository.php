@@ -95,6 +95,13 @@ class BaseRepository extends Repository implements RepositoryInterface
         }
     }
 
+    /**
+     * Delete image by path
+     *
+     * @param string $path
+     *
+     * @return mixed
+     */
     public function deleteImage($path)
     {
         $path = public_path() . DIRECTORY_SEPARATOR . $path;

@@ -386,6 +386,7 @@ $(document).ready(function () {
 
 
 	/**
+	 * fChecked to select url or file
 	* types - (create/update)
 	* */
 	$('#icon-switch-text').on('ifChecked', function () {
@@ -426,7 +427,5 @@ $(document).ready(function () {
 		});
 
 	});
-
-
-
+	
 });
