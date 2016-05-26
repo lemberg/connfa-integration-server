@@ -53,7 +53,7 @@ class BaseRepository extends Repository implements RepositoryInterface
      */
     public function checkLastUpdate($since, $params = [])
     {
-        $data = $this->model;
+        $data = $this->model->withTrashed();
 
         if ($since) {
             $data = $data->where('updated_at', '>=', $since->toDateTimeString());
@@ -63,7 +63,7 @@ class BaseRepository extends Repository implements RepositoryInterface
             $data = $data->where($params);
         }
 
-        $data = $data->first();
+        $data = $data->withTrashed()->first();
 
         if ($data) {
             return true;
