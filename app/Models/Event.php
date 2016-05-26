@@ -69,7 +69,7 @@ class Event extends Model
 
     public function getDateAttribute()
     {
-        return $this->start_at->format('Y-m-d');
+        return $this->start_at->format('d-m-Y');
     }
 
 }
