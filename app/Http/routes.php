@@ -23,6 +23,9 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
     $app->get('/dashboard', 'DashboardController@index');
     $app->resource('levels', 'LevelsController');
     $app->resource('tracks', 'TracksController');
+    $app->resource('types', 'TypesController');
+    $app->delete('types/{id}/icon', 'TypesController@iconDelete');
+
 });
 
 $api->version('v2', [

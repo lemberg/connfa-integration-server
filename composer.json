@@ -12,7 +12,8 @@
         "vendocrat/laravel-settings": "dev-master",
         "codeception/codeception": "^2.1",
         "laravelcollective/html": "5.2.*",
-        "cerbero/command-validator": "^1.0"
+        "cerbero/command-validator": "^1.0",
+        "intervention/image": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
