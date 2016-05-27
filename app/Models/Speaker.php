@@ -45,8 +45,8 @@ class Speaker extends Model
      */
     public function getTwitterNameWithoutAtAttribute()
     {
-        $this->attributes['twitter_name_without_at'] = '';
-        if (!is_null($this->twitter_name) and starts_with($this->twitter_name, '@')) {
+        $this->attributes['twitter_name_without_at'] = $this->twitter_name;
+        if (!empty($this->twitter_name) and starts_with($this->twitter_name, '@')) {
             $this->attributes['twitter_name_without_at'] = substr($this->twitter_name, 1);
         }
 

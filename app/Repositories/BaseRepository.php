@@ -112,9 +112,9 @@ class BaseRepository extends Repository implements RepositoryInterface
      */
     public function deleteImage($path)
     {
-        $path = public_path() . DIRECTORY_SEPARATOR . $path;
-        if (File::exists($path)) {
-            return File::delete($path);
+        $realPath = public_path($path);
+        if (File::exists($realPath)) {
+            return File::delete($realPath);
         }
 
         return true;
@@ -129,8 +129,9 @@ class BaseRepository extends Repository implements RepositoryInterface
      */
     protected function checkAndMakeDirectory($path)
     {
-        if (!File::exists($path)) {
-            return File::makeDirectory(public_path() . $path, 0775, true);
+        $realPath = public_path($path);
+        if (!File::exists($realPath)) {
+            return File::makeDirectory($realPath, 0775, true);
         }
 
         return true;

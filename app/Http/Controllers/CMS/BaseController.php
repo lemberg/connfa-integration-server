@@ -226,27 +226,6 @@ class BaseController extends Controller
     }
 
     /**
-     * Save image and return clean data to save / update
-     *
-     * @param string $fieldName
-     *
-     * @return array
-     */
-    protected function saveImage($fieldName)
-    {
-        if ($this->request->get('icon-switch') == 'file' AND $this->request->hasFile('image')) {
-            $path = $this->repository->saveImage($this->request->file('image'), $this->getViewsFolder());
-            if (!$path) {
-                return redirect()->back()->withError('Could not resize image');
-            }
-
-            $this->request[$fieldName] = $path;
-        }
-
-        return $this->request->except('_method', '_token', 'icon-switch', 'image');
-    }
-
-    /**
      * Delete image file and clean field
      *
      * @param int $id

@@ -24,10 +24,9 @@
                         </thead>
 
                         <tbody>
-                        <?php $i=0 ?>
                         @foreach ($data as $item)
                             <tr>
-                                <td>{{ ++$i }}</td>
+                                <td>{{ $item->id }}</td>
                                 <td>
                                     @if(!empty($item->avatar2))
                                         {{ Html::image($item->avatar, $item->first_name . ' ' . $item->last_name, array('class' => 'avatar img-responsive')) }}

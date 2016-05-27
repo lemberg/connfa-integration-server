@@ -23,10 +23,9 @@
                         </thead>
 
                         <tbody>
-                        <?php $i=0 ?>
                         @foreach ($data as $item)
                             <tr>
-                                <td>{{ ++$i }}</td>
+                                <td>{{ $item->id }}</td>
                                 <td>
                                     {{ $item->name }}
                                 </td>

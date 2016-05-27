@@ -19,14 +19,34 @@ class TypesController extends BaseController
 
     public function store()
     {
-        $this->repository->create($this->saveImage('icon'));
+        $data = $this->request->all();
+        if ($this->request->get('icon-switch') == 'file' AND $this->request->hasFile('image')) {
+            $path = $this->repository->saveImage($this->request->file('image'), 'events/types');
+            if (!$path) {
+                return redirect()->back()->withError('Could not save image');
+            }
+
+            $data['icon'] = $path;
+        }
+
+        $this->repository->create($data);
 
         return $this->redirectTo('index');
     }
 
     public function update($id)
     {
-        $this->repository->updateRich($this->saveImage('icon'), $id);
+        $data = $this->request->all();
+        if ($this->request->get('icon-switch') == 'file' AND $this->request->hasFile('image')) {
+            $path = $this->repository->saveImage($this->request->file('image'), 'events/types');
+            if (!$path) {
+                return redirect()->back()->withError('Could not save image');
+            }
+
+            $data['icon'] = $path;
+        }
+
+        $this->repository->updateRich($data, $id);
 
         return $this->redirectTo('index');
     }
