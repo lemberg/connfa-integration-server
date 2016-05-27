@@ -13,6 +13,12 @@ class SettingsRepository extends BaseRepository
         return Setting::class;
     }
 
+    /**
+     * Get settings with deleted since $since param if passed
+     *
+     * @param string|bool $since
+     * @return mixed
+     */
     public function getSettingsWithDeleted($since = false)
     {
         $settings = $this->model->withTrashed();
@@ -24,6 +30,13 @@ class SettingsRepository extends BaseRepository
         return $settings->get();
     }
 
+    /**
+     * Get Setting by key since $since param if passed
+     *
+     * @param $setting
+     * @param $since
+     * @return mixed
+     */
     public function getByKeyWithDeleted($setting, $since)
     {
         $settings = $this->model->withTrashed()->where('key', $setting);
@@ -35,6 +48,11 @@ class SettingsRepository extends BaseRepository
         return $settings->first();
     }
 
+    /**
+     * Create twitter objects
+     *
+     * @param $data
+     */
     public function createTwitter($data)
     {
         if (array_get($data, 'twitterSearchQuery')) {

@@ -18,12 +18,24 @@ class EventsController extends ApiController
      */
     protected $repository;
 
+    /**
+     * EventsController constructor.
+     *
+     * @param EventRepository $repository
+     * @param Request $request
+     * @param Container $app
+     */
     public function __construct(EventRepository $repository, Request $request, Container $app)
     {
         parent::__construct($request, $app);
         $this->repository = $repository;
     }
 
+    /**
+     * Get list of sessions
+     *
+     * @return \Dingo\Api\Http\Response
+     */
     public function getSessions()
     {
         $events = $this->fetchEventsByType('session');
@@ -34,6 +46,11 @@ class EventsController extends ApiController
         return $this->response->array($transformer->transform($events));
     }
 
+    /**
+     * Get list of bofs
+     *
+     * @return \Dingo\Api\Http\Response
+     */
     public function getBofs()
     {
         $events = $this->fetchEventsByType('bof');
@@ -44,6 +61,11 @@ class EventsController extends ApiController
         return $this->response->array($transformer->transform($events));
     }
 
+    /**
+     * Get list of social events
+     *
+     * @return \Dingo\Api\Http\Response
+     */
     public function getSocialEvents()
     {
         $events = $this->fetchEventsByType('social');
@@ -54,6 +76,12 @@ class EventsController extends ApiController
         return $this->response->array($transformer->transform($events));
     }
 
+    /**
+     * Fetch events by type
+     *
+     * @param $type
+     * @return mixed
+     */
     private function fetchEventsByType($type)
     {
         $events = $this->repository->getEventsByTypeWithDeleted($type, $this->since);

@@ -12,6 +12,12 @@ class TrackRepository extends BaseRepository
         return Track::class;
     }
 
+    /**
+     * Get tracks with deleted since $since param if passed
+     *
+     * @param string|bool $since
+     * @return mixed
+     */
     public function getTracksWithDeleted($since = false)
     {
         if ($since) {

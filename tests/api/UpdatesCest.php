@@ -44,7 +44,7 @@ class UpdatesCest extends BaseCest
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson(['idsForUpdate' => [1, 2, 3, 4, 5]]);
 
-        $I->haveAnEvent(['name' => 'test', 'event_type' => 'program']);
+        $I->haveAnEvent(['name' => 'test', 'event_type' => 'session']);
         $I->sendGET('v2/checkUpdates');
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson(['idsForUpdate' => [1, 2, 3, 4, 5, 7]]);

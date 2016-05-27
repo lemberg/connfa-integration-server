@@ -19,6 +19,14 @@ class BaseRepository extends Repository implements RepositoryInterface
     {
     }
 
+    /**
+     * Find resource or throw NotFoundHttpException
+     *
+     * @param $id
+     * @param array $columns
+     * @throws NotFoundHttpException
+     * @return mixed
+     */
     public function findOrFail($id, $columns = ['*'])
     {
         $found = $this->find($id, $columns);
@@ -30,12 +38,20 @@ class BaseRepository extends Repository implements RepositoryInterface
         return $found;
     }
 
+    /**
+     * Find first resource or create new
+     *
+     * @param $params
+     * @return mixed
+     */
     public function firstOrNew($params)
     {
         return $this->model->firstOrNew($params);
     }
 
     /**
+     * Check if resource was updated since $since param
+     *
      * @param Carbon $since date from If-Modified-Since header
      * @param array $params
      *
@@ -43,7 +59,7 @@ class BaseRepository extends Repository implements RepositoryInterface
      */
     public function checkLastUpdate($since, $params = [])
     {
-        $data = $this->model;
+        $data = $this->model->withTrashed();
 
         if ($since) {
             $data = $data->where('updated_at', '>=', $since->toDateTimeString());
@@ -53,7 +69,7 @@ class BaseRepository extends Repository implements RepositoryInterface
             $data = $data->where($params);
         }
 
-        $data = $data->first();
+        $data = $data->withTrashed()->first();
 
         if ($data) {
             return true;

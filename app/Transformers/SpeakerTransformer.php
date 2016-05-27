@@ -32,6 +32,7 @@ class SpeakerTransformer extends TransformerAbstract
         $speakers = [
             'speakerId'        => $speaker->id,
             'firstName'        => $speaker->first_name,
+            'lastName'         => $speaker->last_name,
             'avatarImageURL'   => $speaker->avatar,
             'organizationName' => $speaker->organization,
             'jobTitle'         => $speaker->job,
