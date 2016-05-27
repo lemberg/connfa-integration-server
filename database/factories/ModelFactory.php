@@ -25,7 +25,7 @@ $factory->define(App\Models\Speaker::class, function (Faker\Generator $faker) {
         'first_name'     => $faker->firstName,
         'last_name'      => $faker->lastName,
         'email'          => $faker->safeEmail,
-        'characteristic' => $faker->sentence(),
+        'characteristic' => $faker->text(),
         'job'            => $faker->jobTitle,
         'organization'   => $faker->company(),
         'twitter_name'   => '@' . $faker->userName(),
