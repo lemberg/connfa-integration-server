@@ -21,4 +21,35 @@ class Speaker extends Model
         'email',
         'order',
     ];
+
+    /**
+     * Check and change first symbol in twitter name
+     *
+     * @param $value
+     *
+     * @return mixed
+     */
+    public function setTwitterNameAttribute($value)
+    {
+        if (!is_null($value) and !starts_with($value, '@')) {
+            return $this->attributes['twitter_name'] = '@' . $value;
+        }
+
+        return $this->attributes['twitter_name'] = $value;
+    }
+
+    /**
+     * Get twitter name without at
+     *
+     * @return mixed
+     */
+    public function getTwitterNameWithoutAtAttribute()
+    {
+        $this->attributes['twitter_name_without_at'] = '';
+        if (!is_null($this->twitter_name) and starts_with($this->twitter_name, '@')) {
+            $this->attributes['twitter_name_without_at'] = substr($this->twitter_name, 1);
+        }
+
+        return $this->attributes['twitter_name_without_at'];
+    }
 }

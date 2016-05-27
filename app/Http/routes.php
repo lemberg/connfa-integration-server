@@ -25,7 +25,8 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
     $app->resource('tracks', 'Events\TracksController');
     $app->resource('types', 'Events\TypesController');
     $app->delete('types/{id}/icon', 'Events\TypesController@iconDelete');
-
+    $app->resource('speakers', 'SpeakersController');
+    $app->delete('speakers/{id}/avatar', 'SpeakersController@iconDelete');
 });
 
 $api->version('v2', [

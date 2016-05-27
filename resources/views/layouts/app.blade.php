@@ -22,6 +22,8 @@
 
     <!-- Custom Theme Style -->
     <link rel="stylesheet" href="{{ URL::asset('assets/css/custom.css') }}">
+
+
 </head>
 
 <body class="nav-md">
@@ -130,6 +132,8 @@
 <!-- bootstrap-daterangepicker -->
 <script src="{{ URL::asset('assets/js/moment/moment.min.js') }}"></script>
 <script src="{{ URL::asset('assets/js/datepicker/daterangepicker.js') }}"></script>
+
+<script src="{{ URL::asset('assets/vendors/ckeditor/ckeditor.js') }}"></script>
 
 <!-- Custom Theme Scripts -->
 <script src="{{ URL::asset('assets/js/custom.js') }}"></script>

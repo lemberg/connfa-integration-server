@@ -224,4 +224,46 @@ class BaseController extends Controller
     {
         return $this->getViewsFolder() . '.' . $viewName;
     }
+
+    /**
+     * Save image and return clean data to save / update
+     *
+     * @param string $fieldName
+     *
+     * @return array
+     */
+    protected function saveImage($fieldName)
+    {
+        if ($this->request->get('icon-switch') == 'file' AND $this->request->hasFile('image')) {
+            $path = $this->repository->saveImage($this->request->file('image'), $this->getViewsFolder());
+            if (!$path) {
+                return redirect()->back()->withError('Could not resize image');
+            }
+
+            $this->request[$fieldName] = $path;
+        }
+
+        return $this->request->except('_method', '_token', 'icon-switch', 'image');
+    }
+
+    /**
+     * Delete image file and clean field
+     *
+     * @param int $id
+     * @param string $fieldName
+     *
+     * @return bool
+     */
+    public function deleteImageAndCleanField($id, $fieldName)
+    {
+        $repository = $this->repository->findOrFail($id);
+        if ($image = $repository[$fieldName]) {
+            $this->repository->deleteImage($image);
+        }
+
+        $repository[$fieldName] = "";
+        $repository->save();
+
+        return true;
+    }
 }

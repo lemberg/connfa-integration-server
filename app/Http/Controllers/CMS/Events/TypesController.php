@@ -19,22 +19,22 @@ class TypesController extends BaseController
 
     public function store()
     {
-        $this->repository->create($this->saveImage());
+        $this->repository->create($this->saveImage('icon'));
 
         return $this->redirectTo('index');
     }
 
     public function update($id)
     {
-        $this->repository->update($this->saveImage(), $id);
+        $this->repository->updateRich($this->saveImage('icon'), $id);
 
         return $this->redirectTo('index');
     }
 
     public function destroy($id)
     {
-        $type = $this->repository->findOrFail($id);
-        if ($image = $type->icon) {
+        $repository = $this->repository->findOrFail($id);
+        if ($image = $repository->icon) {
             $this->repository->deleteImage($image);
         }
         $this->repository->delete($id);
@@ -42,43 +42,10 @@ class TypesController extends BaseController
         return $this->redirectTo('index');
     }
 
-    /**
-     * Delete image file and clean icon field
-     *
-     * @param $id
-     *
-     * @return array
-     */
     public function iconDelete($id)
     {
-        $type = $this->repository->findOrFail($id);
-        if ($image = $type->icon) {
-            $this->repository->deleteImage($image);
-        }
-
-        $type->icon = "";
-        $type->save();
+        $this->deleteImageAndCleanField($id, 'icon');
 
         return ['result' => true];
-    }
-
-
-    /**
-     * Save image and return clean data to save / update
-     *
-     * @return array
-     */
-    protected function saveImage()
-    {
-        if ($this->request->get('icon-switch') == 'file' AND $this->request->hasFile('image')) {
-            $path = $this->repository->saveImage($this->request->file('image'), 'types');
-            if (!$path) {
-                return redirect()->back()->withError('Could not resize image');
-            }
-
-            $this->request['icon'] = $path;
-        }
-
-        return $this->request->except('_method', '_token', 'icon-switch', 'image');
     }
 }

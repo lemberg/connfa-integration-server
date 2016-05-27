@@ -54,13 +54,13 @@
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('icon-file') ? ' has-error' : '' }} form-group-icon-file">
+                    <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }} form-group-icon-file">
                         {{ Form::label('icon-file', trans('Icon'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             {{ Form::file('image', ['accept' => 'image/*', 'class' => 'form-control col-md-7 col-xs-12']) }}
-                            @if ($errors->has('icon-file'))
+                            @if ($errors->has('image'))
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('icon-file') }}</strong>
+                                    <strong>{{ $errors->first('image') }}</strong>
                                 </span>
                             @endif
                         </div>

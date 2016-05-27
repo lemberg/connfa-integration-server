@@ -427,5 +427,16 @@ $(document).ready(function () {
 		});
 
 	});
-	
+
+	// Replace the <textarea id="editor1"> with a CKEditor
+// instance, using default configuration.
+
+	var o = $('#editor-speaker');
+	if (o.length > 0) {
+		CKEDITOR.replace( 'editor-speaker' );
+	}
+
 });
+
+
+

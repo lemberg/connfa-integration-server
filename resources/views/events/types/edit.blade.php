@@ -38,8 +38,10 @@
                             <div class="form-group">
                                 {{ Form::label('icon-label', trans('Icon'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                                 <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div style="display: inline-block; position: relative;">
                                     {{ Html::image($data->icon, $data->name, array('class' => 'img-thumbnail img-responsive')) }}
-                                    <button class="btn btn-link" id="type-icon-delete" data-url="{{ url('types/'.$data->id.'/icon') }}" data-token="{{ csrf_token() }}" style="padding: 0; position: absolute; margin-left: -24px;"><i class="fa fa-times" style="font-size: 24px;"></i></button>
+                                    <button class="btn btn-link" id="type-icon-delete" data-url="{{ url('types/'.$data->id.'/icon') }}" data-token="{{ csrf_token() }}" style="padding: 0; position: absolute; top: 0px; right: 0px;"><i class="fa fa-times" style="font-size: 24px;"></i></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -65,21 +67,18 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('icon-file') ? ' has-error' : '' }} form-group-icon-file">
+                            <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }} form-group-icon-file">
                                 {{ Form::label('icon-file', trans('Icon'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     {{ Form::file('image', ['accept' => 'image/*', 'class' => 'form-control col-md-7 col-xs-12']) }}
-                                    @if ($errors->has('icon-file'))
+                                    @if ($errors->has('image'))
                                         <span class="help-block">
-                                            <strong>{{ $errors->first('icon-file') }}</strong>
+                                            <strong>{{ $errors->first('image') }}</strong>
                                         </span>
                                     @endif
                                 </div>
                             </div>
                         </div>
-
-
-
 
                         <div class="ln_solid"></div>
                         <div class="form-group">
