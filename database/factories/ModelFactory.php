@@ -103,7 +103,7 @@ $factory->define(App\Models\Point::class, function (Faker\Generator $faker) {
     return [
         'name'        => $faker->word,
         'description' => $faker->text(),
-        'image_url'   => $faker->imageUrl(),
+        'image'       => $faker->imageUrl(),
         'details_url' => $faker->url,
     ];
 });

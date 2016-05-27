@@ -33,7 +33,7 @@ class PointTransformer extends TransformerAbstract
             'poiId'          => $point->id,
             'poiName'        => $point->name,
             'poiDescription' => $point->description,
-            'poiImageURL'    => $point->image_url,
+            'poiImageURL'    => $point->image,
             'poiDetailURL'   => $point->details_url,
             'order'          => $point->order,
             'deleted'        => $point->deleted_at ? 1 : 0,

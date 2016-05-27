@@ -12,7 +12,8 @@ class Point extends Model
     protected $fillable = [
         'name',
         'description',
-        'image_url',
+        'image',
         'detail_url',
+        'order'
     ];
 }
