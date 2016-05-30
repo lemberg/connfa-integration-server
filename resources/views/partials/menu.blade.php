@@ -8,6 +8,7 @@
             <li><a href="{{ url('/tracks') }}"><i class="fa fa-exchange"></i> Tracks</a></li>
             <li><a href="{{ url('/types') }}"><i class="fa fa-bar-chart-o"></i> Types</a></li>
             <li><a href="{{ url('/speakers') }}"><i class="fa fa-group"></i> Speakers</a></li>
+            <li><a href="{{ url('/locations') }}"><i class="fa fa-location-arrow"></i> Locations</a></li>
         </ul>
     </div>
 </div>
