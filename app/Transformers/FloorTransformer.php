@@ -34,7 +34,7 @@ class FloorTransformer extends TransformerAbstract
             'floorPlanName'     => $floor->name,
             'floorPlanImageURL' => $floor->url,
             'order'             => $floor->order,
-            'deleted'           => $floor->deleted_at ? 1 : 0,
+            'deleted'           => $floor->deleted_at ? true : false,
         ];
 
         return $data;

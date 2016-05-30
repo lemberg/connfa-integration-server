@@ -32,7 +32,7 @@ class LevelTransformer extends TransformerAbstract
             'levelId'   => $level->id,
             'levelName' => $level->name,
             'order'     => $level->order,
-            'deleted'   => $level->deleted_at ? 1 : 0,
+            'deleted'   => $level->deleted_at ? true : false,
         ];
 
         return $data;

@@ -41,7 +41,7 @@ class SpeakerTransformer extends TransformerAbstract
             'webSite'          => $speaker->website,
             'email'            => $speaker->email,
             'order'            => $speaker->order,
-            'deleted'          => $speaker->deleted_at ? 1 : 0,
+            'deleted'          => $speaker->deleted_at ? true : false,
         ];
 
         return $speakers;

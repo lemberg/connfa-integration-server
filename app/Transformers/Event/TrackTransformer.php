@@ -32,7 +32,7 @@ class TrackTransformer extends TransformerAbstract
             'trackId'   => $track->id,
             'trackName' => $track->name,
             'order'     => $track->order,
-            'deleted'   => $track->deleted_at ? 1 : 0,
+            'deleted'   => $track->deleted_at ? true : false,
         ];
 
         return $tracks;
