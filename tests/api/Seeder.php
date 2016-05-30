@@ -68,6 +68,22 @@ class Seeder
         return $factory;
     }
 
+    public function point($data = [])
+    {
+        $factory = factory(App\Models\Point::class, 1)->make($data);
+        $factory->save();
+
+        return $factory;
+    }
+
+    public function floor($data = [])
+    {
+        $factory = factory(App\Models\Floor::class, 1)->make($data);
+        $factory->save();
+
+        return $factory;
+    }
+
     public function twitter($data = [])
     {
         $data = array_merge([

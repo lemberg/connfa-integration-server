@@ -37,12 +37,25 @@ class InfoCest extends BaseCest
         $I->seeResponseContainsJson(['infoTitle' => 'test title']);
     }
 
-    public function tryToGetInfoWithFeatureIfModifiedSince(ApiTester $I)
+    public function tryToGetInfoWithFutureIfModifiedSince(ApiTester $I)
     {
         $since = \Carbon\Carbon::parse('+5 hour');
         $I->haveALevel(['name' => 'test title']);
         $I->haveHttpHeader('If-modified-since', $since->toIso8601String());
         $I->sendGET('v2/getInfo');
         $I->seeResponseCodeIs(304);
+    }
+
+    public function tryToGetDeletedInfo(ApiTester $I)
+    {
+        $page = $I->haveAPage(['name' => 'test title']);
+        $I->sendGET('v2/getInfo');
+        $I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson(['infoTitle' => 'test title', 'deleted' => false]);
+        $page->delete();
+        $I->haveHttpHeader('If-modified-since', \Carbon\Carbon::now()->toIso8601String());
+        $I->sendGET('v2/getInfo');
+        $I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson(['infoTitle' => 'test title', 'deleted' => true]);
     }
 }

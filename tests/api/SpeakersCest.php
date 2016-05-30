@@ -37,12 +37,25 @@ class SpeakersCest extends BaseCest
         $I->seeResponseContainsJson(['firstName' => 'test']);
     }
 
-    public function tryToGetSpeakerWithFeatureIfModifiedSince(ApiTester $I)
+    public function tryToGetSpeakerWithFutureIfModifiedSince(ApiTester $I)
     {
         $since = \Carbon\Carbon::parse('+5 hour');
         $I->haveASpeaker(['first_name' => 'test', 'last_name' => 'Speaker']);
         $I->haveHttpHeader('If-modified-since', $since->toIso8601String());
         $I->sendGET('v2/getSpeakers');
         $I->seeResponseCodeIs(304);
+    }
+
+    public function tryToGetDeletedSpeaker(ApiTester $I)
+    {
+        $speaker = $I->haveASpeaker(['first_name' => 'test', 'last_name' => 'Speaker']);
+        $I->sendGET('v2/getSpeakers');
+        $I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson(['firstName' => 'test']);
+        $speaker->delete();
+        $I->haveHttpHeader('If-modified-since', \Carbon\Carbon::now()->toIso8601String());
+        $I->sendGET('v2/getSpeakers');
+        $I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson(['firstName' => 'test', 'deleted' => true]);
     }
 }
