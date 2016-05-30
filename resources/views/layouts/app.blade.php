@@ -23,7 +23,6 @@
     <!-- Custom Theme Style -->
     <link rel="stylesheet" href="{{ URL::asset('assets/css/custom.css') }}">
 
-
 </head>
 
 <body class="nav-md">
@@ -79,12 +78,10 @@
         </div>
         <!-- /top navigation -->
 
-
         <!-- page content -->
         <div class="right_col" role="main">
             @yield('content')
         </div>
-
         <!-- /page content -->
 
         <!-- footer content -->
@@ -137,7 +134,6 @@
 
 <!-- Custom Theme Scripts -->
 <script src="{{ URL::asset('assets/js/custom.js') }}"></script>
-
 
 </body>
 </html>
