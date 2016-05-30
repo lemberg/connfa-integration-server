@@ -39,7 +39,7 @@ class TwitterCest extends BaseCest
         $I->seeResponseContainsJson(['twitterSearchQuery' => '#connfa']);
     }
 
-    public function tryToGetTwitterWithFeatureIfModifiedSince(ApiTester $I)
+    public function tryToGetTwitterWithFutureIfModifiedSince(ApiTester $I)
     {
         $since = \Carbon\Carbon::parse('+5 hour');
         $I->haveATwitter(['twitterWidget' => 'test widget', 'twitterSearchQuery' => '#connfa']);
