@@ -18,8 +18,8 @@
                             {{ Form::text('first_name', $data->first_name, ['class' => 'form-control col-md-7 col-xs-12']) }}
                             @if ($errors->has('first_name'))
                                 <span class="help-block">
-                                        <strong>{{ $errors->first('first_name') }}</strong>
-                                    </span>
+                                    <strong>{{ $errors->first('first_name') }}</strong>
+                                </span>
                             @endif
                         </div>
                     </div>
@@ -30,8 +30,8 @@
                             {{ Form::text('last_name', $data->last_name, ['class' => 'form-control col-md-7 col-xs-12']) }}
                             @if ($errors->has('last_name'))
                                 <span class="help-block">
-                                        <strong>{{ $errors->first('last_name') }}</strong>
-                                    </span>
+                                    <strong>{{ $errors->first('last_name') }}</strong>
+                                </span>
                             @endif
                         </div>
                     </div>
@@ -42,8 +42,8 @@
                             {{ Form::email('email', $data->email, ['class' => 'form-control col-md-7 col-xs-12']) }}
                             @if ($errors->has('email'))
                                 <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
                             @endif
                         </div>
                     </div>
@@ -103,17 +103,23 @@
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div style="display: inline-block; position: relative;">
                                     {{ Html::image($data->avatar, $data->first_name. ' '. $data->last_name, array('class' => 'img-thumbnail img-responsive')) }}
-                                    <button class="btn btn-link" id="type-icon-delete" data-url="{{ url('speakers/'.$data->id.'/avatar') }}" data-token="{{ csrf_token() }}" style="padding: 0; position: absolute; top: 0px; right: 0px;"><i class="fa fa-times" style="font-size: 24px;"></i></button>
+                                    <button class="btn btn-link" id="type-icon-delete"
+                                            data-url="{{ url('speakers/'.$data->id.'/avatar') }}"
+                                            data-token="{{ csrf_token() }}"
+                                            style="padding: 0; position: absolute; top: 0px; right: 0px;"><i
+                                                class="fa fa-times" style="font-size: 24px;"></i></button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="upload-image-block" style="{{ empty($data->avatar) ? 'display:block;':'display:none;' }}">
+                    <div class="upload-image-block"
+                         style="{{ empty($data->avatar) ? 'display:block;':'display:none;' }}">
                         <div class="form-group">
                             {{ Form::label('icon-label', trans('Avatar'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                {{ Form::radio('icon-switch', 'url', true, ['class' => 'flat', 'id' => 'icon-switch-text']) }} {{ trans('Url') }}<br>
+                                {{ Form::radio('icon-switch', 'url', true, ['class' => 'flat', 'id' => 'icon-switch-text']) }} {{ trans('Url') }}
+                                <br>
                                 {{ Form::radio('icon-switch', 'file', false, ['class' => 'flat', 'id' => 'icon-switch-file']) }} {{ trans('Image upload') }}
                             </div>
                         </div>

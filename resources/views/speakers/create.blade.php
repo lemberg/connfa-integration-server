@@ -105,13 +105,13 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('icon') ? ' has-error' : '' }} form-group-icon-text">
+                        <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }} form-group-icon-text">
                             {{ Form::label('icon-text', trans('Url'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                {{ Form::url('icon', '', ['class' => 'form-control col-md-7 col-xs-12']) }}
-                                @if ($errors->has('icon'))
+                                {{ Form::url('avatar', '', ['class' => 'form-control col-md-7 col-xs-12']) }}
+                                @if ($errors->has('avatar'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('icon') }}</strong>
+                                        <strong>{{ $errors->first('avatar') }}</strong>
                                     </span>
                                 @endif
                             </div>
