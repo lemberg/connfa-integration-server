@@ -12,6 +12,12 @@ class PointRepository extends BaseRepository
         return Point::class;
     }
 
+    /**
+     * Get points of interests with deleted since $since param if passed
+     *
+     * @param string|bool $since
+     * @return mixed
+     */
     public function getPointsWithDeleted($since = false)
     {
         if ($since) {

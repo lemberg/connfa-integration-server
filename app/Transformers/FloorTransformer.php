@@ -30,9 +30,9 @@ class FloorTransformer extends TransformerAbstract
     public function transform($floor)
     {
         $data = [
-            'housePlanId'       => $floor->id,
-            'housePlanName'     => $floor->name,
-            'housePlanImageURL' => $floor->url,
+            'floorPlanId'       => $floor->id,
+            'floorPlanName'     => $floor->name,
+            'floorPlanImageURL' => $floor->url,
             'order'             => $floor->order,
             'deleted'           => $floor->deleted_at ? 1 : 0,
         ];

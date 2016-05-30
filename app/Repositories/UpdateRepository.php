@@ -9,6 +9,10 @@ use App\Repositories\Event\TypeRepository;
 class UpdateRepository
 {
 
+    /**
+     * ObjectsMap with resource id, repository and additional params
+     * @var array
+     */
     protected $objectsMap = array(
         'settings'  => array(
             'id'         => 0,
@@ -41,7 +45,7 @@ class UpdateRepository
         'sessions'  => array(
             'id'         => 7,
             'repository' => EventRepository::class,
-            'params'     => ['event_type' => 'program'],
+            'params'     => ['event_type' => 'session'],
         ),
         'bofs'      => array(
             'id'         => 8,
@@ -67,6 +71,13 @@ class UpdateRepository
         ),
     );
 
+    /**
+     * Get array of updated resources
+     *
+     * @param $since
+     * @param array $params
+     * @return array
+     */
     public function getLastUpdate($since, $params = [])
     {
         $updates = [];

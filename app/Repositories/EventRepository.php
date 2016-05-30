@@ -12,6 +12,13 @@ class EventRepository extends BaseRepository
         return Event::class;
     }
 
+    /**
+     * Get events with deleted by type since $since param if passed
+     *
+     * @param $type
+     * @param string|bool $since
+     * @return mixed
+     */
     public function getEventsByTypeWithDeleted($type, $since = false)
     {
         $events = $this->model->withTrashed()->where('event_type', $type);

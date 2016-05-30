@@ -12,6 +12,12 @@ class TypeRepository extends BaseRepository
         return Type::class;
     }
 
+    /**
+     * Get types with deleted since $since param if passed
+     *
+     * @param string|bool $since
+     * @return mixed
+     */
     public function getTypesWithDeleted($since = false)
     {
         if ($since) {

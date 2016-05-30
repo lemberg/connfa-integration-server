@@ -25,7 +25,7 @@ $factory->define(App\Models\Speaker::class, function (Faker\Generator $faker) {
         'first_name'     => $faker->firstName,
         'last_name'      => $faker->lastName,
         'email'          => $faker->safeEmail,
-        'characteristic' => $faker->sentence(),
+        'characteristic' => $faker->text(),
         'job'            => $faker->jobTitle,
         'organization'   => $faker->company(),
         'twitter_name'   => '@' . $faker->userName(),
@@ -103,7 +103,7 @@ $factory->define(App\Models\Point::class, function (Faker\Generator $faker) {
     return [
         'name'        => $faker->word,
         'description' => $faker->text(),
-        'image_url'   => $faker->imageUrl(),
+        'image'       => $faker->imageUrl(),
         'details_url' => $faker->url,
     ];
 });

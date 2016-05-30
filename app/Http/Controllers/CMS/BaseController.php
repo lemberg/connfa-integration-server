@@ -224,4 +224,25 @@ class BaseController extends Controller
     {
         return $this->getViewsFolder() . '.' . $viewName;
     }
+
+    /**
+     * Delete image file and clean field
+     *
+     * @param int $id
+     * @param string $fieldName
+     *
+     * @return bool
+     */
+    public function deleteImageAndCleanField($id, $fieldName)
+    {
+        $repository = $this->repository->findOrFail($id);
+        if ($image = $repository[$fieldName]) {
+            $this->repository->deleteImage($image);
+        }
+
+        $repository[$fieldName] = "";
+        $repository->save();
+
+        return true;
+    }
 }

@@ -8,6 +8,13 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class UpdatesController extends ApiController
 {
+    /**
+     * Get list of methods updated
+     *
+     * @param UpdateRepository $repository
+     * @throws HttpException
+     * @return \Dingo\Api\Http\Response
+     */
     public function index(UpdateRepository $repository)
     {
         $changes = $repository->getLastUpdate($this->since);

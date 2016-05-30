@@ -16,7 +16,7 @@ class CreatePointsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->text('description');
-            $table->string('image_url');
+            $table->string('image');
             $table->string('details_url');
             $table->float('order');
             $table->softDeletes();
