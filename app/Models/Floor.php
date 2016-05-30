@@ -11,7 +11,7 @@ class Floor extends Model
 
     protected $fillable = [
         'name',
-        'url',
+        'image',
         'order',
     ];
 }

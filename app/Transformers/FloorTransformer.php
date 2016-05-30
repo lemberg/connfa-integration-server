@@ -32,7 +32,7 @@ class FloorTransformer extends TransformerAbstract
         $data = [
             'floorPlanId'       => $floor->id,
             'floorPlanName'     => $floor->name,
-            'floorPlanImageURL' => $floor->url,
+            'floorPlanImageURL' => $floor->image,
             'order'             => $floor->order,
             'deleted'           => $floor->deleted_at ? true : false,
         ];

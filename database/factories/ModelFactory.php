@@ -75,8 +75,8 @@ $factory->define(App\Models\Event::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Models\Floor::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->word,
-        'url'  => $faker->imageUrl(),
+        'name'  => $faker->word,
+        'image' => $faker->imageUrl(),
     ];
 });
 
