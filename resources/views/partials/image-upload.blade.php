@@ -2,7 +2,7 @@
 @if(!$create and empty(old($fieldName . '_delete')))
     <div class="{{ $fieldName }}-block" style="{{ !empty($fieldNameValue) ? 'display:block;':'display:none;' }}">
         <div class="form-group">
-            {{ Form::label('icon-label', trans('Image'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
+            {{ Form::label('icon-label', $labelName, ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div style="display: inline-block; position: relative;">
                     {{ Html::image($fieldNameValue, '', ['class' => 'img-thumbnail img-responsive']) }}
