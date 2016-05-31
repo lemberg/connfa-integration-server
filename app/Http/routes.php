@@ -28,6 +28,7 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
     $app->resource('points', 'PointsController');
     $app->resource('locations', 'LocationsController');
     $app->resource('floors', 'FloorsController');
+    $app->resource('pages', 'PagesController');
 });
 
 $api->version('v2', [

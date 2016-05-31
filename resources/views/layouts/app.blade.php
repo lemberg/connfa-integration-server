@@ -132,6 +132,8 @@
 
 <script src="{{ URL::asset('assets/vendors/ckeditor/ckeditor.js') }}"></script>
 
+<script src="{{ URL::asset('assets/js/jquery.synctranslit.min.js') }}"></script>
+
 <!-- Custom Theme Scripts -->
 <script src="{{ URL::asset('assets/js/custom.js') }}"></script>
 
