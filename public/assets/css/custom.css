@@ -690,7 +690,7 @@ footer {
 }
 @media (min-width: 768px) {
   footer {
-   // margin-left: 230px;
+    margin-left: 230px;
   }
 }
 .nav-sm footer {

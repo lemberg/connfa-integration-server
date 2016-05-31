@@ -13,7 +13,7 @@ class Point extends Model
         'name',
         'description',
         'image',
-        'detail_url',
+        'details_url',
         'order'
     ];
 }

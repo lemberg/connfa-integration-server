@@ -2,11 +2,11 @@
 
 @section('content')
     <div class="col-md-12 col-sm-12 col-xs-12">
-        {{ Html::link(route('speakers.create'), trans('Create speaker'), ['class' => 'btn btn-primary pull-right']) }}
+        {{ Html::link(route('points.create'), trans('Create point'), ['class' => 'btn btn-primary pull-right']) }}
 
         <div class="x_panel">
             <div class="x_title">
-                <h2>{{ trans('Speakers') }}</h2>
+                <h2>{{ trans('Points') }}</h2>
                 <div class="clearfix"></div>
             </div>
 
@@ -16,9 +16,9 @@
                         <thead>
                             <tr class="headings">
                                 <th class="column-title">#</th>
-                                <th class="column-title">{{ trans('Avatar') }}</th>
                                 <th class="column-title">{{ trans('Name') }}</th>
-                                <th class="column-title">{{ trans('Email') }}</th>
+                                <th class="column-title">{{ trans('Details url') }}</th>
+                                <th class="column-title">{{ trans('Image') }}</th>
                                 <th class="column-title no-link last"><span class="nobr">{{ trans('Action') }}</span></th>
                             </tr>
                         </thead>
@@ -28,20 +28,20 @@
                             <tr>
                                 <td>{{ $item->id }}</td>
                                 <td>
-                                    @if(!empty($item->avatar))
-                                        {{ Html::image($item->avatar, $item->first_name . ' ' . $item->last_name, ['class' => 'avatar img-responsive']) }}
+                                    {{ $item->name }}
+                                </td>
+                                <td>
+                                    {{ $item->details_url }}
+                                </td>
+                                <td>
+                                    @if(!empty($item->image))
+                                        {{ Html::image($item->image, $item->name, ['class' => 'avatar img-responsive']) }}
                                     @endif
                                 </td>
-                                <td>
-                                    {{ $item->first_name }} {{ $item->last_name }}
-                                </td>
-                                <td>
-                                    {{ $item->email }}
-                                </td>
                                 <td class="text-right">
-                                    <a href="{{ route('speakers.show', ['id' => $item->id]) }}" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> {{ trans('View') }}</a>
-                                    <a href="{{ route('speakers.edit', ['id' => $item->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> {{ trans('Edit') }}</a>
-                                    {!! Form::open(['url' => route('speakers.destroy', ['id' => $item->id]), 'method' => 'POST', 'style' => 'vertical-align: middle; display: inline-block;']) !!}
+                                    <a href="{{ route('points.show', ['id' => $item->id]) }}" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> {{ trans('View') }}</a>
+                                    <a href="{{ route('points.edit', ['id' => $item->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> {{ trans('Edit') }}</a>
+                                    {!! Form::open(['url' => route('points.destroy', ['id' => $item->id]), 'method' => 'POST', 'style' => 'vertical-align: middle; display: inline-block;']) !!}
                                         {{ method_field('DELETE') }}
                                         {{ Form::button("<i class='fa fa-trash-o'></i> ".trans('Delete'), ['type' => 'submit', 'class' => 'btn btn-danger btn-xs']) }}
                                     {!! Form::close() !!}
