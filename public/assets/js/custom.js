@@ -384,47 +384,52 @@ $(document).ready(function () {
 
 	<!-- /Skycons -->
 
-
-	/**
-	 * fChecked to select url or file
-	* types - (create/update)
-	* */
-	$('#icon-switch-text').on('ifChecked', function () {
-		$('.form-group-icon-text').show();
-		$('.form-group-icon-file').hide();
-	});
-
-	$('#icon-switch-file').on('ifChecked', function () {
-		$('.form-group-icon-file').show();
-		$('.form-group-icon-text').hide();
-	});
-
-	if (($('input[name=icon-switch]:checked').length > 0) && ($('input[name=icon-switch]:checked').val() == 'image_url')) {
-		$('.form-group-icon-file').hide();
-	} else {
-		$('.form-group-icon-text').hide();
-	}
-
-	/**
-	 * types - delete icon
-	 */
-	$('.btn-image-delete').on('click', function (e) {
-		e.preventDefault();
-		var field = $(this).data('field');
-		$("input[name="+field+"_delete]").val($("input[name="+field+"]").val());
-		$('.image-block').hide();
-		$('.upload-image-block').show();
-	});
-
 	/**
 	 * include CKEDITOR to id
 	 */
 	var o = $('#editor-speaker');
 	if (o.length > 0) {
-		CKEDITOR.replace( 'editor-speaker' );
+		CKEDITOR.replace('editor-speaker');
 	}
 
+	// floors
+	checkSwitcher('image');
+	deleteImage('image');
+
 });
+
+
+function checkSwitcher(fieldName) {
+	$('#' + fieldName + '-switch-url').on('ifChecked', function () {
+		$('.form-group-' + fieldName + '-url').show();
+		$('.form-group-' + fieldName + '-file').hide();
+	});
+
+	$('#' + fieldName + '-switch-file').on('ifChecked', function () {
+		$('.form-group-' + fieldName + '-file').show();
+		$('.form-group-' + fieldName + '-url').hide();
+	});
+
+	if (($('input[name=' + fieldName + '-switch]:checked').length > 0) && ($('input[name=' + fieldName + '-switch]:checked').val() == fieldName + '_url')) {
+		$('.form-group-' + fieldName + '-file').hide();
+	} else {
+		$('.form-group-' + fieldName + '-url').hide();
+	}
+}
+
+function deleteImage(fieldName) {
+	$('.btn-' + fieldName + '-delete').on('click', function (e) {
+		e.preventDefault();
+		var field = $(this).data('field');
+		$("input[name=" + field + "_delete]").val($("input[name=" + field + "]").val());
+		$('.' + fieldName + '-block').hide();
+		$('.' + fieldName + '-upload-block').show();
+	});
+}
+
+
+
+
 
 
 

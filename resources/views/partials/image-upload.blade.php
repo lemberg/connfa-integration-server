@@ -1,17 +1,17 @@
 
 @if(!$create and empty(old($fieldName . '_delete')))
-    <div class="image-block" style="{{ !empty($fieldNameValue) ? 'display:block;':'display:none;' }}">
+    <div class="{{ $fieldName }}-block" style="{{ !empty($fieldNameValue) ? 'display:block;':'display:none;' }}">
         <div class="form-group">
             {{ Form::label('icon-label', trans('Image'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div style="display: inline-block; position: relative;">
                     {{ Html::image($fieldNameValue, '', ['class' => 'img-thumbnail img-responsive']) }}
-                    <button class="btn btn-link btn-image-delete" data-field="{{ $fieldName }}" style="padding: 0; position: absolute; top: 0px; right: 0px;"><i class="fa fa-times" style="font-size: 24px;"></i></button>
+                    <button class="btn btn-link btn-{{ $fieldName }}-delete" data-field="{{ $fieldName }}" style="padding: 0; position: absolute; top: 0px; right: 0px;"><i class="fa fa-times" style="font-size: 24px;"></i></button>
                 </div>
             </div>
         </div>
     </div>
-    <div class="upload-image-block" style="{{ empty($fieldNameValue) ? 'display:block;':'display:none;' }}">
+    <div class="{{ $fieldName }}-upload-block" style="{{ empty($fieldNameValue) ? 'display:block;':'display:none;' }}">
 @endif
 
 {{ Form::hidden($fieldName, $fieldNameValue) }}
@@ -19,11 +19,11 @@
 <div class="form-group">
     {{ Form::label('label-switch', $labelName, ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
     <div class="col-md-6 col-sm-6 col-xs-12">
-        {{ Form::radio($fieldName . '-switch', $fieldName . '_url', true, ['class' => 'flat', 'id' => 'icon-switch-text']) }} {{ trans('Image url') }}<br>
-        {{ Form::radio($fieldName . '-switch', $fieldName . '_file', false, ['class' => 'flat', 'id' => 'icon-switch-file']) }} {{ trans('Image file') }}
+        {{ Form::radio($fieldName . '-switch', $fieldName . '_url', true, ['class' => 'flat', 'id' => $fieldName . '-switch-url']) }} {{ trans('Image url') }}<br>
+        {{ Form::radio($fieldName . '-switch', $fieldName . '_file', false, ['class' => 'flat', 'id' => $fieldName . '-switch-file']) }} {{ trans('Image file') }}
     </div>
 </div>
-<div class="form-group{{ $errors->has($fieldName . '_url') ? ' has-error' : '' }} form-group-icon-text">
+<div class="form-group{{ $errors->has($fieldName . '_url') ? ' has-error' : '' }} form-group-{{ $fieldName }}-url">
     {{ Form::label($fieldName . '_url', trans('Image url') . ($required ? ' *' : ''), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
     <div class="col-md-6 col-sm-6 col-xs-12">
         {{ Form::url($fieldName . '_url', '', ['class' => 'form-control col-md-7 col-xs-12']) }}
@@ -34,7 +34,7 @@
         @endif
     </div>
 </div>
-<div class="form-group{{ $errors->has($fieldName . '_file') ? ' has-error' : '' }} form-group-icon-file">
+<div class="form-group{{ $errors->has($fieldName . '_file') ? ' has-error' : '' }} form-group-{{ $fieldName }}-file">
     {{ Form::label($fieldName . '_file', trans('Image file') . ($required ? ' *' : ''), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
     <div class="col-md-6 col-sm-6 col-xs-12">
         {{ Form::file($fieldName . '_file', ['accept' => 'image/*', 'class' => 'form-control col-md-7 col-xs-12']) }}
@@ -49,3 +49,4 @@
 @if(!$create and empty(old($fieldName . '_delete')))
     </div>
 @endif
+

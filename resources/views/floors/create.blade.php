@@ -28,7 +28,7 @@
                         'labelName' => trans('Image'),
                         'fieldName' => 'image',
                         'fieldNameValue' => '',
-                        'required' => false,
+                        'required' => true,
                     ])
 
                     <div class="form-group{{ $errors->has('order') ? ' has-error' : '' }}">

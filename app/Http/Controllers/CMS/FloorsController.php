@@ -17,7 +17,7 @@ class FloorsController extends BaseController
     public function store()
     {
         $data = $this->request->all();
-        if ($this->request->get('icon-switch') == 'image_file' AND $this->request->hasFile('image_file')) {
+        if ($this->request->get('image-switch') == 'image_file' AND $this->request->hasFile('image_file')) {
             $path = $this->repository->saveImage($this->request->file('image_file'), $this->getViewsFolder());
             if (!$path) {
                 return redirect()->back()->withError('Could not save image');
@@ -39,7 +39,7 @@ class FloorsController extends BaseController
             $this->deleteImageAndCleanField($id, 'image');
         }
 
-        if ($this->request->get('icon-switch') == 'image_file' AND $this->request->hasFile('image_file')) {
+        if ($this->request->get('image-switch') == 'image_file' AND $this->request->hasFile('image_file')) {
             $path = $this->repository->saveImage($this->request->file('image_file'), $this->getViewsFolder());
             if (!$path) {
                 return redirect()->back()->withError('Could not save image');
