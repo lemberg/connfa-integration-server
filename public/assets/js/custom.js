@@ -399,7 +399,7 @@ $(document).ready(function () {
 		$('.form-group-icon-text').hide();
 	});
 
-	if (($('input[name=icon-switch]:checked').length > 0) && ($('input[name=icon-switch]:checked').val() == 'url')) {
+	if (($('input[name=icon-switch]:checked').length > 0) && ($('input[name=icon-switch]:checked').val() == 'image_url')) {
 		$('.form-group-icon-file').hide();
 	} else {
 		$('.form-group-icon-text').hide();
@@ -408,29 +408,17 @@ $(document).ready(function () {
 	/**
 	 * types - delete icon
 	 */
-	$('#type-icon-delete').on('click', function (e) {
+	$('.btn-image-delete').on('click', function (e) {
 		e.preventDefault();
-		$.ajax({
-			url: $(this).data('url'),
-			type: 'post',
-			data: {_method: 'delete', _token: $(this).data('token')},
-			success: function(result) {
-				JSON.stringify(result);
-				if(result.result)
-				{
-					console.log(result);
-					console.log('delete image');
-					$('.image-block').hide();
-					$('.upload-image-block').show();
-				}
-			}
-		});
-
+		var field = $(this).data('field');
+		$("input[name="+field+"_delete]").val($("input[name="+field+"]").val());
+		$('.image-block').hide();
+		$('.upload-image-block').show();
 	});
 
-	// Replace the <textarea id="editor1"> with a CKEditor
-// instance, using default configuration.
-
+	/**
+	 * include CKEDITOR to id
+	 */
 	var o = $('#editor-speaker');
 	if (o.length > 0) {
 		CKEDITOR.replace( 'editor-speaker' );
