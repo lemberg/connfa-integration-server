@@ -54,7 +54,7 @@ class SessionTransformer implements EmbeddedTransformer
             'track'           => $event->track ? $event->track->id : null,
             'order'           => $event->order,
             'link'            => $event->url,
-            'deleted'         => $event->deleted_at ? 1 : 0,
+            'deleted'         => $event->deleted_at ? true : false,
         ];
 
         return $data;

@@ -38,12 +38,25 @@ class BofsCest extends BaseCest
         $I->seeResponseContainsJson(['name' => 'test']);
     }
 
-    public function tryToGetBofWithFeatureIfModifiedSince(ApiTester $I)
+    public function tryToGetBofWithFutureIfModifiedSince(ApiTester $I)
     {
         $since = \Carbon\Carbon::parse('+5 hour');
         $I->haveAnEvent(['name' => 'test', 'event_type' => 'bof']);
         $I->haveHttpHeader('If-modified-since', $since->toIso8601String());
         $I->sendGET('v2/getBofs');
         $I->seeResponseCodeIs(304);
+    }
+
+    public function tryToGetDeletedBof(ApiTester $I)
+    {
+        $event = $I->haveAnEvent(['name' => 'test', 'event_type' => 'bof']);
+        $I->sendGET('v2/getBofs');
+        $I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson(['name' => 'test', 'deleted' => false]);
+        $event->delete();
+        $I->haveHttpHeader('If-modified-since', \Carbon\Carbon::now()->toIso8601String());
+        $I->sendGET('v2/getBofs');
+        $I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson(['name' => 'test', 'deleted' => true]);
     }
 }

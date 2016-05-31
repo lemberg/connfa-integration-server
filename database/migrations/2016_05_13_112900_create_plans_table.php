@@ -15,8 +15,8 @@ class CreatePlansTable extends Migration
         Schema::create('floors', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('url');
-            $table->float('order');
+            $table->string('image');
+            $table->float('order')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

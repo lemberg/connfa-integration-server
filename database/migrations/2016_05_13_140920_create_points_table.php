@@ -18,7 +18,7 @@ class CreatePointsTable extends Migration
             $table->text('description');
             $table->string('image');
             $table->string('details_url');
-            $table->float('order');
+            $table->float('order')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

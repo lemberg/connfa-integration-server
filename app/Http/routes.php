@@ -30,6 +30,8 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
     $app->resource('points', 'PointsController');
     $app->delete('points/{id}/image', 'PointsController@iconDelete');
     $app->resource('locations', 'LocationsController');
+    $app->resource('floors', 'FloorsController');
+    $app->delete('floors/{id}/image', 'FloorsController@iconDelete');
 });
 
 $api->version('v2', [

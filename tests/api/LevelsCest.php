@@ -37,12 +37,26 @@ class LevelsCest extends BaseCest
         $I->seeResponseContainsJson(['levelName' => 'beginner']);
     }
 
-    public function tryToGetLevelWithFeatureIfModifiedSince(ApiTester $I)
+    public function tryToGetLevelWithFutureIfModifiedSince(ApiTester $I)
     {
         $since = \Carbon\Carbon::parse('+5 hour');
         $I->haveALevel(['name' => 'beginner']);
         $I->haveHttpHeader('If-modified-since', $since->toIso8601String());
         $I->sendGET('v2/getLevels');
         $I->seeResponseCodeIs(304);
+    }
+
+    public function tryToGetDeletedLevel(ApiTester $I)
+    {
+        $level = $I->haveALevel(['name' => 'beginner']);
+        $I->sendGET('v2/getLevels');
+        $I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson(['levelName' => 'beginner', 'deleted' => false]);
+        $level->delete();
+        $I->haveHttpHeader('If-modified-since', \Carbon\Carbon::now()->toIso8601String());
+        $I->sendGET('v2/getLevels');
+        $I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson(['levelName' => 'beginner', 'deleted' => true]);
+
     }
 }

@@ -10,6 +10,7 @@
             <li><a href="{{ url('/speakers') }}"><i class="fa fa-group"></i> Speakers</a></li>
             <li><a href="{{ url('/points') }}"><i class="fa fa-group"></i> Points</a></li>
             <li><a href="{{ url('/locations') }}"><i class="fa fa-location-arrow"></i> Locations</a></li>
+            <li><a href="{{ url('/floors') }}"><i class="fa fa-puzzle-piece"></i> Floors plans</a></li>
         </ul>
     </div>
 </div>
