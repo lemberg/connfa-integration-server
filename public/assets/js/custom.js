@@ -396,6 +396,14 @@ $(document).ready(function () {
 	checkSwitcher('image');
 	deleteImage('image');
 
+	// speakers
+	checkSwitcher('avatar');
+	deleteImage('avatar');
+
+	// types
+	checkSwitcher('icon');
+	deleteImage('icon');
+
 });
 
 

@@ -18,15 +18,16 @@ class SpeakersController extends BaseController
     public function store()
     {
         $data = $this->request->all();
-        if ($this->request->get('icon-switch') == 'file' AND $this->request->hasFile('image')) {
-            $path = $this->repository->saveImage($this->request->file('image'), $this->getViewsFolder());
+        if ($this->request->get('avatar-switch') == 'avatar_file' AND $this->request->hasFile('avatar_file')) {
+            $path = $this->repository->saveImage($this->request->file('avatar_file'), $this->getViewsFolder());
             if (!$path) {
                 return redirect()->back()->withError('Could not save image');
             }
-
-            $data['avatar'] = $path;
+        } else {
+            $path = $this->request->get('avatar_url');
         }
 
+        $data['avatar'] = $path;
         $this->repository->create($data);
 
         return $this->redirectTo('index');
@@ -35,14 +36,17 @@ class SpeakersController extends BaseController
     public function update($id)
     {
         $data = $this->request->all();
-        if ($this->request->get('icon-switch') == 'file' AND $this->request->hasFile('image')) {
-            $path = $this->repository->saveImage($this->request->file('image'), $this->getViewsFolder());
+        if ($this->request->get('avatar-switch') == 'avatar_file' AND $this->request->hasFile('avatar_file')) {
+            $path = $this->repository->saveImage($this->request->file('avatar_file'), $this->getViewsFolder());
             if (!$path) {
                 return redirect()->back()->withError('Could not save image');
             }
-
-            $data['avatar'] = $path;
         }
+        else {
+            $path = $this->request->get('avatar_url');
+        }
+
+        $data['avatar'] = $path;
         $this->repository->updateRich($data, $id);
 
         return $this->redirectTo('index');
@@ -57,12 +61,5 @@ class SpeakersController extends BaseController
         $this->repository->delete($id);
 
         return $this->redirectTo('index');
-    }
-
-    public function iconDelete($id)
-    {
-        $this->deleteImageAndCleanField($id, 'avatar');
-
-        return ['result' => true];
     }
 }

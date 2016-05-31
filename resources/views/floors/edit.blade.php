@@ -23,13 +23,13 @@
                             </div>
                         </div>
 
-                    @include('partials/image-upload', [
-                        'create' => false,
-                        'labelName' => trans('Image'),
-                        'fieldName' => 'image',
-                        'fieldNameValue' => $data->image,
-                        'required' => true,
-                    ])
+                        @include('partials/image-upload', [
+                            'create' => false,
+                            'labelName' => trans('Image'),
+                            'fieldName' => 'image',
+                            'fieldNameValue' => $data->image,
+                            'required' => true,
+                        ])
 
                         <div class="form-group{{ $errors->has('order') ? ' has-error' : '' }}">
                             {{ Form::label('order', trans('Order'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}

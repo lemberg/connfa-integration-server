@@ -27,8 +27,8 @@ class PointRequest extends Request
         if (in_array($this->method(), ['POST', 'PUT'])) {
             $validation = [
                 'name' => 'required',
-                'file' => 'mimes:jpeg,bmp,png,gif|max:6000',
-                'image' => 'url',
+                'image_file' => 'mimes:jpeg,bmp,png,gif|max:6000',
+                'image_url' => 'url',
                 'detail_url' => 'url',
             ];
         }
