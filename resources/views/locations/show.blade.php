@@ -10,7 +10,7 @@
             <a href="{{ route('locations.edit', ['id' => $data->id ]) }}" class="btn btn-info pull-right"><i class="fa fa-pencil"></i> {{ trans('Edit') }}</a>
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Location</h2>
+                    <h2>{{ trans('Location') }}</h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">

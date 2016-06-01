@@ -28,21 +28,21 @@ class FloorRequest extends Request
             $request = $this->request->all();
             if ($request['image-switch'] == 'image_url') {
                 $validation = [
-                    'name'       => 'required',
+                    'name' => 'required',
                     'image_file' => 'mimes:jpeg,bmp,png,gif|max:6000',
-                    'image_url'  => 'required|url',
+                    'image_url' => 'required|url',
                 ];
             } elseif ($request['image-switch'] == 'image_file') {
                 $validation = [
-                    'name'       => 'required',
+                    'name' => 'required',
                     'image_file' => 'required|mimes:jpeg,bmp,png,gif|max:6000',
-                    'image_url'  => 'url',
+                    'image_url' => 'url',
                 ];
             } else {
                 $validation = [
-                    'name'       => 'required',
+                    'name' => 'required',
                     'image_file' => 'required|mimes:jpeg,bmp,png,gif|max:6000',
-                    'image_url'  => 'required|url',
+                    'image_url' => 'required|url',
                 ];
             }
         }

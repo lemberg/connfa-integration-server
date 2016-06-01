@@ -387,14 +387,29 @@ $(document).ready(function () {
 	/**
 	 * include CKEDITOR to id
 	 */
-	var o = $('#editor-speaker');
+	var o = $('#editor');
 	if (o.length > 0) {
-		CKEDITOR.replace('editor-speaker');
+		CKEDITOR.replace('editor');
+	}
+
+	// pages
+	var o = $('.page-from #alias');
+	if (o.length > 0) {
+		$("#name").syncTranslit({destination: "alias"});
 	}
 
 	// floors
 	checkSwitcher('image');
 	deleteImage('image');
+
+	// speakers
+	checkSwitcher('avatar');
+	deleteImage('avatar');
+
+	// types
+	checkSwitcher('icon');
+	deleteImage('icon');
+
 
 });
 
@@ -426,10 +441,3 @@ function deleteImage(fieldName) {
 		$('.' + fieldName + '-upload-block').show();
 	});
 }
-
-
-
-
-
-
-

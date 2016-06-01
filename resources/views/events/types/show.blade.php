@@ -11,7 +11,7 @@
 
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Type</h2>
+                    <h2>{{ trans('Type') }}</h2>
                     <div class="clearfix"></div>
                 </div>
 
