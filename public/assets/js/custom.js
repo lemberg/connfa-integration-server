@@ -396,6 +396,18 @@ $(document).ready(function () {
 	checkSwitcher('image');
 	deleteImage('image');
 
+	//user password
+	$('#change_password').on('ifChecked', function () {
+		$('.change-password').show();
+	});
+	$('#change_password').on('ifUnchecked', function () {
+		$('.change-password').hide();
+	});
+	if($('#change_password').attr('checked') == 'checked'){
+		$('.change-password').show();
+	}
+
+
 });
 
 
