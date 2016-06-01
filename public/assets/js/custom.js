@@ -401,7 +401,6 @@ $(document).ready(function () {
 	// floors
 	checkSwitcher('image');
 	deleteImage('image');
-
 	// speakers
 	checkSwitcher('avatar');
 	deleteImage('avatar');
@@ -410,7 +409,16 @@ $(document).ready(function () {
 	checkSwitcher('icon');
 	deleteImage('icon');
 
-
+	//user password
+	$('#change_password').on('ifChecked', function () {
+		$('.change-password').show();
+	});
+	$('#change_password').on('ifUnchecked', function () {
+		$('.change-password').hide();
+	});
+	if($('#change_password').attr('checked') == 'checked'){
+		$('.change-password').show();
+	}
 });
 
 

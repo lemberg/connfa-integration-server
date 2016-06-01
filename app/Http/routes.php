@@ -16,6 +16,9 @@ $api = app('api.router');
 
 $app->auth();
 
+/**
+ * CMS routes
+ */
 $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
     $app->get('/', function () {
         return redirect('/dashboard');
@@ -29,8 +32,12 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
     $app->resource('locations', 'LocationsController');
     $app->resource('floors', 'FloorsController');
     $app->resource('pages', 'PagesController');
+    $app->resource('users', 'UsersController');
 });
 
+/**
+ * API routes
+ */
 $api->version('v2', [
     'middleware' => ['api'],
     'namespace'  => 'App\Http\Controllers\Api',
