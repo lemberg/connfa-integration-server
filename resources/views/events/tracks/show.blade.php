@@ -10,7 +10,7 @@
 
         <div class="x_panel">
             <div class="x_title">
-                <h2>Track</h2>
+                <h2>{{ trans('Track') }}</h2>
                 <div class="clearfix"></div>
             </div>
 

@@ -48,57 +48,13 @@
                         </div>
                     </div>
 
-                    <div class="image-block" style="{{ !empty($data->image) ? 'display:block;':'display:none;' }}">
-                        <div class="form-group">
-                            {{ Form::label('icon-label', trans('Image'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <div style="display: inline-block; position: relative;">
-                                    {{ Html::image($data->image, $data->name, array('class' => 'img-thumbnail img-responsive')) }}
-                                    <button class="btn btn-link" id="type-icon-delete"
-                                            data-url="{{ url('points/'.$data->id.'/image') }}"
-                                            data-token="{{ csrf_token() }}"
-                                            style="padding: 0; position: absolute; top: 0px; right: 0px;"><i
-                                                class="fa fa-times" style="font-size: 24px;"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="upload-image-block"
-                         style="{{ empty($data->image) ? 'display:block;':'display:none;' }}">
-                        <div class="form-group">
-                            {{ Form::label('icon-label', trans('Image'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                {{ Form::radio('icon-switch', 'url', true, ['class' => 'flat', 'id' => 'icon-switch-text']) }} {{ trans('Url') }}
-                                <br>
-                                {{ Form::radio('icon-switch', 'file', false, ['class' => 'flat', 'id' => 'icon-switch-file']) }} {{ trans('Image upload') }}
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }} form-group-icon-text">
-                            {{ Form::label('icon-text', trans('Image url'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                {{ Form::url('image', '', ['class' => 'form-control col-md-7 col-xs-12']) }}
-                                @if ($errors->has('avatar'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('avatar') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('file') ? ' has-error' : '' }} form-group-icon-file">
-                            {{ Form::label('file', trans('Image file'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                {{ Form::file('file', ['accept' => 'image/*', 'class' => 'form-control col-md-7 col-xs-12']) }}
-                                @if ($errors->has('file'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('file') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
+                    @include('partials/image-upload', [
+                            'create' => false,
+                            'labelName' => trans('Image'),
+                            'fieldName' => 'image',
+                            'fieldNameValue' => $data->image,
+                            'required' => false,
+                        ])
 
                     <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                         {{ Form::label('description', trans('Description'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}

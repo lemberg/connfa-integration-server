@@ -20,15 +20,16 @@ class TypesController extends BaseController
     public function store()
     {
         $data = $this->request->all();
-        if ($this->request->get('icon-switch') == 'file' AND $this->request->hasFile('image')) {
-            $path = $this->repository->saveImage($this->request->file('image'), 'events/types');
+        if ($this->request->get('icon-switch') == 'icon_file' AND $this->request->hasFile('icon_file')) {
+            $path = $this->repository->saveImage($this->request->file('icon_file'), 'events/types');
             if (!$path) {
                 return redirect()->back()->withError('Could not save image');
             }
-
-            $data['icon'] = $path;
+        } else {
+            $path = $this->request->get('icon_url');
         }
 
+        $data['icon'] = $path;
         $this->repository->create($data);
 
         return $this->redirectTo('index');
@@ -37,14 +38,16 @@ class TypesController extends BaseController
     public function update($id)
     {
         $data = $this->request->all();
-        if ($this->request->get('icon-switch') == 'file' AND $this->request->hasFile('image')) {
-            $path = $this->repository->saveImage($this->request->file('image'), 'events/types');
+        if ($this->request->get('icon-switch') == 'icon_file' AND $this->request->hasFile('icon_file')) {
+            $path = $this->repository->saveImage($this->request->file('icon_file'), 'events/types');
             if (!$path) {
                 return redirect()->back()->withError('Could not save image');
             }
-
-            $data['icon'] = $path;
+        }else {
+            $path = $this->request->get('icon_url');
         }
+
+        $data['icon'] = $path;
 
         $this->repository->updateRich($data, $id);
 
@@ -60,12 +63,5 @@ class TypesController extends BaseController
         $this->repository->delete($id);
 
         return $this->redirectTo('index');
-    }
-
-    public function iconDelete($id)
-    {
-        $this->deleteImageAndCleanField($id, 'icon');
-
-        return ['result' => true];
     }
 }

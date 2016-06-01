@@ -30,8 +30,8 @@ class SpeakerRequest extends Request
                 'last_name' => 'required',
                 'website' => 'url',
                 'email' => 'between:3,64|email',
-                'image' => 'mimes:jpeg,bmp,png,gif|max:6000',
-                'icon' => 'url',
+                'image_file' => 'mimes:jpeg,bmp,png,gif|max:6000',
+                'image_url' => 'url',
             ];
         }
 

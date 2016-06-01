@@ -27,8 +27,8 @@ class TypeRequest extends Request
         if (in_array($this->method(), ['POST', 'PUT'])) {
             $validation = [
                 'name' => 'required',
-                'image' => 'mimes:jpeg,bmp,png,gif|max:6000',
-                'icon' => 'url',
+                'icon_file' => 'mimes:jpeg,bmp,png,gif|max:6000',
+                'icon_url' => 'url',
             ];
         }
 

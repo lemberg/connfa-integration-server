@@ -17,15 +17,16 @@ class PointsController extends BaseController
     public function store()
     {
         $data = $this->request->all();
-        if ($this->request->get('icon-switch') == 'file' AND $this->request->hasFile('file')) {
-            $path = $this->repository->saveImage($this->request->file('file'), $this->getViewsFolder());
+        if ($this->request->get('image-switch') == 'image_file' AND $this->request->hasFile('image_file')) {
+            $path = $this->repository->saveImage($this->request->file('image_file'), $this->getViewsFolder());
             if (!$path) {
                 return redirect()->back()->withError('Could not save image');
             }
-
-            $data['image'] = $path;
+        } else {
+            $path = $this->request->get('image_url');
         }
-        //dd($data);
+
+        $data['image'] = $path;
         $this->repository->create($data);
 
         return $this->redirectTo('index');
@@ -34,14 +35,18 @@ class PointsController extends BaseController
     public function update($id)
     {
         $data = $this->request->all();
-        if ($this->request->get('icon-switch') == 'file' AND $this->request->hasFile('file')) {
-            $path = $this->repository->saveImage($this->request->file('file'), $this->getViewsFolder());
+        if ($this->request->get('image-switch') == 'image_file' AND $this->request->hasFile('image_file')) {
+            $path = $this->repository->saveImage($this->request->file('image_file'), $this->getViewsFolder());
             if (!$path) {
                 return redirect()->back()->withError('Could not save image');
             }
-
-            $data['image'] = $path;
         }
+        else{
+            $path = $this->request->get('image_url');
+        }
+
+        $data['image'] = $path;
+
         $this->repository->updateRich($data, $id);
 
         return $this->redirectTo('index');
@@ -58,10 +63,4 @@ class PointsController extends BaseController
         return $this->redirectTo('index');
     }
 
-    public function iconDelete($id)
-    {
-        $this->deleteImageAndCleanField($id, 'image');
-
-        return ['result' => true];
-    }
 }
