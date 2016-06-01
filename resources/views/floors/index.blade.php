@@ -9,7 +9,7 @@
             {{ Html::link(route('floors.create'), trans('Create floor'), ['class' => 'btn btn-primary pull-right']) }}
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>{{ trans('Floors plans') }}</h2>
+                    <h2>{{ trans('Floor plans') }}</h2>
                     <div class="clearfix"></div>
                 </div>
 

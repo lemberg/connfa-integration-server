@@ -3,17 +3,14 @@
 @section('content')
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="pull-left">
-                {!! Breadcrumbs::render('breadcrumbs', [['label'=> trans('Points'), 'route' => 'points.index'], ['label'=> trans('Create point'), 'route' => 'points.index']]) !!}
-            </div>
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>{{ trans('Create points') }}</h2>
+                    <h2>{{ trans('Create user') }}</h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
                     <br/>
-                    {!! Form::open(['route' => ['points.store'], 'files' => true, 'method' => 'POST', 'class' => 'form-horizontal form-label-left']) !!}
+                    {!! Form::open(['route' => ['users.store'], 'method' => 'POST', 'class' => 'form-horizontal form-label-left']) !!}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             {{ Form::label('name', trans('Name')." *", ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
@@ -27,45 +24,37 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('order') ? ' has-error' : '' }}">
-                            {{ Form::label('order', trans('Order'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            {{ Form::label('email', trans('Email')." *", ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                {{ Form::text('order', '', ['class' => 'form-control col-md-7 col-xs-12']) }}
-                                @if ($errors->has('order'))
+                                {{ Form::email('email', '', ['class' => 'form-control col-md-7 col-xs-12']) }}
+                                @if ($errors->has('email'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('order') }}</strong>
+                                        <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('details_url') ? ' has-error' : '' }}">
-                            {{ Form::label('details_url', trans('Details url'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
+                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                            {{ Form::label('Password', trans('Password')." *", ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                {{ Form::url('details_url', '', ['class' => 'form-control col-md-7 col-xs-12']) }}
-                                @if ($errors->has('details_url'))
+                                {{ Form::password('password', ['class' => 'form-control col-md-7 col-xs-12']) }}
+                                @if ($errors->has('password'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('details_url') }}</strong>
+                                        <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
-                        @include('partials/image-upload', [
-                            'create' => true,
-                            'labelName' => trans('Image'),
-                            'fieldName' => 'image',
-                            'fieldNameValue' => '',
-                            'required' => false,
-                        ])
-
-                        <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-                            {{ Form::label('description', trans('Description'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
+                        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+                            {{ Form::label('password_confirmation', trans('Password confirmation')." *", ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                {{ Form::textarea('description', '', ['id' => 'editor-points', 'class' => 'form-control col-md-7 col-xs-12']) }}
-                                @if ($errors->has('description'))
+                                {{ Form::password('password_confirmation', ['class' => 'form-control col-md-7 col-xs-12']) }}
+                                @if ($errors->has('password_confirmation'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('description') }}</strong>
+                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
                                     </span>
                                 @endif
                             </div>

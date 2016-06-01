@@ -16,6 +16,9 @@ $api = app('api.router');
 
 $app->auth();
 
+/**
+ * CMS routes
+ */
 $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
     $app->get('/', function () {
         return redirect('/dashboard');
@@ -24,16 +27,17 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
     $app->resource('levels', 'Events\LevelsController');
     $app->resource('tracks', 'Events\TracksController');
     $app->resource('types', 'Events\TypesController');
-    $app->delete('types/{id}/icon', 'Events\TypesController@iconDelete');
     $app->resource('speakers', 'SpeakersController');
-    $app->delete('speakers/{id}/avatar', 'SpeakersController@iconDelete');
     $app->resource('points', 'PointsController');
-    $app->delete('points/{id}/image', 'PointsController@iconDelete');
     $app->resource('locations', 'LocationsController');
     $app->resource('floors', 'FloorsController');
-    $app->delete('floors/{id}/image', 'FloorsController@iconDelete');
+    $app->resource('pages', 'PagesController');
+    $app->resource('users', 'UsersController');
 });
 
+/**
+ * API routes
+ */
 $api->version('v2', [
     'middleware' => ['api'],
     'namespace'  => 'App\Http\Controllers\Api',
