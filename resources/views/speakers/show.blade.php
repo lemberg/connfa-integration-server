@@ -1,29 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
-
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="pull-left">
+                {!! Breadcrumbs::render('breadcrumbs', [['label'=> trans('Speaker'), 'route' => 'speakers.index'], ['label'=> trans('Speaker'), 'route' => 'speakers.index']]) !!}
+            </div>
             <div class="x_panel">
                 <div class="x_title">
                     <h2>{{ trans('Speaker') }}</h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-
                     <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
                         @if($data->avatar)
                             <div class="profile_img">
-                                <!-- end of image cropping -->
                                 <div id="crop-avatar">
-                                    <!-- Current avatar -->
                                     <img class="img-responsive avatar-view" src="{{ $data->avatar }}" alt="{{ $data->first_name }} {{ $data->last_name }}" title="{{ $data->first_name }} {{ $data->last_name }}">
                                 </div>
-                                <!-- end of image cropping -->
                             </div>
                         @endif
                         <h3>{{ $data->first_name }} {{ $data->last_name }}</h3>
-
                         <ul class="list-unstyled user_data">
                             <li>
                                 <i class="fa fa-briefcase user-profile-icon" title="{{ trans('Job') }}"></i> {{ $data->job }}
@@ -52,7 +49,6 @@
                         <br />
                     </div>
                     <div class="col-md-9 col-sm-9 col-xs-12">
-
                         <div class="profile_title">
                             <div class="col-md-6">
                                 <h2>{{ trans('Characteristic') }}</h2>
@@ -61,9 +57,9 @@
                         <p>
                             {!! Html::decode($data->characteristic)  !!}
                         <p>
-
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 @endsection

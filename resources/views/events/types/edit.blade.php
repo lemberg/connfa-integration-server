@@ -3,6 +3,9 @@
 @section('content')
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="pull-left">
+                {!! Breadcrumbs::render('breadcrumbs', [['label'=> trans('Types'), 'route' => 'types.index'], ['label'=> trans('Edit type'), 'route' => 'types.index']]) !!}
+            </div>
             <div class="x_panel">
                 <div class="x_title">
                     <h2>{{ trans('Edit type') }}</h2>
@@ -33,7 +36,6 @@
                                 @endif
                             </div>
                         </div>
-
                         <div class="image-block" style="{{ !empty($data->icon) ? 'display:block;':'display:none;' }}">
                             <div class="form-group">
                                 {{ Form::label('icon-label', trans('Icon'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
@@ -45,7 +47,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="upload-image-block" style="{{ empty($data->icon) ? 'display:block;':'display:none;' }}">
                             <div class="form-group">
                                 {{ Form::label('icon-label', trans('Url or icon'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
@@ -54,7 +55,6 @@
                                     {{ Form::radio('icon-switch', 'file', false, ['class' => 'flat', 'id' => 'icon-switch-file']) }} {{ trans('Image upload') }}
                                 </div>
                             </div>
-
                             <div class="form-group{{ $errors->has('icon') ? ' has-error' : '' }} form-group-icon-text">
                                 {{ Form::label('icon-text', trans('Url'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                                 <div class="col-md-6 col-sm-6 col-xs-12">
@@ -66,7 +66,6 @@
                                     @endif
                                 </div>
                             </div>
-
                             <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }} form-group-icon-file">
                                 {{ Form::label('icon-file', trans('Icon'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                                 <div class="col-md-6 col-sm-6 col-xs-12">
@@ -79,7 +78,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="ln_solid"></div>
                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
@@ -87,7 +85,6 @@
                             </div>
                         </div>
                     {!! Form::close() !!}
-
                 </div>
             </div>
         </div>
