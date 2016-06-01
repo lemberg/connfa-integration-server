@@ -441,13 +441,3 @@ function deleteImage(fieldName) {
 		$('.' + fieldName + '-upload-block').show();
 	});
 }
-
-
-
-
-
-
-
-
-
-
