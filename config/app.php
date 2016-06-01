@@ -159,7 +159,8 @@ return [
         Dingo\Api\Provider\LaravelServiceProvider::class,
         vendocrat\Settings\SettingsServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class
+        Intervention\Image\ImageServiceProvider::class,
+        DaveJamesMiller\Breadcrumbs\ServiceProvider::class
 
     ],
 
@@ -211,7 +212,8 @@ return [
         'Setting' => vendocrat\Settings\Facades\Setting::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-        'Image'     => Intervention\Image\Facades\Image::class
+        'Image'     => Intervention\Image\Facades\Image::class,
+        'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
     ],
 
 ];

@@ -23,7 +23,7 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
     $app->get('/', function () {
         return redirect('/dashboard');
     });
-    $app->get('/dashboard', 'DashboardController@index');
+    $app->get('/dashboard', 'DashboardController@index')->name('dashboard');;
     $app->resource('levels', 'Events\LevelsController');
     $app->resource('tracks', 'Events\TracksController');
     $app->resource('types', 'Events\TypesController');

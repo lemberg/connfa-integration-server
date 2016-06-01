@@ -13,7 +13,8 @@
         "codeception/codeception": "^2.1",
         "laravelcollective/html": "5.2.*",
         "cerbero/command-validator": "^1.0",
-        "intervention/image": "dev-master"
+        "intervention/image": "dev-master",
+        "davejamesmiller/laravel-breadcrumbs": "^3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -3,6 +3,9 @@
 @section('content')
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="pull-left">
+                {!! Breadcrumbs::render('breadcrumbs', [['label'=> trans('Points'), 'route' => 'points.index'], ['label'=> trans('Create point'), 'route' => 'points.index']]) !!}
+            </div>
             <div class="x_panel">
                 <div class="x_title">
                     <h2>{{ trans('Create points') }}</h2>
