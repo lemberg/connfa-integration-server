@@ -7,13 +7,11 @@
                 {!! Breadcrumbs::render('breadcrumbs', ['label'=> trans('Users'), 'route' => 'users.index']) !!}
             </div>
             {{ Html::link(route('users.create'), trans('Create user'), ['class' => 'btn btn-primary pull-right']) }}
-
             <div class="x_panel">
                 <div class="x_title">
                     <h2>{{ trans('Users') }}</h2>
                     <div class="clearfix"></div>
                 </div>
-
                 <div class="x_content">
                     <div class="table-responsive">
                         <table class="table table-striped jambo_table bulk_action">
@@ -25,7 +23,6 @@
                                     <th class="column-title no-link last"><span class="nobr">{{ trans('Action') }}</span></th>
                                 </tr>
                             </thead>
-
                             <tbody>
                             @foreach ($data as $item)
                                 <tr>

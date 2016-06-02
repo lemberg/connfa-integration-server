@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="pull-left">
-                {!! Breadcrumbs::render('breadcrumbs', [['label'=> trans('Speaker'), 'route' => 'speakers.index'], ['label'=> trans('Create speaker'), 'route' => 'speakers.index']]) !!}
+                {!! Breadcrumbs::render('breadcrumbs', [['label'=> trans('Speakers'), 'route' => 'speakers.index'], ['label'=> trans('Create speaker'), 'route' => 'speakers.index']]) !!}
             </div>
             <div class="x_panel">
                 <div class="x_title">
