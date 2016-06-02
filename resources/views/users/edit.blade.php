@@ -3,6 +3,9 @@
 @section('content')
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="pull-left">
+                {!! Breadcrumbs::render('breadcrumbs', [['label'=> trans('Users'), 'route' => 'users.index'], ['label'=> trans('Edit user'), 'route' => 'users.index']]) !!}
+            </div>
             <div class="x_panel">
                 <div class="x_title">
                     <h2>{{ trans('Edit user') }}</h2>
