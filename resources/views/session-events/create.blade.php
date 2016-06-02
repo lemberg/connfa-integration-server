@@ -147,9 +147,9 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('text') ? ' has-error' : '' }}">
-                            {{ Form::label('text', trans('Text'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
+                            {{ Form::label('editor', trans('Text'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                {{ Form::textarea('text', '', ['id' => 'editor-speaker', 'class' => 'form-control col-md-7 col-xs-12']) }}
+                                {{ Form::textarea('text', '', ['id' => 'editor', 'class' => 'form-control col-md-7 col-xs-12']) }}
                                 @if ($errors->has('text'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('text') }}</strong>

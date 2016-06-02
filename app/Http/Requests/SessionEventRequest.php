@@ -28,7 +28,7 @@ class SessionEventRequest extends Request
             $validation = [
                 'start_at' => 'required|date_format:Y-m-d H:i:s',
                 'end_at' => 'required|date_format:Y-m-d H:i:s',
-                'text' => 'required',
+                'name' => 'required',
                 'url' => 'url',
             ];
         }

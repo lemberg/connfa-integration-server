@@ -9,7 +9,6 @@ use App\Repositories\Event\TypeRepository;
 use App\Repositories\EventRepository;
 use App\Repositories\SpeakerRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use App\Http\Controllers\CMS\BaseController;
 
 class SessionEventsController extends BaseController
 {
@@ -70,11 +69,7 @@ class SessionEventsController extends BaseController
     public function update($id)
     {
         $data = $this->request->all();
-        if ($this->repository->updateRich($data, $id)) {
-            $event = $this->repository->findOrFail($id);
-            $event->speakers()->sync(array_get($data, 'speakers'));
-        }
-
+        $this->repository->updateWithSpeakers($id, $data);
 
         return $this->redirectTo('index');
     }

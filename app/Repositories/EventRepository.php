@@ -29,4 +29,21 @@ class EventRepository extends BaseRepository
 
         return $events->orderBy('start_at')->get();
     }
+
+    /**
+     * Update with Speakers
+     *
+     * @param $id
+     * @param $data
+     * @return mixed
+     */
+    public function updateWithSpeakers($id, $data)
+    {
+        $event = $this->findOrFail($id);
+
+        $event->fill($data);
+        $event->speakers()->sync(array_get($data, 'speakers'));
+
+        return $event;
+    }
 }
