@@ -20,6 +20,8 @@
     <!-- jVectorMap -->
     <link rel="stylesheet" href="{{ URL::asset('assets/css/maps/jquery-jvectormap-2.0.3.css') }}">
 
+    <link rel="stylesheet" href="{{ URL::asset('assets/vendors/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css') }}">
+
     <!-- Custom Theme Style -->
     <link rel="stylesheet" href="{{ URL::asset('assets/css/custom.css') }}">
 
@@ -28,7 +30,7 @@
 <body class="nav-md">
 <div class="container body">
     <div class="main_container">
-        <div class="col-md-3 left_col">
+        <div class="col-md-3 left_col menu_fixed">
             <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
                     <a href="{{ url('/') }}" class="site_title"><i class="fa fa-paw"></i> <span>Connfa!</span></a>
@@ -128,7 +130,7 @@
 <script src="{{ URL::asset('assets/js/maps/jquery-jvectormap-2.0.3.min.js') }}"></script>
 <!-- bootstrap-daterangepicker -->
 <script src="{{ URL::asset('assets/js/moment/moment.min.js') }}"></script>
-<script src="{{ URL::asset('assets/js/datepicker/daterangepicker.js') }}"></script>
+<script src="{{ URL::asset('assets/vendors/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
 
 <script src="{{ URL::asset('assets/vendors/ckeditor/ckeditor.js') }}"></script>
 
