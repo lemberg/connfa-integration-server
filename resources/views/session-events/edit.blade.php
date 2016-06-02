@@ -5,157 +5,154 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>{{ trans('Edit speaker') }}</h2>
+                    <h2>{{ trans('Edit session events') }}</h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
                     <br/>
-                    {!! Form::open(['route' => ['speakers.update', 'id' => $data->id], 'files' => true, 'method' => 'PUT', 'class' => 'form-horizontal form-label-left']) !!}
+                    {!! Form::open(['route' => ['sessions.update', 'id' => $data->id], 'method' => 'PUT', 'class' => 'form-horizontal form-label-left']) !!}
 
-                    <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
-                        {{ Form::label('first_name', trans('First Name')." *", ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
+                    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                        {{ Form::label('name', trans('Name')." *", ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            {{ Form::text('first_name', $data->first_name, ['class' => 'form-control col-md-7 col-xs-12']) }}
-                            @if ($errors->has('first_name'))
+                            {{ Form::text('name', $data->name, ['class' => 'form-control col-md-7 col-xs-12']) }}
+                            @if ($errors->has('name'))
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('first_name') }}</strong>
+                                    <strong>{{ $errors->first('name') }}</strong>
                                 </span>
                             @endif
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
-                        {{ Form::label('last_name', trans('Last Name')." *", ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
+                    <div class="form-group{{ $errors->has('start_at') ? ' has-error' : '' }} has-feedback">
+                        {{ Form::label('start_at', trans('Start at')." *", ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            {{ Form::text('last_name', $data->last_name, ['class' => 'form-control col-md-7 col-xs-12']) }}
-                            @if ($errors->has('last_name'))
+                            {{ Form::text('start_at', $data->start_at, ['class' => 'form-control col-md-7 col-xs-12 has-feedback-left']) }}
+                            <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                            @if ($errors->has('start_at'))
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('last_name') }}</strong>
+                                    <strong>{{ $errors->first('start_at') }}</strong>
                                 </span>
                             @endif
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                        {{ Form::label('email', trans('Email'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
+                    <div class="form-group{{ $errors->has('end_at') ? ' has-error' : '' }} has-feedback">
+                        {{ Form::label('end_at', trans('End at')." *", ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            {{ Form::email('email', $data->email, ['class' => 'form-control col-md-7 col-xs-12']) }}
-                            @if ($errors->has('email'))
+                            {{ Form::text('end_at', $data->end_at, ['class' => 'form-control col-md-7 col-xs-12  has-feedback-left']) }}
+                            <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                            @if ($errors->has('end_at'))
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('email') }}</strong>
+                                    <strong>{{ $errors->first('end_at') }}</strong>
                                 </span>
                             @endif
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('job') ? ' has-error' : '' }}">
-                        {{ Form::label('job', trans('Job'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
+                    <div class="form-group{{ $errors->has('speakers') ? ' has-error' : '' }}">
+                        {{ Form::label('speakers', trans('Speakers'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            {{ Form::text('job', $data->job, ['class' => 'form-control col-md-7 col-xs-12']) }}
-                            @if ($errors->has('job'))
+                            {{ Form::select('speakers', $speakers, $data->speakers->pluck('id')->toArray(), ['class' => 'form-control col-md-7 col-xs-12 select2_multiple', 'multiple' => 'multiple', 'name' => 'speakers[]']) }}
+                            @if ($errors->has('speakers'))
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('job') }}</strong>
+                                    <strong>{{ $errors->first('speakers') }}</strong>
                                 </span>
                             @endif
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('organization') ? ' has-error' : '' }}">
-                        {{ Form::label('organization', trans('Organization'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
+                    <div class="form-group{{ $errors->has('place') ? ' has-error' : '' }}">
+                        {{ Form::label('place', trans('Place'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            {{ Form::text('organization', $data->organization, ['class' => 'form-control col-md-7 col-xs-12']) }}
-                            @if ($errors->has('organization'))
+                            {{ Form::text('place', $data->place, ['class' => 'form-control col-md-7 col-xs-12']) }}
+                            @if ($errors->has('place'))
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('organization') }}</strong>
+                                    <strong>{{ $errors->first('place') }}</strong>
                                 </span>
                             @endif
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('twitter_name') ? ' has-error' : '' }} has-feedback">
-                        {{ Form::label('twitter_name', trans('Twitter name'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
+                    <div class="form-group{{ $errors->has('version') ? ' has-error' : '' }}">
+                        {{ Form::label('version', trans('Version'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            {{ Form::text('twitter_name', $data->twitter_name_without_at, ['class' => 'form-control col-md-7 col-xs-12 has-feedback-left']) }}
-                            <span class="fa fa-at form-control-feedback left" aria-hidden="true"></span>
-                            @if ($errors->has('twitter_name'))
+                            {{ Form::text('version', $data->version, ['class' => 'form-control col-md-7 col-xs-12']) }}
+                            @if ($errors->has('version'))
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('twitter_name') }}</strong>
+                                    <strong>{{ $errors->first('version') }}</strong>
                                 </span>
                             @endif
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('website') ? ' has-error' : '' }}">
-                        {{ Form::label('website', trans('Website'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
+                    <div class="form-group{{ $errors->has('url') ? ' has-error' : '' }}">
+                        {{ Form::label('url', trans('Url'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            {{ Form::text('website', $data->website, ['class' => 'form-control col-md-7 col-xs-12']) }}
-                            @if ($errors->has('website'))
+                            {{ Form::url('url', $data->url, ['class' => 'form-control col-md-7 col-xs-12']) }}
+                            @if ($errors->has('url'))
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('website') }}</strong>
+                                    <strong>{{ $errors->first('url') }}</strong>
                                 </span>
                             @endif
                         </div>
                     </div>
 
-                    <div class="image-block" style="{{ !empty($data->avatar) ? 'display:block;':'display:none;' }}">
-                        <div class="form-group">
-                            {{ Form::label('icon-label', trans('Avatar'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <div style="display: inline-block; position: relative;">
-                                    {{ Html::image($data->avatar, $data->first_name. ' '. $data->last_name, array('class' => 'img-thumbnail img-responsive')) }}
-                                    <button class="btn btn-link" id="type-icon-delete"
-                                            data-url="{{ url('speakers/'.$data->id.'/avatar') }}"
-                                            data-token="{{ csrf_token() }}"
-                                            style="padding: 0; position: absolute; top: 0px; right: 0px;"><i
-                                                class="fa fa-times" style="font-size: 24px;"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="upload-image-block"
-                         style="{{ empty($data->avatar) ? 'display:block;':'display:none;' }}">
-                        <div class="form-group">
-                            {{ Form::label('icon-label', trans('Avatar'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                {{ Form::radio('icon-switch', 'url', true, ['class' => 'flat', 'id' => 'icon-switch-text']) }} {{ trans('Url') }}
-                                <br>
-                                {{ Form::radio('icon-switch', 'file', false, ['class' => 'flat', 'id' => 'icon-switch-file']) }} {{ trans('Image upload') }}
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }} form-group-icon-text">
-                            {{ Form::label('icon-text', trans('Url'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                {{ Form::url('avatar', '', ['class' => 'form-control col-md-7 col-xs-12']) }}
-                                @if ($errors->has('avatar'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('avatar') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }} form-group-icon-file">
-                            {{ Form::label('image', trans('Image'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                {{ Form::file('image', ['accept' => 'image/*', 'class' => 'form-control col-md-7 col-xs-12']) }}
-                                @if ($errors->has('image'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('image') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group{{ $errors->has('characteristic') ? ' has-error' : '' }}">
-                        {{ Form::label('characteristic', trans('Characteristic'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
+                    <div class="form-group{{ $errors->has('level_id') ? ' has-error' : '' }}">
+                        {{ Form::label('level_id', trans('Level'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            {{ Form::textarea('characteristic', $data->characteristic, ['id' => 'editor-speaker', 'class' => 'form-control col-md-7 col-xs-12']) }}
-                            @if ($errors->has('characteristic'))
+                            {{ Form::select('level_id', ['NULL' => 'Select the option'] + $levels, $data->level_id, ['class' => 'form-control col-md-7 col-xs-12']) }}
+                            @if ($errors->has('level_id'))
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('characteristic') }}</strong>
+                                    <strong>{{ $errors->first('level_id') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group{{ $errors->has('type_id') ? ' has-error' : '' }}">
+                        {{ Form::label('type_id', trans('Type'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            {{ Form::select('type_id', ['NULL' => 'Select the option'] + $types, $data->type_id, ['class' => 'form-control col-md-7 col-xs-12']) }}
+                            @if ($errors->has('type_id'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('type_id') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group{{ $errors->has('track_id') ? ' has-error' : '' }}">
+                        {{ Form::label('track_id', trans('Track'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            {{ Form::select('track_id', ['NULL' => 'Select the option'] + $tracks, $data->track_id, ['class' => 'form-control col-md-7 col-xs-12']) }}
+                            @if ($errors->has('track_id'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('track_id') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group{{ $errors->has('order') ? ' has-error' : '' }}">
+                        {{ Form::label('order', trans('Order'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            {{ Form::text('order', $data->order, ['class' => 'form-control col-md-7 col-xs-12']) }}
+                            @if ($errors->has('order'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('order') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group{{ $errors->has('text') ? ' has-error' : '' }}">
+                        {{ Form::label('text', trans('Text'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            {{ Form::textarea('text', $data->text, ['id' => 'editor-speaker', 'class' => 'form-control col-md-7 col-xs-12']) }}
+                            @if ($errors->has('text'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('text') }}</strong>
                                 </span>
                             @endif
                         </div>

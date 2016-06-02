@@ -19,27 +19,27 @@
                         <strong>{{ trans('Name') }}:</strong> {{ $data->name }}<br>
                     </p>
                     <p>
-                        <strong>{{ count($data->speakers)>1 ? trans('Speakers') : trans('Speaker') }}:</strong>
-
-                        @if($data->speakers)
-                            @foreach($data->speakers as $key => $speaker)
-                                {{ $speaker->first_name }} {{ $speaker->last_name }}
-                                {{ next($data->speakers)==true ? ', ' : '' }}
-                            @endforeach
-                        @endif
-                        <br>
-                    </p>
-                    <p>
                         <strong>{{ trans('Start at') }}:</strong> {{ $data->start_at }}<br>
                     </p>
                     <p>
                         <strong>{{ trans('End at') }}:</strong> {{ $data->end_at }}<br>
                     </p>
                     <p>
+                        <strong>{{ count($data->speakers)>1 ? trans('Speakers') : trans('Speaker') }}:</strong>
+                        {{ $data->speakers->implode('full_name', ', ') }}
+                        <br>
+                    </p>
+                    <p>
                         <strong>{{ trans('Place') }}:</strong> {{ $data->place }}<br>
                     </p>
                     <p>
                         <strong>{{ trans('Version') }}:</strong> {{ $data->version }}<br>
+                    </p>
+                    <p>
+                        <strong>{{ trans('Url') }}:</strong> {{ $data->url }}<br>
+                    </p>
+                    <p>
+                        <strong>{{ trans('Event type') }}:</strong> {{ $data->event_type }}<br>
                     </p>
                     <p>
                         <strong>{{ trans('Level') }}:</strong> {{ $data->level->name }}<br>
@@ -49,12 +49,6 @@
                     </p>
                     <p>
                         <strong>{{ trans('Track') }}:</strong> {{ $data->track->name }}<br>
-                    </p>
-                    <p>
-                        <strong>{{ trans('Url') }}:</strong> {{ $data->url }}<br>
-                    </p>
-                    <p>
-                        <strong>{{ trans('Event type') }}:</strong> {{ $data->event_type }}<br>
                     </p>
                     <p>
                         <strong>{{ trans('Order') }}:</strong> {{ $data->order }}<br>

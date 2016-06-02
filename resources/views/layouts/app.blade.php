@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="{{ URL::asset('assets/css/maps/jquery-jvectormap-2.0.3.css') }}">
 
     <link rel="stylesheet" href="{{ URL::asset('assets/vendors/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css') }}">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ URL::asset('assets/vendors/select2/dist/css/select2.min.css') }}">
+
 
     <!-- Custom Theme Style -->
     <link rel="stylesheet" href="{{ URL::asset('assets/css/custom.css') }}">
@@ -128,11 +131,14 @@
 <script src="{{ URL::asset('assets/js/flot/curvedLines.js') }}"></script>
 <!-- jVectorMap -->
 <script src="{{ URL::asset('assets/js/maps/jquery-jvectormap-2.0.3.min.js') }}"></script>
-<!-- bootstrap-daterangepicker -->
+<!-- bootstrap-datetimepicker -->
 <script src="{{ URL::asset('assets/js/moment/moment.min.js') }}"></script>
 <script src="{{ URL::asset('assets/vendors/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
 
 <script src="{{ URL::asset('assets/vendors/ckeditor/ckeditor.js') }}"></script>
+
+<!-- Select2 -->
+<script src="{{ URL::asset('assets//vendors/select2/dist/js/select2.full.min.js') }}"></script>
 
 <!-- Custom Theme Scripts -->
 <script src="{{ URL::asset('assets/js/custom.js') }}"></script>

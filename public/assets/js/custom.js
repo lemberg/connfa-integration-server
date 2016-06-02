@@ -412,6 +412,12 @@ $(document).ready(function () {
 		$('#end_at').datetimepicker(dateTimeOptions);
 	});
 
+	<!-- Select2 -->
+	$(".select2_multiple").select2({
+		allowClear: true
+	});
+	<!-- /Select2 -->
+
 });
 
 
