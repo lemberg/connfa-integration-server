@@ -52,4 +52,14 @@ class Speaker extends Model
 
         return $this->attributes['twitter_name_without_at'];
     }
+
+    /**
+     * Get full name
+     *
+     * @return string
+     */
+    public function getFullNameAttribute()
+    {
+         return $this->attributes['first_name'] . ' ' . $this->attributes['last_name'];
+    }
 }

@@ -33,6 +33,7 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
     $app->resource('floors', 'FloorsController');
     $app->resource('pages', 'PagesController');
     $app->resource('users', 'UsersController');
+    $app->resource('sessions', 'SessionEventsController');
 });
 
 /**

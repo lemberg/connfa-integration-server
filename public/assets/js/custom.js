@@ -292,7 +292,7 @@ if (typeof NProgress != 'undefined') {
 <!-- bootstrap-daterangepicker -->
 $(document).ready(function () {
 
-	var cb = function (start, end, label) {
+	/*var cb = function (start, end, label) {
 		console.log(start.toISOString(), end.toISOString(), label);
 		$('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
 	};
@@ -357,7 +357,7 @@ $(document).ready(function () {
 	});
 	$('#destroy').click(function () {
 		$('#reportrange').data('daterangepicker').remove();
-	});
+	});*/
 });
 
 <!-- /bootstrap-daterangepicker -->
@@ -419,6 +419,29 @@ $(document).ready(function () {
 	if($('#change_password').attr('checked') == 'checked'){
 		$('.change-password').show();
 	}
+
+	//event datetimepicker
+	var dateTimeOptions = {
+		format: 'yyyy-mm-dd hh:ii:00',
+		todayBtn: true,
+		clearBtn: true,
+		pickerPosition: 'bottom-right',
+		autoclose: true
+	};
+	$(function () {
+		$('#start_at').datetimepicker(dateTimeOptions);
+	});
+
+	$(function () {
+		$('#end_at').datetimepicker(dateTimeOptions);
+	});
+
+	<!-- Select2 -->
+	$(".select2_multiple").select2({
+		allowClear: true
+	});
+	<!-- /Select2 -->
+
 });
 
 
