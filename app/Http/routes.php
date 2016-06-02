@@ -51,7 +51,6 @@ $api->version('v2', [
     $api->get('getBofs', 'EventsController@getBofs');
     $api->get('getSocialEvents', 'EventsController@getSocialEvents');
     $api->get('getSettings', 'SettingsController@index');
-    $api->get('getTwitter', 'SettingsController@getTwitter');
     $api->get('getFloorPlans', 'FloorsController@index');
     $api->get('getInfo', 'PagesController@index');
     $api->get('getLocations', 'LocationsController@index');

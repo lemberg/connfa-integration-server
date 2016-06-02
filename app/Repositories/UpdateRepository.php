@@ -64,11 +64,7 @@ class UpdateRepository
         'info'      => array(
             'id'         => 11,
             'repository' => PageRepository::class,
-        ),
-        'tweets'    => array(
-            'id'         => 12,
-            'repository' => SettingsRepository::class,
-        ),
+        )
     );
 
     /**
