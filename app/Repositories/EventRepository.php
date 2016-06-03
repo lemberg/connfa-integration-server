@@ -47,6 +47,14 @@ class EventRepository extends BaseRepository
         return $event;
     }
 
+    /**
+     * Get event by type with pagination
+     *
+     * @param $type
+     * @param int $itemsOnPage
+     *
+     * @return mixed
+     */
     public function getByEventTypeOnPage($type, $itemsOnPage = 25)
     {
         return $this->model->where(['event_type' => $type])->paginate($itemsOnPage);
