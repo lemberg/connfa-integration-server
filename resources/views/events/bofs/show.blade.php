@@ -4,18 +4,16 @@
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="pull-left">
-                {!! Breadcrumbs::render('breadcrumbs', [['label'=> trans('Session events'), 'route' => 'sessions.index'], ['label'=> trans('Session Event'), 'route' => 'sessions.index']]) !!}
+                {!! Breadcrumbs::render('breadcrumbs', [['label'=> trans('BOF events'), 'route' => 'bofs.index'], ['label'=> trans('BOF Event'), 'route' => 'bofs.index']]) !!}
             </div>
-
-            {!! Form::open([route('sessions.destroy', ['id' => $data->id]), 'method' => 'POST', 'class' => 'pull-right']) !!}
+            {!! Form::open([route('bofs.destroy', ['id' => $data->id]), 'method' => 'POST', 'class' => 'pull-right']) !!}
             {{ method_field('DELETE') }}
             {{ Form::button("<i class='fa fa-trash-o'></i> Delete", ['type' => 'submit', 'class' => 'btn btn-danger']) }}
             {!! Form::close() !!}
-            <a href="{{ route('sessions.edit', ['id' => $data->id ]) }}" class="btn btn-info pull-right"><i class="fa fa-pencil"></i> {{ trans('Edit') }}</a>
-
+            <a href="{{ route('bofs.edit', ['id' => $data->id ]) }}" class="btn btn-info pull-right"><i class="fa fa-pencil"></i> {{ trans('Edit') }}</a>
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>{{ trans('Session events') }}</h2>
+                    <h2>{{ trans('BOF event') }}</h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">

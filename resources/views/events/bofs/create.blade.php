@@ -4,16 +4,16 @@
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="pull-left">
-                {!! Breadcrumbs::render('breadcrumbs', [['label'=> trans('Session events'), 'route' => 'sessions.index'], ['label'=> trans('Create Session Event'), 'route' => 'sessions.index']]) !!}
+                {!! Breadcrumbs::render('breadcrumbs', [['label'=> trans('BOF events'), 'route' => 'bofs.index'], ['label'=> trans('Create BOF event'), 'route' => 'bofs.index']]) !!}
             </div>
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>{{ trans('Create session events') }}</h2>
+                    <h2>{{ trans('Create BOF event') }}</h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
                     <br/>
-                    {!! Form::open(['route' => ['sessions.store'], 'method' => 'POST', 'class' => 'form-horizontal form-label-left']) !!}
+                    {!! Form::open(['route' => ['bofs.store'], 'method' => 'POST', 'class' => 'form-horizontal form-label-left']) !!}
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             {{ Form::label('name', trans('Name')." *", ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -55,8 +55,8 @@
                                 {{ Form::select('speakers', $speakers, [], ['class' => 'form-control col-md-7 col-xs-12 select2_multiple', 'multiple' => 'multiple', 'name' => 'speakers[]']) }}
                                 @if ($errors->has('speakers'))
                                     <span class="help-block">
-                                            <strong>{{ $errors->first('speakers') }}</strong>
-                                        </span>
+                                        <strong>{{ $errors->first('speakers') }}</strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>
@@ -77,8 +77,8 @@
                                 {{ Form::text('version', '', ['class' => 'form-control col-md-7 col-xs-12']) }}
                                 @if ($errors->has('version'))
                                     <span class="help-block">
-                                            <strong>{{ $errors->first('version') }}</strong>
-                                        </span>
+                                        <strong>{{ $errors->first('version') }}</strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>
@@ -88,8 +88,8 @@
                                 {{ Form::url('url', '', ['class' => 'form-control col-md-7 col-xs-12']) }}
                                 @if ($errors->has('url'))
                                     <span class="help-block">
-                                            <strong>{{ $errors->first('url') }}</strong>
-                                        </span>
+                                        <strong>{{ $errors->first('url') }}</strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>
@@ -99,8 +99,8 @@
                                 {{ Form::select('level_id', ['NULL' => 'Select the option'] + $levels, 'NULL', ['class' => 'form-control col-md-7 col-xs-12']) }}
                                 @if ($errors->has('level_id'))
                                     <span class="help-block">
-                                            <strong>{{ $errors->first('level_id') }}</strong>
-                                        </span>
+                                        <strong>{{ $errors->first('level_id') }}</strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>
@@ -110,8 +110,8 @@
                                 {{ Form::select('type_id', ['NULL' => 'Select the option'] + $types, 'NULL', ['class' => 'form-control col-md-7 col-xs-12']) }}
                                 @if ($errors->has('type_id'))
                                     <span class="help-block">
-                                            <strong>{{ $errors->first('type_id') }}</strong>
-                                        </span>
+                                        <strong>{{ $errors->first('type_id') }}</strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>
@@ -121,15 +121,15 @@
                                 {{ Form::select('track_id', ['NULL' => 'Select the option'] + $tracks, 'NULL', ['class' => 'form-control col-md-7 col-xs-12']) }}
                                 @if ($errors->has('track_id'))
                                     <span class="help-block">
-                                                    <strong>{{ $errors->first('track_id') }}</strong>
-                                                </span>
+                                        <strong>{{ $errors->first('track_id') }}</strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('order') ? ' has-error' : '' }}">
                             {{ Form::label('order', trans('Order'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                {{ Form::number('order', '', ['class' => 'form-control col-md-7 col-xs-12', 'step' => '0.01']) }}
+                                {{ Form::text('order', '', ['class' => 'form-control col-md-7 col-xs-12']) }}
                                 @if ($errors->has('order'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('order') }}</strong>
@@ -137,6 +137,7 @@
                                 @endif
                             </div>
                         </div>
+
                         <div class="form-group{{ $errors->has('text') ? ' has-error' : '' }}">
                             {{ Form::label('editor', trans('Text'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">

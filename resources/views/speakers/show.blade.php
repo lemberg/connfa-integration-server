@@ -38,6 +38,9 @@
                                 <i class="fa fa-twitter user-profile-icon" title="{{ trans('Twitter') }}"></i>
                                 <a href="https://twitter.com/{{ $data->twitter_name }}" target="_blank">{{ $data->twitter_name }}</a>
                             </li>
+                            <li>
+                                <i class="fa fa-sort-amount-asc user-profile-icon" title="{{ trans('Order') }}"></i> {{ $data->order }}
+                            </li>
                         </ul>
 
                         <a href="{{ route('speakers.edit', ['id' => $data->id ]) }}" class="btn btn-success"><i class="fa fa-edit m-right-xs"></i> {{ trans('Edit') }}</a>
