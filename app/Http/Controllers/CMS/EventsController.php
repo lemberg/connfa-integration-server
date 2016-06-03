@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\CMS;
 
-use App\Http\Requests\EventReguest;
+use App\Http\Requests\EventRequest;
 use App\Repositories\Event\LevelRepository;
 use App\Repositories\Event\TrackRepository;
 use App\Repositories\Event\TypeRepository;
@@ -18,7 +18,7 @@ class EventsController extends BaseController
     protected $tracks;
 
     public function __construct(
-        EventReguest $request,
+        EventRequest $request,
         EventRepository $repository,
         ResponseFactory $response,
         SpeakerRepository $speakers,
