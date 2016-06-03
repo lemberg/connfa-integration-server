@@ -14,6 +14,7 @@
             <li><a href="{{ url('/pages') }}"><i class="fa fa-file"></i> Pages</a></li>
             <li><a href="{{ url('/users') }}"><i class="fa fa-user"></i> Users</a></li>
             <li><a href="{{ url('/sessions') }}"><i class="fa fa-puzzle-piece"></i> Session events</a></li>
+            <li><a href="{{ url('/bofs') }}"><i class="fa fa-puzzle-piece"></i> BOF events</a></li>
         </ul>
     </div>
 </div>
