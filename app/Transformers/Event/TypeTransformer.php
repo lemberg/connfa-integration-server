@@ -32,7 +32,7 @@ class TypeTransformer extends TransformerAbstract
             'typeId'      => $type->id,
             'typeName'    => $type->name,
             'typeIconURL' => $type->icon,
-            'order'       => $type->order,
+            'order'       => floatval($type->order),
             'deleted'     => $type->deleted_at ? true : false,
         ];
 

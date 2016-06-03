@@ -31,7 +31,7 @@ class TrackTransformer extends TransformerAbstract
         $tracks = [
             'trackId'   => $track->id,
             'trackName' => $track->name,
-            'order'     => $track->order,
+            'order'     => floatval($track->order),
             'deleted'   => $track->deleted_at ? true : false,
         ];
 

@@ -52,7 +52,7 @@ class SessionTransformer implements EmbeddedTransformer
             'to'              => $event->getFormattedEndAt($tz),
             'speakers'        => $event->speakers ? $event->speakers->pluck('id')->toArray() : [],
             'track'           => $event->track ? $event->track->id : null,
-            'order'           => $event->order,
+            'order'           => floatval($event->order),
             'link'            => $event->url,
             'deleted'         => $event->deleted_at ? true : false,
         ];
