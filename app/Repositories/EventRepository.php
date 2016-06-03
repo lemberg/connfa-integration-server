@@ -46,4 +46,9 @@ class EventRepository extends BaseRepository
 
         return $event;
     }
+
+    public function getByEventTypeOnPage($type, $itemsOnPage = 25)
+    {
+        return $this->model->where(['event_type' => $type])->paginate($itemsOnPage);
+    }
 }

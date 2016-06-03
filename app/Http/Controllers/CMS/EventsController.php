@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\CMS;
 
-use App\Http\Requests\SessionEventRequest;
+use App\Http\Requests\EventReguest;
 use App\Repositories\Event\LevelRepository;
 use App\Repositories\Event\TrackRepository;
 use App\Repositories\Event\TypeRepository;
@@ -10,29 +10,32 @@ use App\Repositories\EventRepository;
 use App\Repositories\SpeakerRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
 
-class SessionEventsController extends BaseController
+class EventsController extends BaseController
 {
-    protected $viewsFolder = 'session-events';
-    protected $routeName = 'sessions';
+    protected $speakers;
     protected $levels;
     protected $types;
     protected $tracks;
-    protected $speakers;
 
     public function __construct(
-        SessionEventRequest $request,
+        EventReguest $request,
         EventRepository $repository,
         ResponseFactory $response,
+        SpeakerRepository $speakers,
         LevelRepository $levels,
         TypeRepository $types,
-        TrackRepository $tracks,
-        SpeakerRepository $speakers
+        TrackRepository $tracks
     ) {
+        $this->speakers = $speakers;
         $this->levels = $levels;
         $this->types = $types;
         $this->tracks = $tracks;
-        $this->speakers = $speakers;
         parent::__construct($request, $repository, $response);
+    }
+
+    public function index()
+    {
+        return $this->response->view($this->getViewName('index'), ['data' => $this->repository->getByEventTypeOnPage($this->eventType, 25)]);
     }
 
     public function create()
@@ -48,7 +51,7 @@ class SessionEventsController extends BaseController
     public function store()
     {
         $data = $this->request->all();
-        $data['event_type'] = 'session';
+        $data['event_type'] = 'bof';
         $event = $this->repository->create($data);
         $event->speakers()->sync(array_get($data, 'speakers'));
 
