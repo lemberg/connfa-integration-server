@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use League\Fractal\Manager;
 use League\Fractal\Serializer\ArraySerializer;
+use Validator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,7 +16,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Validator::extend('greater_than_field', function($attribute, $value, $parameters, $validator) {
+            $minField = $parameters[0];
+            $data = $validator->getData();
+            $minValue = $data[$minField];
+            return $value > $minValue;
+        });
     }
 
     /**
