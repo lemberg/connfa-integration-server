@@ -33,7 +33,7 @@ class FloorTransformer extends TransformerAbstract
             'floorPlanId'       => $floor->id,
             'floorPlanName'     => $floor->name,
             'floorPlanImageURL' => $floor->image,
-            'order'             => $floor->order,
+            'order'             => floatval($floor->order),
             'deleted'           => $floor->deleted_at ? true : false,
         ];
 
