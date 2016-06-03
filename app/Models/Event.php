@@ -72,4 +72,10 @@ class Event extends Model
         return $this->start_at->format('d-m-Y');
     }
 
+    public function setOrderAttribute($value)
+    {
+        if(!strlen($value)){
+            return $this->attributes['order'] = null;
+        }
+    }
 }

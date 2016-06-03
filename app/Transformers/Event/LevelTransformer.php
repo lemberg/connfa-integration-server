@@ -31,7 +31,7 @@ class LevelTransformer extends TransformerAbstract
         $data = [
             'levelId'   => $level->id,
             'levelName' => $level->name,
-            'order'     => $level->order,
+            'order'     => floatval($level->order),
             'deleted'   => $level->deleted_at ? true : false,
         ];
 

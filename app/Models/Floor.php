@@ -14,4 +14,11 @@ class Floor extends Model
         'image',
         'order',
     ];
+
+    public function setOrderAttribute($value)
+    {
+        if(!strlen($value)){
+            return $this->attributes['order'] = null;
+        }
+    }
 }

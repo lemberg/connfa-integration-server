@@ -15,4 +15,11 @@ class Type extends Model
         'name',
         'icon'
     ];
+
+    public function setOrderAttribute($value)
+    {
+        if(!strlen($value)){
+            return $this->attributes['order'] = null;
+        }
+    }
 }

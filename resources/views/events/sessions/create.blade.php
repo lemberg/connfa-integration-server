@@ -14,7 +14,6 @@
                 <div class="x_content">
                     <br/>
                     {!! Form::open(['route' => ['sessions.store'], 'method' => 'POST', 'class' => 'form-horizontal form-label-left']) !!}
-
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             {{ Form::label('name', trans('Name')." *", ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -26,7 +25,6 @@
                                 @endif
                             </div>
                         </div>
-
                         <div class="form-group{{ $errors->has('start_at') ? ' has-error' : '' }} has-feedback">
                             {{ Form::label('start_at', trans('Start at')." *", ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -39,7 +37,6 @@
                                 @endif
                             </div>
                         </div>
-
                         <div class="form-group{{ $errors->has('end_at') ? ' has-error' : '' }} has-feedback">
                             {{ Form::label('end_at', trans('End at')." *", ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -52,7 +49,6 @@
                                 @endif
                             </div>
                         </div>
-
                         <div class="form-group{{ $errors->has('speakers') ? ' has-error' : '' }}">
                             {{ Form::label('speakers', trans('Speakers'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -64,7 +60,6 @@
                                 @endif
                             </div>
                         </div>
-
                         <div class="form-group{{ $errors->has('place') ? ' has-error' : '' }}">
                             {{ Form::label('place', trans('Place'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -76,7 +71,6 @@
                                 @endif
                             </div>
                         </div>
-
                         <div class="form-group{{ $errors->has('version') ? ' has-error' : '' }}">
                             {{ Form::label('version', trans('Version'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -88,7 +82,6 @@
                                 @endif
                             </div>
                         </div>
-
                         <div class="form-group{{ $errors->has('url') ? ' has-error' : '' }}">
                             {{ Form::label('url', trans('Url'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -100,7 +93,6 @@
                                 @endif
                             </div>
                         </div>
-
                         <div class="form-group{{ $errors->has('level_id') ? ' has-error' : '' }}">
                             {{ Form::label('level_id', trans('Level'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -112,7 +104,6 @@
                                 @endif
                             </div>
                         </div>
-
                         <div class="form-group{{ $errors->has('type_id') ? ' has-error' : '' }}">
                             {{ Form::label('type_id', trans('Type'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -124,7 +115,6 @@
                                 @endif
                             </div>
                         </div>
-
                         <div class="form-group{{ $errors->has('track_id') ? ' has-error' : '' }}">
                             {{ Form::label('track_id', trans('Track'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -136,11 +126,10 @@
                                 @endif
                             </div>
                         </div>
-
                         <div class="form-group{{ $errors->has('order') ? ' has-error' : '' }}">
                             {{ Form::label('order', trans('Order'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                {{ Form::text('order', '', ['class' => 'form-control col-md-7 col-xs-12']) }}
+                                {{ Form::number('order', '', ['class' => 'form-control col-md-7 col-xs-12', 'step' => '0.01']) }}
                                 @if ($errors->has('order'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('order') }}</strong>
@@ -148,7 +137,6 @@
                                 @endif
                             </div>
                         </div>
-
                         <div class="form-group{{ $errors->has('text') ? ' has-error' : '' }}">
                             {{ Form::label('editor', trans('Text'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -160,7 +148,6 @@
                                 @endif
                             </div>
                         </div>
-
                         <div class="ln_solid"></div>
                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">

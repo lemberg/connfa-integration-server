@@ -62,4 +62,11 @@ class Speaker extends Model
     {
          return $this->attributes['first_name'] . ' ' . $this->attributes['last_name'];
     }
+
+    public function setOrderAttribute($value)
+    {
+        if(!strlen($value)){
+            return $this->attributes['order'] = null;
+        }
+    }
 }

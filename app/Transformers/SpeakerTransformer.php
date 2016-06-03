@@ -40,7 +40,7 @@ class SpeakerTransformer extends TransformerAbstract
             'twitterName'      => $speaker->twitter_name,
             'webSite'          => $speaker->website,
             'email'            => $speaker->email,
-            'order'            => $speaker->order,
+            'order'            => floatval($speaker->order),
             'deleted'          => $speaker->deleted_at ? true : false,
         ];
 

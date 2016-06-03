@@ -17,9 +17,9 @@
                         <table class="table table-striped jambo_table bulk_action">
                             <thead>
                                 <tr class="headings">
-                                    <th class="column-title">#</th>
-                                    <th class="column-title" style="width: 30%">{{ trans('Name') }}</th>
-                                    <th class="column-title" style="width: 30%">{{ trans('Order') }}</th>
+                                    <th class="column-title">id</th>
+                                    <th class="column-title">{{ trans('Name') }}</th>
+                                    <th class="column-title">{{ trans('Order') }}</th>
                                     <th class="column-title no-link last"><span class="nobr">{{ trans('Action') }}</span></th>
                                 </tr>
                             </thead>
