@@ -77,8 +77,8 @@
                                 {{ Form::text('version', '', ['class' => 'form-control col-md-7 col-xs-12']) }}
                                 @if ($errors->has('version'))
                                     <span class="help-block">
-                                            <strong>{{ $errors->first('version') }}</strong>
-                                        </span>
+                                        <strong>{{ $errors->first('version') }}</strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>
@@ -88,8 +88,8 @@
                                 {{ Form::url('url', '', ['class' => 'form-control col-md-7 col-xs-12']) }}
                                 @if ($errors->has('url'))
                                     <span class="help-block">
-                                            <strong>{{ $errors->first('url') }}</strong>
-                                        </span>
+                                        <strong>{{ $errors->first('url') }}</strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>
@@ -99,8 +99,8 @@
                                 {{ Form::select('level_id', ['NULL' => 'Select the option'] + $levels, 'NULL', ['class' => 'form-control col-md-7 col-xs-12']) }}
                                 @if ($errors->has('level_id'))
                                     <span class="help-block">
-                                            <strong>{{ $errors->first('level_id') }}</strong>
-                                        </span>
+                                        <strong>{{ $errors->first('level_id') }}</strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>
@@ -110,8 +110,8 @@
                                 {{ Form::select('type_id', ['NULL' => 'Select the option'] + $types, 'NULL', ['class' => 'form-control col-md-7 col-xs-12']) }}
                                 @if ($errors->has('type_id'))
                                     <span class="help-block">
-                                            <strong>{{ $errors->first('type_id') }}</strong>
-                                        </span>
+                                        <strong>{{ $errors->first('type_id') }}</strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>
@@ -121,8 +121,8 @@
                                 {{ Form::select('track_id', ['NULL' => 'Select the option'] + $tracks, 'NULL', ['class' => 'form-control col-md-7 col-xs-12']) }}
                                 @if ($errors->has('track_id'))
                                     <span class="help-block">
-                                                    <strong>{{ $errors->first('track_id') }}</strong>
-                                                </span>
+                                        <strong>{{ $errors->first('track_id') }}</strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>
