@@ -25,17 +25,6 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group{{ $errors->has('order') ? ' has-error' : '' }}">
-                            {{ Form::label('order', trans('Order'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                {{ Form::text('order', $data->order, ['class' => 'form-control col-md-7 col-xs-12']) }}
-                                @if ($errors->has('order'))
-                                    <span class="help-block">
-                                    <strong>{{ $errors->first('order') }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div>
 
                         @include('partials/image-upload', [
                             'create' => false,
@@ -45,6 +34,17 @@
                             'required' => false,
                         ])
 
+                        <div class="form-group{{ $errors->has('order') ? ' has-error' : '' }}">
+                            {{ Form::label('order', trans('Order'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                {{ Form::number('order', $data->order, ['class' => 'form-control col-md-7 col-xs-12', 'step' => '0.01']) }}
+                                @if ($errors->has('order'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('order') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
                         <div class="ln_solid"></div>
                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">

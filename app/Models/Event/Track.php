@@ -15,4 +15,11 @@ class Track extends Model
         'name',
         'order'
     ];
+
+    public function setOrderAttribute($value)
+    {
+        if(!strlen($value)){
+            return $this->attributes['order'] = null;
+        }
+    }
 }
