@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Traits\OrderTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Speaker extends Model
 {
     use SoftDeletes;
+    use OrderTrait;
 
     protected $fillable = [
         'first_name',
@@ -61,12 +63,5 @@ class Speaker extends Model
     public function getFullNameAttribute()
     {
          return $this->attributes['first_name'] . ' ' . $this->attributes['last_name'];
-    }
-
-    public function setOrderAttribute($value)
-    {
-        if(!strlen($value)){
-            return $this->attributes['order'] = null;
-        }
     }
 }

@@ -6,6 +6,7 @@ use App\Models\Event\Level;
 use App\Models\Event\Track;
 use App\Models\Event\Type;
 use App\Models\Traits\DateFormatterTrait;
+use App\Models\Traits\OrderTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -13,6 +14,7 @@ class Event extends Model
 {
     use SoftDeletes;
     use DateFormatterTrait;
+    use OrderTrait;
 
     public static $event_types_available = [
         'session',
@@ -70,12 +72,5 @@ class Event extends Model
     public function getDateAttribute()
     {
         return $this->start_at->format('d-m-Y');
-    }
-
-    public function setOrderAttribute($value)
-    {
-        if(!strlen($value)){
-            return $this->attributes['order'] = null;
-        }
     }
 }

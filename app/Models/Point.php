@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Traits\OrderTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Point extends Model
 {
     use SoftDeletes;
+    use OrderTrait;
 
     protected $fillable = [
         'name',
@@ -16,11 +18,4 @@ class Point extends Model
         'details_url',
         'order'
     ];
-
-    public function setOrderAttribute($value)
-    {
-        if(!strlen($value)){
-            return $this->attributes['order'] = null;
-        }
-    }
 }

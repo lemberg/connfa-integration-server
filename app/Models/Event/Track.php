@@ -2,12 +2,14 @@
 
 namespace App\Models\Event;
 
+use App\Models\Traits\OrderTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Track extends Model
 {
     use SoftDeletes;
+    use OrderTrait;
 
     protected $table = 'event_tracks';
 
@@ -15,11 +17,4 @@ class Track extends Model
         'name',
         'order'
     ];
-
-    public function setOrderAttribute($value)
-    {
-        if(!strlen($value)){
-            return $this->attributes['order'] = null;
-        }
-    }
 }
