@@ -12,6 +12,7 @@ use Illuminate\Contracts\Routing\ResponseFactory;
 
 class EventsController extends BaseController
 {
+    protected $eventType;
     protected $speakers;
     protected $levels;
     protected $types;
@@ -51,7 +52,7 @@ class EventsController extends BaseController
     public function store()
     {
         $data = $this->request->all();
-        $data['event_type'] = 'bof';
+        $data['event_type'] = $this->eventType;
         $event = $this->repository->create($data);
         $event->speakers()->sync(array_get($data, 'speakers'));
 
