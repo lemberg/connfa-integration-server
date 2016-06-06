@@ -136,8 +136,24 @@ $(document).ready(function () {
 			});
 		});
 	}
+	;
 });
 // /iCheck
+
+<!-- Select2 -->
+$(document).ready(function () {
+	$(".select2_single").select2({
+		placeholder: "Select a state",
+		allowClear: true
+	});
+	$(".select2_group").select2({});
+	$(".select2_multiple").select2({
+		maximumSelectionLength: 4,
+		placeholder: "With Max Selection limit 4",
+		allowClear: true
+	});
+});
+<!-- /Select2 -->
 
 // NProgress
 if (typeof NProgress != 'undefined') {
@@ -189,7 +205,6 @@ if (typeof NProgress != 'undefined') {
 
 })(jQuery, 'smartresize');
 
-
 /**
  * my scripts. test
  *
@@ -227,7 +242,7 @@ $(document).ready(function () {
 	$('#change_password').on('ifUnchecked', function () {
 		$('.change-password').hide();
 	});
-	if($('#change_password').attr('checked') == 'checked'){
+	if ($('#change_password').attr('checked') == 'checked') {
 		$('.change-password').show();
 	}
 
@@ -252,9 +267,7 @@ $(document).ready(function () {
 		allowClear: true
 	});
 	<!-- /Select2 -->
-
 });
-
 
 function checkSwitcher(fieldName) {
 	$('#' + fieldName + '-switch-url').on('ifChecked', function () {

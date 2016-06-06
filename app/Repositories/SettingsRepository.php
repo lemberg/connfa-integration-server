@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use vendocrat\Settings\Models\Setting;
 use vendocrat\Settings\Facades\Setting as SettingFacade;
+use \DateTimeZone;
 
 class SettingsRepository extends BaseRepository
 {
@@ -17,6 +18,7 @@ class SettingsRepository extends BaseRepository
      * Get settings with deleted since $since param if passed
      *
      * @param string|bool $since
+     *
      * @return mixed
      */
     public function getSettingsWithDeleted($since = false)
@@ -35,6 +37,7 @@ class SettingsRepository extends BaseRepository
      *
      * @param $setting
      * @param $since
+     *
      * @return mixed
      */
     public function getByKeyWithDeleted($setting, $since)
@@ -62,5 +65,38 @@ class SettingsRepository extends BaseRepository
             SettingFacade::set('twitterWidget', array_get($data, 'twitterWidget'));
         }
         SettingFacade::save();
+    }
+
+    /**
+     * Save settings
+     *
+     * @param array $settings
+     *
+     * @return mixed
+     */
+    public function saveSettings(array $settings = [])
+    {
+        if (empty($settings)) {
+            return false;
+        }
+
+        foreach ($settings as $key => $value) {
+            SettingFacade::set($key, $value);
+        }
+
+        return SettingFacade::save();
+    }
+
+
+    /**
+     * Get all timezone
+     *
+     * @return array
+     */
+    public function getTimezoneList()
+    {
+        $timezones = DateTimeZone::listIdentifiers();
+
+        return array_combine($timezones, $timezones);
     }
 }

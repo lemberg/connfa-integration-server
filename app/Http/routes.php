@@ -23,7 +23,7 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
     $app->get('/', function () {
         return redirect('/dashboard');
     });
-    $app->get('/dashboard', 'DashboardController@index')->name('dashboard');;
+    $app->get('/dashboard', 'DashboardController@index')->name('dashboard');
     $app->resource('levels', 'Events\LevelsController');
     $app->resource('tracks', 'Events\TracksController');
     $app->resource('types', 'Events\TypesController');
@@ -36,6 +36,9 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
     $app->resource('sessions', 'Events\SessionsController');
     $app->resource('bofs', 'Events\BofsController');
     $app->resource('social', 'Events\SocialController');
+    $app->get('settings', 'SettingsController@index')->name('settings.index');
+    $app->get('settings/edit', 'SettingsController@edit')->name('settings.edit');
+    $app->put('settings', 'SettingsController@update')->name('settings.update');
 });
 
 /**

@@ -15,8 +15,7 @@
     <link rel="stylesheet" href="{{ URL::asset('assets/vendors/font-awesome/css/font-awesome.min.css') }}">
     <!-- iCheck -->
     <link rel="stylesheet" href="{{ URL::asset('assets/vendors/iCheck/skins/flat/green.css') }}">
-    <!-- bootstrap-progressbar -->
-    <link rel="stylesheet" href="{{ URL::asset('assets/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}">
+    <!-- bootstrap-datetimepicker -->
     <link rel="stylesheet" href="{{ URL::asset('assets/vendors/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css') }}">
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ URL::asset('assets/vendors/select2/dist/css/select2.min.css') }}">

@@ -16,6 +16,7 @@
             <li><a href="{{ url('/sessions') }}"><i class="fa fa-puzzle-piece"></i> Session events</a></li>
             <li><a href="{{ url('/bofs') }}"><i class="fa fa-puzzle-piece"></i> BOF events</a></li>
             <li><a href="{{ url('/social') }}"><i class="fa fa-puzzle-piece"></i> Social events</a></li>
+            <li><a href="{{ url('/settings') }}"><i class="fa fa-cogs"></i> Settings</a></li>
         </ul>
     </div>
 </div>
