@@ -35,18 +35,22 @@ class PointsController extends BaseController
     public function update($id)
     {
         $data = $this->request->all();
+        $path = array_get($data, 'image');
+        if (array_get($data, 'image_delete')) {
+            $this->repository->deleteImage($data['image_delete']);
+            $path = '';
+        }
+
         if ($this->request->get('image-switch') == 'image_file' AND $this->request->hasFile('image_file')) {
             $path = $this->repository->saveImage($this->request->file('image_file'), $this->getViewsFolder());
             if (!$path) {
                 return redirect()->back()->withError('Could not save image');
             }
-        }
-        else{
+        } elseif ($this->request->get('image_url') && !array_get($data, 'image_delete')) {
             $path = $this->request->get('image_url');
         }
 
         $data['image'] = $path;
-
         $this->repository->updateRich($data, $id);
 
         return $this->redirectTo('index');

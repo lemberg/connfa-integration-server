@@ -35,8 +35,10 @@ class FloorsController extends BaseController
     public function update($id)
     {
         $data = $this->request->all();
-        if (!empty($data['image_delete'])) {
-            $this->deleteImageAndCleanField($id, 'image');
+        $path = array_get($data, 'image');
+        if (array_get($data, 'image_delete')) {
+            $this->repository->deleteImage($data['image_delete']);
+            $path = '';
         }
 
         if ($this->request->get('image-switch') == 'image_file' AND $this->request->hasFile('image_file')) {
@@ -44,8 +46,7 @@ class FloorsController extends BaseController
             if (!$path) {
                 return redirect()->back()->withError('Could not save image');
             }
-        }
-        else{
+        } elseif ($this->request->get('image_url') && !array_get($data, 'image_delete')) {
             $path = $this->request->get('image_url');
         }
 

@@ -38,17 +38,22 @@ class TypesController extends BaseController
     public function update($id)
     {
         $data = $this->request->all();
+        $path = array_get($data, 'icon');
+        if (array_get($data, 'icon_delete')) {
+            $this->repository->deleteImage($data['icon_delete']);
+            $path = '';
+        }
+
         if ($this->request->get('icon-switch') == 'icon_file' AND $this->request->hasFile('icon_file')) {
             $path = $this->repository->saveImage($this->request->file('icon_file'), 'events/types');
             if (!$path) {
                 return redirect()->back()->withError('Could not save image');
             }
-        }else {
+        } elseif ($this->request->get('icon_url') && !array_get($data, 'icon_delete')) {
             $path = $this->request->get('icon_url');
         }
 
         $data['icon'] = $path;
-
         $this->repository->updateRich($data, $id);
 
         return $this->redirectTo('index');

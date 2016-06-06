@@ -36,13 +36,18 @@ class SpeakersController extends BaseController
     public function update($id)
     {
         $data = $this->request->all();
+        $path = array_get($data, 'avatar');
+        if (array_get($data, 'avatar_delete')) {
+            $this->repository->deleteImage($data['avatar_delete']);
+            $path = '';
+        }
+
         if ($this->request->get('avatar-switch') == 'avatar_file' AND $this->request->hasFile('avatar_file')) {
             $path = $this->repository->saveImage($this->request->file('avatar_file'), $this->getViewsFolder());
             if (!$path) {
                 return redirect()->back()->withError('Could not save image');
             }
-        }
-        else {
+        } elseif ($this->request->get('avatar_url') && !array_get($data, 'avatar_delete')) {
             $path = $this->request->get('avatar_url');
         }
 
