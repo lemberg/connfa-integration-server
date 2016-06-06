@@ -27,8 +27,8 @@ class LocationRequest extends Request
         if (in_array($this->method(), ['POST', 'PUT'])) {
             $validation = [
                 'name' => 'required',
-                'lat' => 'required|regex:/^([0-9]?[0-9])\.(\d+)$/',
-                'lon' => 'required|regex:/^([0-9]?[0-9])\.(\d+)$/',
+                'lat' => 'required|regex:/^(-?[0-9]?[0-9]?[0-9])\.(\d+)$/',
+                'lon' => 'required|regex:/^(-?[0-9]?[0-9]?[0-9])\.(\d+)$/',
                 'address' => 'required',
             ];
         }
