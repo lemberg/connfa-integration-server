@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\CMS;
 
-
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SettingRequest;
 use App\Repositories\SettingsRepository;
@@ -42,7 +41,10 @@ class SettingsController extends Controller
 
     public function edit()
     {
-        return $this->response->view('settings.edit', ['data' => $this->repository->all()]);
+        return $this->response->view('settings.edit', [
+            'data' => $this->repository->all(),
+            'timezoneList' => $this->repository->getTimezoneList(),
+        ]);
     }
 
     /**

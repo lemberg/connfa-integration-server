@@ -15,15 +15,18 @@
                     <br/>
                     {!! Form::open(['route' => ['settings.update'], 'method' => 'PUT', 'class' => 'form-horizontal form-label-left']) !!}
                     @if($data)
-                        @foreach($data as $key => $value)
+                        @foreach($data as $item)
                             <div class="form-group">
-
-                                {{ Form::label($value->key, trans(ucfirst(strtolower(implode(' ', preg_split('/(?=[A-Z])/', $value->key))))), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
+                                {{ Form::label($item->key, trans(ucfirst(strtolower(implode(' ', preg_split('/(?=[A-Z])/', $item->key))))), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    @if($value->key == 'twitterWidget')
-                                        {{ Form::textarea($value->key, $value->value, ['class' => 'form-control col-md-7 col-xs-12']) }}
+                                    @if($item->key == 'twitterWidget')
+                                        {{ Form::textarea($item->key, $item->value, ['class' => 'form-control col-md-7 col-xs-12']) }}
+                                    @elseif($item->key == 'timezone')
+                                        @if(!empty($timezoneList))
+                                            {{ Form::select($item->key , ['NULL' => 'Select the option'] + $timezoneList, $item->value, ['class' => 'select2_single form-control col-md-7 col-xs-12']) }}
+                                        @endif
                                     @else
-                                        {{ Form::text($value->key, $value->value, ['class' => 'form-control col-md-7 col-xs-12']) }}
+                                        {{ Form::text($item->key, $item->value, ['class' => 'form-control col-md-7 col-xs-12']) }}
                                     @endif
                                 </div>
                             </div>

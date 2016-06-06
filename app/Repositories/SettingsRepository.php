@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use vendocrat\Settings\Models\Setting;
 use vendocrat\Settings\Facades\Setting as SettingFacade;
+use \DateTimeZone;
 
 class SettingsRepository extends BaseRepository
 {
@@ -84,5 +85,18 @@ class SettingsRepository extends BaseRepository
         }
 
         return SettingFacade::save();
+    }
+
+
+    /**
+     * Get all timezone
+     *
+     * @return array
+     */
+    public function getTimezoneList()
+    {
+        $timezones = DateTimeZone::listIdentifiers();
+
+        return array_combine($timezones, $timezones);
     }
 }
