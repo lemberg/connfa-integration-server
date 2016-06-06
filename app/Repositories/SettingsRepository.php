@@ -73,8 +73,12 @@ class SettingsRepository extends BaseRepository
      *
      * @return mixed
      */
-    public function saveSettings(array $settings)
+    public function saveSettings(array $settings = [])
     {
+        if (empty($settings)) {
+            return false;
+        }
+
         foreach ($settings as $key => $value) {
             SettingFacade::set($key, $value);
         }

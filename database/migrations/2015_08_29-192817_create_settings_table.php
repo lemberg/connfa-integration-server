@@ -31,7 +31,7 @@ class SettingsTable extends Migration
 
             $table->string('group')->nullable();
             $table->string('key')->unique()->index();
-            $table->string('value')->nullable();
+            $table->text('value')->nullable();
 
             $table->softDeletes()->nullable()->default(null);
             $table->timestamps();

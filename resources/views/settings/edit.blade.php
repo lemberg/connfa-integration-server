@@ -17,9 +17,14 @@
                     @if($data)
                         @foreach($data as $key => $value)
                             <div class="form-group">
+
                                 {{ Form::label($value->key, trans(ucfirst(strtolower(implode(' ', preg_split('/(?=[A-Z])/', $value->key))))), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    {{ Form::text($value->key, $value->value, ['class' => 'form-control col-md-7 col-xs-12']) }}
+                                    @if($value->key == 'twitterWidget')
+                                        {{ Form::textarea($value->key, $value->value, ['class' => 'form-control col-md-7 col-xs-12']) }}
+                                    @else
+                                        {{ Form::text($value->key, $value->value, ['class' => 'form-control col-md-7 col-xs-12']) }}
+                                    @endif
                                 </div>
                             </div>
                         @endforeach
