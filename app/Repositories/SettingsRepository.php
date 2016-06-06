@@ -17,6 +17,7 @@ class SettingsRepository extends BaseRepository
      * Get settings with deleted since $since param if passed
      *
      * @param string|bool $since
+     *
      * @return mixed
      */
     public function getSettingsWithDeleted($since = false)
@@ -35,6 +36,7 @@ class SettingsRepository extends BaseRepository
      *
      * @param $setting
      * @param $since
+     *
      * @return mixed
      */
     public function getByKeyWithDeleted($setting, $since)
@@ -62,5 +64,21 @@ class SettingsRepository extends BaseRepository
             SettingFacade::set('twitterWidget', array_get($data, 'twitterWidget'));
         }
         SettingFacade::save();
+    }
+
+    /**
+     * Save settings
+     *
+     * @param array $settings
+     *
+     * @return mixed
+     */
+    public function saveSettings(array $settings)
+    {
+        foreach ($settings as $key => $value) {
+            SettingFacade::set($key, $value);
+        }
+
+        return SettingFacade::save();
     }
 }
