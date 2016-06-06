@@ -35,6 +35,7 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
     $app->resource('users', 'UsersController');
     $app->resource('sessions', 'Events\SessionsController');
     $app->resource('bofs', 'Events\BofsController');
+    $app->resource('social', 'Events\SocialController');
 });
 
 /**
