@@ -126,33 +126,6 @@ $(document).ready(function () {
 });
 // /Panel toolbox
 
-// Tooltip
-$(document).ready(function () {
-	$('[data-toggle="tooltip"]').tooltip({
-		container: 'body'
-	});
-});
-// /Tooltip
-
-// Progressbar
-if ($(".progress .progress-bar")[0]) {
-	$('.progress .progress-bar').progressbar(); // bootstrap 3
-}
-// /Progressbar
-
-// Switchery
-$(document).ready(function () {
-	if ($(".js-switch")[0]) {
-		var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
-		elems.forEach(function (html) {
-			var switchery = new Switchery(html, {
-				color: '#26B99A'
-			});
-		});
-	}
-});
-// /Switchery
-
 // iCheck
 $(document).ready(function () {
 	if ($("input.flat")[0]) {
@@ -165,73 +138,6 @@ $(document).ready(function () {
 	}
 });
 // /iCheck
-
-// Table
-$('table input').on('ifChecked', function () {
-	checkState = '';
-	$(this).parent().parent().parent().addClass('selected');
-	countChecked();
-});
-$('table input').on('ifUnchecked', function () {
-	checkState = '';
-	$(this).parent().parent().parent().removeClass('selected');
-	countChecked();
-});
-
-var checkState = '';
-
-$('.bulk_action input').on('ifChecked', function () {
-	checkState = '';
-	$(this).parent().parent().parent().addClass('selected');
-	countChecked();
-});
-$('.bulk_action input').on('ifUnchecked', function () {
-	checkState = '';
-	$(this).parent().parent().parent().removeClass('selected');
-	countChecked();
-});
-$('.bulk_action input#check-all').on('ifChecked', function () {
-	checkState = 'all';
-	countChecked();
-});
-$('.bulk_action input#check-all').on('ifUnchecked', function () {
-	checkState = 'none';
-	countChecked();
-});
-
-function countChecked() {
-	if (checkState === 'all') {
-		$(".bulk_action input[name='table_records']").iCheck('check');
-	}
-	if (checkState === 'none') {
-		$(".bulk_action input[name='table_records']").iCheck('uncheck');
-	}
-
-	var checkCount = $(".bulk_action input[name='table_records']:checked").length;
-
-	if (checkCount) {
-		$('.column-title').hide();
-		$('.bulk-actions').show();
-		$('.action-cnt').html(checkCount + ' Records Selected');
-	} else {
-		$('.column-title').show();
-		$('.bulk-actions').hide();
-	}
-}
-
-// Accordion
-$(document).ready(function () {
-	$(".expand").on("click", function () {
-		$(this).next().slideToggle(200);
-		$expand = $(this).find(">:first-child");
-
-		if ($expand.text() == "+") {
-			$expand.text("-");
-		} else {
-			$expand.text("+");
-		}
-	});
-});
 
 // NProgress
 if (typeof NProgress != 'undefined') {
@@ -288,102 +194,7 @@ if (typeof NProgress != 'undefined') {
  * my scripts. test
  *
  * */
-
-<!-- bootstrap-daterangepicker -->
 $(document).ready(function () {
-
-	/*var cb = function (start, end, label) {
-		console.log(start.toISOString(), end.toISOString(), label);
-		$('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-	};
-
-	var optionSet1 = {
-		startDate: moment().subtract(29, 'days'),
-		endDate: moment(),
-		minDate: '01/01/2012',
-		maxDate: '12/31/2015',
-		dateLimit: {
-			days: 60
-		},
-		showDropdowns: true,
-		showWeekNumbers: true,
-		timePicker: false,
-		timePickerIncrement: 1,
-		timePicker12Hour: true,
-		ranges: {
-			'Today': [moment(), moment()],
-			'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-			'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-			'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-			'This Month': [moment().startOf('month'), moment().endOf('month')],
-			'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-		},
-		opens: 'left',
-		buttonClasses: ['btn btn-default'],
-		applyClass: 'btn-small btn-primary',
-		cancelClass: 'btn-small',
-		format: 'MM/DD/YYYY',
-		separator: ' to ',
-		locale: {
-			applyLabel: 'Submit',
-			cancelLabel: 'Clear',
-			fromLabel: 'From',
-			toLabel: 'To',
-			customRangeLabel: 'Custom',
-			daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
-			monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-			firstDay: 1
-		}
-	};
-	$('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
-	$('#reportrange').daterangepicker(optionSet1, cb);
-	$('#reportrange').on('show.daterangepicker', function () {
-		console.log("show event fired");
-	});
-	$('#reportrange').on('hide.daterangepicker', function () {
-		console.log("hide event fired");
-	});
-	$('#reportrange').on('apply.daterangepicker', function (ev, picker) {
-		console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
-	});
-	$('#reportrange').on('cancel.daterangepicker', function (ev, picker) {
-		console.log("cancel event fired");
-	});
-	$('#options1').click(function () {
-		$('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
-	});
-	$('#options2').click(function () {
-		$('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
-	});
-	$('#destroy').click(function () {
-		$('#reportrange').data('daterangepicker').remove();
-	});*/
-});
-
-<!-- /bootstrap-daterangepicker -->
-
-
-
-<!-- Skycons -->
-
-$(document).ready(function () {
-	var icons = new Skycons({
-			"color": "#73879C"
-		}),
-		list = [
-			"clear-day", "clear-night", "partly-cloudy-day",
-			"partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind",
-			"fog"
-		],
-		i;
-
-	for (i = list.length; i--;)
-		icons.set(list[i], list[i]);
-
-	icons.play();
-
-	<!-- /Skycons -->
-
 	/**
 	 * include CKEDITOR to id
 	 */

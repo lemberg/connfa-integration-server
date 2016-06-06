@@ -18,16 +18,16 @@
 </head>
 
 <body style="background:#F7F7F7;">
-<div class="">
-    <div id="wrapper">
-        <div id="login" class=" form">
-            <section class="login_content">
+    <div>
+        <div id="wrapper">
+            <div id="login" class=" form">
+                <section class="login_content">
 
-                @yield('content')
+                    @yield('content')
 
-            </section>
+                </section>
+            </div>
         </div>
     </div>
-</div>
 </body>
 </html>
