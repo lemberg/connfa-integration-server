@@ -41,16 +41,16 @@ class TypesController extends BaseController
         $path = array_get($data, 'icon');
         if (array_get($data, 'icon_delete')) {
             $this->repository->deleteImage($data['icon_delete']);
-            $path = '';
+            $path = array_get($data, 'icon_url');
         }
 
-        if ($this->request->get('icon-switch') == 'icon_file' AND $this->request->hasFile('icon_file')) {
-            $path = $this->repository->saveImage($this->request->file('icon_file'), 'events/types');
+        if (array_get($data, 'icon-switch') == 'icon_file' and $this->request->hasFile('icon_file')) {
+            $path = $this->repository->saveImage($this->request->file('icon_file'), $this->getViewsFolder());
             if (!$path) {
                 return redirect()->back()->withError('Could not save image');
             }
-        } elseif ($this->request->get('icon_url') && !array_get($data, 'icon_delete')) {
-            $path = $this->request->get('icon_url');
+        } elseif (array_get($data, 'icon_url') and !array_get($data, 'icon_delete')) {
+            $path = array_get($data, 'icon_url');
         }
 
         $data['icon'] = $path;

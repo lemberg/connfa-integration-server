@@ -39,16 +39,16 @@ class SpeakersController extends BaseController
         $path = array_get($data, 'avatar');
         if (array_get($data, 'avatar_delete')) {
             $this->repository->deleteImage($data['avatar_delete']);
-            $path = '';
+            $path = array_get($data, 'avatar_url');
         }
 
-        if ($this->request->get('avatar-switch') == 'avatar_file' AND $this->request->hasFile('avatar_file')) {
+        if (array_get($data, 'avatar-switch') == 'avatar_file' and $this->request->hasFile('avatar_file')) {
             $path = $this->repository->saveImage($this->request->file('avatar_file'), $this->getViewsFolder());
             if (!$path) {
                 return redirect()->back()->withError('Could not save image');
             }
-        } elseif ($this->request->get('avatar_url') && !array_get($data, 'avatar_delete')) {
-            $path = $this->request->get('avatar_url');
+        } elseif (array_get($data, 'avatar_url') and !array_get($data, 'avatar_delete')) {
+            $path = array_get($data, 'avatar_url');
         }
 
         $data['avatar'] = $path;

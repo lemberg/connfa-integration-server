@@ -26,7 +26,7 @@
 <div class="form-group{{ $errors->has($fieldName . '_url') ? ' has-error' : '' }} form-group-{{ $fieldName }}-url">
     {{ Form::label($fieldName . '_url', trans('Image url') . ($required ? ' *' : ''), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
     <div class="col-md-6 col-sm-6 col-xs-12">
-        {{ Form::url($fieldName . '_url', '', ['class' => 'form-control col-md-7 col-xs-12']) }}
+        {{ Form::url($fieldName . '_url', $fieldNameValue, ['class' => 'form-control col-md-7 col-xs-12']) }}
         @if ($errors->has($fieldName . '_url'))
             <span class="help-block">
         <strong>{{ $errors->first($fieldName . '_url') }}</strong>

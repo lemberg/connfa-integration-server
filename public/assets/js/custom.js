@@ -292,6 +292,7 @@ function deleteImage(fieldName) {
 		e.preventDefault();
 		var field = $(this).data('field');
 		$("input[name=" + field + "_delete]").val($("input[name=" + field + "]").val());
+		$("input[name=" + field + "_url]").val('');
 		$('.' + fieldName + '-block').hide();
 		$('.' + fieldName + '-upload-block').show();
 	});

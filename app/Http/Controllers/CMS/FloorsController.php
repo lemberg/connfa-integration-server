@@ -17,7 +17,7 @@ class FloorsController extends BaseController
     public function store()
     {
         $data = $this->request->all();
-        if ($this->request->get('image-switch') == 'image_file' AND $this->request->hasFile('image_file')) {
+        if ($this->request->get('image-switch') == 'image_file' and $this->request->hasFile('image_file')) {
             $path = $this->repository->saveImage($this->request->file('image_file'), $this->getViewsFolder());
             if (!$path) {
                 return redirect()->back()->withError('Could not save image');
@@ -38,16 +38,16 @@ class FloorsController extends BaseController
         $path = array_get($data, 'image');
         if (array_get($data, 'image_delete')) {
             $this->repository->deleteImage($data['image_delete']);
-            $path = '';
+            $path = array_get($data, 'image_url');
         }
 
-        if ($this->request->get('image-switch') == 'image_file' AND $this->request->hasFile('image_file')) {
+        if (array_get($data, 'image-switch') == 'image_file' and $this->request->hasFile('image_file')) {
             $path = $this->repository->saveImage($this->request->file('image_file'), $this->getViewsFolder());
             if (!$path) {
                 return redirect()->back()->withError('Could not save image');
             }
-        } elseif ($this->request->get('image_url') && !array_get($data, 'image_delete')) {
-            $path = $this->request->get('image_url');
+        } elseif (array_get($data, 'image_url') and !array_get($data, 'image_delete')) {
+            $path = array_get($data, 'image_url');
         }
 
         $data['image'] = $path;
