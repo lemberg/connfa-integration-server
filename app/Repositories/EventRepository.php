@@ -43,8 +43,8 @@ class EventRepository extends BaseRepository
 
         $event->fill($data);
         $event->speakers()->sync(array_get($data, 'speakers'));
-
-        return $event;
+        
+        return $event->save();
     }
 
     /**
