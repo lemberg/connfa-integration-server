@@ -29,5 +29,14 @@
             </div>
         </div>
     </div>
+    <script src="{{ URL::asset('assets/vendors/jquery/dist/jquery.min.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            <!-- disable button after first click -->
+            $('form').submit(function(){
+                $('input[type=submit]', $(this)).prop( 'disabled', true );
+            });
+        });
+    </script>
 </body>
 </html>
