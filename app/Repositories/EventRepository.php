@@ -58,4 +58,18 @@ class EventRepository extends BaseRepository
     {
         return $this->model->where(['event_type' => $type])->paginate($itemsOnPage);
     }
+
+    /**
+     * Get events by type sort DESC and limit
+     *
+     * @param $type
+     * @param string $orderBy
+     * @param int $limit
+     *
+     * @return mixed
+     */
+    public function getEventByTypeOrderAndLimit($type, $orderBy = 'updated_at', $limit = 5)
+    {
+        return $this->model->where(['event_type' => $type])->orderBy($orderBy, 'DESC')->limit($limit)->get();
+    }
 }

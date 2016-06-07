@@ -1,24 +1,46 @@
 <?php
-/**
- * @author       Lemberg Solution LAMP Team
- */
 
 namespace App\Http\Controllers\CMS;
 
 use App\Http\Requests;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Repositories\SpeakerRepository;
+use App\Repositories\EventRepository;
+use Illuminate\Contracts\Routing\ResponseFactory;
 
 class DashboardController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * @var ResponseFactory
      */
-    public function __construct()
-    {
+    protected $response;
+
+    /**
+     * @var SpeakerRepository
+     */
+    protected $speakers;
+
+    /**
+     * @var EventRepository
+     */
+    protected $repository;
+
+    /**
+     * DashboardController constructor.
+     *
+     * @param ResponseFactory $response
+     * @param SpeakerRepository $speakers
+     * @param EventRepository $repository
+     */
+    public function __construct(
+        ResponseFactory $response,
+        SpeakerRepository $speakers,
+        EventRepository $repository
+    ) {
         $this->middleware('auth');
+        $this->response = $response;
+        $this->speakers = $speakers;
+        $this->repository = $repository;
     }
 
     /**
@@ -28,6 +50,11 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        return $this->response->view('dashboard', [
+            'speakers' => $this->speakers->getLimitLastUpdated(),
+            'sessions' => $this->repository->getEventByTypeOrderAndLimit('session'),
+            'social' => $this->repository->getEventByTypeOrderAndLimit('social'),
+            'bofs' => $this->repository->getEventByTypeOrderAndLimit('bof'),
+        ]);
     }
 }
