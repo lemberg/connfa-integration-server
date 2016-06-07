@@ -40,10 +40,9 @@ class EventRepository extends BaseRepository
     public function updateWithSpeakers($id, $data)
     {
         $event = $this->findOrFail($id);
-
         $event->fill($data);
-        $event->speakers()->sync(array_get($data, 'speakers'));
-        
+        $event->speakers()->sync(array_get($data, 'speakers', []));
+
         return $event->save();
     }
 

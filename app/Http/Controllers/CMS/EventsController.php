@@ -54,7 +54,7 @@ class EventsController extends BaseController
         $data = $this->request->all();
         $data['event_type'] = $this->eventType;
         $event = $this->repository->create($data);
-        $event->speakers()->sync(array_get($data, 'speakers'));
+        $event->speakers()->sync(array_get($data, 'speakers', []));
 
         return $this->redirectTo('index');
     }
