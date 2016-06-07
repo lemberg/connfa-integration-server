@@ -12,6 +12,12 @@ class PageRepository extends BaseRepository
         return Page::class;
     }
 
+    /**
+     * Get pages with deleted since $since param if passed
+     *
+     * @param string|bool $since
+     * @return mixed
+     */
     public function getPagesWithDeleted($since = false)
     {
         if ($since) {

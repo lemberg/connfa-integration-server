@@ -8,6 +8,12 @@ use App\Transformers\Event\TrackTransformer;
 
 class EventTracksController extends ApiController
 {
+    /**
+     * Get list of Events Tracks
+     *
+     * @param TrackRepository $repository
+     * @return \Dingo\Api\Http\Response
+     */
     public function index(TrackRepository $repository)
     {
         $tracks = $repository->getTracksWithDeleted($this->since);

@@ -35,8 +35,8 @@ class LocationTransformer extends TransformerAbstract
             'longitude'    => $location->lon,
             'latitude'     => $location->lat,
             'address'      => $location->address,
-            'order'        => $location->order,
-            'deleted'      => $location->deleted_at ? 1 : 0,
+            'order'        => floatval($location->order),
+            'deleted'      => $location->deleted_at ? true : false,
         ];
 
         return $data;

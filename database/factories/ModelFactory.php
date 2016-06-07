@@ -25,7 +25,7 @@ $factory->define(App\Models\Speaker::class, function (Faker\Generator $faker) {
         'first_name'     => $faker->firstName,
         'last_name'      => $faker->lastName,
         'email'          => $faker->safeEmail,
-        'characteristic' => $faker->sentence(),
+        'characteristic' => $faker->text(),
         'job'            => $faker->jobTitle,
         'organization'   => $faker->company(),
         'twitter_name'   => '@' . $faker->userName(),
@@ -75,8 +75,8 @@ $factory->define(App\Models\Event::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Models\Floor::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->word,
-        'url'  => $faker->imageUrl(),
+        'name'  => $faker->word,
+        'image' => $faker->imageUrl(),
     ];
 });
 
@@ -103,7 +103,7 @@ $factory->define(App\Models\Point::class, function (Faker\Generator $faker) {
     return [
         'name'        => $faker->word,
         'description' => $faker->text(),
-        'image_url'   => $faker->imageUrl(),
+        'image'       => $faker->imageUrl(),
         'details_url' => $faker->url,
     ];
 });

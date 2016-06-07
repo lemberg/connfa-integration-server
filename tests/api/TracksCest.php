@@ -37,12 +37,25 @@ class TracksCest extends BaseCest
         $I->seeResponseContainsJson(['trackName' => 'test']);
     }
 
-    public function tryToGetTrackWithFeatureIfModifiedSince(ApiTester $I)
+    public function tryToGetTrackWithFutureIfModifiedSince(ApiTester $I)
     {
         $since = \Carbon\Carbon::parse('+5 hour');
         $I->haveATrack(['name' => 'test']);
         $I->haveHttpHeader('If-modified-since', $since->toIso8601String());
         $I->sendGET('v2/getTracks');
         $I->seeResponseCodeIs(304);
+    }
+
+    public function tryToGetDeletedTrack(ApiTester $I)
+    {
+        $track = $I->haveATrack(['name' => 'test']);
+        $I->sendGET('v2/getTracks');
+        $I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson(['trackName' => 'test', 'deleted' => false]);
+        $track->delete();
+        $I->haveHttpHeader('If-modified-since', \Carbon\Carbon::now()->toIso8601String());
+        $I->sendGET('v2/getTracks');
+        $I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson(['trackName' => 'test', 'deleted' => true]);
     }
 }

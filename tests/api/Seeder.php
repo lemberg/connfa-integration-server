@@ -2,6 +2,7 @@
 
 use App\Repositories\SettingsRepository;
 use Faker\Factory as Faker;
+use vendocrat\Settings\Facades\Setting;
 
 class Seeder
 {
@@ -68,14 +69,37 @@ class Seeder
         return $factory;
     }
 
-    public function twitter($data = [])
+    public function point($data = [])
+    {
+        $factory = factory(App\Models\Point::class, 1)->make($data);
+        $factory->save();
+
+        return $factory;
+    }
+
+    public function floor($data = [])
+    {
+        $factory = factory(App\Models\Floor::class, 1)->make($data);
+        $factory->save();
+
+        return $factory;
+    }
+
+    public function setting($data = [])
     {
         $data = array_merge([
+            'titleMajor'         => $this->faker->word,
+            'titleMinor'         => $this->faker->sentence(3),
             'twitterWidget'      => $this->faker->word,
             'twitterSearchQuery' => '#' . $this->faker->word(),
+            'timezone'           => $this->faker->timezone,
         ], $data);
 
-        return $this->make(SettingsRepository::class)->createTwitter($data);
+        foreach ($data as $key => $setting) {
+            Setting::set($key, $setting);
+        }
+
+        Setting::save();
     }
 
     protected function make($class, $attributes = [])

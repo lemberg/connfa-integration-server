@@ -32,8 +32,8 @@ class PageTransformer implements EmbeddedTransformer
             'infoId'    => $page->id,
             'infoTitle' => $page->name,
             'html'      => $page->content,
-            'order'     => $page->order,
-            'deleted'   => $page->deleted_at ? 1 : 0,
+            'order'     => floatval($page->order),
+            'deleted'   => $page->deleted_at ? true : false,
         ];
 
         return $data;
