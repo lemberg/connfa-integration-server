@@ -46,13 +46,22 @@
                         <strong>{{ trans('Event type') }}:</strong> {{ $data->event_type }}<br>
                     </p>
                     <p>
-                        <strong>{{ trans('Level') }}:</strong> {{ $data->level->name }}<br>
+                        <strong>{{ trans('Level') }}:</strong>
+                        @if($data->level_id)
+                            {{ $data->level->name }}<br>
+                        @endif
                     </p>
                     <p>
-                        <strong>{{ trans('Type') }}:</strong> {{ $data->type->name }}<br>
+                        <strong>{{ trans('Type') }}:</strong>
+                        @if($data->type_id)
+                            {{ $data->type->name }}<br>
+                        @endif
                     </p>
                     <p>
-                        <strong>{{ trans('Track') }}:</strong> {{ $data->track->name }}<br>
+                        <strong>{{ trans('Track') }}:</strong>
+                        @if($data->track_id)
+                            {{ $data->track->name }}<br>
+                        @endif
                     </p>
                     <p>
                         <strong>{{ trans('Order') }}:</strong> {{ $data->order }}<br>
