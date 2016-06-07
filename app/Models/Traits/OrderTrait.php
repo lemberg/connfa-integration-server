@@ -16,5 +16,7 @@ trait OrderTrait
         if (!strlen($value)) {
             return $this->attributes['order'] = null;
         }
+
+        return $this->attributes['order'] = $value;
     }
 }
