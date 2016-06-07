@@ -1,17 +1,15 @@
 <?php
-/**
- * @author       Lemberg Solution LAMP Team
- */
 
-namespace app\Models;
+namespace App\Models;
 
-
+use App\Models\Traits\UrlableTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Speaker extends Model
 {
     use SoftDeletes;
+    use UrlableTrait;
 
     protected $fillable = [
         'first_name',
@@ -24,5 +22,9 @@ class Speaker extends Model
         'avatar',
         'email',
         'order',
+    ];
+
+    protected $urlable = [
+        'avatar'
     ];
 }

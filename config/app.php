@@ -157,6 +157,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Dingo\Api\Provider\LaravelServiceProvider::class,
+        vendocrat\Settings\SettingsServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class
 
     ],
 
@@ -205,6 +207,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'API'         => Dingo\Api\Facade\API::class,
+        'Setting' => vendocrat\Settings\Facades\Setting::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class
     ],
 
 ];

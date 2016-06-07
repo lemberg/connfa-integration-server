@@ -16,7 +16,7 @@ class CreateSpeakersTable extends Migration
             $table->increments('id');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('characteristic');
+            $table->text('characteristic');
             $table->string('job');
             $table->string('organization');
             $table->string('twitter_name');

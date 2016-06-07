@@ -11,14 +11,24 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+$api = app('api.router');
 
-$api = app('Dingo\Api\Routing\Router');
-
-$api->version('v2', ['middleware' => ['api'], 'namespace' => 'App\Http\Controllers\Api', 'prefix' => 'api/v2'],function ($api) {
-
+$api->version('v2', [
+    'middleware' => ['api'],
+    'namespace'  => 'App\Http\Controllers\Api',
+    'prefix'     => 'api/v2',
+], function ($api) {
     $api->get('getSpeakers', 'SpeakersController@index');
-
+    $api->get('getTypes', 'EventTypesController@index');
+    $api->get('getLevels', 'EventLevelsController@index');
+    $api->get('getTracks', 'EventTracksController@index');
+    $api->get('getSessions', 'EventsController@getSessions');
+    $api->get('getBofs', 'EventsController@getBofs');
+    $api->get('getSocialEvents', 'EventsController@getSocialEvents');
+    $api->get('getSettings', 'SettingsController@index');
+    $api->get('getFloorPlans', 'FloorsController@index');
+    $api->get('getInfo', 'PagesController@index');
+    $api->get('getLocations', 'LocationsController@index');
+    $api->get('getPOI', 'PointsController@index');
+    $api->get('checkUpdates', 'UpdatesController@index');
 });

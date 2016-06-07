@@ -4,8 +4,6 @@ namespace App\Transformers;
 
 use League\Fractal;
 use League\Fractal\TransformerAbstract;
-use League\Fractal\Resource\Collection;
-use League\Fractal\Resource\Item;
 
 class SpeakerTransformer extends TransformerAbstract
 {
@@ -34,6 +32,7 @@ class SpeakerTransformer extends TransformerAbstract
         $speakers = [
             'speakerId'        => $speaker->id,
             'firstName'        => $speaker->first_name,
+            'lastName'         => $speaker->last_name,
             'avatarImageURL'   => $speaker->avatar,
             'organizationName' => $speaker->organization,
             'jobTitle'         => $speaker->job,
@@ -41,11 +40,10 @@ class SpeakerTransformer extends TransformerAbstract
             'twitterName'      => $speaker->twitter_name,
             'webSite'          => $speaker->website,
             'email'            => $speaker->email,
-            'order'            => $speaker->order,
-            'deleted'          => $speaker->deleted_at ? 1 : 0,
+            'order'            => floatval($speaker->order),
+            'deleted'          => $speaker->deleted_at ? true : false,
         ];
 
         return $speakers;
     }
-
 }

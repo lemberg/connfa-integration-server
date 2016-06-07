@@ -1,24 +1,29 @@
-<?php namespace App\Repositories;
+<?php
 
-use App\Models\Role;
-use app\Models\Speaker;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+namespace App\Repositories;
+
+use App\Models\Speaker;
 
 class SpeakerRepository extends BaseRepository
 {
 
     public function model()
     {
-        return 'App\Models\Speaker';
+        return Speaker::class;
     }
 
+    /**
+     * Get speakers with deleted since $since param if passed
+     *
+     * @param string|bool $since
+     * @return mixed
+     */
     public function getSpeakersWithDeleted($since = false)
     {
         if ($since) {
-            return Speaker::withTrashed()->where('updated_at', '>=', $since->toDateTimeString())->get();
+            return $this->model->withTrashed()->where('updated_at', '>=', $since->toDateTimeString())->get();
         }
 
-        return Speaker::withTrashed()->get();
+        return $this->model->withTrashed()->get();
     }
 }
