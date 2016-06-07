@@ -96,7 +96,7 @@
                         <div class="form-group{{ $errors->has('level_id') ? ' has-error' : '' }}">
                             {{ Form::label('level_id', trans('Level'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                {{ Form::select('level_id', ['NULL' => 'Select the option'] + $levels, 'NULL', ['class' => 'form-control col-md-7 col-xs-12']) }}
+                                {{ Form::select('level_id', ['NULL' => 'Select the option'] + $levels, [], ['class' => 'form-control col-md-7 col-xs-12']) }}
                                 @if ($errors->has('level_id'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('level_id') }}</strong>
@@ -107,7 +107,7 @@
                         <div class="form-group{{ $errors->has('type_id') ? ' has-error' : '' }}">
                             {{ Form::label('type_id', trans('Type'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                {{ Form::select('type_id', ['NULL' => 'Select the option'] + $types, 'NULL', ['class' => 'form-control col-md-7 col-xs-12']) }}
+                                {{ Form::select('type_id', ['NULL' => 'Select the option'] + $types, [], ['class' => 'form-control col-md-7 col-xs-12']) }}
                                 @if ($errors->has('type_id'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('type_id') }}</strong>
@@ -118,7 +118,7 @@
                         <div class="form-group{{ $errors->has('track_id') ? ' has-error' : '' }}">
                             {{ Form::label('track_id', trans('Track'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                {{ Form::select('track_id', ['NULL' => 'Select the option'] + $tracks, 'NULL', ['class' => 'form-control col-md-7 col-xs-12']) }}
+                                {{ Form::select('track_id', ['NULL' => 'Select the option'] + $tracks, [], ['class' => 'form-control col-md-7 col-xs-12']) }}
                                 @if ($errors->has('track_id'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('track_id') }}</strong>

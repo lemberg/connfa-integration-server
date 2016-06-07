@@ -40,10 +40,9 @@ class EventRepository extends BaseRepository
     public function updateWithSpeakers($id, $data)
     {
         $event = $this->findOrFail($id);
-
         $event->fill($data);
-        $event->speakers()->sync(array_get($data, 'speakers'));
-        
+        $event->speakers()->sync(array_get($data, 'speakers', []));
+
         return $event->save();
     }
 
@@ -58,5 +57,19 @@ class EventRepository extends BaseRepository
     public function getByEventTypeOnPage($type, $itemsOnPage = 25)
     {
         return $this->model->where(['event_type' => $type])->paginate($itemsOnPage);
+    }
+
+    /**
+     * Get events by type sort DESC and limit
+     *
+     * @param $type
+     * @param string $orderBy
+     * @param int $limit
+     *
+     * @return mixed
+     */
+    public function getEventByTypeOrderAndLimit($type, $orderBy = 'updated_at', $limit = 5)
+    {
+        return $this->model->where(['event_type' => $type])->orderBy($orderBy, 'DESC')->limit($limit)->get();
     }
 }

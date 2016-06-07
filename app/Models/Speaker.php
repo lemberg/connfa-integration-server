@@ -25,7 +25,7 @@ class Speaker extends Model
         'email',
         'order',
     ];
-    
+
     protected $urlable = [
         'avatar'
     ];
@@ -39,7 +39,7 @@ class Speaker extends Model
      */
     public function setTwitterNameAttribute($value)
     {
-        if (!is_null($value) and !starts_with($value, '@')) {
+        if (strlen($value) and !starts_with($value, '@')) {
             return $this->attributes['twitter_name'] = '@' . $value;
         }
 
