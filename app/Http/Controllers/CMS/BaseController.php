@@ -131,7 +131,7 @@ class BaseController extends Controller
      */
     public function update($id)
     {
-        $this->repository->update($this->request->except('_method', '_token'), $id);
+        $this->repository->updateRich($this->request->except('_method', '_token'), $id);
 
         return $this->redirectTo('index');
     }
