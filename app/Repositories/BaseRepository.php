@@ -155,12 +155,12 @@ class BaseRepository extends Repository implements RepositoryInterface
 
     /**
      * Find or create
-     * 
+     *
      * @param array $parameters
      *
      * @return mixed
      */
-    public function firstOrCreate(array $parameters)
+    public function firstOrCreate(array $parameters = [])
     {
         return $this->model->firstOrCreate($parameters);
     }

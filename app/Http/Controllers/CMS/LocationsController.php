@@ -25,11 +25,6 @@ class LocationsController extends Controller
     protected $response = null;
 
     /**
-     * @var int
-     */
-    protected $defaultId = 1;
-
-    /**
      * @var string
      *
      */
@@ -62,7 +57,7 @@ class LocationsController extends Controller
     public function index()
     {
         return $this->response->view($this->getViewName('index'),
-            ['data' => $this->repository->firstOrCreate(['id' => $this->defaultId])]);
+            ['data' => $this->repository->firstOrCreate()]);
     }
 
     /**
@@ -73,7 +68,7 @@ class LocationsController extends Controller
     public function edit()
     {
         return $this->response->view($this->getViewName('edit'),
-            ['data' => $this->repository->firstOrCreate(['id' => $this->defaultId])]);
+            ['data' => $this->repository->firstOrCreate()]);
     }
 
     /** Update the specified resource in storage.
@@ -82,7 +77,8 @@ class LocationsController extends Controller
      */
     public function update()
     {
-        $this->repository->updateRich($this->request->except('_method', '_token'), $this->defaultId);
+        $location = $this->repository->firstOrCreate();
+        $this->repository->updateRich($this->request->except('_method', '_token'), $location->id);
 
         return $this->response->redirectToRoute($this->routeName . '.index');
     }

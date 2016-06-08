@@ -25,9 +25,6 @@
                     <p>
                         <strong>{{ trans('Longitude') }}:</strong> {{ $data->lon }}<br>
                     </p>
-                    <p>
-                        <strong>{{ trans('Order') }}:</strong> {{ $data->order }}<br>
-                    </p>
                 </div>
             </div>
         </div>
