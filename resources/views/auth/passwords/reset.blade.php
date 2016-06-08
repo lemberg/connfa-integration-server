@@ -9,15 +9,14 @@
         </div>
     @endif
 
-    {!! Form::open(array('url' => '/password/email', 'method' => 'POST', 'class' => 'form-horizontal')) !!}
+    {!! Form::open(array('url' => '/password/reset', 'method' => 'POST', 'class' => 'form-horizontal')) !!}
         {{ csrf_field() }}
 
         <h1>Reset Password</h1>
 
         {{ Form::hidden("token", $token) }}
-
         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-            {{ Form::email("email", $email or old('email'), ['class' => 'form-control', 'placeholder' => 'E-Mail Address']) }}
+            {{ Form::email("email", $email, ['class' => 'form-control', 'placeholder' => 'E-Mail Address']) }}
             @if ($errors->has('email'))
                 <span class="help-block">
                         <strong>{{ $errors->first('email') }}</strong>
