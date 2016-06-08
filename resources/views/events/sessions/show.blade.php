@@ -67,7 +67,10 @@
                         <strong>{{ trans('Order') }}:</strong> {{ $data->order }}<br>
                     </p>
                     <p>
-                        <strong>{{ trans('Text') }}:</strong>  {!! Html::decode($data->text)  !!}<br>
+                        <strong>{{ trans('Text') }}:</strong>
+                        @if($data->text)
+                            <pre><code>{!! $data->text !!}</code></pre>
+                        @endif
                     </p>
                 </div>
             </div>

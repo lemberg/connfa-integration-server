@@ -28,7 +28,10 @@
                         <strong>{{ trans('Details url') }}:</strong> {{ $data->details_url }}<br>
                     </p>
                     <p>
-                        <strong>{{ trans('Description') }}:</strong> {{ $data->description }}<br>
+                        <strong>{{ trans('Description') }}:</strong>
+                        @if($data->description)
+                            <pre><code>{!! $data->description !!}</code></pre>
+                        @endif
                     </p>
                     <p>
                         <strong>{{ trans('Image') }}:</strong><br>

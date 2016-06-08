@@ -57,9 +57,10 @@
                                 <h2>{{ trans('Characteristic') }}</h2>
                             </div>
                         </div>
-                        <p>
-                            {!! Html::decode($data->characteristic)  !!}
-                        <p>
+                        <br>
+                        @if($data->characteristic)
+                            <pre><code>{!! $data->characteristic !!}</code></pre>
+                        @endif
                     </div>
                 </div>
             </div>

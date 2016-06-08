@@ -23,8 +23,14 @@ class SettingRequest extends Request
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        $validation = [];
+        if (in_array($this->method(), ['POST', 'PUT'])) {
+            $validation = [
+                'timezone' => 'required',
+                'twitterSearchQuery' => 'required',
+            ];
+        }
+
+        return $validation;
     }
 }
