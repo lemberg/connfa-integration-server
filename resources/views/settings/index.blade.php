@@ -14,16 +14,16 @@
                 </div>
                 <div class="x_content">
                     <p>
-                        <strong>{{ trans('Title major') }}:</strong> {{ $data['titleMajor'] }}
+                        <strong>{{ trans('Title major') }}:</strong> {{ array_get($data, 'titleMajor') }}
                     </p>
                     <p>
-                        <strong>{{ trans('Title minor') }}:</strong> {{ $data['titleMinor'] }}
+                        <strong>{{ trans('Title minor') }}:</strong> {{ array_get($data, 'titleMinor') }}
                     </p>
                     <p>
-                        <strong>{{ trans('Twitter search query') }}:</strong> {{ $data['twitterSearchQuery'] }}
+                        <strong>{{ trans('Twitter search query') }}:</strong> {{ array_get($data, 'twitterSearchQuery') }}
                     </p>
                     <p>
-                        <strong>{{ trans('Timezone') }}:</strong> {{ $data['timezone'] }}
+                        <strong>{{ trans('Timezone') }}:</strong> {{ array_get($data, 'timezone') }}
                     </p>
                 </div>
             </div>

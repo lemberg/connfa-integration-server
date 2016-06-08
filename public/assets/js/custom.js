@@ -143,7 +143,7 @@ $(document).ready(function () {
 <!-- Select2 -->
 $(document).ready(function () {
 	$(".select2_single").select2({
-		placeholder: "Select a state",
+		placeholder: "Select the option",
 		allowClear: true
 	});
 	$(".select2_group").select2({});

@@ -20,7 +20,7 @@
                         <div class="form-group{{ $errors->has('titleMajor') ? ' has-error' : '' }}">
                             {{ Form::label('titleMajor', trans('Title major'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                {{ Form::text('titleMajor', $data['titleMajor'], ['class' => 'form-control col-md-7 col-xs-12']) }}
+                                {{ Form::text('titleMajor', array_get($data, 'titleMajor'), ['class' => 'form-control col-md-7 col-xs-12']) }}
                                 @if ($errors->has('titleMajor'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('titleMajor') }}</strong>
@@ -31,7 +31,7 @@
                         <div class="form-group{{ $errors->has('titleMinor') ? ' has-error' : '' }}">
                             {{ Form::label('titleMinor', trans('Title minor'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                {{ Form::text('titleMinor', $data['titleMinor'], ['class' => 'form-control col-md-7 col-xs-12']) }}
+                                {{ Form::text('titleMinor', array_get($data, 'titleMinor'), ['class' => 'form-control col-md-7 col-xs-12']) }}
                                 @if ($errors->has('titleMinor'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('titleMinor') }}</strong>
@@ -42,7 +42,7 @@
                         <div class="form-group{{ $errors->has('twitterSearchQuery') ? ' has-error' : '' }}">
                             {{ Form::label('twitterSearchQuery', trans('Twitter search query')." *", ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                {{ Form::text('twitterSearchQuery', $data['twitterSearchQuery'], ['class' => 'form-control col-md-7 col-xs-12']) }}
+                                {{ Form::text('twitterSearchQuery', array_get($data, 'twitterSearchQuery'), ['class' => 'form-control col-md-7 col-xs-12']) }}
                                 @if ($errors->has('twitterSearchQuery'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('twitterSearchQuery') }}</strong>
@@ -56,8 +56,8 @@
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                         {{ Form::select(
                                             'timezone',
-                                            $timezoneList,
-                                            $data['timezone'],
+                                            ['' => 'Select Timezone'] + $timezoneList,
+                                            array_get($data, 'timezone'),
                                             ['class' => 'select2_single form-control col-md-7 col-xs-12']
                                         ) }}
                                     @if ($errors->has('timezone'))
