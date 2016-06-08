@@ -20,7 +20,7 @@
             </li>
             <li><a href="{{ url('/speakers') }}"><i class="fa fa-group"></i> Speakers</a></li>
             <li><a href="{{ url('/points') }}"><i class="fa fa-flag-checkered"></i> Points</a></li>
-            <li><a href="{{ url('/locations') }}"><i class="fa fa-map-marker"></i> Locations</a></li>
+            <li><a href="{{ url('/location') }}"><i class="fa fa-map-marker"></i> Location</a></li>
             <li><a href="{{ url('/floors') }}"><i class="fa fa-puzzle-piece"></i> Floor plans</a></li>
             <li><a href="{{ url('/pages') }}"><i class="fa fa-file"></i> Pages</a></li>
             <li><a href="{{ url('/users') }}"><i class="fa fa-user"></i> Users</a></li>

@@ -29,13 +29,15 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
     $app->resource('types', 'Events\TypesController');
     $app->resource('speakers', 'SpeakersController');
     $app->resource('points', 'PointsController');
-    $app->resource('locations', 'LocationsController');
     $app->resource('floors', 'FloorsController');
     $app->resource('pages', 'PagesController');
     $app->resource('users', 'UsersController');
     $app->resource('sessions', 'Events\SessionsController');
     $app->resource('bofs', 'Events\BofsController');
     $app->resource('social', 'Events\SocialController');
+    $app->get('location', 'LocationsController@index')->name('location.index');
+    $app->get('location/edit', 'LocationsController@edit')->name('location.edit');
+    $app->put('location', 'LocationsController@update')->name('location.update');
     $app->get('settings', 'SettingsController@index')->name('settings.index');
     $app->get('settings/edit', 'SettingsController@edit')->name('settings.edit');
     $app->put('settings', 'SettingsController@update')->name('settings.update');
