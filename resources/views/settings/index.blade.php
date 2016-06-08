@@ -13,14 +13,18 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                    @if($data)
-                        @foreach($data as $key => $value)
-                            <p>
-                                <strong>{{ trans(ucfirst(strtolower(implode(' ', preg_split('/(?=[A-Z])/', $value->key))))) }}:</strong>
-                                {{ $value->value }}<br>
-                            </p>
-                        @endforeach
-                    @endif
+                    <p>
+                        <strong>{{ trans('Title major') }}:</strong> {{ $data['titleMajor'] }}
+                    </p>
+                    <p>
+                        <strong>{{ trans('Title minor') }}:</strong> {{ $data['titleMinor'] }}
+                    </p>
+                    <p>
+                        <strong>{{ trans('Twitter search query') }}:</strong> {{ $data['twitterSearchQuery'] }}
+                    </p>
+                    <p>
+                        <strong>{{ trans('Timezone') }}:</strong> {{ $data['timezone'] }}
+                    </p>
                 </div>
             </div>
         </div>

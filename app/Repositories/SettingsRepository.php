@@ -99,4 +99,22 @@ class SettingsRepository extends BaseRepository
 
         return array_combine($timezones, $timezones);
     }
+
+    /**
+     * Get settings in single array
+     *
+     * @return array
+     */
+    public function getAllSettingInSingleArray()
+    {
+        $transformSettings = [];
+        $settings = $this->model->all()->toArray();
+        if (!empty($settings)) {
+            foreach ($settings as $setting) {
+                $transformSettings[$setting['key']] = $setting['value'];
+            }
+        }
+
+        return $transformSettings;
+    }
 }

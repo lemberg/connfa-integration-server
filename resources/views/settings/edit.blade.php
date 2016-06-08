@@ -17,44 +17,63 @@
                 <div class="x_content">
                     <br/>
                     {!! Form::open(['route' => ['settings.update'], 'method' => 'PUT', 'class' => 'form-horizontal form-label-left']) !!}
-                    @if($data)
-                        @foreach($data as $item)
-                            <div class="form-group{{ $errors->has($item->key) ? ' has-error' : '' }}">
-                                {{ Form::label(
-                                    $item->key,
-                                    trans(ucfirst(strtolower(implode(' ', preg_split('/(?=[A-Z])/', $item->key))))) .
-                                        ($item->key == 'timezone' ? ' *' : '') .
-                                        ($item->key == 'twitterSearchQuery' ? ' *' : ''),
-                                    ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]
-                                ) }}
+                        <div class="form-group{{ $errors->has('titleMajor') ? ' has-error' : '' }}">
+                            {{ Form::label('titleMajor', trans('Title major'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                {{ Form::text('titleMajor', $data['titleMajor'], ['class' => 'form-control col-md-7 col-xs-12']) }}
+                                @if ($errors->has('titleMajor'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('titleMajor') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('titleMinor') ? ' has-error' : '' }}">
+                            {{ Form::label('titleMinor', trans('Title minor'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                {{ Form::text('titleMinor', $data['titleMinor'], ['class' => 'form-control col-md-7 col-xs-12']) }}
+                                @if ($errors->has('titleMinor'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('titleMinor') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('twitterSearchQuery') ? ' has-error' : '' }}">
+                            {{ Form::label('twitterSearchQuery', trans('Twitter search query')." *", ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                {{ Form::text('twitterSearchQuery', $data['twitterSearchQuery'], ['class' => 'form-control col-md-7 col-xs-12']) }}
+                                @if ($errors->has('twitterSearchQuery'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('twitterSearchQuery') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        @if(!empty($timezoneList))
+                            <div class="form-group{{ $errors->has('timezone') ? ' has-error' : '' }}">
+                                {{ Form::label('timezone', trans('Timezone')." *", ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    @if($item->key == 'timezone')
-                                        @if(!empty($timezoneList))
-                                            {{ Form::select(
-                                                $item->key,
-                                                $timezoneList,
-                                                $item->value,
-                                                ['class' => 'select2_single form-control col-md-7 col-xs-12']
-                                            ) }}
-                                        @endif
-                                    @else
-                                        {{ Form::text($item->key, $item->value, ['class' => 'form-control col-md-7 col-xs-12']) }}
-                                    @endif
-                                    @if ($errors->has($item->key))
+                                        {{ Form::select(
+                                            'timezone',
+                                            $timezoneList,
+                                            $data['timezone'],
+                                            ['class' => 'select2_single form-control col-md-7 col-xs-12']
+                                        ) }}
+                                    @if ($errors->has('timezone'))
                                         <span class="help-block">
-                                            <strong>{{ $errors->first($item->key) }}</strong>
+                                            <strong>{{ $errors->first('timezone') }}</strong>
                                         </span>
                                     @endif
                                 </div>
                             </div>
-                        @endforeach
-                    @endif
-                    <div class="ln_solid"></div>
-                    <div class="form-group">
-                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                            {{ Form::submit(trans('Update'), ['class' => 'btn btn-success']) }}
+                        @endif
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                {{ Form::submit(trans('Update'), ['class' => 'btn btn-success']) }}
+                            </div>
                         </div>
-                    </div>
                     {!! Form::close() !!}
                 </div>
             </div>
