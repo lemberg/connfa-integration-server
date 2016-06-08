@@ -4793,8 +4793,7 @@ ul.notifications {
 /** /Dropzone.js **/
 
 .table .column-title.last{
-  text-align: right;
-  padding-right: 85px;
+  width: 200px;
 }
 
 
@@ -4813,4 +4812,7 @@ ul.widget_profile_box li:first-child {
 }
 .list-inline.count2{
   text-align: center;
+}
+pre{
+  background-color: #fff;
 }

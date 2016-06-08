@@ -36,13 +36,13 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        return $this->response->view('settings.index', ['data' => $this->repository->all()]);
+        return $this->response->view('settings.index', ['data' => $this->repository->getAllSettingInSingleArray()]);
     }
 
     public function edit()
     {
         return $this->response->view('settings.edit', [
-            'data' => $this->repository->all(),
+            'data' => $this->repository->getAllSettingInSingleArray(),
             'timezoneList' => $this->repository->getTimezoneList(),
         ]);
     }
@@ -58,5 +58,4 @@ class SettingsController extends Controller
 
         return $this->response->redirectToRoute('settings.index');
     }
-
 }
