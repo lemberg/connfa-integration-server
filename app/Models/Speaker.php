@@ -39,6 +39,7 @@ class Speaker extends Model
      */
     public function setTwitterNameAttribute($value)
     {
+        $value = str_replace(' ', '', $value);
         if (strlen($value) and !starts_with($value, '@')) {
             return $this->attributes['twitter_name'] = '@' . $value;
         }
@@ -57,7 +58,7 @@ class Speaker extends Model
         if (!empty($this->twitter_name) and starts_with($this->twitter_name, '@')) {
             $this->attributes['twitter_name_without_at'] = substr($this->twitter_name, 1);
         }
-
+        
         return $this->attributes['twitter_name_without_at'];
     }
 
