@@ -21,6 +21,7 @@
                                 <th class="column-title">{{ trans('Name') }}</th>
                                 <th class="column-title">{{ trans('Start at') }}</th>
                                 <th class="column-title">{{ trans('End at') }}</th>
+                                <th class="column-title">{{ trans('Order') }}</th>
                                 <th class="column-title no-link last"><span class="nobr">{{ trans('Action') }}</span></th>
                             </tr>
                             </thead>
@@ -36,6 +37,9 @@
                                     </td>
                                     <td>
                                         {{ $item->end_at }}
+                                    </td>
+                                    <td>
+                                        {{ $item->order }}
                                     </td>
                                     <td class="text-right">
                                         <a href="{{ route('sessions.show', ['id' => $item->id]) }}" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> {{ trans('View') }}</a>
