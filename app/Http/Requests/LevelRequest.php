@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
 /**
  * Class LevelRequest
  * @package App\Http\Requests

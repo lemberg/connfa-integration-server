@@ -11,7 +11,6 @@
                 {{ Form::button("<i class='fa fa-trash-o'></i> Delete", ['type' => 'submit', 'class' => 'btn btn-danger']) }}
             {!! Form::close() !!}
             <a href="{{ route('points.edit', ['id' => $data->id ]) }}" class="btn btn-info pull-right"><i class="fa fa-pencil"></i> {{ trans('Edit') }}</a>
-
             <div class="x_panel">
                 <div class="x_title">
                     <h2>{{ trans('Point') }}</h2>

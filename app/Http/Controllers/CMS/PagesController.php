@@ -5,15 +5,30 @@ namespace App\Http\Controllers\CMS;
 use App\Http\Requests\PageRequest;
 use App\Repositories\PageRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use App\Http\Controllers\CMS\BaseController;
 
+/**
+ * Class PagesController
+ * @package App\Http\Controllers\CMS
+ */
 class PagesController extends BaseController
 {
+    /**
+     * PagesController constructor.
+     *
+     * @param PageRequest $request
+     * @param PageRepository $repository
+     * @param ResponseFactory $response
+     */
     public function __construct(PageRequest $request, PageRepository $repository, ResponseFactory $response)
     {
         parent::__construct($request, $repository, $response);
     }
 
+    /**
+     * Overridden parent method, added check to unique alias
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store()
     {
         $data = $this->request->all();
@@ -22,6 +37,13 @@ class PagesController extends BaseController
         return $this->redirectTo('index');
     }
 
+    /**
+     * Overridden parent method, added check to unique alias
+     * 
+     * @param int $id
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update($id)
     {
         $data = $this->request->all();

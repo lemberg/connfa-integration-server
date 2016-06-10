@@ -8,8 +8,8 @@
             </div>
 
             {!! Form::open([route('sessions.destroy', ['id' => $data->id]), 'method' => 'POST', 'class' => 'pull-right']) !!}
-            {{ method_field('DELETE') }}
-            {{ Form::button("<i class='fa fa-trash-o'></i> Delete", ['type' => 'submit', 'class' => 'btn btn-danger']) }}
+                {{ method_field('DELETE') }}
+                {{ Form::button("<i class='fa fa-trash-o'></i> Delete", ['type' => 'submit', 'class' => 'btn btn-danger']) }}
             {!! Form::close() !!}
             <a href="{{ route('sessions.edit', ['id' => $data->id ]) }}" class="btn btn-info pull-right"><i class="fa fa-pencil"></i> {{ trans('Edit') }}</a>
 

@@ -7,6 +7,10 @@ use App\Http\Requests\SettingRequest;
 use App\Repositories\SettingsRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
 
+/**
+ * Class SettingsController
+ * @package App\Http\Controllers\CMS
+ */
 class SettingsController extends Controller
 {
     /**
@@ -24,6 +28,13 @@ class SettingsController extends Controller
      */
     protected $response = null;
 
+    /**
+     * SettingsController constructor.
+     *
+     * @param SettingRequest $request
+     * @param SettingsRepository $repository
+     * @param ResponseFactory $response
+     */
     public function __construct(SettingRequest $request, SettingsRepository $repository, ResponseFactory $response)
     {
         $this->request = $request;
@@ -32,6 +43,8 @@ class SettingsController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     * 
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -39,6 +52,11 @@ class SettingsController extends Controller
         return $this->response->view('settings.index', ['data' => $this->repository->getAllSettingInSingleArray()]);
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     * 
+     * @return \Illuminate\Http\Response
+     */
     public function edit()
     {
         return $this->response->view('settings.edit', [

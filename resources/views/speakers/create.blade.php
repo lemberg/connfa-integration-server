@@ -53,8 +53,8 @@
                                 {{ Form::text('job', '', ['class' => 'form-control col-md-7 col-xs-12']) }}
                                 @if ($errors->has('job'))
                                     <span class="help-block">
-                                            <strong>{{ $errors->first('job') }}</strong>
-                                        </span>
+                                        <strong>{{ $errors->first('job') }}</strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>
@@ -64,8 +64,8 @@
                                 {{ Form::text('organization', '', ['class' => 'form-control col-md-7 col-xs-12']) }}
                                 @if ($errors->has('organization'))
                                     <span class="help-block">
-                                            <strong>{{ $errors->first('organization') }}</strong>
-                                        </span>
+                                        <strong>{{ $errors->first('organization') }}</strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>
@@ -76,8 +76,8 @@
                                 <span class="fa fa-at form-control-feedback left" aria-hidden="true"></span>
                                 @if ($errors->has('twitter_name'))
                                     <span class="help-block">
-                                            <strong>{{ $errors->first('twitter_name') }}</strong>
-                                        </span>
+                                        <strong>{{ $errors->first('twitter_name') }}</strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>
@@ -87,8 +87,8 @@
                                 {{ Form::text('website', '', ['class' => 'form-control col-md-7 col-xs-12']) }}
                                 @if ($errors->has('website'))
                                     <span class="help-block">
-                                            <strong>{{ $errors->first('website') }}</strong>
-                                        </span>
+                                        <strong>{{ $errors->first('website') }}</strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>

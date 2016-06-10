@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
+/**
+ * Class FloorRequest
+ * @package App\Http\Requests
+ */
 class FloorRequest extends Request
 {
     /**

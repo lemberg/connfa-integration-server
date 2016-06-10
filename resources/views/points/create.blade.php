@@ -51,8 +51,8 @@
                                 {{ Form::number('order', '', ['class' => 'form-control col-md-7 col-xs-12', 'step' => '0.01']) }}
                                 @if ($errors->has('order'))
                                     <span class="help-block">
-                                            <strong>{{ $errors->first('order') }}</strong>
-                                        </span>
+                                        <strong>{{ $errors->first('order') }}</strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>

@@ -12,7 +12,6 @@
                     <h2>{{ trans('Session events') }}</h2>
                     <div class="clearfix"></div>
                 </div>
-
                 <div class="x_content">
                     <div class="table-responsive">
                         <table class="table table-striped jambo_table bulk_action">
@@ -25,7 +24,6 @@
                                 <th class="column-title no-link last"><span class="nobr">{{ trans('Action') }}</span></th>
                             </tr>
                             </thead>
-
                             <tbody>
                             @foreach ($data as $item)
                                 <tr>

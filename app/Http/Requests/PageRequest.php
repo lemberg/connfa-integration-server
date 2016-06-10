@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
+/**
+ * Class PageRequest
+ * @package App\Http\Requests
+ */
 class PageRequest extends Request
 {
     /**
@@ -24,17 +26,16 @@ class PageRequest extends Request
     public function rules()
     {
         $validation = [];
-        if($this->method() == 'POST'){
+        if ($this->method() == 'POST') {
             $validation = [
                 'name' => 'required|unique:pages,name,NULL,id,deleted_at,NULL',
                 'alias' => 'required|unique:pages,alias,NULL,id,deleted_at,NULL',
                 'content' => 'required',
             ];
-        }
-        elseif($this->method() == 'PUT'){
+        } elseif ($this->method() == 'PUT') {
             $validation = [
-                'name' => 'required|unique:pages,name,'.$this->route()->parameters()['pages'].',id,deleted_at,NULL',
-                'alias' => 'required|unique:pages,alias,'.$this->route()->parameters()['pages'].',id,deleted_at,NULL',
+                'name' => 'required|unique:pages,name,' . $this->route()->parameters()['pages'] . ',id,deleted_at,NULL',
+                'alias' => 'required|unique:pages,alias,' . $this->route()->parameters()['pages'] . ',id,deleted_at,NULL',
                 'content' => 'required',
             ];
         }

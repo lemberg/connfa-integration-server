@@ -5,15 +5,30 @@ namespace App\Http\Controllers\CMS;
 use App\Http\Requests\PointRequest;
 use App\Repositories\PointRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use App\Http\Controllers\CMS\BaseController;
 
+/**
+ * Class PointsController
+ * @package App\Http\Controllers\CMS
+ */
 class PointsController extends BaseController
 {
+    /**
+     * PointsController constructor.
+     *
+     * @param PointRequest $request
+     * @param PointRepository $repository
+     * @param ResponseFactory $response
+     */
     public function __construct(PointRequest $request, PointRepository $repository, ResponseFactory $response)
     {
         parent::__construct($request, $repository, $response);
     }
 
+    /**
+     * Overridden parent method, added save image
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store()
     {
         $data = $this->request->all();
@@ -32,6 +47,13 @@ class PointsController extends BaseController
         return $this->redirectTo('index');
     }
 
+    /**
+     * Overridden parent method, added update image
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update($id)
     {
         $data = $this->request->all();
@@ -56,6 +78,13 @@ class PointsController extends BaseController
         return $this->redirectTo('index');
     }
 
+    /**
+     * Overridden parent method, added delete image
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy($id)
     {
         $repository = $this->repository->findOrFail($id);
@@ -66,5 +95,4 @@ class PointsController extends BaseController
 
         return $this->redirectTo('index');
     }
-
 }

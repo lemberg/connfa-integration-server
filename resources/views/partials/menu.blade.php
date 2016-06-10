@@ -1,4 +1,3 @@
-
 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
     <div class="menu_section">
         <h3>General</h3>
@@ -24,7 +23,6 @@
             <li><a href="{{ url('/floors') }}"><i class="fa fa-puzzle-piece"></i> Floor plans</a></li>
             <li><a href="{{ url('/pages') }}"><i class="fa fa-file"></i> Pages</a></li>
             <li><a href="{{ url('/users') }}"><i class="fa fa-user"></i> Users</a></li>
-
             <li><a href="{{ url('/settings') }}"><i class="fa fa-cogs"></i> Settings</a></li>
         </ul>
     </div>

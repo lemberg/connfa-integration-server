@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
+/**
+ * Class TypeRequest
+ * @package App\Http\Requests
+ */
 class TypeRequest extends Request
 {
     /**

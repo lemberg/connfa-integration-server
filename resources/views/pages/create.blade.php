@@ -53,8 +53,8 @@
                                 {{ Form::textarea('content', '', ['id' => 'editor', 'class' => 'form-control col-md-7 col-xs-12']) }}
                                 @if ($errors->has('content'))
                                     <span class="help-block">
-                                            <strong>{{ $errors->first('content') }}</strong>
-                                        </span>
+                                        <strong>{{ $errors->first('content') }}</strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>

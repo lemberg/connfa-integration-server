@@ -2,9 +2,12 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
 use Hash;
 
+/**
+ * Class UserRequest
+ * @package App\Http\Requests
+ */
 class UserRequest extends Request
 {
     /**
@@ -27,14 +30,14 @@ class UserRequest extends Request
         $validation = [];
         if ($this->method() == "POST") {
             $validation = [
-                'name'                  => 'required|unique:users',
-                'email'                 => 'required|unique:users|email',
-                'password'              => 'required|min:6|confirmed',
+                'name' => 'required|unique:users',
+                'email' => 'required|unique:users|email',
+                'password' => 'required|min:6|confirmed',
                 'password_confirmation' => 'required|min:6',
             ];
         } elseif ($this->method() == "PUT") {
             $validation = [
-                'name'  => 'required|unique:users,name,' . $this->route()->parameters()['users'] . ',id',
+                'name' => 'required|unique:users,name,' . $this->route()->parameters()['users'] . ',id',
                 'email' => 'required|unique:users,email,' . $this->route()->parameters()['users'] . ',id|email',
             ];
 

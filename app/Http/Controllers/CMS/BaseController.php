@@ -89,6 +89,8 @@ class BaseController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * 
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store()
     {
@@ -164,7 +166,6 @@ class BaseController extends Controller
 
         return $this->currentCallingControllerName;
     }
-
 
     /**
      * Get route by class name

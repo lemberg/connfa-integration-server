@@ -5,16 +5,31 @@ namespace App\Http\Controllers\CMS;
 use App\Http\Requests\SpeakerRequest;
 use App\Repositories\SpeakerRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use App\Http\Controllers\CMS\BaseController;
 
+/**
+ * Class SpeakersController
+ * @package App\Http\Controllers\CMS
+ */
 class SpeakersController extends BaseController
 {
 
+    /**
+     * SpeakersController constructor.
+     *
+     * @param SpeakerRequest $request
+     * @param SpeakerRepository $repository
+     * @param ResponseFactory $response
+     */
     public function __construct(SpeakerRequest $request, SpeakerRepository $repository, ResponseFactory $response)
     {
         parent::__construct($request, $repository, $response);
     }
 
+    /**
+     * Overridden parent method, added save image
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store()
     {
         $data = $this->request->all();
@@ -33,6 +48,13 @@ class SpeakersController extends BaseController
         return $this->redirectTo('index');
     }
 
+    /**
+     * Overridden parent method, added save image
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update($id)
     {
         $data = $this->request->all();
@@ -57,6 +79,13 @@ class SpeakersController extends BaseController
         return $this->redirectTo('index');
     }
 
+    /**
+     * Overridden parent method, added delete image
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy($id)
     {
         $repository = $this->repository->findOrFail($id);

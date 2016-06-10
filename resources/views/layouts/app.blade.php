@@ -6,9 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>Connfa</title>
-
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{{ URL::asset('assets/vendors/bootstrap/dist/css/bootstrap.min.css') }}">
     <!-- Font Awesome -->
@@ -21,7 +19,6 @@
     <link rel="stylesheet" href="{{ URL::asset('assets/vendors/select2/dist/css/select2.min.css') }}">
     <!-- Custom Theme Style -->
     <link rel="stylesheet" href="{{ URL::asset('assets/css/custom.css') }}">
-
 </head>
 <body class="nav-md">
 <div class="container body">
@@ -38,7 +35,6 @@
                 <!-- /sidebar menu -->
             </div>
         </div>
-
         <!-- top navigation -->
         <div class="top_nav">
             <div class="nav_menu">
@@ -65,13 +61,11 @@
             </div>
         </div>
         <!-- /top navigation -->
-
         <!-- page content -->
         <div class="right_col" role="main">
             @yield('content')
         </div>
         <!-- /page content -->
-
         <!-- footer content -->
         <footer>
             <div class="pull-right">
@@ -82,7 +76,6 @@
         <!-- /footer content -->
     </div>
 </div>
-
 <!-- jQuery -->
 <script src="{{ URL::asset('assets/vendors/jquery/dist/jquery.min.js') }}"></script>
 <!-- Bootstrap -->
@@ -102,6 +95,5 @@
 <script src="{{ URL::asset('assets/vendors/select2/dist/js/select2.full.min.js') }}"></script>
 <!-- Custom Theme Scripts -->
 <script src="{{ URL::asset('assets/js/custom.js') }}"></script>
-
 </body>
 </html>

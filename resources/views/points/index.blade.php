@@ -7,13 +7,11 @@
                 {!! Breadcrumbs::render('breadcrumbs', ['label'=> trans('Points'), 'route' => 'points.index']) !!}
             </div>
             {{ Html::link(route('points.create'), trans('Create point'), ['class' => 'btn btn-primary pull-right']) }}
-
             <div class="x_panel">
                 <div class="x_title">
                     <h2>{{ trans('Points') }}</h2>
                     <div class="clearfix"></div>
                 </div>
-
                 <div class="x_content">
                     <div class="table-responsive">
                         <table class="table table-striped jambo_table bulk_action">
@@ -22,11 +20,11 @@
                                     <th class="column-title">id</th>
                                     <th class="column-title">{{ trans('Name') }}</th>
                                     <th class="column-title">{{ trans('Details url') }}</th>
+                                    <th class="column-title">{{ trans('Order') }}</th>
                                     <th class="column-title">{{ trans('Image') }}</th>
                                     <th class="column-title no-link last"><span class="nobr">{{ trans('Action') }}</span></th>
                                 </tr>
                             </thead>
-
                             <tbody>
                             @foreach ($data as $item)
                                 <tr>
@@ -36,6 +34,9 @@
                                     </td>
                                     <td>
                                         {{ $item->details_url }}
+                                    </td>
+                                    <td>
+                                        {{ $item->order }}
                                     </td>
                                     <td>
                                         @if(!empty($item->image))

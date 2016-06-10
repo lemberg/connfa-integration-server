@@ -12,7 +12,6 @@
                     <h2>{{ trans('Floor plans') }}</h2>
                     <div class="clearfix"></div>
                 </div>
-
                 <div class="x_content">
                     <div class="table-responsive">
                         <table class="table table-striped jambo_table bulk_action">

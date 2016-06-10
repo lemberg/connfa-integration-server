@@ -1,4 +1,3 @@
-
 @if(!$create and empty(old($fieldName . '_delete')))
     <div class="{{ $fieldName }}-block" style="{{ !empty($fieldNameValue) ? 'display:block;':'display:none;' }}">
         <div class="form-group">
@@ -13,7 +12,6 @@
     </div>
     <div class="{{ $fieldName }}-upload-block" style="{{ empty($fieldNameValue) ? 'display:block;':'display:none;' }}">
 @endif
-
 {{ Form::hidden($fieldName, $fieldNameValue) }}
 {{ Form::hidden($fieldName . '_delete', old($fieldName . '_delete')) }}
 <div class="form-group">
@@ -29,8 +27,8 @@
         {{ Form::url($fieldName . '_url', $fieldNameValue, ['class' => 'form-control col-md-7 col-xs-12']) }}
         @if ($errors->has($fieldName . '_url'))
             <span class="help-block">
-        <strong>{{ $errors->first($fieldName . '_url') }}</strong>
-    </span>
+                <strong>{{ $errors->first($fieldName . '_url') }}</strong>
+            </span>
         @endif
     </div>
 </div>
@@ -40,12 +38,11 @@
         {{ Form::file($fieldName . '_file', ['accept' => 'image/*', 'class' => 'form-control col-md-7 col-xs-12']) }}
         @if ($errors->has($fieldName . '_file'))
             <span class="help-block">
-        <strong>{{ $errors->first($fieldName . '_file') }}</strong>
-    </span>
+                <strong>{{ $errors->first($fieldName . '_file') }}</strong>
+            </span>
         @endif
     </div>
 </div>
-
 @if(!$create and empty(old($fieldName . '_delete')))
     </div>
 @endif

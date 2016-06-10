@@ -7,6 +7,10 @@ use App\Repositories\LocationRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use App\Http\Controllers\Controller;
 
+/**
+ * Class LocationsController
+ * @package App\Http\Controllers\CMS
+ */
 class LocationsController extends Controller
 {
     /**

@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
+/**
+ * Class PointRequest
+ * @package App\Http\Requests
+ */
 class PointRequest extends Request
 {
     /**

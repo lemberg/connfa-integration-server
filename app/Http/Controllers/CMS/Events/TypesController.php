@@ -7,16 +7,34 @@ use App\Repositories\Event\TypeRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use App\Http\Controllers\CMS\BaseController;
 
+/**
+ * Class TypesController
+ * @package App\Http\Controllers\CMS\Events
+ */
 class TypesController extends BaseController
 {
-
+    /**
+     * Overridden the views directory
+     */
     protected $viewsFolder = 'events.types';
 
+    /**
+     * TypesController constructor.
+     *
+     * @param TypeRequest $request
+     * @param TypeRepository $repository
+     * @param ResponseFactory $response
+     */
     public function __construct(TypeRequest $request, TypeRepository $repository, ResponseFactory $response)
     {
         parent::__construct($request, $repository, $response);
     }
-
+    
+    /**
+     * Overridden parent method, added save image
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store()
     {
         $data = $this->request->all();
@@ -35,6 +53,13 @@ class TypesController extends BaseController
         return $this->redirectTo('index');
     }
 
+    /**
+     * Overridden parent method, added save image
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update($id)
     {
         $data = $this->request->all();
@@ -59,6 +84,13 @@ class TypesController extends BaseController
         return $this->redirectTo('index');
     }
 
+    /**
+     * Overridden parent method, added delete image
+     * 
+     * @param int $id
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy($id)
     {
         $repository = $this->repository->findOrFail($id);

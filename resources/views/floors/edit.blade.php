@@ -20,8 +20,8 @@
                                 {{ Form::text('name', $data->name, ['class' => 'form-control col-md-7 col-xs-12']) }}
                                 @if ($errors->has('name'))
                                     <span class="help-block">
-                                    <strong>{{ $errors->first('name') }}</strong>
-                                </span>
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>
@@ -52,7 +52,6 @@
                             </div>
                         </div>
                     {!! Form::close() !!}
-
                 </div>
             </div>
         </div>
