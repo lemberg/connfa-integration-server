@@ -4816,3 +4816,6 @@ ul.widget_profile_box li:first-child {
 pre{
   background-color: #fff;
 }
+p{
+  word-wrap: break-word;
+}
