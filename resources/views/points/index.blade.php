@@ -20,8 +20,8 @@
                                     <th class="column-title">id</th>
                                     <th class="column-title">{{ trans('Name') }}</th>
                                     <th class="column-title">{{ trans('Details url') }}</th>
-                                    <th class="column-title">{{ trans('Order') }}</th>
                                     <th class="column-title">{{ trans('Image') }}</th>
+                                    <th class="column-title">{{ trans('Order') }}</th>
                                     <th class="column-title no-link last"><span class="nobr">{{ trans('Action') }}</span></th>
                                 </tr>
                             </thead>
@@ -36,12 +36,12 @@
                                         {{ $item->details_url }}
                                     </td>
                                     <td>
-                                        {{ $item->order }}
-                                    </td>
-                                    <td>
                                         @if(!empty($item->image))
                                             {{ Html::image($item->image, $item->name, ['class' => 'avatar img-responsive']) }}
                                         @endif
+                                    </td>
+                                    <td>
+                                        {{ $item->order }}
                                     </td>
                                     <td class="text-right">
                                         <a href="{{ route('points.show', ['id' => $item->id]) }}" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> {{ trans('View') }}</a>

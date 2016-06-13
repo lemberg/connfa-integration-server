@@ -31,7 +31,7 @@ $factory->define(App\Models\Speaker::class, function (Faker\Generator $faker) {
         'twitter_name'   => '@' . $faker->userName(),
         'website'        => $faker->url(),
         'avatar'         => $faker->imageUrl(),
-        'order'          => $faker->randomFloat(),
+        'order'          => $faker->randomFloat(2, 0, 10),
     ];
 });
 
@@ -39,21 +39,21 @@ $factory->define(App\Models\Event\Type::class, function (Faker\Generator $faker)
     return [
         'name'  => $faker->word,
         'icon'  => $faker->imageUrl(),
-        'order' => $faker->randomFloat(),
+        'order' => $faker->randomFloat(2, 0, 10),
     ];
 });
 
 $factory->define(App\Models\Event\Track::class, function (Faker\Generator $faker) {
     return [
         'name'  => $faker->word,
-        'order' => $faker->randomFloat(),
+        'order' => $faker->randomFloat(2, 0, 10),
     ];
 });
 
 $factory->define(App\Models\Event\Level::class, function (Faker\Generator $faker) {
     return [
         'name'  => $faker->word,
-        'order' => $faker->randomFloat(),
+        'order' => $faker->randomFloat(2, 0, 10),
     ];
 });
 
@@ -70,6 +70,7 @@ $factory->define(App\Models\Event::class, function (Faker\Generator $faker) {
         'version'    => $faker->optional()->randomNumber(),
         'event_type' => $faker->randomElement(App\Models\Event::$event_types_available),
         'url'        => $faker->url,
+        'order'   => $faker->randomFloat(2, 0, 10),
     ];
 });
 
@@ -77,6 +78,7 @@ $factory->define(App\Models\Floor::class, function (Faker\Generator $faker) {
     return [
         'name'  => $faker->word,
         'image' => $faker->imageUrl(),
+        'order'   => $faker->randomFloat(2, 0, 10),
     ];
 });
 
@@ -85,7 +87,7 @@ $factory->define(App\Models\Page::class, function (Faker\Generator $faker) {
         'name'    => $faker->word,
         'content' => $faker->text(),
         'alias'   => $faker->slug(),
-        'order'   => $faker->randomFloat(),
+        'order'   => $faker->randomFloat(2, 0, 10),
     ];
 });
 
@@ -95,7 +97,7 @@ $factory->define(App\Models\Location::class, function (Faker\Generator $faker) {
         'lat'     => $faker->latitude(),
         'lon'     => $faker->longitude(),
         'address' => $faker->address(),
-        'order'   => $faker->randomFloat(),
+        'order'   => $faker->randomFloat(2, 0, 10),
     ];
 });
 
@@ -105,5 +107,6 @@ $factory->define(App\Models\Point::class, function (Faker\Generator $faker) {
         'description' => $faker->text(),
         'image'       => $faker->imageUrl(),
         'details_url' => $faker->url,
+        'order'   => $faker->randomFloat(2, 0, 10),
     ];
 });
