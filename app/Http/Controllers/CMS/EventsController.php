@@ -138,8 +138,7 @@ class EventsController extends BaseController
      */
     public function update($id)
     {
-        $data = $this->request->all();
-        $this->repository->updateWithSpeakers($id, $data);
+        $this->repository->updateWithSpeakers($id, $this->request->except('_method', '_token'));
 
         return $this->redirectTo('index');
     }
