@@ -2760,7 +2760,7 @@ ul.widget_profile_box {
 }
 ul.widget_profile_box li:first-child {
   width: 25%;
-  float: left;
+  //float: left;
 }
 ul.widget_profile_box li:first-child a {
   float: left;
