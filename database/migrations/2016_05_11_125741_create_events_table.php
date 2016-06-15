@@ -25,7 +25,7 @@ class CreateEventsTable extends Migration
             $table->integer('track_id')->nullable()->unsigned();
             $table->string('url');
             $table->enum('event_type', ['session', 'bof', 'social']);
-            $table->float('order')->nullable();
+            $table->integer('order')->nullable();
             $table->softDeletes()->nullable()->default(null);
             $table->timestamps();
         });

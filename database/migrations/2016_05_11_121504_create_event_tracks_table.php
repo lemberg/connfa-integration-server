@@ -15,7 +15,7 @@ class CreateEventTracksTable extends Migration
         Schema::create('event_tracks', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->float('order')->nullable();
+            $table->integer('order')->nullable();
             $table->softDeletes()->nullable()->default(null);
             $table->timestamps();
         });

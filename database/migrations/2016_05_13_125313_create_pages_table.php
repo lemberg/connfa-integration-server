@@ -17,7 +17,7 @@ class CreatePagesTable extends Migration
             $table->string('alias');
             $table->string('name');
             $table->text('content');
-            $table->float('order')->nullable();
+            $table->integer('order')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
