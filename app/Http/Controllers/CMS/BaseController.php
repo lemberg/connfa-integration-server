@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Repositories\BaseRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
-
+use Yajra\Datatables\Datatables;
 /**
  * Class BaseController
  * @package App\Http\Controllers\CMS
@@ -78,6 +78,20 @@ class BaseController extends Controller
     }
 
     /**
+     * Process datatables ajax request.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getData()
+    {
+        return Datatables::of($this->repository->all())
+            ->addColumn('actions', function ($data) {
+                return view('partials/actions', ['item' => $data, 'viewFolder' => $this->getRouteName()]);
+            })
+            ->make(true);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -89,7 +103,7 @@ class BaseController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * 
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store()

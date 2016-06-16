@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="{{ URL::asset('assets/vendors/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css') }}">
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ URL::asset('assets/vendors/select2/dist/css/select2.min.css') }}">
+    <!-- dataTables -->
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/dataTables.bootstrap.min.css') }}">
     <!-- Custom Theme Style -->
     <link rel="stylesheet" href="{{ URL::asset('assets/css/custom.css') }}">
 </head>
@@ -78,6 +80,9 @@
 </div>
 <!-- jQuery -->
 <script src="{{ URL::asset('assets/vendors/jquery/dist/jquery.min.js') }}"></script>
+<!-- DataTables -->
+<script src="{{ URL::asset('assets/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ URL::asset('assets/js/dataTables.bootstrap.min.js') }}"></script>
 <!-- Bootstrap -->
 <script src="{{ URL::asset('assets/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <!-- NProgress -->
@@ -95,5 +100,7 @@
 <script src="{{ URL::asset('assets/vendors/select2/dist/js/select2.full.min.js') }}"></script>
 <!-- Custom Theme Scripts -->
 <script src="{{ URL::asset('assets/js/custom.js') }}"></script>
+
+@stack('scripts')
 </body>
 </html>

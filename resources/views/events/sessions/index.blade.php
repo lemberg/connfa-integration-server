@@ -14,7 +14,7 @@
                 </div>
                 <div class="x_content">
                     <div class="table-responsive">
-                        <table class="table table-striped jambo_table bulk_action">
+                        <table class="table table-striped jambo_table bulk_action" id="users-table">
                             <thead>
                             <tr class="headings">
                                 <th class="column-title">id</th>
@@ -25,40 +25,33 @@
                                 <th class="column-title no-link last"><span class="nobr">{{ trans('Action') }}</span></th>
                             </tr>
                             </thead>
-                            <tbody>
-                            @foreach ($data as $item)
-                                <tr>
-                                    <td>{{ $item->id }}</td>
-                                    <td>
-                                        {{ $item->name }}
-                                    </td>
-                                    <td>
-                                        {{ $item->start_at }}
-                                    </td>
-                                    <td>
-                                        {{ $item->end_at }}
-                                    </td>
-                                    <td>
-                                        {{ $item->order }}
-                                    </td>
-                                    <td class="text-right">
-                                        <a href="{{ route('sessions.show', ['id' => $item->id]) }}" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> {{ trans('View') }}</a>
-                                        <a href="{{ route('sessions.edit', ['id' => $item->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> {{ trans('Edit') }}</a>
-                                        {!! Form::open(['url' => route('sessions.destroy', ['id' => $item->id]), 'method' => 'POST', 'style' => 'vertical-align: middle; display: inline-block;']) !!}
-                                        {{ method_field('DELETE') }}
-                                        {{ Form::button("<i class='fa fa-trash-o'></i> ".trans('Delete'), ['type' => 'submit', 'class' => 'btn btn-danger btn-xs']) }}
-                                        {!! Form::close() !!}
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
                         </table>
                     </div>
-                </div>
-                <div class="pull-right">
-                    {!! $data->links() !!}
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
+@push('scripts')
+<script>
+    $(function () {
+        $('#users-table').DataTable({
+            serverSide: true,
+            autoWidth: false,
+            ajax: '{!! route('sessions.data') !!}',
+            columns: [
+                {data: 'id', name: 'id', width: '20px'},
+                {data: 'name', name: 'name'},
+                {data: 'start_at', name: 'start_at'},
+                {data: 'end_at', name: 'end_at'},
+                {data: 'order', name: 'order'},
+                {data: 'actions', name: 'actions', targets: 'no-sort', orderable: false, className: 'text-right'}
+            ]
+        });
+    });
+</script>
+@endpush
+
+
+

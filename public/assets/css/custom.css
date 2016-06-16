@@ -1079,8 +1079,8 @@ table.countries_list td {
 }
 .dataTables_paginate a {
   padding: 6px 9px !important;
-  background: #ddd !important;
-  border-color: #ddd !important;
+  //background: #ddd !important;
+  //border-color: #ddd !important;
 }
 .paging_full_numbers a.paginate_active {
   background-color: rgba(38, 185, 154, 0.59) !important;
@@ -1100,8 +1100,8 @@ table.jambo_table thead {
 }
 table.jambo_table tbody tr:hover td {
   background: rgba(38, 185, 154, 0.07);
-  border-top: 1px solid rgba(38, 185, 154, 0.11);
-  border-bottom: 1px solid rgba(38, 185, 154, 0.11);
+  //border-top: 1px solid rgba(38, 185, 154, 0.11);
+  //border-bottom: 1px solid rgba(38, 185, 154, 0.11);
 }
 table.jambo_table tbody tr.selected {
   background: rgba(38, 185, 154, 0.16);
@@ -4794,6 +4794,8 @@ ul.notifications {
 
 .table .column-title.last{
   width: 200px;
+  box-sizing: border-box;
+  text-align: left;
 }
 
 
@@ -4818,4 +4820,10 @@ pre{
 }
 p{
   word-wrap: break-word;
+}
+.table {
+  margin-bottom: 10px;
+}
+.pagination{
+  margin: 0;
 }
