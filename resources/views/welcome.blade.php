@@ -1,17 +1,25 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Connfa Integration Server</title>
 
-@section('content')
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+    </style>
+</head>
+<body>
 <div class="container">
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
-                <div class="panel-heading">Welcome</div>
-
-                <div class="panel-body">
-                    Your Application's Landing Page.
-                </div>
-            </div>
+    <div class="content">
+        <h1 class="title">Connfa Integration Server</h1>
+        <div>
+            <p>Visit project web site <a href="http://connfa.com/">connfa.com</a></p>
+            <p>Documentation is available on <a href="http://connfa.com/documentation/">http://connfa.com/documentation</a></p>
+            <p>API documentation is available on <a href="http://connfa.com/api/">http://connfa.com/api</a></p>
+            <p>Project is supported by <a href="http://lemberg.co.uk">Lemberg Solutions</a></p>
         </div>
     </div>
 </div>
-@endsection
+</body>
+</html>
