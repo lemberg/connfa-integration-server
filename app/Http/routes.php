@@ -11,7 +11,12 @@
 |
 */
 
+$app = app('router');
 $api = app('api.router');
+
+$app->get('/', function (){
+   return view('welcome');
+});
 
 $api->version('v2', [
     'middleware' => ['api'],
