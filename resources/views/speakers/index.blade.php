@@ -42,12 +42,12 @@
             ajax: '{!! route('speakers.data') !!}',
             columns: [
                 {data: 'id', name: 'id', width: '20px'},
-                {data: 'avatar', targets: 'no-sort', orderable: false, render: function (data, type, row) {
+                {data: 'avatar', targets: 'no-sort', 'searchable': false, orderable: false, render: function (data, type, row) {
                     return "<img src='" + data + "' class='avatar img-responsive'>";
                 }},
                 {data: 'first_name', name: 'first_name'},
                 {data: 'email', name: 'email'},
-                {data: 'actions', name: 'actions', targets: 'no-sort', orderable: false, className: 'text-right'}
+                {data: 'actions', name: 'actions', targets: 'no-sort', 'searchable': false, orderable: false, className: 'text-right'}
             ]
         });
     });

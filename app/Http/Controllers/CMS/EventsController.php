@@ -9,6 +9,7 @@ use App\Repositories\Event\TypeRepository;
 use App\Repositories\EventRepository;
 use App\Repositories\SpeakerRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use Yajra\Datatables\Datatables;
 
 /**
  * Class EventsController
@@ -138,5 +139,19 @@ class EventsController extends BaseController
         $this->repository->updateWithSpeakers($id, $this->request->except('_method', '_token'));
 
         return $this->redirectTo('index');
+    }
+
+    /**
+     * Process datatables ajax request.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getData()
+    {
+        return Datatables::of($this->repository->findAllBy('event_type', $this->eventType))
+            ->addColumn('actions', function ($data) {
+                return view('partials/actions', ['route' => $this->getRouteName(), 'id' => $data->id]);
+            })
+            ->make(true);
     }
 }

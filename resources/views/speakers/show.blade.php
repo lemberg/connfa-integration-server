@@ -46,7 +46,7 @@
                         {!! Form::open([route('speakers.destroy', ['id' => $data->id]), 'method' => 'POST', 'class' => '', 'style' => 'display:inline-block;vertical-align: middle;
 ']) !!}
                             {{ method_field('DELETE') }}
-                            {{ Form::button("<i class='fa fa-trash-o'></i> Delete", ['type' => 'submit', 'class' => 'btn btn-danger']) }}
+                            {{ Form::button("<i class='fa fa-trash-o'></i> Delete", ['onclick' => 'deleteItem(this)', 'class' => 'btn btn-danger']) }}
                         {!! Form::close() !!}
                         <br />
                     </div>

@@ -86,7 +86,7 @@ class BaseController extends Controller
     {
         return Datatables::of($this->repository->all())
             ->addColumn('actions', function ($data) {
-                return view('partials/actions', ['item' => $data, 'viewFolder' => $this->getRouteName()]);
+                return view('partials/actions', ['route' => $this->getRouteName(), 'id' => $data->id]);
             })
             ->make(true);
     }

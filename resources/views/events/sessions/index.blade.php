@@ -45,8 +45,8 @@
                 {data: 'name', name: 'name'},
                 {data: 'start_at', name: 'start_at'},
                 {data: 'end_at', name: 'end_at'},
-                {data: 'order', name: 'order'},
-                {data: 'actions', name: 'actions', targets: 'no-sort', orderable: false, className: 'text-right'}
+                {data: 'order', name: 'order', 'searchable': false},
+                {data: 'actions', name: 'actions', targets: 'no-sort', 'searchable': false, orderable: false, className: 'text-right'}
             ]
         });
     });

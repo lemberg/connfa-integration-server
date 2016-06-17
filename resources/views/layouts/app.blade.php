@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="{{ URL::asset('assets/vendors/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css') }}">
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ URL::asset('assets/vendors/select2/dist/css/select2.min.css') }}">
+    <!-- SweetAlert -->
+    <link rel="stylesheet" href="{{ URL::asset('assets/vendors/sweetalert/dist/sweetalert.css') }}">
     <!-- dataTables -->
     <link rel="stylesheet" href="{{ URL::asset('assets/css/dataTables.bootstrap.min.css') }}">
     <!-- Custom Theme Style -->
@@ -98,6 +100,8 @@
 <script src="{{ URL::asset('assets/js/jquery.synctranslit.min.js') }}"></script>
 <!-- Select2 -->
 <script src="{{ URL::asset('assets/vendors/select2/dist/js/select2.full.min.js') }}"></script>
+<!-- sweetalert -->
+<script src="{{ URL::asset('assets/vendors/sweetalert/dist/sweetalert.min.js') }}"></script>
 <!-- Custom Theme Scripts -->
 <script src="{{ URL::asset('assets/js/custom.js') }}"></script>
 

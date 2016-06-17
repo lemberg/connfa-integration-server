@@ -210,6 +210,49 @@ if (typeof NProgress != 'undefined') {
  *
  * */
 $(document).ready(function () {
+
+	/**
+	 * Confirm delete form
+	 */
+	/*$(".delete").on("submit", function(){
+		return confirm("Do you want to delete this item?");
+	});
+	$('.delete').submit(function (e) {
+		console.log('test');
+		var form = $(this).parents('form');
+		swal({
+			title: "Are you sure?",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			confirmButtonText: "Yes, delete it!",
+			allowOutsideClick: true
+		}, function (isConfirm) {
+			if (isConfirm) {
+				//form.submit();
+				$(this).unbind('submit').submit();
+			}
+		});
+		e.preventDefault();
+	});*/
+
+
+	/*$('.delete').on('click', function () {
+	 var form = $(this).parents('form');
+	 swal({
+	 title: "Are you sure?",
+	 type: "warning",
+	 showCancelButton: true,
+	 confirmButtonColor: "#DD6B55",
+	 confirmButtonText: "Yes, delete it!",
+	 allowOutsideClick: true
+	 }, function (isConfirm) {
+	 if (isConfirm) {
+	 form.submit();
+	 }
+	 });
+	 });*/
+
 	/**
 	 * include CKEDITOR to id
 	 */
@@ -269,10 +312,29 @@ $(document).ready(function () {
 	<!-- /Select2 -->
 
 	<!-- disable button after first click -->
-	$('form').submit(function(){
-		$('input[type=submit]', $(this)).prop( 'disabled', true );
+	$('form').submit(function () {
+		$('input[type=submit]', $(this)).prop('disabled', true);
 	});
 });
+
+/**
+ * Confirm delete form
+ */
+function deleteItem(data) {
+	var form = $(data).parents('form');
+	swal({
+		title: "Are you sure?",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#DD6B55",
+		confirmButtonText: "Yes, delete it!",
+		allowOutsideClick: true
+	}, function (isConfirm) {
+		if (isConfirm) {
+			form.submit();
+		}
+	});
+}
 
 function checkSwitcher(fieldName) {
 	$('#' + fieldName + '-switch-url').on('ifChecked', function () {

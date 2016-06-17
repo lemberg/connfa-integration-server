@@ -8,7 +8,7 @@
             </div>
             {!! Form::open([route('users.destroy', ['id' => $data->id]), 'method' => 'POST', 'class' => 'pull-right']) !!}
                 {{ method_field('DELETE') }}
-                {{ Form::button("<i class='fa fa-trash-o'></i> Delete", ['type' => 'submit', 'class' => 'btn btn-danger']) }}
+                {{ Form::button("<i class='fa fa-trash-o'></i> Delete", ['onclick' => 'deleteItem(this)', 'class' => 'btn btn-danger']) }}
             {!! Form::close() !!}
             <a href="{{ route('users.edit', ['id' => $data->id ]) }}" class="btn btn-info pull-right"><i class="fa fa-pencil"></i> {{ trans('Edit') }}</a>
             <div class="x_panel">
