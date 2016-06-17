@@ -34,7 +34,7 @@ class FloorsController extends BaseController
     {
         $data = $this->request->all();
         if ($this->request->get('image-switch') == 'image_file' and $this->request->hasFile('image_file')) {
-            $path = $this->repository->saveImage($this->request->file('image_file'), $this->getViewsFolder());
+            $path = $this->repository->saveImage($this->request->file('image_file'), $this->getViewsFolder(), ['width' => 1920, 'height' => 1920]);
             if (!$path) {
                 return redirect()->back()->withError('Could not save image');
             }
