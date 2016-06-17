@@ -160,7 +160,8 @@ return [
         vendocrat\Settings\SettingsServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        DaveJamesMiller\Breadcrumbs\ServiceProvider::class
+        DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
+        Yajra\Datatables\DatatablesServiceProvider::class
 
     ],
 
@@ -214,6 +215,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Image'     => Intervention\Image\Facades\Image::class,
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
+        'Datatables' => Yajra\Datatables\Facades\Datatables::class,
     ],
 
 ];

@@ -53,10 +53,10 @@
                             @endforeach
                             </tbody>
                         </table>
+                        <div class="pull-right">
+                            {!! $data->links() !!}
+                        </div>
                     </div>
-                </div>
-                <div class="pull-right">
-                    {!! $data->links() !!}
                 </div>
             </div>
         </div>

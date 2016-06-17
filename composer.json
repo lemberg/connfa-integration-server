@@ -14,7 +14,8 @@
         "laravelcollective/html": "5.2.*",
         "cerbero/command-validator": "^1.0",
         "intervention/image": "dev-master",
-        "davejamesmiller/laravel-breadcrumbs": "^3.0"
+        "davejamesmiller/laravel-breadcrumbs": "^3.0",
+        "yajra/laravel-datatables-oracle": "~6.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

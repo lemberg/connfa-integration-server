@@ -23,6 +23,10 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
     $app->get('/', function () {
         return redirect('/dashboard');
     });
+    $app->get('speakers/data', 'SpeakersController@getData')->name('speakers.data');
+    $app->get('sessions/data', 'Events\SessionsController@getData')->name('sessions.data');
+    $app->get('bofs/data', 'Events\BofsController@getData')->name('bofs.data');
+    $app->get('social/data', 'Events\SocialController@getData')->name('social.data');
     $app->get('/dashboard', 'DashboardController@index')->name('dashboard');
     $app->resource('levels', 'Events\LevelsController');
     $app->resource('tracks', 'Events\TracksController');
