@@ -4,6 +4,7 @@ namespace App\Http\Controllers\CMS\Events;
 
 use App\Http\Requests\TypeRequest;
 use App\Repositories\Event\TypeRepository;
+use App\Repositories\EventRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use App\Http\Controllers\CMS\BaseController;
 
@@ -19,17 +20,24 @@ class TypesController extends BaseController
     protected $viewsFolder = 'events.types';
 
     /**
+     * @var EventRepository
+     */
+    protected $event;
+
+    /**
      * TypesController constructor.
      *
      * @param TypeRequest $request
      * @param TypeRepository $repository
      * @param ResponseFactory $response
+     * @param EventRepository $event
      */
-    public function __construct(TypeRequest $request, TypeRepository $repository, ResponseFactory $response)
+    public function __construct(TypeRequest $request, TypeRepository $repository, ResponseFactory $response, EventRepository $event)
     {
         parent::__construct($request, $repository, $response);
+        $this->event = $event;
     }
-    
+
     /**
      * Overridden parent method, added save image
      *
@@ -86,7 +94,7 @@ class TypesController extends BaseController
 
     /**
      * Overridden parent method, added delete image
-     * 
+     *
      * @param int $id
      *
      * @return \Illuminate\Http\RedirectResponse
@@ -97,6 +105,7 @@ class TypesController extends BaseController
         if ($image = $repository->icon) {
             $this->repository->deleteImage($image);
         }
+        $this->event->updateByField('type_id', $id);
         $this->repository->delete($id);
 
         return $this->redirectTo('index');

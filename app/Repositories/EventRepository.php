@@ -80,4 +80,17 @@ class EventRepository extends BaseRepository
     {
         return $this->model->where(['event_type' => $type])->orderBy($orderBy, 'DESC')->limit($limit)->get();
     }
+
+    /**
+     * Update collection by field (track, level, type)
+     *
+     * @param $field
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function updateByField($field, $id)
+    {
+        return $this->model->where([$field => $id])->update([$field => null]);
+    }
 }
