@@ -38,7 +38,6 @@
     $(function () {
         $('#users-table').DataTable({
             serverSide: true,
-            autoWidth: false,
             ajax: '{!! route('bofs.data') !!}',
             columns: [
                 {data: 'id', name: 'id', width: '20px'},
@@ -46,7 +45,7 @@
                 {data: 'start_at', name: 'start_at'},
                 {data: 'end_at', name: 'end_at'},
                 {data: 'order', name: 'order', 'searchable': false},
-                {data: 'actions', name: 'actions', targets: 'no-sort', 'searchable': false, orderable: false, className: 'text-right'}
+                {data: 'actions', name: 'actions', targets: 'no-sort', 'searchable': false, orderable: false, className: 'text-right', width: '214px'}
             ]
         });
     });

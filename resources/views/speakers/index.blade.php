@@ -38,7 +38,6 @@
     $(function () {
         $('#users-table').DataTable({
             serverSide: true,
-            autoWidth: false,
             ajax: '{!! route('speakers.data') !!}',
             columns: [
                 {data: 'id', name: 'id', width: '20px'},
@@ -47,7 +46,7 @@
                 }},
                 {data: 'first_name', name: 'first_name'},
                 {data: 'email', name: 'email'},
-                {data: 'actions', name: 'actions', targets: 'no-sort', 'searchable': false, orderable: false, className: 'text-right'}
+                {data: 'actions', name: 'actions', targets: 'no-sort', 'searchable': false, orderable: false, className: 'text-right', width: '214px'}
             ]
         });
     });
