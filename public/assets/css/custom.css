@@ -4820,6 +4820,7 @@ pre{
 }
 p{
   word-wrap: break-word;
+  word-break: break-word;
 }
 .table {
   margin-bottom: 10px;

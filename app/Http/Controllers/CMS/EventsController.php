@@ -75,10 +75,7 @@ class EventsController extends BaseController
      */
     public function index()
     {
-        return $this->response->view(
-            $this->getViewName('index'),
-            ['data' => $this->repository->getByEventTypeOnPage($this->eventType, 25)]
-        );
+        return $this->response->view($this->getViewName('index'));
     }
 
     /**
