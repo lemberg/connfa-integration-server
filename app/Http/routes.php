@@ -14,8 +14,6 @@
 $app = app('router');
 $api = app('api.router');
 
-$app->auth();
-
 /**
  * CMS routes
  */
@@ -47,9 +45,6 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
     $app->put('settings', 'SettingsController@update')->name('settings.update');
 });
 
-/**
- * API routes
- */
 $api->version('v2', [
     'middleware' => ['api'],
     'namespace'  => 'App\Http\Controllers\Api',
