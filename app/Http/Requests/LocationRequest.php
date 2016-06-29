@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
+/**
+ * Class LocationRequest
+ * @package App\Http\Requests
+ */
 class LocationRequest extends Request
 {
     /**

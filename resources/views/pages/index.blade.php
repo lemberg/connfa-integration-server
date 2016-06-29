@@ -7,13 +7,11 @@
                 {!! Breadcrumbs::render('breadcrumbs', ['label'=> trans('Pages'), 'route' => 'pages.index']) !!}
             </div>
             {{ Html::link(route('pages.create'), trans('Create page'), ['class' => 'btn btn-primary pull-right']) }}
-
             <div class="x_panel">
                 <div class="x_title">
                     <h2>{{ trans('Pages') }}</h2>
                     <div class="clearfix"></div>
                 </div>
-
                 <div class="x_content">
                     <div class="table-responsive">
                         <table class="table table-striped jambo_table bulk_action">
@@ -26,7 +24,6 @@
                                     <th class="column-title no-link last"><span class="nobr">{{ trans('Action') }}</span></th>
                                 </tr>
                             </thead>
-
                             <tbody>
                             @foreach ($data as $item)
                                 <tr>
@@ -41,21 +38,16 @@
                                         {{ $item->order }}
                                     </td>
                                     <td class="text-right">
-                                        <a href="{{ route('pages.show', ['id' => $item->id]) }}" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> {{ trans('View') }}</a>
-                                        <a href="{{ route('pages.edit', ['id' => $item->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> {{ trans('Edit') }}</a>
-                                        {!! Form::open(['url' => route('pages.destroy', ['id' => $item->id]), 'method' => 'POST', 'style' => 'vertical-align: middle; display: inline-block;']) !!}
-                                            {{ method_field('DELETE') }}
-                                            {{ Form::button("<i class='fa fa-trash-o'></i> ".trans('Delete'), ['type' => 'submit', 'class' => 'btn btn-danger btn-xs']) }}
-                                        {!! Form::close() !!}
+                                        @include('partials/actions', ['route' => 'pages', 'id' => $item->id])
                                     </td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
+                        <div class="pull-right">
+                            {!! $data->links() !!}
+                        </div>
                     </div>
-                </div>
-                <div class="pull-right">
-                    {!! $data->links() !!}
                 </div>
             </div>
         </div>

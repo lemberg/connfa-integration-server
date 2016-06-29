@@ -14,49 +14,43 @@
                 </div>
                 <div class="x_content">
                     <div class="table-responsive">
-                        <table class="table table-striped jambo_table bulk_action">
+                        <table class="table table-striped jambo_table bulk_action" id="users-table">
                             <thead>
-                                <tr class="headings">
-                                    <th class="column-title">id</th>
-                                    <th class="column-title">{{ trans('Avatar') }}</th>
-                                    <th class="column-title">{{ trans('Name') }}</th>
-                                    <th class="column-title">{{ trans('Email') }}</th>
-                                    <th class="column-title no-link last"><span class="nobr">{{ trans('Action') }}</span></th>
-                                </tr>
+                            <tr class="headings">
+                                <th class="column-title">{{ trans('id') }}</th>
+                                <th class="column-title">{{ trans('Avatar') }}</th>
+                                <th class="column-title">{{ trans('Name') }}</th>
+                                <th class="column-title">{{ trans('Email') }}</th>
+                                <th class="column-title no-link last"><span class="nobr">{{ trans('Action') }}</span>
+                                </th>
+                            </tr>
                             </thead>
-                            <tbody>
-                            @foreach ($data as $item)
-                                <tr>
-                                    <td>{{ $item->id }}</td>
-                                    <td>
-                                        @if(!empty($item->avatar))
-                                            {{ Html::image($item->avatar, $item->first_name . ' ' . $item->last_name, ['class' => 'avatar img-responsive']) }}
-                                        @endif
-                                    </td>
-                                    <td>
-                                        {{ $item->first_name }} {{ $item->last_name }}
-                                    </td>
-                                    <td>
-                                        {{ $item->email }}
-                                    </td>
-                                    <td class="text-right">
-                                        <a href="{{ route('speakers.show', ['id' => $item->id]) }}" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> {{ trans('View') }}</a>
-                                        <a href="{{ route('speakers.edit', ['id' => $item->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> {{ trans('Edit') }}</a>
-                                        {!! Form::open(['url' => route('speakers.destroy', ['id' => $item->id]), 'method' => 'POST', 'style' => 'vertical-align: middle; display: inline-block;']) !!}
-                                            {{ method_field('DELETE') }}
-                                            {{ Form::button("<i class='fa fa-trash-o'></i> ".trans('Delete'), ['type' => 'submit', 'class' => 'btn btn-danger btn-xs']) }}
-                                        {!! Form::close() !!}
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
                         </table>
                     </div>
-                </div>
-                <div class="pull-right">
-                    {!! $data->links() !!}
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
+@push('scripts')
+<script>
+    $(function () {
+        $('#users-table').DataTable({
+            serverSide: true,
+            ajax: '{!! route('speakers.data') !!}',
+            columns: [
+                {data: 'id', name: 'id', width: '20px'},
+                {data: 'avatar', targets: 'no-sort', 'searchable': false, orderable: false, render: function (data, type, row) {
+                    return "<img src='" + data + "' class='avatar img-responsive'>";
+                }},
+                {data: 'first_name', name: 'first_name'},
+                {data: 'email', name: 'email'},
+                {data: 'actions', name: 'actions', targets: 'no-sort', 'searchable': false, orderable: false, className: 'text-right', width: '214px'}
+            ]
+        });
+    });
+</script>
+@endpush
+
+

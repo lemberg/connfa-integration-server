@@ -42,8 +42,7 @@
         <div class="clearfix"></div>
         <div class="separator">
             <div>
-                <h1><i class="fa fa-paw" style="font-size: 26px;"></i> Connfa!</h1>
-                <p>©2015 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+                <h1>Connfa!</h1>
             </div>
         </div>
 

@@ -7,8 +7,8 @@
                 {!! Breadcrumbs::render('breadcrumbs', [['label'=> trans('Social events'), 'route' => 'social.index'], ['label'=> trans('Social Event'), 'route' => 'social.index']]) !!}
             </div>
             {!! Form::open([route('social.destroy', ['id' => $data->id]), 'method' => 'POST', 'class' => 'pull-right']) !!}
-            {{ method_field('DELETE') }}
-            {{ Form::button("<i class='fa fa-trash-o'></i> Delete", ['type' => 'submit', 'class' => 'btn btn-danger']) }}
+                {{ method_field('DELETE') }}
+                {{ Form::button("<i class='fa fa-trash-o'></i> Delete", ['onclick' => 'deleteItem(this)', 'class' => 'btn btn-danger']) }}
             {!! Form::close() !!}
             <a href="{{ route('social.edit', ['id' => $data->id ]) }}" class="btn btn-info pull-right"><i class="fa fa-pencil"></i> {{ trans('Edit') }}</a>
             <div class="x_panel">
@@ -65,7 +65,10 @@
                         <strong>{{ trans('Order') }}:</strong> {{ $data->order }}<br>
                     </p>
                     <p>
-                        <strong>{{ trans('Text') }}:</strong>  {!! Html::decode($data->text)  !!}<br>
+                        <strong>{{ trans('Text') }}:</strong>
+                        @if($data->text)
+                            <pre><code>{!! $data->text !!}</code></pre>
+                        @endif
                     </p>
                 </div>
             </div>

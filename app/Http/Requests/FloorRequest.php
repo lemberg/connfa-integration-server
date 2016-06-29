@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
+/**
+ * Class FloorRequest
+ * @package App\Http\Requests
+ */
 class FloorRequest extends Request
 {
     /**
@@ -29,19 +31,19 @@ class FloorRequest extends Request
             if ($request['image-switch'] == 'image_url') {
                 $validation = [
                     'name' => 'required',
-                    'image_file' => 'mimes:jpeg,bmp,png,gif|max:6000',
+                    'image_file' => 'mimes:jpeg,bmp,png,gif|max:20000',
                     'image_url' => 'required|url',
                 ];
             } elseif ($request['image-switch'] == 'image_file') {
                 $validation = [
                     'name' => 'required',
-                    'image_file' => 'required|mimes:jpeg,bmp,png,gif|max:6000',
+                    'image_file' => 'required|mimes:jpeg,bmp,png,gif|max:20000',
                     'image_url' => 'url',
                 ];
             } else {
                 $validation = [
                     'name' => 'required',
-                    'image_file' => 'required|mimes:jpeg,bmp,png,gif|max:6000',
+                    'image_file' => 'required|mimes:jpeg,bmp,png,gif|max:20000',
                     'image_url' => 'required|url',
                 ];
             }

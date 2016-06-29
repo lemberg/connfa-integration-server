@@ -8,7 +8,7 @@
             </div>
             {!! Form::open([route('pages.destroy', ['id' => $data->id]), 'method' => 'POST', 'class' => 'pull-right']) !!}
                 {{ method_field('DELETE') }}
-                {{ Form::button("<i class='fa fa-trash-o'></i> Delete", ['type' => 'submit', 'class' => 'btn btn-danger']) }}
+                {{ Form::button("<i class='fa fa-trash-o'></i> Delete", ['onclick' => 'deleteItem(this)', 'class' => 'btn btn-danger']) }}
             {!! Form::close() !!}
             <a href="{{ route('pages.edit', ['id' => $data->id ]) }}" class="btn btn-info pull-right"><i class="fa fa-pencil"></i> {{ trans('Edit') }}</a>
             <div class="x_panel">
@@ -27,7 +27,10 @@
                         <strong>{{ trans('Order') }}:</strong> {{ $data->order }}<br>
                     </p>
                     <p>
-                        <strong>{{ trans('Content') }}:</strong> {!! Html::decode($data->content)  !!}<br>
+                        <strong>{{ trans('Content') }}:</strong>
+                        @if($data->content)
+                            <pre><code>{!! $data->content !!}</code></pre>
+                        @endif
                     </p>
                 </div>
             </div>

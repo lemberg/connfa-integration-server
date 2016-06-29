@@ -8,6 +8,10 @@ use App\Repositories\SpeakerRepository;
 use App\Repositories\EventRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
 
+/**
+ * Class DashboardController
+ * @package App\Http\Controllers\CMS
+ */
 class DashboardController extends Controller
 {
     /**

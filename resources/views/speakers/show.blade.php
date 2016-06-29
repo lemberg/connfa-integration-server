@@ -42,12 +42,11 @@
                                 <i class="fa fa-sort-amount-asc user-profile-icon" title="{{ trans('Order') }}"></i> {{ $data->order }}
                             </li>
                         </ul>
-
                         <a href="{{ route('speakers.edit', ['id' => $data->id ]) }}" class="btn btn-success"><i class="fa fa-edit m-right-xs"></i> {{ trans('Edit') }}</a>
                         {!! Form::open([route('speakers.destroy', ['id' => $data->id]), 'method' => 'POST', 'class' => '', 'style' => 'display:inline-block;vertical-align: middle;
 ']) !!}
                             {{ method_field('DELETE') }}
-                            {{ Form::button("<i class='fa fa-trash-o'></i> Delete", ['type' => 'submit', 'class' => 'btn btn-danger']) }}
+                            {{ Form::button("<i class='fa fa-trash-o'></i> Delete", ['onclick' => 'deleteItem(this)', 'class' => 'btn btn-danger']) }}
                         {!! Form::close() !!}
                         <br />
                     </div>
@@ -57,9 +56,10 @@
                                 <h2>{{ trans('Characteristic') }}</h2>
                             </div>
                         </div>
-                        <p>
-                            {!! Html::decode($data->characteristic)  !!}
-                        <p>
+                        <br>
+                        @if($data->characteristic)
+                            <pre><code>{!! $data->characteristic !!}</code></pre>
+                        @endif
                     </div>
                 </div>
             </div>

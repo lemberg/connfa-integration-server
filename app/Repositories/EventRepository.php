@@ -17,6 +17,7 @@ class EventRepository extends BaseRepository
      *
      * @param $type
      * @param string|bool $since
+     *
      * @return mixed
      */
     public function getEventsByTypeWithDeleted($type, $since = false)
@@ -35,15 +36,22 @@ class EventRepository extends BaseRepository
      *
      * @param $id
      * @param $data
+     *
      * @return mixed
      */
     public function updateWithSpeakers($id, $data)
     {
         $event = $this->findOrFail($id);
-        $event->fill($data);
-        $event->speakers()->sync(array_get($data, 'speakers', []));
+        $speakers = $event->speakers()->sync(array_get($data, 'speakers', []));
+        if (array_get($speakers, 'attached') or array_get($speakers, 'detached') or array_get($speakers, 'updated')) {
+            unset($data['speakers']);
 
-        return $event->save();
+            return $event->where('id', '=', $id)->update($data);
+        } else {
+            $event->fill($data);
+
+            return $event->save();
+        }
     }
 
     /**
@@ -71,5 +79,18 @@ class EventRepository extends BaseRepository
     public function getEventByTypeOrderAndLimit($type, $orderBy = 'updated_at', $limit = 5)
     {
         return $this->model->where(['event_type' => $type])->orderBy($orderBy, 'DESC')->limit($limit)->get();
+    }
+
+    /**
+     * Update collection by field (track, level, type)
+     *
+     * @param $field
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function updateByField($field, $id)
+    {
+        return $this->model->where([$field => $id])->update([$field => null]);
     }
 }

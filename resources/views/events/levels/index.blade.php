@@ -34,21 +34,16 @@
                                         {{ $item->order }}
                                     </td>
                                     <td class="text-right">
-                                        <a href="{{ route('levels.show', ['id' => $item->id]) }}" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> {{ trans('View') }}</a>
-                                        <a href="{{ route('levels.edit', ['id' => $item->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> {{ trans('Edit') }}</a>
-                                        {!! Form::open(['url' => route('levels.destroy', ['id' => $item->id]), 'method' => 'POST', 'style' => 'vertical-align: middle; display: inline-block;']) !!}
-                                            {{ method_field('DELETE') }}
-                                            {{ Form::button("<i class='fa fa-trash-o'></i> ".trans('Delete'), ['type' => 'submit', 'class' => 'btn btn-danger btn-xs']) }}
-                                        {!! Form::close() !!}
+                                        @include('partials/actions', ['route' => 'levels', 'id' => $item->id])
                                     </td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
+                        <div class="pull-right">
+                            {!! $data->links() !!}
+                        </div>
                     </div>
-                </div>
-                <div class="pull-right">
-                    {!! $data->links() !!}
                 </div>
             </div>
         </div>

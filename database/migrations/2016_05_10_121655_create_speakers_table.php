@@ -23,7 +23,7 @@ class CreateSpeakersTable extends Migration
             $table->string('website');
             $table->string('avatar');
             $table->string('email');
-            $table->float('order')->nullable();
+            $table->integer('order')->nullable();
             $table->timestamps();
             $table->softDeletes()->nullable()->default(null);
         });

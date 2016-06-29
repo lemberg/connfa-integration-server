@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
+/**
+ * Class EventRequest
+ * @package App\Http\Requests
+ */
 class EventRequest extends Request
 {
     /**

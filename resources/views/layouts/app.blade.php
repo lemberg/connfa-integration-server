@@ -6,9 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>Connfa</title>
-
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{{ URL::asset('assets/vendors/bootstrap/dist/css/bootstrap.min.css') }}">
     <!-- Font Awesome -->
@@ -19,9 +17,15 @@
     <link rel="stylesheet" href="{{ URL::asset('assets/vendors/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css') }}">
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ URL::asset('assets/vendors/select2/dist/css/select2.min.css') }}">
+    <!-- SweetAlert -->
+    <link rel="stylesheet" href="{{ URL::asset('assets/vendors/sweetalert/dist/sweetalert.css') }}">
+    <!-- dataTables -->
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/dataTables.bootstrap.min.css') }}">
     <!-- Custom Theme Style -->
     <link rel="stylesheet" href="{{ URL::asset('assets/css/custom.css') }}">
-
+    <!-- Icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ URL::asset('assets/images/apple-touch-icon-precomposed.png') }}">
+    <link rel="shortcut icon" href="{{ URL::asset('favicon.ico') }}">
 </head>
 <body class="nav-md">
 <div class="container body">
@@ -29,7 +33,7 @@
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
-                    <a href="{{ url('/') }}" class="site_title"><i class="fa fa-paw"></i> <span>Connfa!</span></a>
+                    <a href="{{ url('/') }}" class="site_title"><i class="fa fa-home"></i> <span>Connfa!</span></a>
                 </div>
                 <div class="clearfix"></div>
                 <br />
@@ -38,7 +42,6 @@
                 <!-- /sidebar menu -->
             </div>
         </div>
-
         <!-- top navigation -->
         <div class="top_nav">
             <div class="nav_menu">
@@ -65,13 +68,11 @@
             </div>
         </div>
         <!-- /top navigation -->
-
         <!-- page content -->
         <div class="right_col" role="main">
             @yield('content')
         </div>
         <!-- /page content -->
-
         <!-- footer content -->
         <footer>
             <div class="pull-right">
@@ -82,9 +83,11 @@
         <!-- /footer content -->
     </div>
 </div>
-
 <!-- jQuery -->
 <script src="{{ URL::asset('assets/vendors/jquery/dist/jquery.min.js') }}"></script>
+<!-- DataTables -->
+<script src="{{ URL::asset('assets/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ URL::asset('assets/js/dataTables.bootstrap.min.js') }}"></script>
 <!-- Bootstrap -->
 <script src="{{ URL::asset('assets/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <!-- NProgress -->
@@ -100,8 +103,11 @@
 <script src="{{ URL::asset('assets/js/jquery.synctranslit.min.js') }}"></script>
 <!-- Select2 -->
 <script src="{{ URL::asset('assets/vendors/select2/dist/js/select2.full.min.js') }}"></script>
+<!-- sweetalert -->
+<script src="{{ URL::asset('assets/vendors/sweetalert/dist/sweetalert.min.js') }}"></script>
 <!-- Custom Theme Scripts -->
 <script src="{{ URL::asset('assets/js/custom.js') }}"></script>
 
+@stack('scripts')
 </body>
 </html>

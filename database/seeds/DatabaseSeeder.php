@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(ImageUploadSeeder::class);
         $this->call(SpeakersTableSeeder::class);
         $this->call(EventLevelsTableSeeder::class);
         $this->call(EventTypesTableSeeder::class);

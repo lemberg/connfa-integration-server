@@ -8,10 +8,9 @@
             </div>
             {!! Form::open([route('points.destroy', ['id' => $data->id]), 'method' => 'POST', 'class' => 'pull-right']) !!}
                 {{ method_field('DELETE') }}
-                {{ Form::button("<i class='fa fa-trash-o'></i> Delete", ['type' => 'submit', 'class' => 'btn btn-danger']) }}
+                {{ Form::button("<i class='fa fa-trash-o'></i> Delete", ['onclick' => 'deleteItem(this)', 'class' => 'btn btn-danger']) }}
             {!! Form::close() !!}
             <a href="{{ route('points.edit', ['id' => $data->id ]) }}" class="btn btn-info pull-right"><i class="fa fa-pencil"></i> {{ trans('Edit') }}</a>
-
             <div class="x_panel">
                 <div class="x_title">
                     <h2>{{ trans('Point') }}</h2>
@@ -28,7 +27,10 @@
                         <strong>{{ trans('Details url') }}:</strong> {{ $data->details_url }}<br>
                     </p>
                     <p>
-                        <strong>{{ trans('Description') }}:</strong> {{ $data->description }}<br>
+                        <strong>{{ trans('Description') }}:</strong>
+                        @if($data->description)
+                            <pre><code>{!! $data->description !!}</code></pre>
+                        @endif
                     </p>
                     <p>
                         <strong>{{ trans('Image') }}:</strong><br>

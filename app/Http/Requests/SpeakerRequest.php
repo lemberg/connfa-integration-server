@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
+/**
+ * Class SpeakerRequest
+ * @package App\Http\Requests
+ */
 class SpeakerRequest extends Request
 {
     /**

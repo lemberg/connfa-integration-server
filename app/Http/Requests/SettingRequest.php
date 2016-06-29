@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
+/**
+ * Class SettingRequest
+ * @package App\Http\Requests
+ */
 class SettingRequest extends Request
 {
     /**
@@ -23,8 +25,14 @@ class SettingRequest extends Request
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        $validation = [];
+        if (in_array($this->method(), ['POST', 'PUT'])) {
+            $validation = [
+                'timezone' => 'required',
+                'twitterSearchQuery' => 'required',
+            ];
+        }
+
+        return $validation;
     }
 }

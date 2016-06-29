@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
+/**
+ * Class TrackRequest
+ * @package App\Http\Requests
+ */
 class TrackRequest extends Request
 {
     /**

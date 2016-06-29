@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Breadcrumbs
+ */
 Breadcrumbs::register('breadcrumbs', function ($breadcrumbs, $items) {
     $breadcrumbs->push('Dashboard', route('dashboard'));
     if (is_array($items)) {
@@ -12,12 +15,3 @@ Breadcrumbs::register('breadcrumbs', function ($breadcrumbs, $items) {
         }
     }
 });
-
-
-
-
-
-
-
-
-
