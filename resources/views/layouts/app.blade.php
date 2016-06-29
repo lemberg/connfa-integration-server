@@ -23,6 +23,9 @@
     <link rel="stylesheet" href="{{ URL::asset('assets/css/dataTables.bootstrap.min.css') }}">
     <!-- Custom Theme Style -->
     <link rel="stylesheet" href="{{ URL::asset('assets/css/custom.css') }}">
+    <!-- Icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ URL::asset('assets/images/apple-touch-icon-precomposed.png') }}">
+    <link rel="shortcut icon" href="{{ URL::asset('favicon.ico') }}">
 </head>
 <body class="nav-md">
 <div class="container body">
@@ -30,7 +33,7 @@
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
-                    <a href="{{ url('/') }}" class="site_title"><i class="fa fa-paw"></i> <span>Connfa!</span></a>
+                    <a href="{{ url('/') }}" class="site_title"><i class="fa fa-home"></i> <span>Connfa!</span></a>
                 </div>
                 <div class="clearfix"></div>
                 <br />

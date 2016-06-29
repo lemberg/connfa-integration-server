@@ -17,11 +17,6 @@ class Type extends Model
 
     protected $fillable = [
         'name',
-        'icon',
         'order',
-    ];
-
-    protected $urlable = [
-        'icon',
     ];
 }

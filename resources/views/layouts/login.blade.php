@@ -13,6 +13,9 @@
     <link href="{{ URL::asset('assets/vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="{{ URL::asset('assets/css/custom.css') }}" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ URL::asset('assets/images/apple-touch-icon-precomposed.png') }}">
+    <link rel="shortcut icon" href="{{ URL::asset('favicon.ico') }}">
 </head>
 <body style="background:#F7F7F7;">
     <div>

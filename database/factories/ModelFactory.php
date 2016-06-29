@@ -65,10 +65,9 @@ $factory->define(App\Models\Speaker::class, function (Faker\Generator $faker, $i
     ];
 });
 
-$factory->define(App\Models\Event\Type::class, function (Faker\Generator $faker, $images) use ($images)  {
+$factory->define(App\Models\Event\Type::class, function (Faker\Generator $faker){
     return [
         'name' => $faker->word,
-        'icon' => $faker->randomElement($images),
         'order' => $faker->numberBetween(0, 100),
     ];
 });

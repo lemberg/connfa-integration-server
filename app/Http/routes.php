@@ -32,7 +32,7 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
     $app->resource('tracks', 'Events\TracksController');
     $app->resource('types', 'Events\TypesController');
     $app->resource('speakers', 'SpeakersController');
-    $app->resource('points', 'PointsController');
+//    $app->resource('points', 'PointsController');
     $app->resource('floors', 'FloorsController');
     $app->resource('pages', 'PagesController');
     $app->resource('users', 'UsersController');

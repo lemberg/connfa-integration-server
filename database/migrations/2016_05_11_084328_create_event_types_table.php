@@ -15,7 +15,6 @@ class CreateEventTypesTable extends Migration
         Schema::create('event_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('icon');
             $table->integer('order')->nullable();
             $table->softDeletes()->nullable()->default(null);
             $table->timestamps();

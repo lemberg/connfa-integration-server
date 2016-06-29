@@ -25,15 +25,6 @@
                                 @endif
                             </div>
                         </div>
-
-                        @include('partials/image-upload', [
-                            'create' => false,
-                            'labelName' => trans('Icon'),
-                            'fieldName' => 'icon',
-                            'fieldNameValue' => $data->icon,
-                            'required' => false,
-                        ])
-
                         <div class="form-group{{ $errors->has('order') ? ' has-error' : '' }}">
                             {{ Form::label('order', trans('Order'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">

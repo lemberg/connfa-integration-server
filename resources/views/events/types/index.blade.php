@@ -19,7 +19,6 @@
                                 <tr class="headings">
                                     <th class="column-title">id</th>
                                     <th class="column-title">{{ trans('Name') }}</th>
-                                    <th class="column-title">{{ trans('Icon') }}</th>
                                     <th class="column-title">{{ trans('Order') }}</th>
                                     <th class="column-title no-link last"><span class="nobr">{{ trans('Action') }}</span></th>
                                 </tr>
@@ -30,11 +29,6 @@
                                     <td>{{ $item->id }}</td>
                                     <td>
                                         {{ $item->name }}
-                                    </td>
-                                    <td>
-                                        @if(!empty($item->icon))
-                                            {{ Html::image($item->icon, $item->name, array('class' => 'avatar img-responsive')) }}
-                                        @endif
                                     </td>
                                     <td>
                                         {{ $item->order }}

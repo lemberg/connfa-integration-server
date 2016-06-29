@@ -23,12 +23,6 @@
                     <p>
                         <strong>{{ trans('Order') }}:</strong> {{ $data->order }}<br>
                     </p>
-                    <p>
-                        <strong>{{ trans('Icon') }}:</strong><br>
-                        @if(!empty($data->icon))
-                            {{ Html::image($data->icon, $data->name, ['class' => 'img-thumbnail img-responsive']) }}
-                        @endif
-                    </p>
                 </div>
             </div>
         </div>
