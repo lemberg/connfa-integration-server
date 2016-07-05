@@ -19,7 +19,6 @@
                                 <tr class="headings">
                                     <th class="column-title">id</th>
                                     <th class="column-title">{{ trans('Name') }}</th>
-                                    <th class="column-title">{{ trans('Order') }}</th>
                                     <th class="column-title no-link last"><span class="nobr">{{ trans('Action') }}</span></th>
                                 </tr>
                             </thead>
@@ -29,9 +28,6 @@
                                     <td>{{ $item->id }}</td>
                                     <td>
                                         {{ $item->name }}
-                                    </td>
-                                    <td>
-                                        {{ $item->order }}
                                     </td>
                                     <td class="text-right">
                                         @include('partials/actions', ['route' => 'tracks', 'id' => $item->id])

@@ -14,6 +14,8 @@
 $app = app('router');
 $api = app('api.router');
 
+$app->auth();
+
 /**
  * CMS routes
  */
