@@ -24,6 +24,7 @@ class BaseRepository extends Repository implements RepositoryInterface
      *
      * @param $id
      * @param array $columns
+     *
      * @throws NotFoundHttpException
      * @return mixed
      */
@@ -42,6 +43,7 @@ class BaseRepository extends Repository implements RepositoryInterface
      * Find first resource or create new
      *
      * @param $params
+     *
      * @return mixed
      */
     public function firstOrNew($params)
@@ -89,12 +91,14 @@ class BaseRepository extends Repository implements RepositoryInterface
      */
     public function saveImage($image, $directory = '', $size = ['width' => 800, 'height' => 600])
     {
-         try {
+        try {
             $directory = str_replace('.', DIRECTORY_SEPARATOR, $directory);
             $imageRealPath = $image->getRealPath();
             $timestamp = Carbon::now()->format('Y-m-d-H-i-s');
-            $thumbName = $timestamp . '-' . str_slug($image->getClientOriginalName(), "-");
-
+            $fileName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+            $extension = pathinfo($image->getClientOriginalName(), PATHINFO_EXTENSION);
+            $thumbName = $timestamp . '-' . str_slug($fileName, "-") . '.' . $extension;
+            
             $img = Image::make($imageRealPath);
             if ($img->width() > $size['width']) {
                 $img->resize(intval($size['width']), null, function ($constraint) {
