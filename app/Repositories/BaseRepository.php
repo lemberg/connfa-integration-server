@@ -93,7 +93,7 @@ class BaseRepository extends Repository implements RepositoryInterface
             $directory = str_replace('.', DIRECTORY_SEPARATOR, $directory);
             $imageRealPath = $image->getRealPath();
             $timestamp = Carbon::now()->format('Y-m-d-H-i-s');
-            $thumbName = $timestamp . '-' . $image->getClientOriginalName();
+            $thumbName = $timestamp . '-' . str_slug($image->getClientOriginalName(), "-");
 
             $img = Image::make($imageRealPath);
             if ($img->width() > $size['width']) {

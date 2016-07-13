@@ -22,25 +22,37 @@
                         @endif
                         <h3>{{ $data->first_name }} {{ $data->last_name }}</h3>
                         <ul class="list-unstyled user_data">
-                            <li>
-                                <i class="fa fa-briefcase user-profile-icon" title="{{ trans('Job') }}"></i> {{ $data->job }}
-                            </li>
-                            <li>
-                                <i class="fa fa-institution user-profile-icon" title="{{ trans('Organization') }}"></i> {{ $data->organization }}
-                            </li>
-                            <li>
-                                <i class="fa fa-envelope user-profile-icon" title="{{ trans('Email') }}"></i> {{ Html::email($data->email) }}
-                            </li>
-                            <li>
-                                <i class="fa fa-external-link user-profile-icon" title="{{ trans('Website') }}"></i> {{ Html::link($data->website, 'website') }}
-                            </li>
-                            <li class="m-top-xs">
-                                <i class="fa fa-twitter user-profile-icon" title="{{ trans('Twitter') }}"></i>
-                                <a href="https://twitter.com/{{ $data->twitter_name }}" target="_blank">{{ $data->twitter_name }}</a>
-                            </li>
-                            <li>
-                                <i class="fa fa-sort-amount-asc user-profile-icon" title="{{ trans('Order') }}"></i> {{ $data->order }}
-                            </li>
+                            @if($data->job)
+                                <li>
+                                    <i class="fa fa-briefcase user-profile-icon" title="{{ trans('Job') }}"></i> {{ $data->job }}
+                                </li>
+                            @endif
+                            @if($data->organization)
+                                <li>
+                                    <i class="fa fa-institution user-profile-icon" title="{{ trans('Organization') }}"></i> {{ $data->organization }}
+                                </li>
+                            @endif
+                            @if($data->email)
+                                <li>
+                                    <i class="fa fa-envelope user-profile-icon" title="{{ trans('Email') }}"></i> {{ Html::email($data->email) }}
+                                </li>
+                            @endif
+                            @if($data->website)
+                                <li>
+                                    <i class="fa fa-external-link user-profile-icon" title="{{ trans('Website') }}"></i> {{ Html::link($data->website, 'website') }}
+                                </li>
+                            @endif
+                            @if($data->twitter_name)
+                                <li class="m-top-xs">
+                                    <i class="fa fa-twitter user-profile-icon" title="{{ trans('Twitter') }}"></i>
+                                    <a href="https://twitter.com/{{ $data->twitter_name }}" target="_blank">{{ $data->twitter_name }}</a>
+                                </li>
+                            @endif
+                            @if($data->order)
+                                <li>
+                                    <i class="fa fa-sort-amount-asc user-profile-icon" title="{{ trans('Order') }}"></i> {{ $data->order }}
+                                </li>
+                            @endif
                         </ul>
                         <a href="{{ route('speakers.edit', ['id' => $data->id ]) }}" class="btn btn-success"><i class="fa fa-edit m-right-xs"></i> {{ trans('Edit') }}</a>
                         {!! Form::open([route('speakers.destroy', ['id' => $data->id]), 'method' => 'POST', 'class' => '', 'style' => 'display:inline-block;vertical-align: middle;
