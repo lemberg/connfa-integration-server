@@ -60,7 +60,7 @@
                                 <span class="help-block">
                                     Enter twitter widget id for Web App
                                 </span>
-                                @if ($errors->has('twitterSearchQuery'))
+                                @if ($errors->has('twitterWidgetId'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('twitterWidgetId') }}</strong>
                                     </span>
