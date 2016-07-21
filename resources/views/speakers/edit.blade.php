@@ -115,7 +115,7 @@
                         <div class="form-group{{ $errors->has('characteristic') ? ' has-error' : '' }}">
                             {{ Form::label('characteristic', trans('Characteristic'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                {{ Form::textarea('characteristic', $data->characteristic, ['id' => 'editor-speaker', 'class' => 'form-control col-md-7 col-xs-12']) }}
+                                {{ Form::textarea('characteristic', $data->characteristic, ['id' => 'editor', 'class' => 'form-control col-md-7 col-xs-12']) }}
                                 @if ($errors->has('characteristic'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('characteristic') }}</strong>
