@@ -35,6 +35,7 @@ class Event extends Model
         'url',
         'event_type',
         'order',
+        'updated_at',
     ];
 
     protected $dates = ['start_at', 'end_at'];

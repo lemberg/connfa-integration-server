@@ -23,6 +23,9 @@
                         <strong>{{ trans('Twitter search query') }}:</strong> {{ array_get($data, 'twitterSearchQuery') }}
                     </p>
                     <p>
+                        <strong>{{ trans('Twitter widget id') }}:</strong> {{ array_get($data, 'twitterWidgetId') }}
+                    </p>
+                    <p>
                         <strong>{{ trans('Timezone') }}:</strong> {{ array_get($data, 'timezone') }}
                     </p>
                 </div>

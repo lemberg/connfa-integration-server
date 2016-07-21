@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Event;
+use Carbon\Carbon;
 
 class EventRepository extends BaseRepository
 {
@@ -92,5 +93,12 @@ class EventRepository extends BaseRepository
     public function updateByField($field, $id)
     {
         return $this->model->where([$field => $id])->update([$field => null]);
+    }
+
+    public function forceUpdateAllEvents()
+    {
+        $this->model->all()->each(function ($event){
+            $event->update(['updated_at' => Carbon::now()]);
+        });
     }
 }
