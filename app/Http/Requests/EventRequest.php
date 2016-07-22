@@ -37,4 +37,16 @@ class EventRequest extends Request
 
         return $validation;
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'end_at.greater_than_field' => 'Should be more than the Start at',
+        ];
+    }
 }
