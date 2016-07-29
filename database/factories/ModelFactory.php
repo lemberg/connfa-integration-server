@@ -28,6 +28,7 @@ $images = getImagesFromFolder();
 function getImagesFromFolder($path = 'uploads/fakers')
 {
     $images = [];
+    checkAndMakeDirectory(public_path($path));
     $path = public_path($path);
     $allowedMimeTypes = ['image/jpeg', 'image/gif', 'image/png', 'image/bmp', 'image/svg+xml'];
     $files = File::allFiles($path);
@@ -38,7 +39,51 @@ function getImagesFromFolder($path = 'uploads/fakers')
         }
     }
 
+    if(empty($images)){
+        uploadImages();
+
+        return getImagesFromFolder();
+    }
+
     return $images;
+}
+
+/**
+ * Upload image to folder use faker
+ *
+ * @param int $countImages
+ * @param string $path
+ *
+ * @return array
+ */
+function uploadImages($countImages = 5, $path = 'uploads/fakers')
+{
+    $faker = Faker\Factory::create();
+    $path = public_path($path);
+    $images = [];
+    if (checkAndMakeDirectory($path)) {
+        for ($i = 0; $i < $countImages; $i++) {
+            $images[$i] = $faker->image($path, 200, 200);
+        }
+    }
+
+    return $images;
+}
+
+/**
+ * Check directory, if not exist then create it
+ *
+ * @param $path
+ *
+ * @return bool
+ */
+function checkAndMakeDirectory($path)
+{
+    if (!File::exists($path)) {
+        return File::makeDirectory($path, 0775, true);
+    }
+
+    return true;
 }
 
 $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
