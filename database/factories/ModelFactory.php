@@ -14,39 +14,35 @@ use Illuminate\Support\Facades\File;
 */
 
 /**
- * get images array
- */
-$images = getImagesFromFolder();
-
-/**
  * Get all image from folder
  *
  * @param string $path
  *
  * @return array
  */
-function getImagesFromFolder($path = 'uploads/fakers')
+$getImagesFromFolder = function ($path = 'uploads/fakers') use(&$getImagesFromFolder)
 {
     $images = [];
-    checkAndMakeDirectory(public_path($path));
     $path = public_path($path);
-    $allowedMimeTypes = ['image/jpeg', 'image/gif', 'image/png', 'image/bmp', 'image/svg+xml'];
-    $files = File::allFiles($path);
-    foreach ($files as $file) {
-        $contentType = mime_content_type((string)$file);
-        if (in_array($contentType, $allowedMimeTypes)) {
-            $images[] = stristr((string)$file, DIRECTORY_SEPARATOR . "uploads");
+    if(checkAndMakeDirectory($path)){
+        $allowedMimeTypes = ['image/jpeg', 'image/gif', 'image/png', 'image/bmp', 'image/svg+xml'];
+        $files = File::allFiles($path);
+        foreach ($files as $file) {
+            $contentType = mime_content_type((string)$file);
+            if (in_array($contentType, $allowedMimeTypes)) {
+                $images[] = stristr((string)$file, DIRECTORY_SEPARATOR . "uploads");
+            }
+        }
+
+        if(empty($images) or count($images) < 5){
+            uploadImages();
+
+            return $getImagesFromFolder();
         }
     }
 
-    if(empty($images)){
-        uploadImages();
-
-        return getImagesFromFolder();
-    }
-
     return $images;
-}
+};
 
 /**
  * Upload image to folder use faker
@@ -80,6 +76,7 @@ function uploadImages($countImages = 5, $path = 'uploads/fakers')
 function checkAndMakeDirectory($path)
 {
     if (!File::exists($path)) {
+
         return File::makeDirectory($path, 0775, true);
     }
 
@@ -95,7 +92,8 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Models\Speaker::class, function (Faker\Generator $faker, $images) use ($images) {
+$factory->define(App\Models\Speaker::class, function (Faker\Generator $faker) use ($getImagesFromFolder) {
+    $images = $getImagesFromFolder();
     return [
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
@@ -148,7 +146,8 @@ $factory->define(App\Models\Event::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Models\Floor::class, function (Faker\Generator $faker, $images) use ($images)  {
+$factory->define(App\Models\Floor::class, function (Faker\Generator $faker) use ($getImagesFromFolder) {
+    $images = $getImagesFromFolder();
     return [
         'name' => $faker->word,
         'image' => $faker->randomElement($images),
@@ -175,7 +174,8 @@ $factory->define(App\Models\Location::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Models\Point::class, function (Faker\Generator $faker, $images) use ($images)  {
+$factory->define(App\Models\Point::class, function (Faker\Generator $faker) use ($getImagesFromFolder) {
+    $images = $getImagesFromFolder();
     return [
         'name' => $faker->word,
         'description' => $faker->text(),
