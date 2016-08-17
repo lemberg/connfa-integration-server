@@ -4847,5 +4847,9 @@ ul.widget_profile_box li{
   position: relative;
   left: 50%;
   top: 50%;
+}
 
+.dash-circle-profile-img-height{
+  height: auto;
+  width: 85px;
 }
