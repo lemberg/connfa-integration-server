@@ -10,8 +10,8 @@
                             </a>
                         @endif
                     </li>
-                    <li>
-                        {{ Html::image(empty($speaker->avatar) ? '/assets/images/user.png' : $speaker->avatar, $speaker->fullname, ['class' => 'img-circle profile_img']) }}
+                    <li class="dash-profile-img-wrapper">
+                        {{ Html::image(empty($speaker->avatar) ? '/assets/images/user.png' : $speaker->avatar, $speaker->fullname, ['class' => 'img-circle dash-circle-profile-img']) }}
                     </li>
                     <li>
                         @if($speaker->twitter_name)

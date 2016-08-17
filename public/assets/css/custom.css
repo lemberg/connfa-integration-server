@@ -4828,3 +4828,24 @@ p{
 .pagination{
   margin: 0;
 }
+ul.widget_profile_box li{
+  vertical-align: top;
+}
+.dash-profile-img-wrapper{
+  background: #fff;
+  border: 1px solid rgba(52, 73, 94, 0.44);
+  border-radius: 50%;
+  overflow: hidden;
+  width: 85px;
+  height: 85px;
+  margin-top: -28px;
+}
+.dash-circle-profile-img{
+  height: 85px;
+  width: auto;
+  transform: translate(-50%,-50%);
+  position: relative;
+  left: 50%;
+  top: 50%;
+
+}
