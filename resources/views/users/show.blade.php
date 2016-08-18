@@ -23,6 +23,13 @@
                     <p>
                         <strong>{{ trans('Email') }}:</strong> {{ $data->email }}<br>
                     </p>
+                    @if($data->roles)
+                        <p>
+                            <strong>{{ count($data->roles)>1 ? trans('Roles') : trans('Role') }}:</strong>
+                            {{ $data->roles->implode('display_name', ', ') }}
+                            <br>
+                        </p>
+                    @endif
                 </div>
             </div>
         </div>

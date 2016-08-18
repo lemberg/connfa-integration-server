@@ -35,7 +35,6 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
 //    $app->resource('points', 'PointsController');
     $app->resource('floors', 'FloorsController');
     $app->resource('pages', 'PagesController');
-    $app->resource('users', 'UsersController');
     $app->resource('sessions', 'Events\SessionsController');
     $app->resource('bofs', 'Events\BofsController');
     $app->resource('social', 'Events\SocialController');
@@ -45,6 +44,10 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
     $app->get('settings', 'SettingsController@index')->name('settings.index');
     $app->get('settings/edit', 'SettingsController@edit')->name('settings.edit');
     $app->put('settings', 'SettingsController@update')->name('settings.update');
+
+    $app->group(['middleware' => ['permission:edit-user']], function($app) {
+        $app->resource('users', 'UsersController');
+    });
 });
 
 $api->version('v2', [
