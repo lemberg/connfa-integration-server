@@ -37,6 +37,7 @@
 <script>
     $(function () {
         $('#users-table').DataTable({
+            stateSave: true,
             serverSide: true,
             ajax: '{!! route('speakers.data') !!}',
             columns: [
