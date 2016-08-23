@@ -15,7 +15,7 @@ class CreateEventLevelsTable extends Migration
         Schema::create('event_levels', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->float('order')->nullable();
+            $table->integer('order')->nullable();
             $table->softDeletes()->nullable()->default(null);
             $table->timestamps();
         });

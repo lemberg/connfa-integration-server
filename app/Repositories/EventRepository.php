@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Event;
+use Carbon\Carbon;
 
 class EventRepository extends BaseRepository
 {
@@ -17,6 +18,7 @@ class EventRepository extends BaseRepository
      *
      * @param $type
      * @param string|bool $since
+     *
      * @return mixed
      */
     public function getEventsByTypeWithDeleted($type, $since = false)
@@ -28,5 +30,75 @@ class EventRepository extends BaseRepository
         }
 
         return $events->orderBy('start_at')->get();
+    }
+
+    /**
+     * Update with Speakers
+     *
+     * @param $id
+     * @param $data
+     *
+     * @return mixed
+     */
+    public function updateWithSpeakers($id, $data)
+    {
+        $event = $this->findOrFail($id);
+        $speakers = $event->speakers()->sync(array_get($data, 'speakers', []));
+        if (array_get($speakers, 'attached') or array_get($speakers, 'detached') or array_get($speakers, 'updated')) {
+            unset($data['speakers']);
+
+            return $event->where('id', '=', $id)->update($data);
+        } else {
+            $event->fill($data);
+
+            return $event->save();
+        }
+    }
+
+    /**
+     * Get event by type with pagination
+     *
+     * @param $type
+     * @param int $itemsOnPage
+     *
+     * @return mixed
+     */
+    public function getByEventTypeOnPage($type, $itemsOnPage = 25)
+    {
+        return $this->model->where(['event_type' => $type])->paginate($itemsOnPage);
+    }
+
+    /**
+     * Get events by type sort DESC and limit
+     *
+     * @param $type
+     * @param string $orderBy
+     * @param int $limit
+     *
+     * @return mixed
+     */
+    public function getEventByTypeOrderAndLimit($type, $orderBy = 'updated_at', $limit = 5)
+    {
+        return $this->model->where(['event_type' => $type])->orderBy($orderBy, 'DESC')->limit($limit)->get();
+    }
+
+    /**
+     * Update collection by field (track, level, type)
+     *
+     * @param $field
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function updateByField($field, $id)
+    {
+        return $this->model->where([$field => $id])->update([$field => null]);
+    }
+
+    public function forceUpdateAllEvents()
+    {
+        $this->model->all()->each(function ($event){
+            $event->update(['updated_at' => Carbon::now()]);
+        });
     }
 }

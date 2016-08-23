@@ -10,7 +10,13 @@
         "dingo/api": "1.0.x@dev",
         "bosnadev/repositories": " 0.*",
         "vendocrat/laravel-settings": "dev-master",
-        "codeception/codeception": "^2.1"
+        "codeception/codeception": "^2.1",
+        "laravelcollective/html": "5.2.*",
+        "cerbero/command-validator": "^1.0",
+        "intervention/image": "dev-master",
+        "davejamesmiller/laravel-breadcrumbs": "^3.0",
+        "yajra/laravel-datatables-oracle": "~6.0",
+        "zizaco/entrust": "5.2.x-dev"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -9,4 +9,5 @@ Homestead.json
 
 tests/_output/*
 tests/_envs/*
-tests/_support/*
+tests/_support/_generated/*
+public/uploads/*

@@ -6,6 +6,7 @@ use App\Models\Event\Level;
 use App\Models\Event\Track;
 use App\Models\Event\Type;
 use App\Models\Traits\DateFormatterTrait;
+use App\Models\Traits\OrderTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -13,6 +14,7 @@ class Event extends Model
 {
     use SoftDeletes;
     use DateFormatterTrait;
+    use OrderTrait;
 
     public static $event_types_available = [
         'session',
@@ -33,6 +35,7 @@ class Event extends Model
         'url',
         'event_type',
         'order',
+        'updated_at',
     ];
 
     protected $dates = ['start_at', 'end_at'];
@@ -71,5 +74,4 @@ class Event extends Model
     {
         return $this->start_at->format('d-m-Y');
     }
-
 }

@@ -2,11 +2,31 @@
 
 namespace App\Repositories;
 
+use Illuminate\Support\Collection;
+use Illuminate\Container\Container as App;
 use vendocrat\Settings\Models\Setting;
 use vendocrat\Settings\Facades\Setting as SettingFacade;
+use \DateTimeZone;
 
 class SettingsRepository extends BaseRepository
 {
+    /**
+     * @var EventRepository
+     */
+    protected $eventRepository;
+
+    /**
+     * SettingsRepository constructor.
+     *
+     * @param App $app
+     * @param Collection $collection
+     * @param EventRepository $eventRepository
+     */
+    public function __construct(App $app, Collection $collection, EventRepository $eventRepository)
+    {
+        parent::__construct($app, $collection);
+        $this->eventRepository = $eventRepository;
+    }
 
     public function model()
     {
@@ -17,6 +37,7 @@ class SettingsRepository extends BaseRepository
      * Get settings with deleted since $since param if passed
      *
      * @param string|bool $since
+     *
      * @return mixed
      */
     public function getSettingsWithDeleted($since = false)
@@ -35,6 +56,7 @@ class SettingsRepository extends BaseRepository
      *
      * @param $setting
      * @param $since
+     *
      * @return mixed
      */
     public function getByKeyWithDeleted($setting, $since)
@@ -62,5 +84,60 @@ class SettingsRepository extends BaseRepository
             SettingFacade::set('twitterWidget', array_get($data, 'twitterWidget'));
         }
         SettingFacade::save();
+    }
+
+    /**
+     * Save settings
+     *
+     * @param array $settings
+     *
+     * @return mixed
+     */
+    public function saveSettings(array $settings = [])
+    {
+        if (empty($settings)) {
+            return false;
+        }
+
+        foreach ($settings as $key => $value) {
+            if ($key == 'timezone' && SettingFacade::get($key) != $value) {
+                $this->eventRepository->forceUpdateAllEvents();
+            }
+
+            SettingFacade::set($key, $value);
+        }
+
+        return SettingFacade::save();
+    }
+
+
+    /**
+     * Get all timezone
+     *
+     * @return array
+     */
+    public function getTimezoneList()
+    {
+        $timezones = DateTimeZone::listIdentifiers();
+
+        return array_combine($timezones, $timezones);
+    }
+
+    /**
+     * Get settings in single array
+     *
+     * @return array
+     */
+    public function getAllSettingInSingleArray()
+    {
+        $transformSettings = [];
+        $settings = $this->model->all()->toArray();
+        if (!empty($settings)) {
+            foreach ($settings as $setting) {
+                $transformSettings[$setting['key']] = $setting['value'];
+            }
+        }
+
+        return $transformSettings;
     }
 }

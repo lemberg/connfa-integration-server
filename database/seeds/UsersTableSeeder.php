@@ -15,6 +15,9 @@ class UsersTableSeeder extends Seeder
             'name' => 'admin',
             'email' => 'admin@test.com'
         ])->save();
-        
+
+        $admin = App\Models\User::where(['email' => 'admin@test.com'])->first();
+        $role = App\Models\Role::where(['name' => 'admin'])->first();
+        $admin->attachRole($role);
     }
 }

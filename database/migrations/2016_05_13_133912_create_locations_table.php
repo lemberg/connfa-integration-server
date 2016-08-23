@@ -18,7 +18,7 @@ class CreateLocationsTable extends Migration
             $table->string('lat');
             $table->string('lon');
             $table->string('address');
-            $table->float('order');
+            $table->integer('order')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

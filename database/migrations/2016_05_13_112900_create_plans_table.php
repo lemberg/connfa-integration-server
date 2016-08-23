@@ -16,7 +16,7 @@ class CreatePlansTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('image');
-            $table->float('order')->nullable();
+            $table->integer('order')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

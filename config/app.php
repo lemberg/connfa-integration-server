@@ -158,7 +158,11 @@ return [
 
         Dingo\Api\Provider\LaravelServiceProvider::class,
         vendocrat\Settings\SettingsServiceProvider::class,
-        Collective\Html\HtmlServiceProvider::class
+        Collective\Html\HtmlServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+        DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
+        Yajra\Datatables\DatatablesServiceProvider::class,
+        Zizaco\Entrust\EntrustServiceProvider::class
 
     ],
 
@@ -209,7 +213,11 @@ return [
         'API'         => Dingo\Api\Facade\API::class,
         'Setting' => vendocrat\Settings\Facades\Setting::class,
         'Form' => Collective\Html\FormFacade::class,
-        'Html' => Collective\Html\HtmlFacade::class
+        'Html' => Collective\Html\HtmlFacade::class,
+        'Image'     => Intervention\Image\Facades\Image::class,
+        'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
+        'Datatables' => Yajra\Datatables\Facades\Datatables::class,
+        'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
     ],
 
 ];

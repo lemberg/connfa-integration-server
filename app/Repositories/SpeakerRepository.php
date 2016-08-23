@@ -26,4 +26,16 @@ class SpeakerRepository extends BaseRepository
 
         return $this->model->withTrashed()->get();
     }
+
+    /**
+     * Get limit last updated speakers
+     *
+     * @param int $limit
+     *
+     * @return mixed
+     */
+    public function getLimitLastUpdated($limit = 5)
+    {
+        return $this->model->orderBy('updated_at', 'DESC')->limit($limit)->get();
+    }
 }
