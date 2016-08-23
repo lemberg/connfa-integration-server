@@ -61,7 +61,7 @@ class LocationsController extends Controller
     public function index()
     {
         return $this->response->view($this->getViewName('index'),
-            ['data' => $this->repository->firstOrCreate()]);
+            ['data' => $this->repository->firstOrNew([])]);
     }
 
     /**
@@ -72,7 +72,7 @@ class LocationsController extends Controller
     public function edit()
     {
         return $this->response->view($this->getViewName('edit'),
-            ['data' => $this->repository->firstOrCreate()]);
+            ['data' => $this->repository->firstOrNew([])]);
     }
 
     /** Update the specified resource in storage.

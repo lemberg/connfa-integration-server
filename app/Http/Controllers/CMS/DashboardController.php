@@ -4,6 +4,7 @@ namespace App\Http\Controllers\CMS;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Repositories\SettingsRepository;
 use App\Repositories\SpeakerRepository;
 use App\Repositories\EventRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -45,6 +46,7 @@ class DashboardController extends Controller
         $this->response = $response;
         $this->speakers = $speakers;
         $this->repository = $repository;
+        $this->isSetTimezone();
     }
 
     /**
@@ -60,5 +62,23 @@ class DashboardController extends Controller
             'social' => $this->repository->getEventByTypeOrderAndLimit('social'),
             'bofs' => $this->repository->getEventByTypeOrderAndLimit('bof'),
         ]);
+    }
+
+    /**
+     * Set or unset Session 'settings'
+     *
+     * @return true
+     */
+    private function isSetTimezone()
+    {
+        $settingsRepository = \App::make(SettingsRepository::class);
+        $settings = $settingsRepository->getAllSettingInSingleArray();
+        if (!isset($settings['timezone'])) {
+            session(['settings' => true]);
+        } elseif (session()->has('settings')) {
+            session()->forget('settings');
+        }
+
+        return true;
     }
 }

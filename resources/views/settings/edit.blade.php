@@ -43,9 +43,26 @@
                             {{ Form::label('twitterSearchQuery', trans('Twitter search query')." *", ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 {{ Form::text('twitterSearchQuery', array_get($data, 'twitterSearchQuery'), ['class' => 'form-control col-md-7 col-xs-12']) }}
+                                <span class="help-block">
+                                    Enter twitter search query for mobile clients
+                                </span>
                                 @if ($errors->has('twitterSearchQuery'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('twitterSearchQuery') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('twitterWidgetId') ? ' has-error' : '' }}">
+                            {{ Form::label('twitterWidgetId', trans('Twitter widget id')." *", ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                {{ Form::text('twitterWidgetId', array_get($data, 'twitterWidgetId'), ['class' => 'form-control col-md-7 col-xs-12']) }}
+                                <span class="help-block">
+                                    Enter twitter widget id for Web App
+                                </span>
+                                @if ($errors->has('twitterWidgetId'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('twitterWidgetId') }}</strong>
                                     </span>
                                 @endif
                             </div>

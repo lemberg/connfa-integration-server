@@ -70,6 +70,9 @@
         <!-- /top navigation -->
         <!-- page content -->
         <div class="right_col" role="main">
+            @if(session()->has('settings'))
+                @include('partials/session-message')
+            @endif
             @yield('content')
         </div>
         <!-- /page content -->
@@ -96,7 +99,7 @@
 <script src="{{ URL::asset('assets/vendors/iCheck/icheck.min.js') }}"></script>
 <!-- bootstrap-datetimepicker -->
 <script src="{{ URL::asset('assets/js/moment/moment.min.js') }}"></script>
-<script src="{{ URL::asset('assets/vendors/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
+<script src="{{ URL::asset('assets/vendors/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js') }}"></script>
 <!-- ckeditor -->
 <script src="{{ URL::asset('assets/vendors/ckeditor/ckeditor.js') }}"></script>
 <!-- synctranslit -->

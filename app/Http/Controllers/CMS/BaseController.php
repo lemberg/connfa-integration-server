@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\CMS;
 
 use App\Exceptions\DirectoryNotFoundException;
+use App\Repositories\SettingsRepository;
 use Exception;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -65,6 +66,7 @@ class BaseController extends Controller
         $this->response = $response;
         $this->viewsFolder = $this->getViewsFolder();
         $this->routeName = $this->getRouteName();
+        $this->isSetTimezone();
     }
 
     /**
@@ -257,6 +259,24 @@ class BaseController extends Controller
 
         $repository[$fieldName] = "";
         $repository->save();
+
+        return true;
+    }
+
+    /**
+     * Set or unset Session 'settings'
+     *
+     * @return Session
+     */
+    private function isSetTimezone()
+    {
+        $settingsRepository = \App::make(SettingsRepository::class);
+        $settings = $settingsRepository->getAllSettingInSingleArray();
+        if (!isset($settings['timezone'])) {
+            session(['settings' => true]);
+        } elseif (session()->has('settings')) {
+            session()->forget('settings');
+        }
 
         return true;
     }

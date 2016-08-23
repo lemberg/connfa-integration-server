@@ -2,12 +2,31 @@
 
 namespace App\Repositories;
 
+use Illuminate\Support\Collection;
+use Illuminate\Container\Container as App;
 use vendocrat\Settings\Models\Setting;
 use vendocrat\Settings\Facades\Setting as SettingFacade;
 use \DateTimeZone;
 
 class SettingsRepository extends BaseRepository
 {
+    /**
+     * @var EventRepository
+     */
+    protected $eventRepository;
+
+    /**
+     * SettingsRepository constructor.
+     *
+     * @param App $app
+     * @param Collection $collection
+     * @param EventRepository $eventRepository
+     */
+    public function __construct(App $app, Collection $collection, EventRepository $eventRepository)
+    {
+        parent::__construct($app, $collection);
+        $this->eventRepository = $eventRepository;
+    }
 
     public function model()
     {
@@ -81,6 +100,10 @@ class SettingsRepository extends BaseRepository
         }
 
         foreach ($settings as $key => $value) {
+            if ($key == 'timezone' && SettingFacade::get($key) != $value) {
+                $this->eventRepository->forceUpdateAllEvents();
+            }
+
             SettingFacade::set($key, $value);
         }
 

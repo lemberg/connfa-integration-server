@@ -30,6 +30,7 @@ class SettingRequest extends Request
             $validation = [
                 'timezone' => 'required',
                 'twitterSearchQuery' => 'required',
+                'twitterWidgetId' => 'required',
             ];
         }
 

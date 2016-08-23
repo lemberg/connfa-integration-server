@@ -44,7 +44,7 @@ class SettingsController extends Controller
 
     /**
      * Display a listing of the resource.
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -54,7 +54,7 @@ class SettingsController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit()
@@ -73,6 +73,9 @@ class SettingsController extends Controller
     public function update()
     {
         $this->repository->saveSettings($this->request->except('_method', '_token'));
+        if (session()->has('settings')) {
+            session()->forget('settings');
+        }
 
         return $this->response->redirectToRoute('settings.index');
     }
