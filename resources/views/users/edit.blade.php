@@ -78,8 +78,8 @@
                                 {{ Form::select('roles', $roles, $data->roles->pluck('id')->toArray(), ['class' => 'form-control col-md-7 col-xs-12 select2_multiple', 'multiple' => 'multiple', 'name' => 'roles[]']) }}
                                 @if ($errors->has('roles'))
                                     <span class="help-block">
-                                                <strong>{{ $errors->first('roles') }}</strong>
-                                            </span>
+                                        <strong>{{ $errors->first('roles') }}</strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>
