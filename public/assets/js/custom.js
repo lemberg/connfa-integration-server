@@ -153,9 +153,10 @@ $(document).ready(function () {
 		allowClear: true
 	});
 	
-	$(".select2_roles").on("select2:unselect", function (e) {
+	$('.select2_roles').on('select2:unselecting', function (e) {
+		var selected = $(this).val();
 		// text('User Administrator') == id(1)
-		if(e.params.data.id == 1){
+		if(e.params.args.data.id == 1){
 			swal({
 				title: "Are you sure?",
 				type: "warning",
@@ -165,7 +166,7 @@ $(document).ready(function () {
 				allowOutsideClick: true
 			}, function (isConfirm) {
 				if (!isConfirm) {
-					$("select").val("1").trigger("change");
+					$('.select2_roles').val(selected).change();
 				}
 			});
 		}
