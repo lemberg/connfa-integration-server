@@ -152,6 +152,25 @@ $(document).ready(function () {
 		placeholder: "With Max Selection limit 4",
 		allowClear: true
 	});
+	
+	$('.select2_roles').on('select2:unselecting', function (e) {
+		var selected = $(this).val();
+		// text('User Administrator') == id(1)
+		if(e.params.args.data.id == 1){
+			swal({
+				title: "Are you sure?",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: "Yes, delete it!",
+				allowOutsideClick: true
+			}, function (isConfirm) {
+				if (!isConfirm) {
+					$('.select2_roles').val(selected).change();
+				}
+			});
+		}
+	});
 });
 <!-- /Select2 -->
 
@@ -215,26 +234,26 @@ $(document).ready(function () {
 	 * Confirm delete form
 	 */
 	/*$(".delete").on("submit", function(){
-		return confirm("Do you want to delete this item?");
-	});
-	$('.delete').submit(function (e) {
-		console.log('test');
-		var form = $(this).parents('form');
-		swal({
-			title: "Are you sure?",
-			type: "warning",
-			showCancelButton: true,
-			confirmButtonColor: "#DD6B55",
-			confirmButtonText: "Yes, delete it!",
-			allowOutsideClick: true
-		}, function (isConfirm) {
-			if (isConfirm) {
-				//form.submit();
-				$(this).unbind('submit').submit();
-			}
-		});
-		e.preventDefault();
-	});*/
+	 return confirm("Do you want to delete this item?");
+	 });
+	 $('.delete').submit(function (e) {
+	 console.log('test');
+	 var form = $(this).parents('form');
+	 swal({
+	 title: "Are you sure?",
+	 type: "warning",
+	 showCancelButton: true,
+	 confirmButtonColor: "#DD6B55",
+	 confirmButtonText: "Yes, delete it!",
+	 allowOutsideClick: true
+	 }, function (isConfirm) {
+	 if (isConfirm) {
+	 //form.submit();
+	 $(this).unbind('submit').submit();
+	 }
+	 });
+	 e.preventDefault();
+	 });*/
 
 
 	/*$('.delete').on('click', function () {

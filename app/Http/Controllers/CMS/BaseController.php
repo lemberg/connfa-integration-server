@@ -10,7 +10,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Repositories\BaseRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Support\Facades\Auth;
 use Yajra\Datatables\Datatables;
+
 /**
  * Class BaseController
  * @package App\Http\Controllers\CMS
@@ -279,5 +281,26 @@ class BaseController extends Controller
         }
 
         return true;
+    }
+
+    /**
+     * Is user has role
+     *
+     * @param string $roleName
+     *
+     * @return bool
+     */
+    public function isRole($roleName = 'admin')
+    {
+        if ($roles = Auth::user()->roles->toArray()) {
+            foreach ($roles as $role) {
+                if (array_get($role, 'name') == $roleName) {
+
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }
