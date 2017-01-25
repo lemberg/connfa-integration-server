@@ -3,6 +3,8 @@
 namespace Parser\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Parser\Console\Commands\ClearDatabaseCommand;
+use Parser\Console\Commands\InstallCronCommand;
 use Parser\Console\Commands\ParseCommand;
 
 class ConnfaParserServiceProvider extends ServiceProvider
@@ -16,7 +18,9 @@ class ConnfaParserServiceProvider extends ServiceProvider
     public function register()
     {
         $this->commands([
-            ParseCommand::class
+            ParseCommand::class,
+            ClearDatabaseCommand::class,
+            InstallCronCommand::class,
         ]);
 
         $this->mergeConfigFrom(realpath(__DIR__.'/../config/parser.php'), 'parser');

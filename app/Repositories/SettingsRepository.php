@@ -59,13 +59,20 @@ class SettingsRepository extends BaseRepository
      *
      * @return mixed
      */
-    public function getByKeyWithDeleted($setting, $since)
+    public function getByKeyWithDeleted($setting, $since = false)
     {
         $settings = $this->model->withTrashed()->where('key', $setting);
 
         if ($since) {
             $settings->where('updated_at', '>=', $since->toDateTimeString());
         }
+
+        return $settings->first();
+    }
+
+    public function getByKey($setting)
+    {
+        $settings = $this->model->where('key', $setting);
 
         return $settings->first();
     }
