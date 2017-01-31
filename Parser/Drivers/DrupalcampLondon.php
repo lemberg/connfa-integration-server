@@ -82,29 +82,25 @@ class DrupalcampLondon implements ParserContract
                     'start_at' => Carbon::parse(array_get($event, 'from')),
                     'end_at' => Carbon::parse(array_get($event, 'to')),
                     'event_type' => 'session',
-                    'link' => array_get($event, 'link'),
-                    'state_id' => 0,
+                    'url' => array_get($event, 'link'),
+                    'track_id' => array_get($event, 'track'),
+                    'deleted_at' => null,
                 );
 
-                $event_obj = $this->eventRepository->firstOrCreate([
-                    'id' => $data['id'],
-                ]);
+                $event_obj = $this->eventRepository->findByIdWithDeleted($data['id']);
 
                 if (array_get($event, 'speakers')) {
-                    $event_obj->speakers()->sync(array_get($event, 'speakers'));
-                }
-
-                if ($track = array_get($event, 'track')) {
-                    $event_obj->tracks()->sync($track);
+                    $event_obj->speakers()->sync([array_get($event, 'speakers')]);
                 }
 
                 $event_obj->update($data);
                 $event_obj->save();
             }
         }
-        $deleted = array_get($sessions, 'deleted', array());
+
+        $deleted = array_get($sessions, 'deleted', []);
         foreach ($deleted as $item) {
-            $this->eventRepository->delete($item);
+            $this->eventRepository->delete($item['eventId']);
         }
     }
 
@@ -134,12 +130,12 @@ class DrupalcampLondon implements ParserContract
 
     public function storeTracks($tracks)
     {
-        // @todo change types -> tracks when drupalcamp team will fix this
-        foreach (array_get($tracks, 'types') as $item) {
+        // @todo check when drupalcamp team will fix this
+        foreach (array_get($tracks, 'tracks') as $item) {
             $track = $this->trackRepository->firstOrCreate([
-                'id' => array_get($item, 'typeID'),
+                'id' => array_get($item, 'trackID'),
             ]);
-            $track->name = array_get($item, 'typeName');
+            $track->name = array_get($item, 'trackName');
             $track->save();
         }
     }

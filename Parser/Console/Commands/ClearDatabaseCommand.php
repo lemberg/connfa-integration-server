@@ -33,13 +33,18 @@ class ClearDatabaseCommand extends Command
 
     public function handle()
     {
-        $this->settingsRepository->getByKey('last_update')->delete();
+        if ($this->settingsRepository->getByKey('last_update')) {
+            $this->settingsRepository->getByKey('last_update')->forceDelete();
+        }
+
         if ($this->confirm("Do you want to clear database ?", true)) {
+            \DB::table('settings')->where('key', 'last_update')->delete();
             \DB::table('event_tracks')->truncate();
             \DB::table('event_levels')->truncate();
             \DB::table('event_types')->truncate();
             \DB::table('event_speaker')->truncate();
             \DB::table('speakers')->truncate();
+            \DB::table('events')->truncate();
         }
     }
 }
