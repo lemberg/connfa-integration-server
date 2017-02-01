@@ -87,7 +87,7 @@ class DrupalcampLondon implements ParserContract
                     'deleted_at' => null,
                 );
 
-                $event_obj = $this->eventRepository->findByIdWithDeleted($data['id']);
+                $event_obj = $this->eventRepository->findOrNewByIdWithDeleted($data['id']);
 
                 if (array_get($event, 'speakers')) {
                     $event_obj->speakers()->sync([array_get($event, 'speakers')]);
