@@ -65,7 +65,6 @@ class DrupalcampLondon implements ParserContract
 
     public function storeSessions($sessions)
     {
-        // TODO: Check storeSessions() method.
         $days = array_get($sessions, 'days');
         foreach ($days as $day) {
             $events = array_get($day, 'events');
@@ -74,7 +73,7 @@ class DrupalcampLondon implements ParserContract
                 date_default_timezone_set('UTC');
                 $data = array(
                     'id' => array_get($event, 'eventId'),
-                    'text' => array_get($event, 'text'),
+                    'text' => array_get($event, 'text', ''),
                     'name' => array_get($event, 'name'),
                     'place' => array_get($event, 'place'),
                     'level_id' => array_get($event, 'experienceLevel'),
@@ -93,7 +92,7 @@ class DrupalcampLondon implements ParserContract
                     $event_obj->speakers()->sync([array_get($event, 'speakers')]);
                 }
 
-                $event_obj->update($data);
+                $event_obj->fill($data);
                 $event_obj->save();
             }
         }
