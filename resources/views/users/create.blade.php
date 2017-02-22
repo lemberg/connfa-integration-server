@@ -59,9 +59,9 @@
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('roles') ? ' has-error' : '' }}">
-                            {{ Form::label('roles', trans('Roles'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
+                            {{ Form::label('roles', trans('Roles')." *", ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                {{ Form::select('roles', $roles, [], ['class' => 'form-control col-md-7 col-xs-12 select2_multiple', 'multiple' => 'multiple', 'name' => 'roles[]']) }}
+                                {{ Form::select('roles', $roles, [], ['class' => 'form-control col-md-7 col-xs-12 select2_multiple select2_roles', 'multiple' => 'multiple', 'name' => 'roles[]']) }}
                                 @if ($errors->has('roles'))
                                     <span class="help-block">
                                             <strong>{{ $errors->first('roles') }}</strong>

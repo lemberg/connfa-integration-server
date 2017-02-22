@@ -162,7 +162,9 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
-        Zizaco\Entrust\EntrustServiceProvider::class
+        Zizaco\Entrust\EntrustServiceProvider::class,
+
+        \Parser\Providers\ConnfaParserServiceProvider::class,
 
     ],
 

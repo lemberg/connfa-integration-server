@@ -34,11 +34,13 @@ class UserRequest extends Request
                 'email' => 'required|unique:users|email',
                 'password' => 'required|min:6|confirmed',
                 'password_confirmation' => 'required|min:6',
+                'roles' => 'required',
             ];
         } elseif ($this->method() == "PUT") {
             $validation = [
                 'name' => 'required|unique:users,name,' . $this->route()->parameters()['users'] . ',id',
                 'email' => 'required|unique:users,email,' . $this->route()->parameters()['users'] . ',id|email',
+                'roles' => 'required',
             ];
 
             if ($this->request->get('change_password') == true) {

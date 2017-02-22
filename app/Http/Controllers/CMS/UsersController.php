@@ -6,6 +6,7 @@ use App\Http\Requests\UserRequest;
 use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class UsersController
@@ -98,6 +99,11 @@ class UsersController extends BaseController
 
         $user = $this->repository->findOrFail($id);
         $user->roles()->sync($roles);
+
+        if (!$this->isRole()) {
+
+            return $this->response->redirectTo('/dashboard');
+        }
 
         return $this->redirectTo('index');
     }
