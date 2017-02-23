@@ -24,6 +24,7 @@ class Speaker extends Model
         'avatar',
         'email',
         'order',
+        'conference_id'
     ];
 
     protected $urlable = [

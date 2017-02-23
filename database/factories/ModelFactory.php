@@ -184,3 +184,10 @@ $factory->define(App\Models\Point::class, function (Faker\Generator $faker) use 
         'order' => $faker->numberBetween(0, 100),
     ];
 });
+
+$factory->define(App\Models\Conference::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word,
+        'alias' => $faker->word
+    ];
+});

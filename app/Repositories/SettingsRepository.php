@@ -2,10 +2,9 @@
 
 namespace App\Repositories;
 
+use App\Models\Setting;
 use Illuminate\Support\Collection;
 use Illuminate\Container\Container as App;
-use vendocrat\Settings\Models\Setting;
-use vendocrat\Settings\Facades\Setting as SettingFacade;
 use \DateTimeZone;
 
 class SettingsRepository extends BaseRepository
@@ -85,12 +84,15 @@ class SettingsRepository extends BaseRepository
     public function createTwitter($data)
     {
         if (array_get($data, 'twitterSearchQuery')) {
-            SettingFacade::set('twitterSearchQuery', array_get($data, 'twitterSearchQuery'));
+            $setting = $this->getByKey('twitterSearchQuery');
+            $setting->value = array_get($data, 'twitterSearchQuery');
+            $setting->save();
         }
         if (array_get($data, 'twitterWidget')) {
-            SettingFacade::set('twitterWidget', array_get($data, 'twitterWidget'));
+            $setting = $this->getByKey('twitterWidget');
+            $setting->value = array_get($data, 'twitterWidget');
+            $setting->save();
         }
-        SettingFacade::save();
     }
 
     /**
@@ -107,14 +109,21 @@ class SettingsRepository extends BaseRepository
         }
 
         foreach ($settings as $key => $value) {
-            if ($key == 'timezone' && SettingFacade::get($key) != $value) {
+            $setting = $this->getByKey($key);
+            if ($key == 'timezone' && $setting && $setting->value != $value) {
                 $this->eventRepository->forceUpdateAllEvents();
             }
-
-            SettingFacade::set($key, $value);
+            if (!$setting) {
+                $setting = new Setting();
+                $setting->key = $key;
+                $setting->value = $value;
+            } else {
+                $setting->value = $value;
+            }
+            $setting->save();
         }
 
-        return SettingFacade::save();
+        return true;
     }
 
 
@@ -146,5 +155,20 @@ class SettingsRepository extends BaseRepository
         }
 
         return $transformSettings;
+    }
+
+    /**
+     * Get value of setting by key or return default vale
+     *
+     * @param string $key
+     * @param string|null $default
+     *
+     * @return string
+     */
+    public function getValueByKey($key, $default = null)
+    {
+        $setting = $this->getByKey($key);
+
+        return $setting ? $setting->value : $default;
     }
 }

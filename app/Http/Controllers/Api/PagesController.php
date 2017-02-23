@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\ApiController;
 use App\Repositories\PageRepository;
+use App\Repositories\SettingsRepository;
 use App\Transformers\InfoTransformer;
-use vendocrat\Settings\SettingsManager;
 
 class PagesController extends ApiController
 {
@@ -13,10 +13,10 @@ class PagesController extends ApiController
      * Get lists of info pages and info titles
      *
      * @param PageRepository $repository
-     * @param SettingsManager $settings
+     * @param SettingsRepository $settingsRepository
      * @return \Dingo\Api\Http\Response
      */
-    public function index(PageRepository $repository, SettingsManager $settings)
+    public function index(PageRepository $repository, SettingsRepository $settingsRepository)
     {
         $pages = $repository->getPagesWithDeleted($this->since);
         $this->checkModified($pages);
@@ -24,8 +24,8 @@ class PagesController extends ApiController
         $response = [
             'info'  => $pages,
             'title' => [
-                'titleMajor' => $settings->get('titleMajor'),
-                'titleMinor' => $settings->get('titleMinor'),
+                'titleMajor' => $settingsRepository->getValueByKey('titleMajor'),
+                'titleMinor' => $settingsRepository->getValueByKey('titleMinor'),
             ]
         ];
 
