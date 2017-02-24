@@ -11,17 +11,28 @@
                         @endif
                     </li>
                     <li class="dash-profile-img-wrapper">
-                            @if(empty($speaker->avatar))
+                        @if(empty($speaker->avatar))
                             {{ Html::image('/assets/images/user.png', $speaker->fullname, ['width' => 85, 'height' => 85, 'class' => 'img-circle dash-circle-profile-img']) }}
-                            @else
-                                <?php list($width, $height, $type, $attr) = getimagesize($speaker->avatar);
+                        @else
+                            <?php
+                            try {
+                                list($width, $height, $type, $attr) = getimagesize($speaker->avatar);
                                 $class = '';
-                                if($width < $height){
+
+                                if ($width < $height) {
                                     $class = 'dash-circle-profile-img-height';
                                 }
-                                ?>
-                            {{ Html::image($speaker->avatar, $speaker->fullname, ['width' => 85, 'height' => 85, 'class' => "img-circle dash-circle-profile-img $class"]) }}
+                                $real_image = true;
+                            } catch (\Exception $e) {
+                                $real_image = false;
+                            }
+                            ?>
+                            @if ($real_image)
+                                {{ Html::image($speaker->avatar, $speaker->fullname, ['width' => 85, 'height' => 85, 'class' => "img-circle dash-circle-profile-img $class"]) }}
+                            @else
+                                {{ Html::image('/assets/images/user.png', $speaker->fullname, ['width' => 85, 'height' => 85, 'class' => 'img-circle dash-circle-profile-img']) }}
                             @endif
+                        @endif
                     </li>
                     <li>
                         @if($speaker->twitter_name)
