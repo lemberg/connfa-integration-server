@@ -32,6 +32,16 @@ class EventRepository extends BaseRepository
         return $events->orderBy('start_at')->get();
     }
 
+    public function findOrNewByIdWithDeleted($id)
+    {
+        $obj = $this->model->withTrashed()->where('id', $id)->first();
+        if (!$obj) {
+            $obj = $this->model->firstOrNew(['id' => $id]);
+        }
+
+        return $obj;
+    }
+
     /**
      * Update with Speakers
      *
