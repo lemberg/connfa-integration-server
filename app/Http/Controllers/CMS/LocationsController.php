@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\CMS;
 
 use App\Http\Requests\LocationRequest;
+use App\Repositories\ConferenceRepository;
 use App\Repositories\LocationRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\View;
 
 /**
  * Class LocationsController
@@ -45,12 +47,17 @@ class LocationsController extends Controller
      * @param LocationRequest $request
      * @param LocationRepository $repository
      * @param ResponseFactory $response
+     * @param ConferenceRepository $conferenceRepository
      */
-    public function __construct(LocationRequest $request, LocationRepository $repository, ResponseFactory $response)
+    public function __construct(LocationRequest $request, LocationRepository $repository, ResponseFactory $response, ConferenceRepository $conferenceRepository)
     {
         $this->request = $request;
         $this->repository = $repository;
         $this->response = $response;
+
+        $conferenceAlias = $request->route()->getParameter('conference_alias');
+        $conference = $conferenceRepository->getByAlias($conferenceAlias);
+        View::share('conference', $conference);
     }
 
     /**
@@ -77,14 +84,16 @@ class LocationsController extends Controller
 
     /** Update the specified resource in storage.
      *
+     * @param string $conferenceAlias
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update()
+    public function update($conferenceAlias)
     {
         $location = $this->repository->firstOrCreate();
         $this->repository->updateRich($this->request->except('_method', '_token'), $location->id);
 
-        return $this->response->redirectToRoute($this->routeName . '.index');
+        return $this->response->redirectToRoute($this->routeName . '.index', ['conference_alias' => $conferenceAlias]);
     }
 
     /**

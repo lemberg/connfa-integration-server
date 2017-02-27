@@ -4,8 +4,10 @@ namespace App\Http\Controllers\CMS;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SettingRequest;
+use App\Repositories\ConferenceRepository;
 use App\Repositories\SettingsRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Support\Facades\View;
 
 /**
  * Class SettingsController
@@ -33,13 +35,18 @@ class SettingsController extends Controller
      *
      * @param SettingRequest $request
      * @param SettingsRepository $repository
-     * @param ResponseFactory $response
+     * @param ResponseFactory $response\
+     * @param ConferenceRepository $conferenceRepository
      */
-    public function __construct(SettingRequest $request, SettingsRepository $repository, ResponseFactory $response)
+    public function __construct(SettingRequest $request, SettingsRepository $repository, ResponseFactory $response, ConferenceRepository $conferenceRepository)
     {
         $this->request = $request;
         $this->repository = $repository;
         $this->response = $response;
+
+        $conferenceAlias = $request->route()->getParameter('conference_alias');
+        $conference = $conferenceRepository->getByAlias($conferenceAlias);
+        View::share('conference', $conference);
     }
 
     /**
@@ -68,15 +75,17 @@ class SettingsController extends Controller
     /**
      * Update the specified resource in storage.
      *
+     * @param string  $conferenceAlias
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update()
+    public function update($conferenceAlias)
     {
         $this->repository->saveSettings($this->request->except('_method', '_token'));
         if (session()->has('settings')) {
             session()->forget('settings');
         }
 
-        return $this->response->redirectToRoute('settings.index');
+        return $this->response->redirectToRoute('settings.index', ['conference_alias' => $conferenceAlias]);
     }
 }

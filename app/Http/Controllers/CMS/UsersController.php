@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\CMS;
 
 use App\Http\Requests\UserRequest;
+use App\Repositories\ConferenceRepository;
 use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -27,15 +28,17 @@ class UsersController extends BaseController
      * @param UserRepository $repository
      * @param RoleRepository $roleRepository
      * @param ResponseFactory $response
+     * @param ConferenceRepository $conferenceRepository
      */
     public function __construct(
         UserRequest $request,
         UserRepository $repository,
         RoleRepository $roleRepository,
-        ResponseFactory $response
+        ResponseFactory $response,
+        ConferenceRepository $conferenceRepository
     ) {
         $this->roleRepository = $roleRepository;
-        parent::__construct($request, $repository, $response);
+        parent::__construct($request, $repository, $response, $conferenceRepository);
     }
 
     /**
@@ -52,25 +55,29 @@ class UsersController extends BaseController
     /**
      * Store a newly created resource in storage.
      *
+     * @param string $conferenceAlias
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store()
+    public function store($conferenceAlias)
     {
         $data = $this->request->all();
         $user = $this->repository->create($data);
         $user->roles()->sync(array_get($data, 'roles', []));
 
-        return $this->redirectTo('index');
+        return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
+     * @param string $conferenceAlias
+     *
      * @param  int $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($conferenceAlias, $id)
     {
         return $this->response->view('users.edit', [
             'roles' => $this->roleRepository->all()->pluck('display_name', 'id'),
@@ -81,11 +88,12 @@ class UsersController extends BaseController
     /**
      * Update data, if set change_password true then update password
      *
+     * @param string $conferenceAlias
      * @param int $id
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($id)
+    public function update($conferenceAlias, $id)
     {
         $data = $this->request->all();
         $roles = array_get($data, 'roles', []);
@@ -105,22 +113,23 @@ class UsersController extends BaseController
             return $this->response->redirectTo('/dashboard');
         }
 
-        return $this->redirectTo('index');
+        return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
+     * @param string $conferenceAlias
      * @param  int $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($conferenceAlias, $id)
     {
         $user = $this->repository->findOrFail($id);
         $user->roles()->sync([]);
         $this->repository->delete($id);
 
-        return $this->redirectTo('index');
+        return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);
     }
 }

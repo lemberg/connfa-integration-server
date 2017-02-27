@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\CMS;
 
 use App\Http\Requests\EventRequest;
+use App\Repositories\ConferenceRepository;
 use App\Repositories\Event\LevelRepository;
 use App\Repositories\Event\TrackRepository;
 use App\Repositories\Event\TypeRepository;
@@ -52,6 +53,7 @@ class EventsController extends BaseController
      * @param LevelRepository $levels
      * @param TypeRepository $types
      * @param TrackRepository $tracks
+     * @param ConferenceRepository $conferenceRepository
      */
     public function __construct(
         EventRequest $request,
@@ -60,13 +62,14 @@ class EventsController extends BaseController
         SpeakerRepository $speakers,
         LevelRepository $levels,
         TypeRepository $types,
-        TrackRepository $tracks
+        TrackRepository $tracks,
+        ConferenceRepository $conferenceRepository
     ) {
         $this->speakers = $speakers;
         $this->levels = $levels;
         $this->types = $types;
         $this->tracks = $tracks;
-        parent::__construct($request, $repository, $response);
+        parent::__construct($request, $repository, $response, $conferenceRepository);
     }
 
     /**
@@ -97,26 +100,29 @@ class EventsController extends BaseController
     /**
      * Store a newly created resource in storage.
      *
+     * @param string $conferenceAlias
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store()
+    public function store($conferenceAlias)
     {
         $data = $this->request->all();
         $data['event_type'] = $this->eventType;
         $event = $this->repository->create($data);
         $event->speakers()->sync(array_get($data, 'speakers', []));
 
-        return $this->redirectTo('index');
+        return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
+     * @param string $conferenceAlias
      * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($conferenceAlias, $id)
     {
         return $this->response->view($this->getViewName('edit'), [
             'data' => $this->repository->findOrFail($id),
@@ -130,15 +136,16 @@ class EventsController extends BaseController
     /**
      * Update the specified resource in storage.
      *
+     * @param string $conferenceAlias
      * @param int $id
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($id)
+    public function update($conferenceAlias, $id)
     {
         $this->repository->updateWithSpeakers($id, $this->request->except('_method', '_token'));
 
-        return $this->redirectTo('index');
+        return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);
     }
 
     /**

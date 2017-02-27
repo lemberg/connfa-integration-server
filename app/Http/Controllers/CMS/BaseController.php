@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\CMS;
 
 use App\Exceptions\DirectoryNotFoundException;
+use App\Models\Conference;
+use App\Repositories\ConferenceRepository;
 use App\Repositories\SettingsRepository;
 use Exception;
 use Illuminate\Http\Request;
@@ -11,7 +13,10 @@ use App\Http\Requests;
 use App\Repositories\BaseRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 use Yajra\Datatables\Datatables;
+
+use Illuminate\Support\Facades\Route;
 
 /**
  * Class BaseController
@@ -60,8 +65,9 @@ class BaseController extends Controller
      * @param Request $request
      * @param BaseRepository $repository
      * @param ResponseFactory $response
+     * @param ConferenceRepository $conferenceRepository
      */
-    public function __construct(Request $request, BaseRepository $repository, ResponseFactory $response)
+    public function __construct(Request $request, BaseRepository $repository, ResponseFactory $response, ConferenceRepository $conferenceRepository)
     {
         $this->request = $request;
         $this->repository = $repository;
@@ -69,6 +75,10 @@ class BaseController extends Controller
         $this->viewsFolder = $this->getViewsFolder();
         $this->routeName = $this->getRouteName();
         $this->isSetTimezone();
+
+        $conferenceAlias = $request->route()->getParameter('conference_alias');
+        $conference = $conferenceRepository->getByAlias($conferenceAlias);
+        View::share('conference', $conference);
     }
 
     /**
@@ -108,36 +118,39 @@ class BaseController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param string $conferenceAlias
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store()
+    public function store($conferenceAlias)
     {
         $this->repository->create($this->request->all());
 
-        return $this->redirectTo('index');
+        return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);
     }
 
     /**
      * Display the specified resource.
      *
+     * @param  string $conferenceAlias
      * @param  int $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($conferenceAlias, $id)
     {
-
         return $this->response->view($this->getViewName('show'), ['data' => $this->repository->findOrFail($id)]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
+     * @param  string $conferenceAlias
      * @param  int $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($conferenceAlias, $id)
     {
         return $this->response->view($this->getViewName('edit'), ['data' => $this->repository->findOrFail($id)]);
     }
@@ -145,29 +158,31 @@ class BaseController extends Controller
     /**
      * Update the specified resource in storage.
      *
+     * @param  string $conferenceAlias
      * @param  int $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update($conferenceAlias, $id)
     {
         $this->repository->updateRich($this->request->except('_method', '_token'), $id);
 
-        return $this->redirectTo('index');
+        return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
+     * @param  string $conferenceAlias
      * @param  int $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($conferenceAlias, $id)
     {
         $this->repository->delete($id);
 
-        return $this->redirectTo('index');
+        return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);
     }
 
     /**
@@ -224,12 +239,13 @@ class BaseController extends Controller
      * Redirect to url
      *
      * @param string $url
+     * @param array  $parameters
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    protected function redirectTo($url)
+    protected function redirectTo($url, $parameters = [])
     {
-        return $this->response->redirectToRoute($this->getRouteName() . "." . $url);
+        return $this->response->redirectToRoute($this->getRouteName() . "." . $url, $parameters);
     }
 
     /**

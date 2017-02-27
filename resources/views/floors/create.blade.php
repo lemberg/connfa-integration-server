@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="pull-left">
-                {!! Breadcrumbs::render('breadcrumbs', [['label'=> trans('Floor plans'), 'route' => 'floors.index'], ['label'=> trans('Create floor plan'), 'route' => 'floors.index']]) !!}
+                {!! Breadcrumbs::render('breadcrumbs', [['label'=> trans('Floor plans'), 'route' => 'floors.index', 'params' => ['conference_alias' => $conference->alias]], ['label'=> trans('Create floor plan'), 'route' => 'floors.index', 'params' => ['conference_alias' => $conference->alias]]]) !!}
             </div>
             <div class="x_panel">
                 <div class="x_title">
@@ -13,7 +13,7 @@
                 </div>
                 <div class="x_content">
                     <br/>
-                    {!! Form::open(['route' => ['floors.store'], 'files' => true, 'method' => 'POST', 'class' => 'form-horizontal form-label-left']) !!}
+                    {!! Form::open(['route' => ['floors.store', 'conference_alias' => $conference->alias], 'files' => true, 'method' => 'POST', 'class' => 'form-horizontal form-label-left']) !!}
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             {{ Form::label('name', trans('Name')." *", ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">

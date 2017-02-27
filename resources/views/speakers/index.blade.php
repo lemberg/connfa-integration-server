@@ -4,9 +4,9 @@
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="pull-left">
-                {!! Breadcrumbs::render('breadcrumbs', ['label'=> trans('Speakers'), 'route' => 'speakers.index']) !!}
+                {!! Breadcrumbs::render('breadcrumbs', ['label'=> trans('Speakers'), 'route' => 'speakers.index', 'params' => ['conference_alias' => $conference->alias]]) !!}
             </div>
-            {{ Html::link(route('speakers.create'), trans('Create speaker'), ['class' => 'btn btn-primary pull-right']) }}
+            {{ Html::link(route('speakers.create', ['conference_alias' => $conference->alias]), trans('Create speaker'), ['class' => 'btn btn-primary pull-right']) }}
             <div class="x_panel">
                 <div class="x_title">
                     <h2>{{ trans('Speakers') }}</h2>
@@ -39,7 +39,7 @@
         $('#users-table').DataTable({
             stateSave: true,
             serverSide: true,
-            ajax: '{!! route('speakers.data') !!}',
+            ajax: '{!! route('speakers.data', ['conference_alias' => $conference->alias]) !!}',
             columns: [
                 {data: 'id', name: 'id', width: '20px'},
                 {data: 'avatar', targets: 'no-sort', 'searchable': false, orderable: false, render: function (data, type, row) {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\CMS\Events;
 
 use App\Http\Requests\TypeRequest;
+use App\Repositories\ConferenceRepository;
 use App\Repositories\Event\TypeRepository;
 use App\Repositories\EventRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -31,25 +32,27 @@ class TypesController extends BaseController
      * @param TypeRepository $repository
      * @param ResponseFactory $response
      * @param EventRepository $event
+     * @param ConferenceRepository $conferenceRepository
      */
-    public function __construct(TypeRequest $request, TypeRepository $repository, ResponseFactory $response, EventRepository $event)
+    public function __construct(TypeRequest $request, TypeRepository $repository, ResponseFactory $response, EventRepository $event, ConferenceRepository $conferenceRepository)
     {
-        parent::__construct($request, $repository, $response);
+        parent::__construct($request, $repository, $response, $conferenceRepository);
         $this->event = $event;
     }
 
     /**
      * Overridden parent method, added delete image
      *
+     * @param  string $conferenceAlias
      * @param int $id
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy($conferenceAlias, $id)
     {
         $this->event->updateByField('type_id', $id);
         $this->repository->delete($id);
 
-        return $this->redirectTo('index');
+        return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);
     }
 }

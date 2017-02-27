@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\CMS;
 
 use App\Http\Requests;
+use App\Repositories\ConferenceRepository;
 use App\Http\Controllers\Controller;
 use App\Repositories\SettingsRepository;
 use App\Repositories\SpeakerRepository;
 use App\Repositories\EventRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 /**
  * Class DashboardController
@@ -33,20 +36,28 @@ class DashboardController extends Controller
     /**
      * DashboardController constructor.
      *
+     * @param Request $request
      * @param ResponseFactory $response
      * @param SpeakerRepository $speakers
      * @param EventRepository $repository
+     * @param ConferenceRepository $conferenceRepository
      */
     public function __construct(
+        Request $request,
         ResponseFactory $response,
         SpeakerRepository $speakers,
-        EventRepository $repository
+        EventRepository $repository,
+        ConferenceRepository $conferenceRepository
     ) {
         $this->middleware('auth');
         $this->response = $response;
         $this->speakers = $speakers;
         $this->repository = $repository;
         $this->isSetTimezone();
+
+        $conferenceAlias = $request->route()->getParameter('conference_alias');
+        $conference = $conferenceRepository->getByAlias($conferenceAlias);
+        View::share('conference', $conference);
     }
 
     /**
