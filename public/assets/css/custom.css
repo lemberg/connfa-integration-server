@@ -4853,3 +4853,14 @@ ul.widget_profile_box li{
   height: auto;
   width: 85px;
 }
+/* Conference template styles */
+.nav-md .container.body.conference .right_col,
+.nav-md .container.body.conference .top_nav,
+.nav-md .container.body.conference footer {
+  margin-left: 0;
+}
+
+.table .column-title.last {
+  width: 300px;
+}
+
