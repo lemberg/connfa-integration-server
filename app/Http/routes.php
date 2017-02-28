@@ -25,7 +25,10 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
     });
     $app->get('conferences/data', 'ConferencesController@getData')->name('conferences.data');
     $app->get('conferences', 'ConferencesController@index')->name('conferences.index');
+    $app->get('conferences/create', 'ConferencesController@create')->name('conferences.create');
+    $app->post('conferences', 'ConferencesController@store')->name('conferences.store');
     $app->get('conferences/{id}/edit', 'ConferencesController@edit')->name('conferences.edit');
+    $app->put('conferences/{id}', 'ConferencesController@update')->name('conferences.update');
     $app->delete('conferences/{id}', 'ConferencesController@destroy')->name('conferences.destroy');
 });
 

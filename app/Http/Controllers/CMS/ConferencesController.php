@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\CMS;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ConferenceRequest;
 use App\Repositories\ConferenceRepository;
-use Illuminate\Http\Request;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Yajra\Datatables\Datatables;
 
@@ -16,7 +16,7 @@ class ConferencesController extends Controller
 {
 
     /**
-     * @var Request
+     * @var ConferenceRequest
      */
     protected $request = null;
 
@@ -33,11 +33,11 @@ class ConferencesController extends Controller
     /**
      * BaseController constructor.
      *
-     * @param Request $request
+     * @param ConferenceRequest $request
      * @param ResponseFactory $response
      * @param ConferenceRepository $conferenceRepository
      */
-    public function __construct(Request $request, ResponseFactory $response, ConferenceRepository $conferenceRepository)
+    public function __construct(ConferenceRequest $request, ResponseFactory $response, ConferenceRepository $conferenceRepository)
     {
         $this->request = $request;
         $this->response = $response;
@@ -55,18 +55,54 @@ class ConferencesController extends Controller
     }
 
     /**
-     * Show edit form
+     * Show list of conferences.
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function create()
     {
-        /** @todo Stub */
-        return $this->response->view('conferences.edit', []);
+        return $this->response->view('conferences.create');
     }
 
     /**
-     * Delete conference
+     * Store a newly created conference in storage.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store()
+    {
+        $data = $this->request->all();
+        $this->conferenceRepository->create($this->checkAndMakeAlias($data));
+
+        return redirect()->route('conferences.index');
+    }
+
+    /**
+     * Show edit form
+     *
+     * @param integer $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        return $this->response->view('conferences.edit', ['data' => $this->conferenceRepository->findOrFail($id)]);
+    }
+
+    /**
+     * Update conference data.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update($id)
+    {
+       return redirect()->route('conferences.index');
+    }
+
+    /**
+     * Delete conference.
      *
      * @param integer $id
      *
@@ -75,6 +111,7 @@ class ConferencesController extends Controller
     public function destroy($id)
     {
         /** @todo Stub */
+
         return redirect()->route('conferences.index');
     }
 
@@ -90,6 +127,24 @@ class ConferencesController extends Controller
                 return view('conferences.actions', ['conference' => $data])->render();
             })
             ->make(true);
+    }
+
+    /**
+     * Check and set slug to alias
+     *
+     * @param array $data
+     *
+     * @return mixed
+     */
+    protected function checkAndMakeAlias($data)
+    {
+        if (empty($data['alias'])) {
+            $data['alias'] = str_slug($data['name']);
+        } else {
+            $data['alias'] = str_slug($data['alias']);
+        }
+
+        return $data;
     }
 
 }

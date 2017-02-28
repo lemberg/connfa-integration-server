@@ -10,7 +10,23 @@ Breadcrumbs::register('breadcrumbs', function ($breadcrumbs, $items) {
             foreach ($items as $item) {
                 $breadcrumbs->push($item['label'], route($item['route'], isset($item['params']) ? $item['params'] : []));
             }
-        }else{
+        } else {
+            $breadcrumbs->push($items['label'], route($items['route'], isset($items['params']) ? $items['params'] : []));
+        }
+    }
+});
+
+/**
+ * Conference breadcrumbs
+ */
+Breadcrumbs::register('conference_breadcrumbs', function ($breadcrumbs, $items) {
+    $breadcrumbs->push('Conferences', route('conferences.index'));
+    if (is_array($items)) {
+        if (!isset($items['label'])) {
+            foreach ($items as $item) {
+                $breadcrumbs->push($item['label'], route($item['route'], isset($item['params']) ? $item['params'] : []));
+            }
+        } else {
             $breadcrumbs->push($items['label'], route($items['route'], isset($items['params']) ? $items['params'] : []));
         }
     }

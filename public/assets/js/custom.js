@@ -280,6 +280,12 @@ $(document).ready(function () {
 		CKEDITOR.replace('editor');
 	}
 
+	// conferences
+    var conferenceAlias = $('.conference-form #alias');
+    if (conferenceAlias.length > 0) {
+        $("#name").syncTranslit({destination: "alias"});
+    }
+
 	// pages
 	var o = $('.page-from #alias');
 	if (o.length > 0) {
