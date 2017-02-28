@@ -98,7 +98,10 @@ class ConferencesController extends Controller
      */
     public function update($id)
     {
-       return redirect()->route('conferences.index');
+        $data = $this->request->all();
+        $this->conferenceRepository->updateRich($this->checkAndMakeAlias($data), $id);
+
+        return redirect()->route('conferences.index');
     }
 
     /**
@@ -111,7 +114,6 @@ class ConferencesController extends Controller
     public function destroy($id)
     {
         /** @todo Stub */
-
         return redirect()->route('conferences.index');
     }
 
