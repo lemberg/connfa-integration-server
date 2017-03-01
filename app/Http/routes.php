@@ -24,6 +24,8 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
         return redirect()->route('conferences.index');
     });
     $app->get('conferences/data', 'ConferencesController@getData')->name('conferences.data');
+    $app->get('conference/{id}/select', 'ConferencesController@select')->name('conferences.select');
+
     $app->get('conferences', 'ConferencesController@index')->name('conferences.index');
     $app->get('conferences/create', 'ConferencesController@create')->name('conferences.create');
     $app->post('conferences', 'ConferencesController@store')->name('conferences.store');

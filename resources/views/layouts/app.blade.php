@@ -62,6 +62,10 @@
                                     <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                                 </ul>
                             </li>
+                            <li>
+                                @inject('conferenceService', 'App\Services\ConferenceService')
+                                {{ Form::select('conference', $conferenceService->getList(), $conference->id, ['class' => 'form-control change-conference action-change-conference', 'data-url' => route('conferences.select', ['id' => '__id__'])]) }}
+                            </li>
                         @endif
                     </ul>
                 </nav>

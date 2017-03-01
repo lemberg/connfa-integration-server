@@ -340,6 +340,12 @@ $(document).ready(function () {
 	$('form').submit(function () {
 		$('input[type=submit]', $(this)).prop('disabled', true);
 	});
+
+	$('.action-change-conference').on('change', function (e) {
+		e.preventDefault();
+		var url = $(this).data('url').replace('__id__', $(this).val());
+		window.location.href = url;
+    })
 });
 
 /**

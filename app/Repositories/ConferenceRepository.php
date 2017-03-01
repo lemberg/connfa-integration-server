@@ -22,5 +22,15 @@ class ConferenceRepository extends BaseRepository
     {
         return $this->model->where('alias', '=', $alias)->first();
     }
+    /**
+     * Get all ordered by name
+     *
+     * @return mixed
+     */
+    public function getAllOrderedByName()
+    {
+        return $this->model->orderBy('name', 'asc')->get();
+    }
+
 
 }

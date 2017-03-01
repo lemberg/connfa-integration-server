@@ -132,6 +132,19 @@ class ConferencesController extends Controller
     }
 
     /**
+     * Select another conference.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function select($id)
+    {
+        $conference = $this->conferenceRepository->findOrFail($id);
+        return redirect()->route('dashboard', ['conference_alias' => $conference->alias]);
+    }
+
+    /**
      * Check and set slug to alias
      *
      * @param array $data
