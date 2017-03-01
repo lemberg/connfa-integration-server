@@ -113,7 +113,7 @@ class ConferencesController extends Controller
      */
     public function destroy($id)
     {
-        /** @todo Stub */
+        $this->conferenceRepository->delete($id);
         return redirect()->route('conferences.index');
     }
 

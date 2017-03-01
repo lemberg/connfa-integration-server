@@ -20,7 +20,7 @@ class ConferenceRepository extends BaseRepository
      */
     public function getByAlias($alias)
     {
-        return $this->model->where('alias', '=', $alias)->first();
+        return $this->model->where('alias', '=', $alias)->firstOrFail();
     }
     /**
      * Get all ordered by name
