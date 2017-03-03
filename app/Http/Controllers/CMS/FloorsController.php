@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\CMS;
 
 use App\Http\Requests\FloorRequest;
-use App\Repositories\ConferenceRepository;
 use App\Repositories\FloorRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
 
@@ -20,11 +19,10 @@ class FloorsController extends BaseController
      * @param FloorRequest $request
      * @param FloorRepository $repository
      * @param ResponseFactory $response
-     * @param ConferenceRepository $conferenceRepository
      */
-    public function __construct(FloorRequest $request, FloorRepository $repository, ResponseFactory $response,  ConferenceRepository $conferenceRepository)
+    public function __construct(FloorRequest $request, FloorRepository $repository, ResponseFactory $response)
     {
-        parent::__construct($request, $repository, $response, $conferenceRepository);
+        parent::__construct($request, $repository, $response);
     }
 
     /**
@@ -47,6 +45,7 @@ class FloorsController extends BaseController
         }
 
         $data['image'] = $path;
+        $data['conference_id'] = $this->conference->id;
         $this->repository->create($data);
 
         return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);

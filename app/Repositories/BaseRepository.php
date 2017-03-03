@@ -168,4 +168,16 @@ class BaseRepository extends Repository implements RepositoryInterface
     {
         return $this->model->firstOrCreate($parameters);
     }
+
+    /**
+     * Find items by conference
+     *
+     * @param integer $id
+     *
+     * @return mixed
+     */
+    public function findByConference($id)
+    {
+        return  $this->model->where('conference_id', $id);
+    }
 }

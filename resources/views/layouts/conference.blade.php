@@ -54,9 +54,6 @@
         <!-- /top navigation -->
         <!-- page content -->
         <div class="right_col" role="main">
-            @if(session()->has('settings'))
-                @include('partials/session-message')
-            @endif
             @yield('content')
         </div>
         <!-- /page content -->

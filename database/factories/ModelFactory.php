@@ -186,8 +186,9 @@ $factory->define(App\Models\Point::class, function (Faker\Generator $faker) use 
 });
 
 $factory->define(App\Models\Conference::class, function (Faker\Generator $faker) {
+    $name = $faker->name;
     return [
-        'name' => $faker->word,
-        'alias' => $faker->word
+        'name' => $name,
+        'alias' => str_slug($name)
     ];
 });

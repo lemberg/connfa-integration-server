@@ -30,12 +30,20 @@ class SpeakerRepository extends BaseRepository
     /**
      * Get limit last updated speakers
      *
+     * @param int $conferenceId
      * @param int $limit
      *
      * @return mixed
      */
-    public function getLimitLastUpdated($limit = 5)
+    public function getLimitLastUpdated($conferenceId, $limit = 5)
     {
-        return $this->model->orderBy('updated_at', 'DESC')->limit($limit)->get();
+        return $this->model
+            ->whereHas('events', function ($query) use ($conferenceId) {
+                $query->where('conference_id', $conferenceId);
+            })
+            ->orderBy('updated_at', 'DESC')
+            ->limit($limit)
+            ->get();
     }
+
 }

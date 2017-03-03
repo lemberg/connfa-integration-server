@@ -3,20 +3,13 @@
 namespace App\Http\Controllers\CMS;
 
 use App\Exceptions\DirectoryNotFoundException;
-use App\Models\Conference;
-use App\Repositories\ConferenceRepository;
 use App\Repositories\SettingsRepository;
 use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Requests;
 use App\Repositories\BaseRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\View;
 use Yajra\Datatables\Datatables;
-
-use Illuminate\Support\Facades\Route;
 
 /**
  * Class BaseController
@@ -65,20 +58,16 @@ class BaseController extends Controller
      * @param Request $request
      * @param BaseRepository $repository
      * @param ResponseFactory $response
-     * @param ConferenceRepository $conferenceRepository
      */
-    public function __construct(Request $request, BaseRepository $repository, ResponseFactory $response, ConferenceRepository $conferenceRepository)
+    public function __construct(Request $request, BaseRepository $repository, ResponseFactory $response)
     {
+        parent::__construct();
         $this->request = $request;
         $this->repository = $repository;
         $this->response = $response;
         $this->viewsFolder = $this->getViewsFolder();
         $this->routeName = $this->getRouteName();
         $this->isSetTimezone();
-
-        $conferenceAlias = $request->route()->getParameter('conference_alias');
-        $conference = $conferenceRepository->getByAlias($conferenceAlias);
-        View::share('conference', $conference);
     }
 
     /**
@@ -88,7 +77,9 @@ class BaseController extends Controller
      */
     public function index()
     {
-        return $this->response->view($this->getViewName('index'), ['data' => $this->repository->paginate(25)]);
+        return $this->response->view($this->getViewName('index'), [
+            'data' => $this->repository->findByConference($this->conference->id)->paginate(25)
+        ]);
     }
 
     /**
@@ -98,7 +89,7 @@ class BaseController extends Controller
      */
     public function getData()
     {
-        return Datatables::of($this->repository->all())
+        return Datatables::of($this->repository->findByConference($this->conference->id))
             ->addColumn('actions', function ($data) {
                 return view('partials/actions', ['route' => $this->getRouteName(), 'id' => $data->id]);
             })
@@ -124,7 +115,9 @@ class BaseController extends Controller
      */
     public function store($conferenceAlias)
     {
-        $this->repository->create($this->request->all());
+        $data = $this->request->all();
+        $data['conference_id'] = $this->conference->id;
+        $this->repository->create($data);
 
         return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);
     }
@@ -288,8 +281,9 @@ class BaseController extends Controller
      */
     private function isSetTimezone()
     {
+        /** @var SettingsRepository $settingsRepository */
         $settingsRepository = \App::make(SettingsRepository::class);
-        $settings = $settingsRepository->getAllSettingInSingleArray();
+        $settings = $settingsRepository->getAllSettingInSingleArray($this->conference->id);
         if (!isset($settings['timezone'])) {
             session(['settings' => true]);
         } elseif (session()->has('settings')) {

@@ -81,15 +81,16 @@ class EventRepository extends BaseRepository
     /**
      * Get events by type sort DESC and limit
      *
-     * @param $type
+     * @param int $conferenceId
+     * @param string $type
      * @param string $orderBy
      * @param int $limit
      *
      * @return mixed
      */
-    public function getEventByTypeOrderAndLimit($type, $orderBy = 'updated_at', $limit = 5)
+    public function getEventByTypeOrderAndLimit($conferenceId, $type, $orderBy = 'updated_at', $limit = 5)
     {
-        return $this->model->where(['event_type' => $type])->orderBy($orderBy, 'DESC')->limit($limit)->get();
+        return $this->model->where(['conference_id' => $conferenceId, 'event_type' => $type])->orderBy($orderBy, 'DESC')->limit($limit)->get();
     }
 
     /**

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\CMS\Events;
 
 use App\Http\Requests\LevelRequest;
-use App\Repositories\ConferenceRepository;
 use App\Repositories\Event\LevelRepository;
 use App\Repositories\EventRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -33,11 +32,10 @@ class LevelsController extends BaseController
      * @param LevelRepository $repository
      * @param ResponseFactory $response
      * @param EventRepository $event
-     * @param ConferenceRepository $conferenceRepository
      */
-    public function __construct(LevelRequest $request, LevelRepository $repository, ResponseFactory $response, EventRepository $event, ConferenceRepository $conferenceRepository)
+    public function __construct(LevelRequest $request, LevelRepository $repository, ResponseFactory $response, EventRepository $event)
     {
-        parent::__construct($request, $repository, $response, $conferenceRepository);
+        parent::__construct($request, $repository, $response);
         $this->event = $event;
     }
 

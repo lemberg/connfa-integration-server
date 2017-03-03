@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\CMS;
 
 use App\Http\Requests\UserRequest;
-use App\Repositories\ConferenceRepository;
 use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Support\Facades\Auth;
 
 /**
  * Class UsersController
@@ -28,17 +26,15 @@ class UsersController extends BaseController
      * @param UserRepository $repository
      * @param RoleRepository $roleRepository
      * @param ResponseFactory $response
-     * @param ConferenceRepository $conferenceRepository
      */
     public function __construct(
         UserRequest $request,
         UserRepository $repository,
         RoleRepository $roleRepository,
-        ResponseFactory $response,
-        ConferenceRepository $conferenceRepository
+        ResponseFactory $response
     ) {
         $this->roleRepository = $roleRepository;
-        parent::__construct($request, $repository, $response, $conferenceRepository);
+        parent::__construct($request, $repository, $response);
     }
 
     /**

@@ -67,6 +67,17 @@ class AddConferenceRelationsTable extends Migration
                 ->onDelete('cascade');
         });
 
+        Schema::table('speakers', function (Blueprint $table) {
+            $table
+                ->integer('conference_id')
+                ->unsigned()
+                ->index('conference_id')
+                ->foreign('conference_id')
+                ->references('id')
+                ->on('conferences')
+                ->onDelete('cascade');
+        });
+
         Schema::table('floors', function (Blueprint $table) {
             $table
                 ->integer('conference_id')

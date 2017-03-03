@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers\CMS;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\SettingRequest;
-use App\Repositories\ConferenceRepository;
 use App\Repositories\SettingsRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Support\Facades\View;
 
 /**
  * Class SettingsController
@@ -36,17 +33,13 @@ class SettingsController extends Controller
      * @param SettingRequest $request
      * @param SettingsRepository $repository
      * @param ResponseFactory $response\
-     * @param ConferenceRepository $conferenceRepository
      */
-    public function __construct(SettingRequest $request, SettingsRepository $repository, ResponseFactory $response, ConferenceRepository $conferenceRepository)
+    public function __construct(SettingRequest $request, SettingsRepository $repository, ResponseFactory $response)
     {
+        parent::__construct();
         $this->request = $request;
         $this->repository = $repository;
         $this->response = $response;
-
-        $conferenceAlias = $request->route()->getParameter('conference_alias');
-        $conference = $conferenceRepository->getByAlias($conferenceAlias);
-        View::share('conference', $conference);
     }
 
     /**
@@ -56,7 +49,7 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        return $this->response->view('settings.index', ['data' => $this->repository->getAllSettingInSingleArray()]);
+        return $this->response->view('settings.index', ['data' => $this->repository->getAllSettingInSingleArray($this->conference->id)]);
     }
 
     /**
@@ -67,7 +60,7 @@ class SettingsController extends Controller
     public function edit()
     {
         return $this->response->view('settings.edit', [
-            'data' => $this->repository->getAllSettingInSingleArray(),
+            'data' => $this->repository->getAllSettingInSingleArray($this->conference->id),
             'timezoneList' => $this->repository->getTimezoneList(),
         ]);
     }
@@ -81,7 +74,7 @@ class SettingsController extends Controller
      */
     public function update($conferenceAlias)
     {
-        $this->repository->saveSettings($this->request->except('_method', '_token'));
+        $this->repository->saveSettings($this->request->except('_method', '_token'), $this->conference->id);
         if (session()->has('settings')) {
             session()->forget('settings');
         }

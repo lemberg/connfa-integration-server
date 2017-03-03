@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\CMS;
 
 use App\Http\Requests\LocationRequest;
-use App\Repositories\ConferenceRepository;
+use App\Models\Location;
 use App\Repositories\LocationRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\View;
 
 /**
  * Class LocationsController
@@ -47,17 +45,13 @@ class LocationsController extends Controller
      * @param LocationRequest $request
      * @param LocationRepository $repository
      * @param ResponseFactory $response
-     * @param ConferenceRepository $conferenceRepository
      */
-    public function __construct(LocationRequest $request, LocationRepository $repository, ResponseFactory $response, ConferenceRepository $conferenceRepository)
+    public function __construct(LocationRequest $request, LocationRepository $repository, ResponseFactory $response)
     {
+        parent::__construct();
         $this->request = $request;
         $this->repository = $repository;
         $this->response = $response;
-
-        $conferenceAlias = $request->route()->getParameter('conference_alias');
-        $conference = $conferenceRepository->getByAlias($conferenceAlias);
-        View::share('conference', $conference);
     }
 
     /**
@@ -67,8 +61,11 @@ class LocationsController extends Controller
      */
     public function index()
     {
-        return $this->response->view($this->getViewName('index'),
-            ['data' => $this->repository->firstOrNew([])]);
+        $location = $this->repository->findByConference($this->conference->id)->first();
+        if (!$location) {
+            $location = new Location();
+        }
+        return $this->response->view($this->getViewName('index'), ['data' => $location]);
     }
 
     /**
@@ -78,8 +75,11 @@ class LocationsController extends Controller
      */
     public function edit()
     {
-        return $this->response->view($this->getViewName('edit'),
-            ['data' => $this->repository->firstOrNew([])]);
+        $location = $this->repository->findByConference($this->conference->id)->first();
+        if (!$location) {
+            $location = new Location();
+        }
+        return $this->response->view($this->getViewName('edit'), ['data' => $location]);
     }
 
     /** Update the specified resource in storage.
@@ -90,7 +90,12 @@ class LocationsController extends Controller
      */
     public function update($conferenceAlias)
     {
-        $location = $this->repository->firstOrCreate();
+        $location = $this->repository->findByConference($this->conference->id)->first();
+        if (!$location) {
+            $location = new Location();
+            $location->conference_id = $this->conference->id;
+            $location->save();
+        }
         $this->repository->updateRich($this->request->except('_method', '_token'), $location->id);
 
         return $this->response->redirectToRoute($this->routeName . '.index', ['conference_alias' => $conferenceAlias]);

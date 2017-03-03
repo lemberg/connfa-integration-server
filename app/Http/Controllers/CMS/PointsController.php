@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\CMS;
 
 use App\Http\Requests\PointRequest;
-use App\Repositories\ConferenceRepository;
 use App\Repositories\PointRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
 
@@ -19,11 +18,10 @@ class PointsController extends BaseController
      * @param PointRequest $request
      * @param PointRepository $repository
      * @param ResponseFactory $response
-     * @param ConferenceRepository $conferenceRepository
      */
-    public function __construct(PointRequest $request, PointRepository $repository, ResponseFactory $response, ConferenceRepository $conferenceRepository)
+    public function __construct(PointRequest $request, PointRepository $repository, ResponseFactory $response)
     {
-        parent::__construct($request, $repository, $response, $conferenceRepository);
+        parent::__construct($request, $repository, $response);
     }
 
     /**

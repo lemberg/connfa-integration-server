@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\CMS;
 
 use App\Http\Requests\SpeakerRequest;
-use App\Repositories\ConferenceRepository;
 use App\Repositories\SpeakerRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
 
@@ -20,11 +19,10 @@ class SpeakersController extends BaseController
      * @param SpeakerRequest $request
      * @param SpeakerRepository $repository
      * @param ResponseFactory $response
-     * @param ConferenceRepository $conferenceRepository
      */
-    public function __construct(SpeakerRequest $request, SpeakerRepository $repository, ResponseFactory $response, ConferenceRepository $conferenceRepository)
+    public function __construct(SpeakerRequest $request, SpeakerRepository $repository, ResponseFactory $response)
     {
-        parent::__construct($request, $repository, $response, $conferenceRepository);
+        parent::__construct($request, $repository, $response);
     }
 
     /**
@@ -47,6 +45,7 @@ class SpeakersController extends BaseController
         }
 
         $data['avatar'] = $path;
+        $data['conference_id'] = $this->conference->id;
         $this->repository->create($data);
 
         return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);

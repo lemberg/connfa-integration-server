@@ -41,5 +41,6 @@ class AppServiceProvider extends ServiceProvider
             return $fractal;
         });
 
+        $this->app->singleton('conference_service', \App\Services\ConferenceService::class);
     }
 }

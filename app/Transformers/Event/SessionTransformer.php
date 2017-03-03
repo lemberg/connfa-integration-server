@@ -3,7 +3,8 @@
 namespace App\Transformers\Event;
 
 use App\Repositories\SettingsRepository;
-use App\Transformers\EmbeddedTransformer as EmbeddedTransformer;
+use App\Transformers\EmbeddedTransformer;
+use Illuminate\Http\Request;
 
 class SessionTransformer implements EmbeddedTransformer
 {
@@ -13,12 +14,19 @@ class SessionTransformer implements EmbeddedTransformer
     protected $settingsRepository;
 
     /**
+     * @var Request
+     */
+    protected $request;
+
+    /**
      * SessionTransformer constructor.
      * @param SettingsRepository $settingsRepository
+     * @param Request            $request
      */
-    public function __construct(SettingsRepository $settingsRepository)
+    public function __construct(SettingsRepository $settingsRepository, Request $request)
     {
         $this->settingsRepository = $settingsRepository;
+        $this->request = $request;
     }
     /**
      * List of resources possible to include
@@ -42,7 +50,7 @@ class SessionTransformer implements EmbeddedTransformer
      */
     public function transform($event)
     {
-        $tz = $this->settingsRepository->getValueByKey('timezone', 'UTC');
+        $tz = $this->settingsRepository->getValueByKey('timezone', $this->request->route()->parameter('conference_alias'), 'UTC');
 
         $data = [
             'eventId'         => $event->id,

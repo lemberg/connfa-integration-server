@@ -55,12 +55,13 @@ class SettingsRepository extends BaseRepository
      *
      * @param $setting
      * @param $since
+     * @param integer $conferenceId
      *
      * @return mixed
      */
-    public function getByKeyWithDeleted($setting, $since = false)
+    public function getByKeyWithDeleted($setting, $since = false, $conferenceId)
     {
-        $settings = $this->model->withTrashed()->where('key', $setting);
+        $settings = $this->findByConference($conferenceId)->withTrashed()->where('key', $setting);
 
         if ($since) {
             $settings->where('updated_at', '>=', $since->toDateTimeString());
@@ -69,9 +70,16 @@ class SettingsRepository extends BaseRepository
         return $settings->first();
     }
 
-    public function getByKey($setting)
+    /**
+     * Get setting value by key
+     *
+     * @param string $setting
+     * @param integer $conferenceId
+     * @return mixed
+     */
+    public function getByKey($setting, $conferenceId)
     {
-        $settings = $this->model->where('key', $setting);
+        $settings = $this->findByConference($conferenceId)->where('key', $setting);
 
         return $settings->first();
     }
@@ -79,18 +87,21 @@ class SettingsRepository extends BaseRepository
     /**
      * Create twitter objects
      *
-     * @param $data
+     * @param array $data
+     * @param integer $conferenceId
      */
-    public function createTwitter($data)
+    public function createTwitter($data, $conferenceId)
     {
         if (array_get($data, 'twitterSearchQuery')) {
-            $setting = $this->getByKey('twitterSearchQuery');
+            $setting = $this->getByKey('twitterSearchQuery', $conferenceId);
             $setting->value = array_get($data, 'twitterSearchQuery');
+            $setting->conference_id = $conferenceId;
             $setting->save();
         }
         if (array_get($data, 'twitterWidget')) {
-            $setting = $this->getByKey('twitterWidget');
+            $setting = $this->getByKey('twitterWidget', $conferenceId);
             $setting->value = array_get($data, 'twitterWidget');
+            $setting->conference_id = $conferenceId;
             $setting->save();
         }
     }
@@ -99,17 +110,18 @@ class SettingsRepository extends BaseRepository
      * Save settings
      *
      * @param array $settings
+     * @param int $conferenceId
      *
      * @return mixed
      */
-    public function saveSettings(array $settings = [])
+    public function saveSettings(array $settings = [], $conferenceId)
     {
         if (empty($settings)) {
             return false;
         }
 
         foreach ($settings as $key => $value) {
-            $setting = $this->getByKey($key);
+            $setting = $this->getByKey($key, $conferenceId);
             if ($key == 'timezone' && $setting && $setting->value != $value) {
                 $this->eventRepository->forceUpdateAllEvents();
             }
@@ -117,6 +129,7 @@ class SettingsRepository extends BaseRepository
                 $setting = new Setting();
                 $setting->key = $key;
                 $setting->value = $value;
+                $setting->conference_id = $conferenceId;
             } else {
                 $setting->value = $value;
             }
@@ -142,12 +155,14 @@ class SettingsRepository extends BaseRepository
     /**
      * Get settings in single array
      *
+     * @param int $conferenceId
+     *
      * @return array
      */
-    public function getAllSettingInSingleArray()
+    public function getAllSettingInSingleArray($conferenceId)
     {
         $transformSettings = [];
-        $settings = $this->model->all()->toArray();
+        $settings = $this->findByConference($conferenceId)->get()->toArray();
         if (!empty($settings)) {
             foreach ($settings as $setting) {
                 $transformSettings[$setting['key']] = $setting['value'];
@@ -161,13 +176,14 @@ class SettingsRepository extends BaseRepository
      * Get value of setting by key or return default vale
      *
      * @param string $key
+     * @param integer $conferenceId
      * @param string|null $default
      *
      * @return string
      */
-    public function getValueByKey($key, $default = null)
+    public function getValueByKey($key, $conferenceId, $default = null)
     {
-        $setting = $this->getByKey($key);
+        $setting = $this->getByKey($key, $conferenceId);
 
         return $setting ? $setting->value : $default;
     }
