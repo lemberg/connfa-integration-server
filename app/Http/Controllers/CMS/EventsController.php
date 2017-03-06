@@ -76,15 +76,6 @@ class EventsController extends BaseController
      */
     public function index()
     {
-        /**
-         * @todo temp
-         */
-        $t1 = $this->getConference();
-        $t2 = $this->getConference();
-        $t3 = $this->getConference();
-        $t4 = $this->getConference();
-        $t5 = $this->getConference();
-        $t6 = $this->getConference();
         return $this->response->view($this->getViewName('index'));
     }
 
