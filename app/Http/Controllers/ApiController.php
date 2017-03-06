@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Conference;
 use Carbon\Carbon;
 use Dingo\Api\Routing\Helpers;
 use Illuminate\Contracts\Container\Container;
@@ -29,11 +28,6 @@ class ApiController extends Controller
     protected $app;
 
     /**
-     * @var Conference
-     */
-    protected $conference;
-
-    /**
      * ApiController constructor.
      *
      * @param Request $request
@@ -50,8 +44,6 @@ class ApiController extends Controller
             $this->since = Carbon::parse($since);
         }
 
-        $this->conference = $this->app->make('conference_service')->getModel();
-
     }
 
     /**
@@ -65,4 +57,5 @@ class ApiController extends Controller
             throw new HttpException(304);
         }
     }
+
 }

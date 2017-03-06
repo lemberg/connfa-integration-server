@@ -60,10 +60,10 @@ class DashboardController extends Controller
     public function index()
     {
         return $this->response->view('dashboard', [
-            'speakers' => $this->speakers->getLimitLastUpdated($this->conference->id),
-            'sessions' => $this->repository->getEventByTypeOrderAndLimit($this->conference->id, 'session'),
-            'social' => $this->repository->getEventByTypeOrderAndLimit($this->conference->id, 'social'),
-            'bofs' => $this->repository->getEventByTypeOrderAndLimit($this->conference->id, 'bof'),
+            'speakers' => $this->speakers->getLimitLastUpdated($this->getConference()->id),
+            'sessions' => $this->repository->getEventByTypeOrderAndLimit($this->getConference()->id, 'session'),
+            'social' => $this->repository->getEventByTypeOrderAndLimit($this->getConference()->id, 'social'),
+            'bofs' => $this->repository->getEventByTypeOrderAndLimit($this->getConference()->id, 'bof'),
         ]);
     }
 
@@ -75,7 +75,7 @@ class DashboardController extends Controller
     private function isSetTimezone()
     {
         $settingsRepository = \App::make(SettingsRepository::class);
-        $settings = $settingsRepository->getAllSettingInSingleArray($this->conference->id);
+        $settings = $settingsRepository->getAllSettingInSingleArray($this->getConference()->id);
         if (!isset($settings['timezone'])) {
             session(['settings' => true]);
         } elseif (session()->has('settings')) {

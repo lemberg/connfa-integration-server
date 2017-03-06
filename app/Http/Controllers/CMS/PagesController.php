@@ -34,7 +34,7 @@ class PagesController extends BaseController
     public function store($conferenceAlias)
     {
         $data = $this->request->all();
-        $data['conference_id'] = $this->conference->id;
+        $data['conference_id'] = $this->getConference()->id;
         $this->repository->create($this->checkAndMakeAlias($data));
 
         return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);

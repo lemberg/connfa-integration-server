@@ -61,7 +61,7 @@ class LocationsController extends Controller
      */
     public function index()
     {
-        $location = $this->repository->findByConference($this->conference->id)->first();
+        $location = $this->repository->findByConference($this->getConference()->id)->first();
         if (!$location) {
             $location = new Location();
         }
@@ -75,7 +75,7 @@ class LocationsController extends Controller
      */
     public function edit()
     {
-        $location = $this->repository->findByConference($this->conference->id)->first();
+        $location = $this->repository->findByConference($this->getConference()->id)->first();
         if (!$location) {
             $location = new Location();
         }
@@ -90,10 +90,10 @@ class LocationsController extends Controller
      */
     public function update($conferenceAlias)
     {
-        $location = $this->repository->findByConference($this->conference->id)->first();
+        $location = $this->repository->findByConference($this->getConference()->id)->first();
         if (!$location) {
             $location = new Location();
-            $location->conference_id = $this->conference->id;
+            $location->conference_id = $this->getConference()->id;
             $location->save();
         }
         $this->repository->updateRich($this->request->except('_method', '_token'), $location->id);

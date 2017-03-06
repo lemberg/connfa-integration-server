@@ -78,7 +78,7 @@ class BaseController extends Controller
     public function index()
     {
         return $this->response->view($this->getViewName('index'), [
-            'data' => $this->repository->findByConference($this->conference->id)->paginate(25)
+            'data' => $this->repository->findByConference($this->getConference()->id)->paginate(25)
         ]);
     }
 
@@ -89,7 +89,7 @@ class BaseController extends Controller
      */
     public function getData()
     {
-        return Datatables::of($this->repository->findByConference($this->conference->id))
+        return Datatables::of($this->repository->findByConference($this->getConference()->id))
             ->addColumn('actions', function ($data) {
                 return view('partials/actions', ['route' => $this->getRouteName(), 'id' => $data->id]);
             })
@@ -116,7 +116,7 @@ class BaseController extends Controller
     public function store($conferenceAlias)
     {
         $data = $this->request->all();
-        $data['conference_id'] = $this->conference->id;
+        $data['conference_id'] = $this->getConference()->id;
         $this->repository->create($data);
 
         return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);
@@ -283,7 +283,7 @@ class BaseController extends Controller
     {
         /** @var SettingsRepository $settingsRepository */
         $settingsRepository = \App::make(SettingsRepository::class);
-        $settings = $settingsRepository->getAllSettingInSingleArray($this->conference->id);
+        $settings = $settingsRepository->getAllSettingInSingleArray($this->getConference()->id);
         if (!isset($settings['timezone'])) {
             session(['settings' => true]);
         } elseif (session()->has('settings')) {

@@ -44,6 +44,7 @@ class PointsController extends BaseController
         }
 
         $data['image'] = $path;
+        $data['conference_id'] = $this->getConference()->id;
         $this->repository->create($data);
 
         return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);

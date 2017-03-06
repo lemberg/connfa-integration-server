@@ -24,8 +24,8 @@ class PagesController extends ApiController
         $response = [
             'info'  => $pages,
             'title' => [
-                'titleMajor' => $settingsRepository->getValueByKey('titleMajor', $this->conference->id),
-                'titleMinor' => $settingsRepository->getValueByKey('titleMinor', $this->conference->id),
+                'titleMajor' => $settingsRepository->getValueByKey('titleMajor', $this->getConference()->id),
+                'titleMinor' => $settingsRepository->getValueByKey('titleMinor', $this->getConference()->id),
             ]
         ];
 

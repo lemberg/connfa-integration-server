@@ -76,6 +76,15 @@ class EventsController extends BaseController
      */
     public function index()
     {
+        /**
+         * @todo temp
+         */
+        $t1 = $this->getConference();
+        $t2 = $this->getConference();
+        $t3 = $this->getConference();
+        $t4 = $this->getConference();
+        $t5 = $this->getConference();
+        $t6 = $this->getConference();
         return $this->response->view($this->getViewName('index'));
     }
 
@@ -87,10 +96,10 @@ class EventsController extends BaseController
     public function create()
     {
         return $this->response->view($this->getViewName('create'), [
-            'speakers' => $this->speakers->findByConference($this->conference->id)->get()->pluck('full_name', 'id')->toArray(),
-            'levels' => $this->levels->findByConference($this->conference->id)->get()->pluck('name', 'id')->toArray(),
-            'types' => $this->types->findByConference($this->conference->id)->get()->pluck('name', 'id')->toArray(),
-            'tracks' => $this->tracks->findByConference($this->conference->id)->get()->pluck('name', 'id')->toArray(),
+            'speakers' => $this->speakers->findByConference($this->getConference()->id)->get()->pluck('full_name', 'id')->toArray(),
+            'levels' => $this->levels->findByConference($this->getConference()->id)->get()->pluck('name', 'id')->toArray(),
+            'types' => $this->types->findByConference($this->getConference()->id)->get()->pluck('name', 'id')->toArray(),
+            'tracks' => $this->tracks->findByConference($this->getConference()->id)->get()->pluck('name', 'id')->toArray(),
         ]);
     }
 
@@ -105,7 +114,7 @@ class EventsController extends BaseController
     {
         $data = $this->request->all();
         $data['event_type'] = $this->eventType;
-        $data['conference_id'] = $this->conference->id;
+        $data['conference_id'] = $this->getConference()->id;
         $event = $this->repository->create($data);
         $event->speakers()->sync(array_get($data, 'speakers', []));
 
@@ -124,10 +133,10 @@ class EventsController extends BaseController
     {
         return $this->response->view($this->getViewName('edit'), [
             'data' => $this->repository->findOrFail($id),
-            'speakers' => $this->speakers->findByConference($this->conference->id)->get()->pluck('full_name', 'id')->toArray(),
-            'levels' => $this->levels->findByConference($this->conference->id)->get()->pluck('name', 'id')->toArray(),
-            'types' => $this->types->findByConference($this->conference->id)->get()->pluck('name', 'id')->toArray(),
-            'tracks' => $this->tracks->findByConference($this->conference->id)->get()->pluck('name', 'id')->toArray(),
+            'speakers' => $this->speakers->findByConference($this->getConference()->id)->get()->pluck('full_name', 'id')->toArray(),
+            'levels' => $this->levels->findByConference($this->getConference()->id)->get()->pluck('name', 'id')->toArray(),
+            'types' => $this->types->findByConference($this->getConference()->id)->get()->pluck('name', 'id')->toArray(),
+            'tracks' => $this->tracks->findByConference($this->getConference()->id)->get()->pluck('name', 'id')->toArray(),
         ]);
     }
 
@@ -153,7 +162,7 @@ class EventsController extends BaseController
      */
     public function getData()
     {
-        return Datatables::of($this->repository->findWhere(['event_type' => $this->eventType, 'conference_id' => $this->conference->id]))
+        return Datatables::of($this->repository->findWhere(['event_type' => $this->eventType, 'conference_id' => $this->getConference()->id]))
             ->addColumn('actions', function ($data) {
                 return view('partials/actions', ['route' => $this->getRouteName(), 'id' => $data->id]);
             })

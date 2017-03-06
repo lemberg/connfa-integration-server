@@ -45,7 +45,7 @@ class SpeakersController extends BaseController
         }
 
         $data['avatar'] = $path;
-        $data['conference_id'] = $this->conference->id;
+        $data['conference_id'] = $this->getConference()->id;
         $this->repository->create($data);
 
         return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);

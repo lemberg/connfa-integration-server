@@ -49,7 +49,7 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        return $this->response->view('settings.index', ['data' => $this->repository->getAllSettingInSingleArray($this->conference->id)]);
+        return $this->response->view('settings.index', ['data' => $this->repository->getAllSettingInSingleArray($this->getConference()->id)]);
     }
 
     /**
@@ -60,7 +60,7 @@ class SettingsController extends Controller
     public function edit()
     {
         return $this->response->view('settings.edit', [
-            'data' => $this->repository->getAllSettingInSingleArray($this->conference->id),
+            'data' => $this->repository->getAllSettingInSingleArray($this->getConference()->id),
             'timezoneList' => $this->repository->getTimezoneList(),
         ]);
     }
@@ -74,7 +74,7 @@ class SettingsController extends Controller
      */
     public function update($conferenceAlias)
     {
-        $this->repository->saveSettings($this->request->except('_method', '_token'), $this->conference->id);
+        $this->repository->saveSettings($this->request->except('_method', '_token'), $this->getConference()->id);
         if (session()->has('settings')) {
             session()->forget('settings');
         }

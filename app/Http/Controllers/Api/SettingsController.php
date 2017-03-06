@@ -33,7 +33,7 @@ class SettingsController extends ApiController
      */
     public function show($setting, SettingsRepository $repository)
     {
-        $value = $repository->getByKeyWithDeleted($setting, $this->since, $this->conference->id);
+        $value = $repository->getByKeyWithDeleted($setting, $this->since, $this->getConference()->id);
         $this->checkModified($value);
 
         return $this->response->array([$setting => $value]);
