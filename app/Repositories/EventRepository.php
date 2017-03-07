@@ -45,19 +45,18 @@ class EventRepository extends BaseRepository
     /**
      * Update with Speakers
      *
-     * @param $id
+     * @param $event
      * @param $data
      *
      * @return mixed
      */
-    public function updateWithSpeakers($id, $data)
+    public function updateWithSpeakers($event, $data)
     {
-        $event = $this->findOrFail($id);
         $speakers = $event->speakers()->sync(array_get($data, 'speakers', []));
         if (array_get($speakers, 'attached') or array_get($speakers, 'detached') or array_get($speakers, 'updated')) {
             unset($data['speakers']);
 
-            return $event->where('id', '=', $id)->update($data);
+            return $event->where('id', '=', $event->id)->update($data);
         } else {
             $event->fill($data);
 

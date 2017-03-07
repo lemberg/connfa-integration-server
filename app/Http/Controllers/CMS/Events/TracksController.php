@@ -49,8 +49,10 @@ class TracksController extends BaseController
      */
     public function destroy($conferenceAlias, $id)
     {
-        $this->event->updateByField('track_id', $id);
-        $this->repository->delete($id);
+        $item = $this->repository->findOrFail($id);
+        $this->checkConference($item->conference_id);
+        $this->event->updateByField('track_id', $item->id);
+        $item->delete();
 
         return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);
     }

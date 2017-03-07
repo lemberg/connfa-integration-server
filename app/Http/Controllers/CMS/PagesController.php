@@ -50,8 +50,10 @@ class PagesController extends BaseController
      */
     public function update($conferenceAlias, $id)
     {
+        $item = $this->repository->findOrFail($id);
+        $this->checkConference($item->conference_id);
         $data = $this->request->all();
-        $this->repository->updateRich($this->checkAndMakeAlias($data), $id);
+        $item->fill($this->checkAndMakeAlias($data))->save();
 
         return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);
     }

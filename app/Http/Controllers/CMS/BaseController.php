@@ -132,7 +132,9 @@ class BaseController extends Controller
      */
     public function show($conferenceAlias, $id)
     {
-        return $this->response->view($this->getViewName('show'), ['data' => $this->repository->findOrFail($id)]);
+        $item = $this->repository->findOrFail($id);
+        $this->checkConference($item->conference_id);
+        return $this->response->view($this->getViewName('show'), ['data' => $item]);
     }
 
     /**
@@ -145,7 +147,9 @@ class BaseController extends Controller
      */
     public function edit($conferenceAlias, $id)
     {
-        return $this->response->view($this->getViewName('edit'), ['data' => $this->repository->findOrFail($id)]);
+        $item = $this->repository->findOrFail($id);
+        $this->checkConference($item->conference_id);
+        return $this->response->view($this->getViewName('edit'), ['data' => $item]);
     }
 
     /**
@@ -158,7 +162,9 @@ class BaseController extends Controller
      */
     public function update($conferenceAlias, $id)
     {
-        $this->repository->updateRich($this->request->except('_method', '_token'), $id);
+        $item = $this->repository->findOrFail($id);
+        $this->checkConference($item->conference_id);
+        $item->fill($this->request->except('_method', '_token'))->save();
 
         return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);
     }
@@ -173,7 +179,9 @@ class BaseController extends Controller
      */
     public function destroy($conferenceAlias, $id)
     {
-        $this->repository->delete($id);
+        $item = $this->repository->findOrFail($id);
+        $this->checkConference($item->conference_id);
+        $item->delete();
 
         return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);
     }

@@ -61,6 +61,9 @@ class SpeakersController extends BaseController
      */
     public function update($conferenceAlias, $id)
     {
+        $item = $this->repository->findOrFail($id);
+        $this->checkConference($item->conference_id);
+
         $data = $this->request->all();
         $path = array_get($data, 'avatar');
         if (array_get($data, 'avatar_delete')) {
@@ -78,7 +81,7 @@ class SpeakersController extends BaseController
         }
 
         $data['avatar'] = $path;
-        $this->repository->updateRich($data, $id);
+        $item->fill($data)->save();
 
         return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);
     }
@@ -94,6 +97,7 @@ class SpeakersController extends BaseController
     public function destroy($conferenceAlias, $id)
     {
         $repository = $this->repository->findOrFail($id);
+        $this->checkConference($repository->conference_id);
         if ($image = $repository->avatar) {
             $this->repository->deleteImage($image);
         }

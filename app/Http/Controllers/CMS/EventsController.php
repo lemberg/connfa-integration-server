@@ -122,8 +122,10 @@ class EventsController extends BaseController
      */
     public function edit($conferenceAlias, $id)
     {
+        $item = $this->repository->findOrFail($id);
+        $this->checkConference($item->conference_id);
         return $this->response->view($this->getViewName('edit'), [
-            'data' => $this->repository->findOrFail($id),
+            'data' => $item,
             'speakers' => $this->speakers->findByConference($this->getConference()->id)->get()->pluck('full_name', 'id')->toArray(),
             'levels' => $this->levels->findByConference($this->getConference()->id)->get()->pluck('name', 'id')->toArray(),
             'types' => $this->types->findByConference($this->getConference()->id)->get()->pluck('name', 'id')->toArray(),
@@ -141,7 +143,9 @@ class EventsController extends BaseController
      */
     public function update($conferenceAlias, $id)
     {
-        $this->repository->updateWithSpeakers($id, $this->request->except('_method', '_token'));
+        $item = $this->repository->findOrFail($id);
+        $this->checkConference($item->conference_id);
+        $this->repository->updateWithSpeakers($item, $this->request->except('_method', '_token'));
 
         return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);
     }

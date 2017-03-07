@@ -35,6 +35,9 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
 });
 
 $app->group(['middleware' => ['auth'], 'namespace' => 'CMS', 'prefix' => '{conference_alias}'], function ($app) {
+    $app->get('/', function () {
+        return redirect()->route('dashboard', ['conference_alias' => request()->route()->parameter('conference_alias')]);
+    });
     $app->get('speakers/data', 'SpeakersController@getData')->name('speakers.data');
     $app->get('sessions/data', 'Events\SessionsController@getData')->name('sessions.data');
     $app->get('bofs/data', 'Events\BofsController@getData')->name('bofs.data');

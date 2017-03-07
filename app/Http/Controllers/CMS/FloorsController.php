@@ -61,6 +61,8 @@ class FloorsController extends BaseController
      */
     public function update($conferenceAlias, $id)
     {
+        $item = $this->repository->findOrFail($id);
+        $this->checkConference($item->conference_id);
         $data = $this->request->all();
         $path = array_get($data, 'image');
         if (array_get($data, 'image_delete')) {
@@ -78,7 +80,7 @@ class FloorsController extends BaseController
         }
 
         $data['image'] = $path;
-        $this->repository->updateRich($data, $id);
+        $item->fill($data)->save();
 
         return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);
     }
@@ -94,6 +96,7 @@ class FloorsController extends BaseController
     public function destroy($conferenceAlias, $id)
     {
         $repository = $this->repository->findOrFail($id);
+        $this->checkConference($repository->conference_id);
         if ($image = $repository->image) {
             $this->repository->deleteImage($image);
         }

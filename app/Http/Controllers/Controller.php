@@ -14,6 +14,8 @@ class Controller extends BaseController
     use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
 
     /**
+     * Get Conference model
+     *
      * @return Conference
      */
     public function getConference()
