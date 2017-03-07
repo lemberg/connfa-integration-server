@@ -13,7 +13,7 @@
                 </div>
                 <div class="x_content">
                     <br />
-                    {!! Form::open(['route' => ['location.update', 'id' => $data->id, 'conference_alias' => $conference->alias], 'method' => 'PUT', 'class' => 'form-horizontal form-label-left']) !!}
+                    {!! Form::open(['route' => ['location.update', 'conference_alias' => $conference->alias], 'method' => 'PUT', 'class' => 'form-horizontal form-label-left']) !!}
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             {{ Form::label('name', trans('Name')." *", ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">

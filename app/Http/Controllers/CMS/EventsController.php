@@ -124,6 +124,7 @@ class EventsController extends BaseController
     {
         $item = $this->repository->findOrFail($id);
         $this->checkConference($item->conference_id);
+
         return $this->response->view($this->getViewName('edit'), [
             'data' => $item,
             'speakers' => $this->speakers->findByConference($this->getConference()->id)->get()->pluck('full_name', 'id')->toArray(),

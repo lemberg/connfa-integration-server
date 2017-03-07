@@ -114,6 +114,7 @@ class ConferencesController extends Controller
     public function destroy($id)
     {
         $this->conferenceRepository->delete($id);
+
         return redirect()->route('conferences.index');
     }
 
@@ -141,6 +142,7 @@ class ConferencesController extends Controller
     public function select($id)
     {
         $conference = $this->conferenceRepository->findOrFail($id);
+
         return redirect()->route('dashboard', ['conference_alias' => $conference->alias]);
     }
 

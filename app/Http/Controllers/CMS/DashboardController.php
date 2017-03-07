@@ -12,12 +12,8 @@ use Illuminate\Http\Request;
  * Class DashboardController
  * @package App\Http\Controllers\CMS
  */
-class DashboardController extends Controller
+class DashboardController extends BaseController
 {
-    /**
-     * @var ResponseFactory
-     */
-    protected $response;
 
     /**
      * @var SpeakerRepository
@@ -25,9 +21,9 @@ class DashboardController extends Controller
     protected $speakers;
 
     /**
-     * @var EventRepository
+     * @var string
      */
-    protected $repository;
+    protected $viewsFolder = '';
 
     /**
      * DashboardController constructor.
@@ -43,11 +39,9 @@ class DashboardController extends Controller
         SpeakerRepository $speakers,
         EventRepository $repository
     ) {
-        parent::__construct();
+        parent::__construct($request, $repository, $response);
         $this->middleware('auth');
-        $this->response = $response;
         $this->speakers = $speakers;
-        $this->repository = $repository;
 
         $this->isSetTimezone();
     }

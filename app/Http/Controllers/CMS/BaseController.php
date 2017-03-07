@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\CMS;
 
+use App\Http\Controllers\Controller;
 use App\Exceptions\DirectoryNotFoundException;
 use App\Repositories\SettingsRepository;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Support\Facades\View;
 use Exception;
 use Illuminate\Http\Request;
 use App\Repositories\BaseRepository;
@@ -61,13 +64,14 @@ class BaseController extends Controller
      */
     public function __construct(Request $request, BaseRepository $repository, ResponseFactory $response)
     {
-        parent::__construct();
         $this->request = $request;
         $this->repository = $repository;
         $this->response = $response;
         $this->viewsFolder = $this->getViewsFolder();
         $this->routeName = $this->getRouteName();
         $this->isSetTimezone();
+
+        View::share('conference', $this->getConference());
     }
 
     /**
@@ -134,6 +138,7 @@ class BaseController extends Controller
     {
         $item = $this->repository->findOrFail($id);
         $this->checkConference($item->conference_id);
+
         return $this->response->view($this->getViewName('show'), ['data' => $item]);
     }
 
@@ -149,6 +154,7 @@ class BaseController extends Controller
     {
         $item = $this->repository->findOrFail($id);
         $this->checkConference($item->conference_id);
+
         return $this->response->view($this->getViewName('edit'), ['data' => $item]);
     }
 
@@ -321,4 +327,19 @@ class BaseController extends Controller
 
         return false;
     }
+
+    /**
+     *
+     * Check if item belong to conference
+     *
+     * @param integer $id
+     * @throws NotFoundHttpException
+     */
+    protected function checkConference($id)
+    {
+        if (!$this->getConference() || $id !== $this->getConference()->id) {
+            throw new NotFoundHttpException();
+        }
+    }
+
 }

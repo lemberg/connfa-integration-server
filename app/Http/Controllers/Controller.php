@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\ConferenceService;
+use App\Models\Conference;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesResources;
-use App\Models\Conference;
 
 class Controller extends BaseController
 {
@@ -20,6 +21,6 @@ class Controller extends BaseController
      */
     public function getConference()
     {
-        return \App::make('conference_service')->getModel();
+        return \App::make(ConferenceService::class)->getModel();
     }
 }

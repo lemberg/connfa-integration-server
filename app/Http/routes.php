@@ -81,13 +81,13 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS', 'prefix' => '{confe
     $app->delete('speakers/{id}', 'SpeakersController@destroy')->name('speakers.destroy');
 
     // Points
-    $app->get('points', 'PointsController@index')->name('points.index');
-    $app->get('points/create', 'PointsController@create')->name('points.create');
-    $app->post('points', 'PointsController@store')->name('points.store');
-    $app->get('points/{id}', 'PointsController@show')->name('points.show');
-    $app->get('points/{id}/edit', 'PointsController@edit')->name('points.edit');
-    $app->put('points/{id}', 'PointsController@update')->name('points.update');
-    $app->delete('points/{id}', 'PointsController@destroy')->name('points.destroy');
+    // $app->get('points', 'PointsController@index')->name('points.index');
+    // $app->get('points/create', 'PointsController@create')->name('points.create');
+    // $app->post('points', 'PointsController@store')->name('points.store');
+    // $app->get('points/{id}', 'PointsController@show')->name('points.show');
+    // $app->get('points/{id}/edit', 'PointsController@edit')->name('points.edit');
+    // $app->put('points/{id}', 'PointsController@update')->name('points.update');
+    // $app->delete('points/{id}', 'PointsController@destroy')->name('points.destroy');
 
     // Floors
     $app->get('floors', 'FloorsController@index')->name('floors.index');
@@ -161,6 +161,7 @@ $api->version('v2', [
     'namespace'  => 'App\Http\Controllers\Api',
     'prefix'     => 'api/v2/{conference_alias}',
 ], function ($api) {
+    $api->get('getSpeakers', 'SpeakersController@index');
     $api->get('getTypes', 'EventTypesController@index');
     $api->get('getLevels', 'EventLevelsController@index');
     $api->get('getTracks', 'EventTracksController@index');

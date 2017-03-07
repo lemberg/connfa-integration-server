@@ -10,7 +10,7 @@ use Illuminate\Contracts\Routing\ResponseFactory;
  * Class SettingsController
  * @package App\Http\Controllers\CMS
  */
-class SettingsController extends Controller
+class SettingsController extends BaseController
 {
     /**
      * @var SettingRequest|null
@@ -36,10 +36,7 @@ class SettingsController extends Controller
      */
     public function __construct(SettingRequest $request, SettingsRepository $repository, ResponseFactory $response)
     {
-        parent::__construct();
-        $this->request = $request;
-        $this->repository = $repository;
-        $this->response = $response;
+        parent::__construct($request, $repository, $response);
     }
 
     /**
@@ -55,9 +52,12 @@ class SettingsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
+     * @param  string $conferenceAlias
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($conferenceAlias, $id = null)
     {
         return $this->response->view('settings.edit', [
             'data' => $this->repository->getAllSettingInSingleArray($this->getConference()->id),
@@ -69,10 +69,11 @@ class SettingsController extends Controller
      * Update the specified resource in storage.
      *
      * @param string  $conferenceAlias
+     * @param int     $id
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($conferenceAlias)
+    public function update($conferenceAlias, $id = null)
     {
         $this->repository->saveSettings($this->request->except('_method', '_token'), $this->getConference()->id);
         if (session()->has('settings')) {

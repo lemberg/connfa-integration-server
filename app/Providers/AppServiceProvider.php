@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use League\Fractal\Manager;
 use League\Fractal\Serializer\ArraySerializer;
 use Validator;
+use App\Services\ConferenceService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -41,6 +42,6 @@ class AppServiceProvider extends ServiceProvider
             return $fractal;
         });
 
-        $this->app->singleton('conference_service', \App\Services\ConferenceService::class);
+        $this->app->singleton(ConferenceService::class);
     }
 }

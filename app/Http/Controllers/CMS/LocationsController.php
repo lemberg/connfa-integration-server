@@ -11,26 +11,11 @@ use Illuminate\Contracts\Routing\ResponseFactory;
  * Class LocationsController
  * @package App\Http\Controllers\CMS
  */
-class LocationsController extends Controller
+class LocationsController extends BaseController
 {
-    /**
-     * @var LocationRequest|null
-     */
-    protected $request = null;
-
-    /**
-     * @var LocationRepository|null
-     */
-    protected $repository = null;
-
-    /**
-     * @var ResponseFactory|null
-     */
-    protected $response = null;
 
     /**
      * @var string
-     *
      */
     protected $viewsFolder = 'locations';
 
@@ -48,10 +33,7 @@ class LocationsController extends Controller
      */
     public function __construct(LocationRequest $request, LocationRepository $repository, ResponseFactory $response)
     {
-        parent::__construct();
-        $this->request = $request;
-        $this->repository = $repository;
-        $this->response = $response;
+        parent::__construct($request, $repository, $response);
     }
 
     /**
@@ -65,30 +47,37 @@ class LocationsController extends Controller
         if (!$location) {
             $location = new Location();
         }
+
         return $this->response->view($this->getViewName('index'), ['data' => $location]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
+     * @param  string $conferenceAlias
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($conferenceAlias, $id = null)
     {
         $location = $this->repository->findByConference($this->getConference()->id)->first();
         if (!$location) {
             $location = new Location();
         }
+
         return $this->response->view($this->getViewName('edit'), ['data' => $location]);
     }
 
-    /** Update the specified resource in storage.
+    /**
+     * Update the specified resource in storage.
      *
-     * @param string $conferenceAlias
+     * @param  string $conferenceAlias
+     * @param  int $id
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($conferenceAlias)
+    public function update($conferenceAlias, $id = null)
     {
         $location = $this->repository->findByConference($this->getConference()->id)->first();
         if (!$location) {
@@ -101,15 +90,4 @@ class LocationsController extends Controller
         return $this->response->redirectToRoute($this->routeName . '.index', ['conference_alias' => $conferenceAlias]);
     }
 
-    /**
-     * Get view name
-     *
-     * @param string $viewName
-     *
-     * @return string
-     */
-    protected function getViewName($viewName)
-    {
-        return $this->viewsFolder . '.' . $viewName;
-    }
 }
