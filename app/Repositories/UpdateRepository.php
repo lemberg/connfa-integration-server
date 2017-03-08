@@ -14,56 +14,60 @@ class UpdateRepository
      * @var array
      */
     protected $objectsMap = array(
-        'settings'  => array(
+        'settings'   => array(
             'id'         => 0,
             'repository' => SettingsRepository::class,
         ),
-        'types'     => array(
+        'types'      => array(
             'id'         => 1,
             'repository' => TypeRepository::class,
         ),
-        'levels'    => array(
+        'levels'     => array(
             'id'         => 2,
             'repository' => LevelRepository::class,
         ),
-        'tracks'    => array(
+        'tracks'     => array(
             'id'         => 3,
             'repository' => TrackRepository::class,
         ),
-        'speaker'   => array(
+        'speaker'    => array(
             'id'         => 4,
             'repository' => SpeakerRepository::class,
         ),
-        'locations' => array(
+        'locations'  => array(
             'id'         => 5,
             'repository' => LocationRepository::class,
         ),
-        'plans'     => array(
+        'plans'      => array(
             'id'         => 6,
             'repository' => FloorRepository::class,
         ),
-        'sessions'  => array(
+        'sessions'   => array(
             'id'         => 7,
             'repository' => EventRepository::class,
             'params'     => ['event_type' => 'session'],
         ),
-        'bofs'      => array(
+        'bofs'       => array(
             'id'         => 8,
             'repository' => EventRepository::class,
             'params'     => ['event_type' => 'bof'],
         ),
-        'social'    => array(
+        'social'     => array(
             'id'         => 9,
             'repository' => EventRepository::class,
             'params'     => ['event_type' => 'social'],
         ),
-        'poi'       => array(
+        'poi'        => array(
             'id'         => 10,
             'repository' => PointRepository::class,
         ),
-        'info'      => array(
+        'info'       => array(
             'id'         => 11,
             'repository' => PageRepository::class,
+        ),
+        'conference' => array(
+            'id'         => 12,
+            'repository' => ConferenceRepository::class,
         )
     );
 

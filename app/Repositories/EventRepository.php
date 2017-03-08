@@ -16,14 +16,15 @@ class EventRepository extends BaseRepository
     /**
      * Get events with deleted by type since $since param if passed
      *
-     * @param $type
+     * @param integer     $conferenceId
+     * @param string      $type
      * @param string|bool $since
      *
      * @return mixed
      */
-    public function getEventsByTypeWithDeleted($type, $since = false)
+    public function getEventsByTypeWithDeleted($conferenceId, $type, $since = false)
     {
-        $events = $this->model->withTrashed()->where('event_type', $type);
+        $events = $this->findByConference($conferenceId)->withTrashed()->where('event_type', $type);
 
         if ($since) {
             $events->where('updated_at', '>=', $since->toDateTimeString());

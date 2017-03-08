@@ -15,15 +15,16 @@ class LevelRepository extends BaseRepository
     /**
      * Get levels with deleted since $since param if passed
      *
+     * @param integer     $conferenceId
      * @param string|bool $since
      * @return mixed
      */
-    public function getLevelsWithDeleted($since = false)
+    public function getLevelsWithDeleted($conferenceId, $since = false)
     {
         if ($since) {
-            return $this->model->withTrashed()->where('updated_at', '>=', $since->toDateTimeString())->get();
+            return $this->findByConference($conferenceId)->withTrashed()->where('updated_at', '>=', $since->toDateTimeString())->get();
         }
 
-        return $this->model->withTrashed()->get();
+        return $this->findByConference($conferenceId)->withTrashed()->get();
     }
 }

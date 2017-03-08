@@ -106,7 +106,7 @@ class UsersController extends BaseController
 
         if (!$this->isRole()) {
 
-            return $this->response->redirectTo('/dashboard');
+            return $this->response->redirectTo(route('dashboard', ['conference_alias' => $conferenceAlias]));
         }
 
         return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);

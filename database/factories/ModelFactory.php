@@ -52,18 +52,20 @@ $getImagesFromFolder = function ($path = 'uploads/fakers') use(&$getImagesFromFo
  *
  * @return array
  */
-function uploadImages($countImages = 5, $path = 'uploads/fakers')
-{
-    $faker = Faker\Factory::create();
-    $path = public_path($path);
-    $images = [];
-    if (checkAndMakeDirectory($path)) {
-        for ($i = 0; $i < $countImages; $i++) {
-            $images[$i] = $faker->image($path, 200, 200);
+if (!function_exists('uploadImages')) {
+    function uploadImages($countImages = 5, $path = 'uploads/fakers')
+    {
+        $faker = Faker\Factory::create();
+        $path = public_path($path);
+        $images = [];
+        if (checkAndMakeDirectory($path)) {
+            for ($i = 0; $i < $countImages; $i++) {
+                $images[$i] = $faker->image($path, 200, 200);
+            }
         }
-    }
 
-    return $images;
+        return $images;
+    }
 }
 
 /**
@@ -73,14 +75,16 @@ function uploadImages($countImages = 5, $path = 'uploads/fakers')
  *
  * @return bool
  */
-function checkAndMakeDirectory($path)
-{
-    if (!File::exists($path)) {
+if (!function_exists('checkAndMakeDirectory')) {
+    function checkAndMakeDirectory($path)
+    {
+        if (!File::exists($path)) {
 
-        return File::makeDirectory($path, 0775, true);
+            return File::makeDirectory($path, 0775, true);
+        }
+
+        return true;
     }
-
-    return true;
 }
 
 $factory->define(App\Models\User::class, function (Faker\Generator $faker) {

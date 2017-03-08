@@ -15,15 +15,16 @@ class PageRepository extends BaseRepository
     /**
      * Get pages with deleted since $since param if passed
      *
+     * @param integer     $conferenceId
      * @param string|bool $since
      * @return mixed
      */
-    public function getPagesWithDeleted($since = false)
+    public function getPagesWithDeleted($conferenceId, $since = false)
     {
         if ($since) {
-            return $this->model->withTrashed()->where('updated_at', '>=', $since->toDateTimeString())->get();
+            return $this->findByConference($conferenceId)->withTrashed()->where('updated_at', '>=', $since->toDateTimeString())->get();
         }
 
-        return $this->model->withTrashed()->get();
+        return $this->findByConference($conferenceId)->withTrashed()->get();
     }
 }

@@ -16,7 +16,7 @@ class LocationsController extends ApiController
      */
     public function index(LocationRepository $repository)
     {
-        $locations = $repository->getLocationsWithDeleted($this->since);
+        $locations = $repository->getLocationsWithDeleted($this->getConference()->id, $this->since);
         $this->checkModified($locations);
 
         return $this->response->collection($locations, new LocationTransformer(), ['key' => 'locations']);

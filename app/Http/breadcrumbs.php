@@ -4,7 +4,7 @@
  * Breadcrumbs
  */
 Breadcrumbs::register('breadcrumbs', function ($breadcrumbs, $items) {
-    $breadcrumbs->push('Dashboard', route('dashboard', ['conference_alias' => request()->route()->getParameter('conference_alias')]));
+    $breadcrumbs->push('Dashboard', route('dashboard', ['conference_alias' => request()->route()->parameter('conference_alias')]));
     if (is_array($items)) {
         if (!isset($items['label'])) {
             foreach ($items as $item) {

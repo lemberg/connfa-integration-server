@@ -35,13 +35,14 @@ class SettingsRepository extends BaseRepository
     /**
      * Get settings with deleted since $since param if passed
      *
+     * @param integer     $conferenceId
      * @param string|bool $since
      *
      * @return mixed
      */
-    public function getSettingsWithDeleted($since = false)
+    public function getSettingsWithDeleted($conferenceId, $since = false)
     {
-        $settings = $this->model->withTrashed();
+        $settings = $this->findByConference($conferenceId)->withTrashed();
 
         if ($since) {
             $settings->where('updated_at', '>=', $since->toDateTimeString());
@@ -53,13 +54,13 @@ class SettingsRepository extends BaseRepository
     /**
      * Get Setting by key since $since param if passed
      *
+     * @param integer $conferenceId
      * @param $setting
      * @param $since
-     * @param integer $conferenceId
      *
      * @return mixed
      */
-    public function getByKeyWithDeleted($setting, $since = false, $conferenceId)
+    public function getByKeyWithDeleted($conferenceId, $setting, $since = false)
     {
         $settings = $this->findByConference($conferenceId)->withTrashed()->where('key', $setting);
 

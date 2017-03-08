@@ -18,7 +18,7 @@ class PagesController extends ApiController
      */
     public function index(PageRepository $repository, SettingsRepository $settingsRepository)
     {
-        $pages = $repository->getPagesWithDeleted($this->since);
+        $pages = $repository->getPagesWithDeleted($this->getConference()->id, $this->since);
         $this->checkModified($pages);
 
         $response = [
