@@ -17,7 +17,7 @@ class UpdatesController extends ApiController
      */
     public function index(UpdateRepository $repository)
     {
-        $changes = $repository->getLastUpdate($this->since);
+        $changes = $repository->getLastUpdate($this->getConference()->id, $this->since);
 
         if (empty($changes) && $this->since) {
             throw new HttpException(304);
