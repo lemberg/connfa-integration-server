@@ -71,11 +71,9 @@ class SpeakerRequest extends Request
                 $value *= 1024;
             case 'm':
                 $value *= 1024;
-            case 'k':
-                $value *= 1024;
         }
 
-        return $value / 1024;
+        return $value;
     }
 
 }
