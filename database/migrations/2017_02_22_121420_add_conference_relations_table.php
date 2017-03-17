@@ -16,7 +16,8 @@ class AddConferenceRelationsTable extends Migration
             $table
                 ->integer('conference_id')
                 ->unsigned()
-                ->index('conference_id')
+                ->default(null)
+                ->nullable()
                 ->foreign('conference_id')
                 ->references('id')
                 ->on('conferences')
@@ -27,7 +28,8 @@ class AddConferenceRelationsTable extends Migration
             $table
                 ->integer('conference_id')
                 ->unsigned()
-                ->index('conference_id')
+                ->default(null)
+                ->nullable()
                 ->foreign('conference_id')
                 ->references('id')
                 ->on('conferences')
@@ -38,7 +40,8 @@ class AddConferenceRelationsTable extends Migration
             $table
                 ->integer('conference_id')
                 ->unsigned()
-                ->index('conference_id')
+                ->default(null)
+                ->nullable()
                 ->foreign('conference_id')
                 ->references('id')
                 ->on('conferences')
@@ -49,7 +52,8 @@ class AddConferenceRelationsTable extends Migration
             $table
                 ->integer('conference_id')
                 ->unsigned()
-                ->index('conference_id')
+                ->default(null)
+                ->nullable()
                 ->foreign('conference_id')
                 ->references('id')
                 ->on('conferences')
@@ -60,7 +64,8 @@ class AddConferenceRelationsTable extends Migration
             $table
                 ->integer('conference_id')
                 ->unsigned()
-                ->index('conference_id')
+                ->default(null)
+                ->nullable()
                 ->foreign('conference_id')
                 ->references('id')
                 ->on('conferences')
@@ -71,7 +76,8 @@ class AddConferenceRelationsTable extends Migration
             $table
                 ->integer('conference_id')
                 ->unsigned()
-                ->index('conference_id')
+                ->default(null)
+                ->nullable()
                 ->foreign('conference_id')
                 ->references('id')
                 ->on('conferences')
@@ -82,7 +88,8 @@ class AddConferenceRelationsTable extends Migration
             $table
                 ->integer('conference_id')
                 ->unsigned()
-                ->index('conference_id')
+                ->default(null)
+                ->nullable()
                 ->foreign('conference_id')
                 ->references('id')
                 ->on('conferences')
@@ -93,7 +100,8 @@ class AddConferenceRelationsTable extends Migration
             $table
                 ->integer('conference_id')
                 ->unsigned()
-                ->index('conference_id')
+                ->default(null)
+                ->nullable()
                 ->foreign('conference_id')
                 ->references('id')
                 ->on('conferences')
@@ -104,7 +112,8 @@ class AddConferenceRelationsTable extends Migration
             $table
                 ->integer('conference_id')
                 ->unsigned()
-                ->index('conference_id')
+                ->default(null)
+                ->nullable()
                 ->foreign('conference_id')
                 ->references('id')
                 ->on('conferences')
@@ -115,7 +124,8 @@ class AddConferenceRelationsTable extends Migration
             $table
                 ->integer('conference_id')
                 ->unsigned()
-                ->index('conference_id')
+                ->default(null)
+                ->nullable()
                 ->foreign('conference_id')
                 ->references('id')
                 ->on('conferences')

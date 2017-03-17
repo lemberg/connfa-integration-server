@@ -28,11 +28,6 @@ class SettingsTableSeeder extends Seeder
      */
     public function run()
     {
-        /*Setting::set('titleMajor', 'Barcelona');
-        Setting::set('titleMinor', 'Drupalcon 2015');
-        Setting::set('twitterSearchQuery', '#drupalcon');
-        Setting::set('timezone', 'Europe/Kiev');*/
-
         $conference = Conference::first();
         $data = [
             [
@@ -64,6 +59,5 @@ class SettingsTableSeeder extends Seeder
         foreach ($data as $item) {
             $this->repository->create($item);
         }
-        Setting::save();
     }
 }

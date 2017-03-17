@@ -12,7 +12,7 @@ class EventsTextMakeNullable extends Migration
      */
     public function up()
     {
-        DB::statement('ALTER TABLE events CHANGE text text TEXT NULL');
+        //DB::statement('ALTER TABLE events CHANGE text text TEXT NULL');
     }
 
     /**
@@ -22,6 +22,6 @@ class EventsTextMakeNullable extends Migration
      */
     public function down()
     {
-        DB::statement('ALTER TABLE events CHANGE text text TEXT');
+        //DB::statement('ALTER TABLE events CHANGE text text TEXT');
     }
 }
