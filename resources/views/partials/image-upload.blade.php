@@ -37,14 +37,7 @@
     <div class="col-md-6 col-sm-6 col-xs-12">
         {{ Form::file($fieldName . '_file', ['accept' => 'image/*', 'class' => 'form-control col-md-7 col-xs-12']) }}
         <span class="help-block">
-            <?php
-            if(ini_get('post_max_size') > ini_get('upload_max_filesize')){
-                $size = ini_get('upload_max_filesize');
-            }else{
-                $size = ini_get('post_max_size');
-            }
-            ?>
-            <span>File size should be less than {{ $size }}. Available extensions: jpg, jpeg, bmp, png, gif.</span>
+            <span>File size should be less than {{ get_max_file_size() }}. Available extensions: jpg, jpeg, bmp, png, gif.</span>
         </span>
         @if ($errors->has($fieldName . '_file'))
             <span class="help-block">

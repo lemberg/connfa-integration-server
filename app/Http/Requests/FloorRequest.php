@@ -25,12 +25,11 @@ class FloorRequest extends Request
      */
     public function rules()
     {
-        $fileSize = 0;
-        if (ini_get('post_max_size') > ini_get('upload_max_filesize')) {
-            $fileSize = $this->convertSize(ini_get('upload_max_filesize'));
-        } else {
-            $fileSize = $this->convertSize(ini_get('post_max_size'));
-        }
+        $fileUploadSize = $this->convertSize(ini_get('upload_max_filesize'));
+        $fileMaxSize = $this->convertSize(ini_get('post_max_size'));
+
+        $fileSize = $fileMaxSize > $fileUploadSize ? $fileUploadSize : $fileMaxSize;
+
         $validation = [];
         if (in_array($this->method(), ['POST', 'PUT'])) {
             $request = $this->request->all();
