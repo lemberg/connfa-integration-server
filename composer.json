@@ -16,10 +16,10 @@
         "intervention/image": "dev-master",
         "davejamesmiller/laravel-breadcrumbs": "^3.0",
         "yajra/laravel-datatables-oracle": "~6.0",
-        "zizaco/entrust": "5.2.x-dev"
+        "zizaco/entrust": "5.2.x-dev",
+        "fzaninotto/faker": "~1.4"
     },
     "require-dev": {
-        "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~4.0",
         "symfony/css-selector": "2.8.*|3.0.*",
