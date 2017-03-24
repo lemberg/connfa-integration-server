@@ -32,8 +32,8 @@ class SpeakerRequest extends Request
                 'last_name' => 'required',
                 'website' => 'url',
                 'email' => 'between:3,64|email',
-                'image_file' => 'mimes:jpeg,bmp,png,gif|max:6000',
-                'image_url' => 'url',
+                'avatar_file' => 'mimes:jpeg,bmp,png,gif|max:4000',
+                'avatar_url' => 'url',
             ];
         }
 
@@ -51,4 +51,5 @@ class SpeakerRequest extends Request
             'website.url' => 'Not a valid URL format.',
         ];
     }
+
 }
