@@ -278,7 +278,8 @@ $(document).ready(function () {
 	var o = $('#editor');
 	if (o.length > 0) {
 		CKEDITOR.replace('editor', {
-            extraPlugins: 'justify'
+            extraPlugins: 'justify',
+            disallowedContent: 'img{width,height}'
 		});
 	}
 
