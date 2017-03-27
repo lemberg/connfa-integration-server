@@ -3,7 +3,7 @@
 use App\Models\Conference;
 use Illuminate\Database\Seeder;
 
-class FloorTableSeeder extends Seeder
+class FloorsTableSeeder extends Seeder
 {
 
     /**

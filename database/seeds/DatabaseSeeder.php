@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EventTracksTableSeeder::class);
         $this->call(EventsTableSeeder::class);
         $this->call(SettingsTableSeeder::class);
-        $this->call(FloorTableSeeder::class);
+        $this->call(FloorsTableSeeder::class);
         $this->call(PagesTableSeeder::class);
         $this->call(LocationsTableSeeder::class);
         $this->call(PointsTableSeeder::class);
