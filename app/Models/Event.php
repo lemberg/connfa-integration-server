@@ -36,6 +36,7 @@ class Event extends Model
         'event_type',
         'order',
         'updated_at',
+        'conference_id'
     ];
 
     protected $dates = ['start_at', 'end_at'];
@@ -58,6 +59,14 @@ class Event extends Model
     public function speakers()
     {
         return $this->belongsToMany(Speaker::class);
+    }
+
+    /**
+     * Get users with a certain role
+     */
+    public function schedules()
+    {
+        return $this->belongsToMany(Schedule::class, 'schedule_event');
     }
 
     public function getFormattedStartAt($tz)
