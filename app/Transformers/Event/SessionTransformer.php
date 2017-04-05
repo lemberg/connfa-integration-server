@@ -50,7 +50,7 @@ class SessionTransformer implements EmbeddedTransformer
      */
     public function transform($event)
     {
-        $tz = $this->settingsRepository->getValueByKey('timezone', $this->conferenceService->getModel()->alias, 'UTC');
+        $tz = $this->settingsRepository->getValueByKey('timezone', $this->conferenceService->getModel()->id, 'UTC');
 
         $data = [
             'eventId'         => $event->id,
