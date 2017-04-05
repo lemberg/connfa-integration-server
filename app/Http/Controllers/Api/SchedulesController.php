@@ -20,6 +20,7 @@ class SchedulesController extends ApiController
     {
         $codes = $this->request->query('codes', []);
         $schedules = $repository->findByCodes($codes);
+
         return $this->response->collection($schedules, new ScheduleTransformer(), ['key' => 'schedules']);
     }
 
