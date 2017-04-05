@@ -67,7 +67,11 @@ $api->version('v2', [
     $api->get('getInfo', 'PagesController@index');
     $api->get('getLocations', 'LocationsController@index');
     $api->get('getPOI', 'PointsController@index');
+
+    $api->get('getSchedules', 'SchedulesController@index');
     $api->post('createSchedule', 'SchedulesController@create');
     $api->put('updateSchedule', 'SchedulesController@update');
+
+
     $api->get('checkUpdates', 'UpdatesController@index');
 });

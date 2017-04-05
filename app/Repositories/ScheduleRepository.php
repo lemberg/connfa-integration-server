@@ -13,6 +13,8 @@ class ScheduleRepository extends BaseRepository
     }
 
     /**
+     * Generate unique code for new schedule
+     *
      * @param int $length
      * @return int
      */
@@ -22,13 +24,35 @@ class ScheduleRepository extends BaseRepository
         $max = (int) str_pad(9, $length, "9", STR_PAD_RIGHT);
 
         $code = mt_rand($min, $max);
-        $schedule = $this->model->where('code', '=', $code)->first();
+        $schedule = $this->findOneByCode($code);
         if ($schedule) {
 
             return $this->generateCode();
         }
 
         return $code;
+    }
+
+    /**
+     * Find one schedule by code
+     *
+     * @param int $code
+     * @return mixed
+     */
+    public function findOneByCode($code)
+    {
+        return $this->model->where('code', '=', $code)->first();
+    }
+
+    /**
+     * Find all by codes
+     *
+     * @param array $codes
+     * @return mixed
+     */
+    public function findByCodes(array $codes)
+    {
+        return $this->model->whereIn('code', $codes)->get();
     }
 
 }

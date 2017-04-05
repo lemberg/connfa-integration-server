@@ -5,19 +5,22 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\ApiController;
 use App\Models\Schedule;
 use App\Repositories\ScheduleRepository;
+use App\Transformers\ScheduleTransformer;
 
 class SchedulesController extends ApiController
 {
+
     /**
-     * Get schedule
+     * Get schedules
      *
-     * @param integer            $code
      * @param ScheduleRepository $repository
      * @return \Dingo\Api\Http\Response
      */
-    public function show($code, ScheduleRepository $repository)
+    public function index(ScheduleRepository $repository)
     {
-        return $this->response->array([]);
+        $codes = $this->request->query('codes', []);
+        $schedules = $repository->findByCodes($codes);
+        return $this->response->collection($schedules, new ScheduleTransformer(), ['key' => 'schedules']);
     }
 
     /**
@@ -36,4 +39,5 @@ class SchedulesController extends ApiController
 
         return $this->response->array(['code' => $schedule->code]);
     }
+
 }
