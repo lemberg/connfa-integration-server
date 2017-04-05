@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiController;
 use App\Models\Schedule;
 use App\Repositories\ScheduleRepository;
 use App\Transformers\ScheduleTransformer;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SchedulesController extends ApiController
 {
@@ -39,6 +40,18 @@ class SchedulesController extends ApiController
         $schedule->events()->attach($eventIds);
 
         return $this->response->array(['code' => $schedule->code]);
+    }
+
+    /**
+     * Create schedule
+     *
+     * @param ScheduleRepository $repository
+     * @return \Dingo\Api\Http\Response
+     */
+    public function update(ScheduleRepository $repository)
+    {
+
+        return $this->response->array(['code' => '']);
     }
 
 }
