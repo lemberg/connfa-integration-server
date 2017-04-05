@@ -39,6 +39,5 @@ class SchedulesTableSeeder extends Seeder
             $schedule->save();
             $schedule->events()->attach($this->faker->randomElements($eventIds, 5));
         }
-
     }
 }
