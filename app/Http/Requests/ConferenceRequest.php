@@ -28,13 +28,13 @@ class ConferenceRequest extends Request
         $validation = [];
         if ($this->method() == 'POST') {
             $validation = [
-                'name'  => 'required',
-                'alias' => 'required|unique:conferences,alias,NULL,id,deleted_at,NULL'
+                'name'  => 'required|max:100',
+                'alias' => 'required|max:100|unique:conferences,alias,NULL,id,deleted_at,NULL'
             ];
         } elseif ($this->method() == 'PUT') {
             $validation = [
-                'name'  => 'required',
-                'alias' => 'required|unique:conferences,alias,' . $this->route()->parameter('id') . ',id,deleted_at,NULL'
+                'name'  => 'required|max:100',
+                'alias' => 'required|max:100|unique:conferences,alias,' . $this->route()->parameter('id') . ',id,deleted_at,NULL'
             ];
         }
 
