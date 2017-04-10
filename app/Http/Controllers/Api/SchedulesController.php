@@ -21,6 +21,13 @@ class SchedulesController extends ApiController
      *     operationId="index",
      *     produces={"application/json"},
      *     @SWG\Parameter(
+     *         name="If-Modified-Since",
+     *         in="header",
+     *         required=false,
+     *         type="string",
+     *         description="Date, for example: Tue, 4 Apr 2017 09:50:24 +0000",
+     *     ),
+     *     @SWG\Parameter(
      *         name="codes[]",
      *         in="query",
      *         description="Array of codes",
@@ -50,7 +57,8 @@ class SchedulesController extends ApiController
     public function index(ScheduleRepository $repository)
     {
         $codes = $this->request->query('codes', []);
-        $schedules = $repository->findByCodes($codes);
+        $schedules = $repository->findByCodes($codes, $this->since);
+        $this->checkModified($schedules);
 
         return $this->response->collection($schedules, new ScheduleTransformer(), ['key' => 'schedules']);
     }
@@ -77,7 +85,7 @@ class SchedulesController extends ApiController
      *                 @SWG\Items(
      *                      type="integer",
      *                      format="int32",
-     *                      example=1212
+     *                      example=15
      *                 )
      *             )
      *         )

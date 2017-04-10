@@ -11,7 +11,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 /**
  * @SWG\Swagger(
  *     schemes={"http"},
- *     host="",
+ *     host="local.connfa",
  *     basePath="/api/v2",
  *     @SWG\Info(
  *          title="Connfa API",

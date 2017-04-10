@@ -48,10 +48,16 @@ class ScheduleRepository extends BaseRepository
      * Find all by codes
      *
      * @param array $codes
+     * @param string|null $since
      * @return mixed
      */
-    public function findByCodes(array $codes)
+    public function findByCodes(array $codes, $since = null)
     {
+        if ($since) {
+
+            return $this->model->where('updated_at', '>=', $since->toDateTimeString())->whereIn('code', $codes)->get();
+        }
+
         return $this->model->whereIn('code', $codes)->get();
     }
 
