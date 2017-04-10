@@ -5,6 +5,34 @@ namespace App\Transformers;
 use App\Models\Schedule;
 use League\Fractal\TransformerAbstract;
 
+/**
+ * Class ScheduleTransformer
+ * @package App\Transformers
+ *
+ *
+ *  @SWG\Definition(
+ *      definition="Transformers.ScheduleTransformer",
+ *      required={"code", "events"},
+ *      @SWG\Property(
+ *          property="code",
+ *          type="integer",
+ *          format="int32",
+ *          example=3518,
+ *          description="Schedule code"
+ *      ),
+ *      @SWG\Property(
+ *          property="events",
+ *          type="array",
+ *          description="List of events",
+ *          @SWG\Items(
+ *              type="integer",
+ *              format="int32",
+ *              example=54
+ *         )
+ *      )
+ *  )
+ *
+ */
 class ScheduleTransformer extends TransformerAbstract
 {
     /**
@@ -22,6 +50,8 @@ class ScheduleTransformer extends TransformerAbstract
     protected $defaultIncludes = [];
 
     /**
+     *
+     *
      * Transform object into a generic array
      *
      * @param Schedule $schedule

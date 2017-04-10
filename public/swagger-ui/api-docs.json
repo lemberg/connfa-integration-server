@@ -1,0 +1,128 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Connfa API",
+        "version": "2.0"
+    },
+    "host": "",
+    "basePath": "/api/v2",
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "paths": {
+        "/getSchedules": {
+            "get": {
+                "tags": [
+                    "Schedule"
+                ],
+                "summary": "Get all schedules",
+                "description": "Returns all schedules by codes",
+                "operationId": "index",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "codes[]",
+                        "in": "query",
+                        "description": "Array of codes",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        },
+                        "collectionFormat": "multi"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Schedules response",
+                        "schema": {
+                            "properties": {
+                                "schedules": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Transformers.ScheduleTransformer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/createSchedule": {
+            "post": {
+                "tags": [
+                    "Schedule"
+                ],
+                "summary": "Create schedule",
+                "description": "Create schedule",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Array of events id",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": 1212
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Schedules response",
+                        "schema": {
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "format": "int32",
+                                    "example": 2431
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Transformers.ScheduleTransformer": {
+            "required": [
+                "code",
+                "events"
+            ],
+            "properties": {
+                "code": {
+                    "description": "Schedule code",
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 3518
+                },
+                "events": {
+                    "description": "List of events",
+                    "type": "array",
+                    "items": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 54
+                    }
+                }
+            }
+        }
+    }
+}

@@ -12,6 +12,36 @@ class SchedulesController extends ApiController
 {
 
     /**
+     *
+     * @SWG\Get(
+     *     path="/getSchedules",
+     *     summary="Get all schedules",
+     *     tags={"Schedule"},
+     *     description="Returns all schedules by codes",
+     *     operationId="index",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         name="codes[]",
+     *         in="query",
+     *         description="Array of codes",
+     *         required=true,
+     *         type="array",
+     *         @SWG\Items(type="integer"),
+     *         collectionFormat="multi"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Schedules response",
+     *         @SWG\Schema(
+     *              @SWG\Property(
+     *                 property="schedules",
+     *                 type="array",
+     *                 @SWG\Items(ref="#/definitions/Transformers.ScheduleTransformer")
+     *             )
+     *         )
+     *     )
+     * )
+     *
      * Get schedules
      *
      * @param ScheduleRepository $repository
@@ -26,6 +56,46 @@ class SchedulesController extends ApiController
     }
 
     /**
+     *
+     *
+     * @SWG\Post(
+     *     path="/createSchedule",
+     *     summary="Create schedule",
+     *     tags={"Schedule"},
+     *     description="Create schedule",
+     *     operationId="create",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         name="body",
+     *         in="body",
+     *         description="Array of events id",
+     *         required=true,
+     *         @SWG\Schema(
+     *              @SWG\Property(
+     *                 property="data",
+     *                 type="array",
+     *                 @SWG\Items(
+     *                      type="integer",
+     *                      format="int32",
+     *                      example=1212
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Schedules response",
+     *         @SWG\Schema(
+     *              @SWG\Property(
+     *                 property="code",
+     *                 type="integer",
+     *                 format="int32",
+     *                 example=2431
+     *             )
+     *         )
+     *     )
+     * )
+     *
      * Create schedule
      *
      * @param ScheduleRepository $repository
