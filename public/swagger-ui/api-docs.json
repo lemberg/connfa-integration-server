@@ -43,10 +43,11 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Schedules response",
+                        "description": "Successful operation",
                         "schema": {
                             "properties": {
                                 "schedules": {
+                                    "description": "Get schedules",
                                     "type": "array",
                                     "items": {
                                         "$ref": "#/definitions/Transformers.ScheduleTransformer"
@@ -54,6 +55,9 @@
                                 }
                             }
                         }
+                    },
+                    "302": {
+                        "description": "No updates"
                     }
                 }
             }
@@ -78,6 +82,7 @@
                         "schema": {
                             "properties": {
                                 "data": {
+                                    "description": "Create schedule",
                                     "type": "array",
                                     "items": {
                                         "type": "integer",
@@ -91,16 +96,77 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Schedules response",
+                        "description": "Successful operation, schedule created",
                         "schema": {
                             "properties": {
                                 "code": {
+                                    "description": "Successful operation, schedule created",
                                     "type": "integer",
                                     "format": "int32",
                                     "example": 2431
                                 }
                             }
                         }
+                    }
+                }
+            }
+        },
+        "/updateSchedule/{code}": {
+            "put": {
+                "tags": [
+                    "Schedule"
+                ],
+                "summary": "Update schedule",
+                "description": "Update schedule",
+                "operationId": "update",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "code",
+                        "in": "path",
+                        "description": "Schedule unique code",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Array of events id",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "data": {
+                                    "description": "Update schedule",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": 15
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation, schedule updated",
+                        "schema": {
+                            "properties": {
+                                "code": {
+                                    "description": "Update schedule",
+                                    "type": "integer",
+                                    "format": "int32",
+                                    "example": 2431
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Schedule not found"
                     }
                 }
             }

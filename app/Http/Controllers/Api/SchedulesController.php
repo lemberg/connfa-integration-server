@@ -12,6 +12,7 @@ class SchedulesController extends ApiController
 {
 
     /**
+     *  Get schedules
      *
      * @SWG\Get(
      *     path="/getSchedules",
@@ -38,7 +39,7 @@ class SchedulesController extends ApiController
      *     ),
      *     @SWG\Response(
      *         response=200,
-     *         description="Schedules response",
+     *         description="Successful operation",
      *         @SWG\Schema(
      *              @SWG\Property(
      *                 property="schedules",
@@ -46,10 +47,13 @@ class SchedulesController extends ApiController
      *                 @SWG\Items(ref="#/definitions/Transformers.ScheduleTransformer")
      *             )
      *         )
+     *     ),
+     *     @SWG\Response(
+     *         response=302,
+     *         description="No updates"
      *     )
      * )
      *
-     * Get schedules
      *
      * @param ScheduleRepository $repository
      * @return \Dingo\Api\Http\Response
@@ -64,7 +68,7 @@ class SchedulesController extends ApiController
     }
 
     /**
-     *
+     * Create schedule
      *
      * @SWG\Post(
      *     path="/createSchedule",
@@ -92,19 +96,19 @@ class SchedulesController extends ApiController
      *     ),
      *     @SWG\Response(
      *         response=200,
-     *         description="Schedules response",
+     *         description="Successful operation, schedule created",
      *         @SWG\Schema(
      *              @SWG\Property(
      *                 property="code",
      *                 type="integer",
      *                 format="int32",
-     *                 example=2431
+     *                 example=2431,
+     *                 description="Successful operation, schedule created",
      *             )
      *         )
      *     )
      * )
      *
-     * Create schedule
      *
      * @param ScheduleRepository $repository
      * @return \Dingo\Api\Http\Response
@@ -121,15 +125,93 @@ class SchedulesController extends ApiController
     }
 
     /**
-     * Create schedule
+     * Update schedule
      *
+     * @SWG\Put(
+     *     path="/updateSchedule/{code}",
+     *     summary="Update schedule",
+     *     tags={"Schedule"},
+     *     description="Update schedule",
+     *     operationId="update",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="Schedule unique code",
+     *         in="path",
+     *         name="code",
+     *         required=true,
+     *         type="integer",
+     *         format="int32"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="body",
+     *         in="body",
+     *         description="Array of events id",
+     *         required=true,
+     *         @SWG\Schema(
+     *              @SWG\Property(
+     *                 property="data",
+     *                 type="array",
+     *                 @SWG\Items(
+     *                      type="integer",
+     *                      format="int32",
+     *                      example=15
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful operation, schedule updated",
+     *         @SWG\Schema(
+     *              @SWG\Property(
+     *                 property="code",
+     *                 type="integer",
+     *                 format="int32",
+     *                 example=2431
+     *             )
+     *         )
+     *     ),
+     *     @SWG\Response(
+     *          response=404,
+     *          description="Schedule not found"
+     *     )
+     * )
+     *
+     *
+     * @param integer $code
      * @param ScheduleRepository $repository
      * @return \Dingo\Api\Http\Response
      */
-    public function update(ScheduleRepository $repository)
+    public function update($code, ScheduleRepository $repository)
     {
+        $eventIds = $this->request->json('data');
+        /** @var Schedule $schedule */
+        $schedule = $repository->findOneByCode($code);
+        if (!$schedule) {
+            throw new NotFoundHttpException('Schedule not found.');
+        }
+        // Delete events from schedule
+        $detachIds = [];
+        foreach ($schedule->events as $event) {
+            if (!in_array($event->id, $eventIds)) {
+                $detachIds[] = $event->id;
+            }
+        }
+        if (count($detachIds)) {
+            $schedule->events()->detach($detachIds);
+        }
+        // Add events to schedule
+        $attachIds = [];
+        foreach ($eventIds as $id) {
+            if (!$schedule->events->contains($id)) {
+                $attachIds[] = $id;
+            }
+        }
+        if (count($attachIds)) {
+            $schedule->events()->attach($attachIds);
+        }
 
-        return $this->response->array(['code' => '']);
+        return $this->response->array(['code' => $schedule->code]);
     }
 
 }

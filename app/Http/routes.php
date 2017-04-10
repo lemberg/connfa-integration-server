@@ -70,8 +70,7 @@ $api->version('v2', [
 
     $api->get('getSchedules', 'SchedulesController@index');
     $api->post('createSchedule', 'SchedulesController@create');
-    $api->put('updateSchedule', 'SchedulesController@update');
-
+    $api->put('updateSchedule/{code}', 'SchedulesController@update');
 
     $api->get('checkUpdates', 'UpdatesController@index');
 });
