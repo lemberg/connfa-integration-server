@@ -31,7 +31,7 @@ class SchedulesController extends ApiController
      *     @SWG\Parameter(
      *         name="codes[]",
      *         in="query",
-     *         description="Array of codes",
+     *         description="Array of codes. Request example: /getSchedules?codes[]=2341&codes[]=8614",
      *         required=true,
      *         type="array",
      *         @SWG\Items(type="integer"),
