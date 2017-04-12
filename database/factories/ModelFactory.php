@@ -44,43 +44,47 @@ $getImagesFromFolder = function ($path = 'uploads/fakers') use(&$getImagesFromFo
     return $images;
 };
 
-/**
- * Upload image to folder use faker
- *
- * @param int $countImages
- * @param string $path
- *
- * @return array
- */
-function uploadImages($countImages = 5, $path = 'uploads/fakers')
-{
-    $faker = Faker\Factory::create();
-    $path = public_path($path);
-    $images = [];
-    if (checkAndMakeDirectory($path)) {
-        for ($i = 0; $i < $countImages; $i++) {
-            $images[$i] = $faker->image($path, 200, 200);
+if (!function_exists('uploadImages')) {
+    /**
+     * Upload image to folder use faker
+     *
+     * @param int $countImages
+     * @param string $path
+     *
+     * @return array
+     */
+    function uploadImages($countImages = 5, $path = 'uploads/fakers')
+    {
+        $faker = Faker\Factory::create();
+        $path = public_path($path);
+        $images = [];
+        if (checkAndMakeDirectory($path)) {
+            for ($i = 0; $i < $countImages; $i++) {
+                $images[$i] = $faker->image($path, 200, 200);
+            }
         }
-    }
 
-    return $images;
+        return $images;
+    }
 }
 
-/**
- * Check directory, if not exist then create it
- *
- * @param $path
- *
- * @return bool
- */
-function checkAndMakeDirectory($path)
-{
-    if (!File::exists($path)) {
+if (!function_exists('checkAndMakeDirectory')) {
+    /**
+     * Check directory, if not exist then create it
+     *
+     * @param $path
+     *
+     * @return bool
+     */
+    function checkAndMakeDirectory($path)
+    {
+        if (!File::exists($path)) {
 
-        return File::makeDirectory($path, 0775, true);
+            return File::makeDirectory($path, 0775, true);
+        }
+
+        return true;
     }
-
-    return true;
 }
 
 $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
@@ -182,5 +186,12 @@ $factory->define(App\Models\Point::class, function (Faker\Generator $faker) use 
         'image' => $faker->randomElement($images),
         'details_url' => $faker->url,
         'order' => $faker->numberBetween(0, 100),
+    ];
+});
+
+$factory->define(App\Models\Schedule::class, function (Faker\Generator $faker) {
+    $repository = App::make(\App\Repositories\ScheduleRepository::class);
+    return [
+        'code' => $repository->generateCode()
     ];
 });
