@@ -2,6 +2,7 @@
 
 namespace App\Transformers\Event;
 
+use App\Models\Event\Track;
 use League\Fractal\TransformerAbstract;
 
 class TrackTransformer extends TransformerAbstract
@@ -23,7 +24,38 @@ class TrackTransformer extends TransformerAbstract
     /**
      * Transform object into a generic array
      *
-     * @var  object
+     * @SWG\Definition(
+     *      definition="Track",
+     *      required={"trackId", "trackName", "order", "deleted"},
+     *      @SWG\Property(
+     *          property="trackId",
+     *          type="integer",
+     *          format="int32",
+     *          example=1,
+     *          description="Track id"
+     *      ),
+     *      @SWG\Property(
+     *          property="trackName",
+     *          type="string",
+     *          example="Coding and Development",
+     *          description="Track name"
+     *      ),
+     *      @SWG\Property(
+     *          property="order",
+     *          type="integer",
+     *          format="int32",
+     *          example=1,
+     *          description="Position for sorting"
+     *      ),
+     *      @SWG\Property(
+     *          property="deleted",
+     *          type="boolean",
+     *          example=false,
+     *          description="Is track deleted"
+     *      )
+     *  )
+     *
+     * @param  Track $track
      * @return array
      */
     public function transform($track)

@@ -27,6 +27,7 @@ class SchedulesController extends ApiController
      *         required=false,
      *         type="string",
      *         description="Date, for example: Tue, 4 Apr 2017 09:50:24 +0000",
+     *         default="Tue, 4 Apr 2017 09:50:24 +0000"
      *     ),
      *     @SWG\Parameter(
      *         name="codes[]",
@@ -44,7 +45,7 @@ class SchedulesController extends ApiController
      *              @SWG\Property(
      *                 property="schedules",
      *                 type="array",
-     *                 @SWG\Items(ref="#/definitions/Transformers.ScheduleTransformer")
+     *                 @SWG\Items(ref="#/definitions/Schedule")
      *             )
      *         )
      *     ),
