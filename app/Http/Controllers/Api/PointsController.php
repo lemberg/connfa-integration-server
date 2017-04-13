@@ -15,7 +15,7 @@ class PointsController extends ApiController
      *     path="/getPOI",
      *     summary="Get all points",
      *     tags={"Point"},
-     *     description="Returns all points",
+     *     description="Returns all points, since 'If-Modified-Since'",
      *     operationId="index",
      *     produces={"application/json"},
      *     @SWG\Parameter(

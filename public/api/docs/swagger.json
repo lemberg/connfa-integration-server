@@ -16,7 +16,7 @@
                     "Event"
                 ],
                 "summary": "Get all event levels",
-                "description": "Returns all event levels",
+                "description": "Returns all event levels, since 'If-Modified-Since'",
                 "operationId": "index",
                 "produces": [
                     "application/json"
@@ -58,7 +58,7 @@
                     "Event"
                 ],
                 "summary": "Get all event tracks",
-                "description": "Returns all event tracks",
+                "description": "Returns all event tracks, since 'If-Modified-Since'",
                 "operationId": "index",
                 "produces": [
                     "application/json"
@@ -100,7 +100,7 @@
                     "Event"
                 ],
                 "summary": "Get all event types",
-                "description": "Returns all event types",
+                "description": "Returns all event types, since 'If-Modified-Since'",
                 "operationId": "index",
                 "produces": [
                     "application/json"
@@ -226,7 +226,7 @@
                     "Event"
                 ],
                 "summary": "Get all social events",
-                "description": "Returns all social events",
+                "description": "Returns all social events, since 'If-Modified-Since'",
                 "operationId": "getSocialEvents",
                 "produces": [
                     "application/json"
@@ -268,7 +268,7 @@
                     "Floor"
                 ],
                 "summary": "Get all floor plans",
-                "description": "Returns all floor plans",
+                "description": "Returns all floor plans, since 'If-Modified-Since'",
                 "operationId": "index",
                 "produces": [
                     "application/json"
@@ -310,7 +310,7 @@
                     "Location"
                 ],
                 "summary": "Get all locations",
-                "description": "Returns all locations",
+                "description": "Returns all locations, since 'If-Modified-Since'",
                 "operationId": "index",
                 "produces": [
                     "application/json"
@@ -352,7 +352,7 @@
                     "Info"
                 ],
                 "summary": "Get all info",
-                "description": "Returns all info",
+                "description": "Returns all info, since 'If-Modified-Since'",
                 "operationId": "index",
                 "produces": [
                     "application/json"
@@ -410,7 +410,7 @@
                     "Point"
                 ],
                 "summary": "Get all points",
-                "description": "Returns all points",
+                "description": "Returns all points, since 'If-Modified-Since'",
                 "operationId": "index",
                 "produces": [
                     "application/json"
@@ -452,7 +452,7 @@
                     "Schedule"
                 ],
                 "summary": "Get all schedules",
-                "description": "Returns all schedules by codes",
+                "description": "Returns all schedules by codes, since 'If-Modified-Since'",
                 "operationId": "index",
                 "produces": [
                     "application/json"
@@ -641,7 +641,7 @@
                     "Speaker"
                 ],
                 "summary": "Get all speakers",
-                "description": "Returns all speakers",
+                "description": "Returns all speakers, since 'If-Modified-Since'",
                 "operationId": "index",
                 "produces": [
                     "application/json"
@@ -683,7 +683,7 @@
                     "Updates"
                 ],
                 "summary": "Get entities for update",
-                "description": "Return ids of entities for update: <br> 1 getTypes<br>2 getLevels<br>3 getTracks<br>4 getSpeakers<br>5 getLocations<br>6 getHousePlans<br>7 getSessions<br>8 getBofs<br>9 getSocialEvents<br>10 getPOI<br>11 getInfo<br>12 getSchedules",
+                "description": "Return ids of entities for update.<br>The ids of methods application should call to update data.<br>Methods:<br>1 getTypes<br>2 getLevels<br>3 getTracks<br>4 getSpeakers<br>5 getLocations<br>6 getHousePlans<br>7 getSessions<br>8 getBofs<br>9 getSocialEvents<br>10 getPOI<br>11 getInfo<br>12 getSchedules",
                 "operationId": "index",
                 "produces": [
                     "application/json"

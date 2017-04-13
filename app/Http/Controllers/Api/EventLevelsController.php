@@ -15,7 +15,7 @@ class EventLevelsController extends ApiController
      *     path="/getLevels",
      *     summary="Get all event levels",
      *     tags={"Event"},
-     *     description="Returns all event levels",
+     *     description="Returns all event levels, since 'If-Modified-Since'",
      *     operationId="index",
      *     produces={"application/json"},
      *     @SWG\Parameter(

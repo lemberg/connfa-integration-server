@@ -18,7 +18,7 @@ class SchedulesController extends ApiController
      *     path="/getSchedules",
      *     summary="Get all schedules",
      *     tags={"Schedule"},
-     *     description="Returns all schedules by codes",
+     *     description="Returns all schedules by codes, since 'If-Modified-Since'",
      *     operationId="index",
      *     produces={"application/json"},
      *     @SWG\Parameter(

@@ -16,7 +16,7 @@ class PagesController extends ApiController
      *     path="/getInfo",
      *     summary="Get all info",
      *     tags={"Info"},
-     *     description="Returns all info",
+     *     description="Returns all info, since 'If-Modified-Since'",
      *     operationId="index",
      *     produces={"application/json"},
      *     @SWG\Parameter(

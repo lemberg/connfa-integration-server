@@ -15,7 +15,7 @@ class FloorsController extends ApiController
      *     path="/getFloorPlans",
      *     summary="Get all floor plans",
      *     tags={"Floor"},
-     *     description="Returns all floor plans",
+     *     description="Returns all floor plans, since 'If-Modified-Since'",
      *     operationId="index",
      *     produces={"application/json"},
      *     @SWG\Parameter(

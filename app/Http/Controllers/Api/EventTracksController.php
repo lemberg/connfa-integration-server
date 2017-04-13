@@ -15,7 +15,7 @@ class EventTracksController extends ApiController
      *     path="/getTracks",
      *     summary="Get all event tracks",
      *     tags={"Event"},
-     *     description="Returns all event tracks",
+     *     description="Returns all event tracks, since 'If-Modified-Since'",
      *     operationId="index",
      *     produces={"application/json"},
      *     @SWG\Parameter(

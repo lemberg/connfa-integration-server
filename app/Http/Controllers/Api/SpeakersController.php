@@ -15,7 +15,7 @@ class SpeakersController extends ApiController
      *     path="/getSpeakers",
      *     summary="Get all speakers",
      *     tags={"Speaker"},
-     *     description="Returns all speakers",
+     *     description="Returns all speakers, since 'If-Modified-Since'",
      *     operationId="index",
      *     produces={"application/json"},
      *     @SWG\Parameter(

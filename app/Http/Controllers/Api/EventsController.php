@@ -132,7 +132,7 @@ class EventsController extends ApiController
      *     path="/getSocialEvents",
      *     summary="Get all social events",
      *     tags={"Event"},
-     *     description="Returns all social events",
+     *     description="Returns all social events, since 'If-Modified-Since'",
      *     operationId="getSocialEvents",
      *     produces={"application/json"},
      *     @SWG\Parameter(

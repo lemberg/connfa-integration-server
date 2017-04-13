@@ -15,7 +15,7 @@ class EventTypesController extends ApiController
      *     path="/getTypes",
      *     summary="Get all event types",
      *     tags={"Event"},
-     *     description="Returns all event types",
+     *     description="Returns all event types, since 'If-Modified-Since'",
      *     operationId="index",
      *     produces={"application/json"},
      *     @SWG\Parameter(

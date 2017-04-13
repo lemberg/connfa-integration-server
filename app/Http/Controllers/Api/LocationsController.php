@@ -15,7 +15,7 @@ class LocationsController extends ApiController
      *     path="/getLocations",
      *     summary="Get all locations",
      *     tags={"Location"},
-     *     description="Returns all locations",
+     *     description="Returns all locations, since 'If-Modified-Since'",
      *     operationId="index",
      *     produces={"application/json"},
      *     @SWG\Parameter(
