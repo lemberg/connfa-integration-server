@@ -19,8 +19,7 @@ Breadcrumbs::register('breadcrumbs', function ($breadcrumbs, $items) {
 /**
  * Conference breadcrumbs
  */
-Breadcrumbs::register('conference_breadcrumbs', function ($breadcrumbs, $items) {
-    $breadcrumbs->push('Conferences', route('conferences.index'));
+Breadcrumbs::register('default_breadcrumbs', function ($breadcrumbs, $items) {
     if (is_array($items)) {
         if (!isset($items['label'])) {
             foreach ($items as $item) {
@@ -31,4 +30,3 @@ Breadcrumbs::register('conference_breadcrumbs', function ($breadcrumbs, $items) 
         }
     }
 });
-

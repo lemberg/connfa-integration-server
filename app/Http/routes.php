@@ -32,6 +32,18 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
     $app->get('conferences/{id}/edit', 'ConferencesController@edit')->name('conferences.edit');
     $app->put('conferences/{id}', 'ConferencesController@update')->name('conferences.update');
     $app->delete('conferences/{id}', 'ConferencesController@destroy')->name('conferences.destroy');
+
+    $app->group(['middleware' => ['permission:edit-user']], function($app) {
+        // Users
+        $app->get('users', 'UsersController@index')->name('users.index');
+        $app->get('users/create', 'UsersController@create')->name('users.create');
+        $app->post('users', 'UsersController@store')->name('users.store');
+        $app->get('users/{id}', 'UsersController@show')->name('users.show');
+        $app->get('users/{id}/edit', 'UsersController@edit')->name('users.edit');
+        $app->put('users/{id}', 'UsersController@update')->name('users.update');
+        $app->delete('users/{id}', 'UsersController@destroy')->name('users.destroy');
+    });
+
 });
 
 $app->group(['middleware' => ['auth'], 'namespace' => 'CMS', 'prefix' => '{conference_alias}'], function ($app) {
@@ -143,17 +155,6 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS', 'prefix' => '{confe
     $app->get('settings', 'SettingsController@index')->name('settings.index');
     $app->get('settings/edit', 'SettingsController@edit')->name('settings.edit');
     $app->put('settings', 'SettingsController@update')->name('settings.update');
-
-    $app->group(['middleware' => ['permission:edit-user']], function($app) {
-        // Users
-        $app->get('users', 'UsersController@index')->name('users.index');
-        $app->get('users/create', 'UsersController@create')->name('users.create');
-        $app->post('users', 'UsersController@store')->name('users.store');
-        $app->get('users/{id}', 'UsersController@show')->name('users.show');
-        $app->get('users/{id}/edit', 'UsersController@edit')->name('users.edit');
-        $app->put('users/{id}', 'UsersController@update')->name('users.update');
-        $app->delete('users/{id}', 'UsersController@destroy')->name('users.destroy');
-    });
 });
 
 $api->version('v2', [

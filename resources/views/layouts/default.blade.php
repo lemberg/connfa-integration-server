@@ -46,6 +46,18 @@
                                     <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                                 </ul>
                             </li>
+                            @permission('edit-user')
+                                <li @if (in_array(\Request::route()->getName(), ['users.index', 'users.create', 'users.edit', 'users.show'])) class="active"@endif>
+                                    <a href="{{ route('users.index') }}">
+                                        <i class="fa fa-user"></i> Users
+                                    </a>
+                                </li>
+                            @endpermission
+                            <li @if (in_array(\Request::route()->getName(), ['conferences.index', 'conferences.create', 'conferences.edit'])) class="active"@endif>
+                                <a href="{{ route('conferences.index') }}">
+                                    <i class="fa fa-calendar"></i> Conferences
+                                </a>
+                            </li>
                         @endif
                     </ul>
                 </nav>

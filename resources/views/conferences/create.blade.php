@@ -1,10 +1,10 @@
-@extends('layouts.conference')
+@extends('layouts.default')
 
 @section('content')
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="pull-left">
-                {!! Breadcrumbs::render('conference_breadcrumbs', [['label'=> trans('Create conference'), 'route' => 'conferences.index']]) !!}
+                {!! Breadcrumbs::render('default_breadcrumbs', [['label'=> trans('Conferences'), 'route' => 'conferences.index'], ['label'=> trans('Create conference'), 'route' => 'conferences.index']]) !!}
             </div>
             <div class="x_panel">
                 <div class="x_title">

@@ -1,12 +1,12 @@
-@extends('layouts.app')
+@extends('layouts.default')
 
 @section('content')
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="pull-left">
-                {!! Breadcrumbs::render('breadcrumbs', ['label'=> trans('Users'), 'route' => 'users.index', 'params' => ['conference_alias' => $conference->alias]]) !!}
+                {!! Breadcrumbs::render('default_breadcrumbs', [['label'=> trans('Users'), 'route' => 'users.index']]) !!}
             </div>
-            {{ Html::link(route('users.create', ['conference_alias' => $conference->alias]), trans('Create user'), ['class' => 'btn btn-primary pull-right']) }}
+            {{ Html::link(route('users.create'), trans('Create user'), ['class' => 'btn btn-primary pull-right']) }}
             <div class="x_panel">
                 <div class="x_title">
                     <h2>{{ trans('Users') }}</h2>
@@ -34,7 +34,12 @@
                                         {{ $item->email }}
                                     </td>
                                     <td class="text-right">
-                                        @include('partials/actions', ['route' => 'users', 'id' => $item->id, 'conference_alias' => $conference->alias])
+                                        <a href="{{ route("users.show", ['id' => $item->id]) }}" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> {{ trans('View') }}</a>
+                                        <a href="{{ route("users.edit", ['id' => $item->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> {{ trans('Edit') }}</a>
+                                        {!! Form::open(['url' => route("users.destroy", ['id' => $item->id]), 'method' => 'POST', 'style' => 'vertical-align: middle; display: inline-block;']) !!}
+                                            {{ method_field('DELETE') }}
+                                            {{ Form::button("<i class='fa fa-trash-o'></i> ".trans('Delete'), ['class' => 'btn btn-danger btn-xs', 'onclick' => 'deleteItem(this)']) }}
+                                        {!! Form::close() !!}
                                     </td>
                                 </tr>
                             @endforeach

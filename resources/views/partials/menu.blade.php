@@ -21,9 +21,6 @@
             <li><a href="{{ route('location.index', ['conference_alias' => $conference->alias]) }}"><i class="fa fa-map-marker"></i> Location</a></li>
             <li><a href="{{ route('floors.index', ['conference_alias' => $conference->alias]) }}"><i class="fa fa-puzzle-piece"></i> Floor plans</a></li>
             <li><a href="{{ route('pages.index', ['conference_alias' => $conference->alias]) }}"><i class="fa fa-file"></i> Pages</a></li>
-            @permission('edit-user')
-                <li><a href="{{ route('users.index', ['conference_alias' => $conference->alias]) }}"><i class="fa fa-user"></i> Users</a></li>
-            @endpermission
             <li><a href="{{ route('settings.index', ['conference_alias' => $conference->alias]) }}"><i class="fa fa-cogs"></i> Settings</a></li>
         </ul>
     </div>

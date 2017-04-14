@@ -6,13 +6,28 @@ use App\Http\Requests\UserRequest;
 use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use App\Http\Controllers\Controller;
 
 /**
  * Class UsersController
  * @package App\Http\Controllers\CMS
  */
-class UsersController extends BaseController
+class UsersController extends Controller
 {
+    /**
+     * @var Request
+     */
+    protected $request = null;
+
+    /**
+     * @var BaseRepository
+     */
+    protected $repository = null;
+
+    /**
+     * @var ResponseFactory
+     */
+    protected $response = null;
 
     /**
      * @var RoleRepository
@@ -34,7 +49,19 @@ class UsersController extends BaseController
         ResponseFactory $response
     ) {
         $this->roleRepository = $roleRepository;
-        parent::__construct($request, $repository, $response);
+        $this->request = $request;
+        $this->repository = $repository;
+        $this->response = $response;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return $this->response->view('users.index', ['data' => $this->repository->paginate(25)]);
     }
 
     /**
@@ -51,29 +78,37 @@ class UsersController extends BaseController
     /**
      * Store a newly created resource in storage.
      *
-     * @param string $conferenceAlias
-     *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store($conferenceAlias)
+    public function store()
     {
         $data = $this->request->all();
         $user = $this->repository->create($data);
         $user->roles()->sync(array_get($data, 'roles', []));
 
-        return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);
+        return $this->response->redirectToRoute('users.index');
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param string $conferenceAlias
+     * Display the specified resource.
      *
      * @param  int $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($conferenceAlias, $id)
+    public function show($id)
+    {
+        return $this->response->view('users.show', ['data' => $this->repository->findOrFail($id)]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
     {
         return $this->response->view('users.edit', [
             'roles' => $this->roleRepository->all()->pluck('display_name', 'id'),
@@ -84,12 +119,11 @@ class UsersController extends BaseController
     /**
      * Update data, if set change_password true then update password
      *
-     * @param string $conferenceAlias
      * @param int $id
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($conferenceAlias, $id)
+    public function update($id)
     {
         $data = $this->request->all();
         $roles = array_get($data, 'roles', []);
@@ -104,28 +138,22 @@ class UsersController extends BaseController
         $user = $this->repository->findOrFail($id);
         $user->roles()->sync($roles);
 
-        if (!$this->isRole()) {
-
-            return $this->response->redirectTo(route('dashboard', ['conference_alias' => $conferenceAlias]));
-        }
-
-        return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);
+        return $this->response->redirectToRoute('users.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param string $conferenceAlias
      * @param  int $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($conferenceAlias, $id)
+    public function destroy($id)
     {
         $user = $this->repository->findOrFail($id);
         $user->roles()->sync([]);
         $this->repository->delete($id);
 
-        return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);
+        return $this->response->redirectToRoute('users.index');
     }
 }
