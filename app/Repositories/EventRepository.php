@@ -16,14 +16,15 @@ class EventRepository extends BaseRepository
     /**
      * Get events with deleted by type since $since param if passed
      *
-     * @param $type
+     * @param integer     $conferenceId
+     * @param string      $type
      * @param string|bool $since
      *
      * @return mixed
      */
-    public function getEventsByTypeWithDeleted($type, $since = false)
+    public function getEventsByTypeWithDeleted($conferenceId, $type, $since = false)
     {
-        $events = $this->model->withTrashed()->where('event_type', $type);
+        $events = $this->findByConference($conferenceId)->withTrashed()->where('event_type', $type);
 
         if ($since) {
             $events->where('updated_at', '>=', $since->toDateTimeString());
@@ -45,19 +46,18 @@ class EventRepository extends BaseRepository
     /**
      * Update with Speakers
      *
-     * @param $id
+     * @param $event
      * @param $data
      *
      * @return mixed
      */
-    public function updateWithSpeakers($id, $data)
+    public function updateWithSpeakers($event, $data)
     {
-        $event = $this->findOrFail($id);
         $speakers = $event->speakers()->sync(array_get($data, 'speakers', []));
         if (array_get($speakers, 'attached') or array_get($speakers, 'detached') or array_get($speakers, 'updated')) {
             unset($data['speakers']);
 
-            return $event->where('id', '=', $id)->update($data);
+            return $event->where('id', '=', $event->id)->update($data);
         } else {
             $event->fill($data);
 
@@ -81,15 +81,16 @@ class EventRepository extends BaseRepository
     /**
      * Get events by type sort DESC and limit
      *
-     * @param $type
+     * @param int $conferenceId
+     * @param string $type
      * @param string $orderBy
      * @param int $limit
      *
      * @return mixed
      */
-    public function getEventByTypeOrderAndLimit($type, $orderBy = 'updated_at', $limit = 5)
+    public function getEventByTypeOrderAndLimit($conferenceId, $type, $orderBy = 'updated_at', $limit = 5)
     {
-        return $this->model->where(['event_type' => $type])->orderBy($orderBy, 'DESC')->limit($limit)->get();
+        return $this->model->where(['conference_id' => $conferenceId, 'event_type' => $type])->orderBy($orderBy, 'DESC')->limit($limit)->get();
     }
 
     /**

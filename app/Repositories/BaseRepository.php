@@ -54,14 +54,15 @@ class BaseRepository extends Repository implements RepositoryInterface
     /**
      * Check if resource was updated since $since param
      *
+     * @param integer $conferenceId
      * @param Carbon $since date from If-Modified-Since header
      * @param array $params
      *
      * @return bool
      */
-    public function checkLastUpdate($since, $params = [])
+    public function checkLastUpdate($conferenceId, $since, $params = [])
     {
-        $data = $this->model->withTrashed();
+        $data = $this->findByConference($conferenceId)->withTrashed();
 
         if ($since) {
             $data = $data->where('updated_at', '>=', $since->toDateTimeString());
@@ -167,5 +168,17 @@ class BaseRepository extends Repository implements RepositoryInterface
     public function firstOrCreate(array $parameters = [])
     {
         return $this->model->firstOrCreate($parameters);
+    }
+
+    /**
+     * Find items by conference
+     *
+     * @param integer $id
+     *
+     * @return mixed
+     */
+    public function findByConference($id)
+    {
+        return  $this->model->where('conference_id', $id);
     }
 }

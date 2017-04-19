@@ -3,34 +3,19 @@
 namespace App\Http\Controllers\CMS;
 
 use App\Http\Requests\LocationRequest;
+use App\Models\Location;
 use App\Repositories\LocationRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use App\Http\Controllers\Controller;
 
 /**
  * Class LocationsController
  * @package App\Http\Controllers\CMS
  */
-class LocationsController extends Controller
+class LocationsController extends BaseController
 {
-    /**
-     * @var LocationRequest|null
-     */
-    protected $request = null;
-
-    /**
-     * @var LocationRepository|null
-     */
-    protected $repository = null;
-
-    /**
-     * @var ResponseFactory|null
-     */
-    protected $response = null;
 
     /**
      * @var string
-     *
      */
     protected $viewsFolder = 'locations';
 
@@ -48,9 +33,7 @@ class LocationsController extends Controller
      */
     public function __construct(LocationRequest $request, LocationRepository $repository, ResponseFactory $response)
     {
-        $this->request = $request;
-        $this->repository = $repository;
-        $this->response = $response;
+        parent::__construct($request, $repository, $response);
     }
 
     /**
@@ -60,42 +43,51 @@ class LocationsController extends Controller
      */
     public function index()
     {
-        return $this->response->view($this->getViewName('index'),
-            ['data' => $this->repository->firstOrNew([])]);
+        $location = $this->repository->findByConference($this->getConference()->id)->first();
+        if (!$location) {
+            $location = new Location();
+        }
+
+        return $this->response->view($this->getViewName('index'), ['data' => $location]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
+     * @param  string $conferenceAlias
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($conferenceAlias, $id = null)
     {
-        return $this->response->view($this->getViewName('edit'),
-            ['data' => $this->repository->firstOrNew([])]);
-    }
+        $location = $this->repository->findByConference($this->getConference()->id)->first();
+        if (!$location) {
+            $location = new Location();
+        }
 
-    /** Update the specified resource in storage.
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update()
-    {
-        $location = $this->repository->firstOrCreate();
-        $this->repository->updateRich($this->request->except('_method', '_token'), $location->id);
-
-        return $this->response->redirectToRoute($this->routeName . '.index');
+        return $this->response->view($this->getViewName('edit'), ['data' => $location]);
     }
 
     /**
-     * Get view name
+     * Update the specified resource in storage.
      *
-     * @param string $viewName
+     * @param  string $conferenceAlias
+     * @param  int $id
      *
-     * @return string
+     * @return \Illuminate\Http\RedirectResponse
      */
-    protected function getViewName($viewName)
+    public function update($conferenceAlias, $id = null)
     {
-        return $this->viewsFolder . '.' . $viewName;
+        $location = $this->repository->findByConference($this->getConference()->id)->first();
+        if (!$location) {
+            $location = new Location();
+            $location->conference_id = $this->getConference()->id;
+            $location->save();
+        }
+        $this->repository->updateRich($this->request->except('_method', '_token'), $location->id);
+
+        return $this->response->redirectToRoute($this->routeName . '.index', ['conference_alias' => $conferenceAlias]);
     }
+
 }

@@ -41,15 +41,18 @@ class TypesController extends BaseController
     /**
      * Overridden parent method, added delete image
      *
+     * @param  string $conferenceAlias
      * @param int $id
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy($conferenceAlias, $id)
     {
-        $this->event->updateByField('type_id', $id);
-        $this->repository->delete($id);
+        $item = $this->repository->findOrFail($id);
+        $this->checkConference($item->conference_id);
+        $this->event->updateByField('type_id', $item->id);
+        $item->delete();
 
-        return $this->redirectTo('index');
+        return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);
     }
 }

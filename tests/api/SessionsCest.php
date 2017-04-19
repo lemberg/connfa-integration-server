@@ -14,15 +14,15 @@ class SessionsCest extends BaseCest
     // tests
     public function tryToGetSessionsWhenEmpty(ApiTester $I)
     {
-        $I->sendGET('v2/getSessions');
+        $I->sendGET('v2/test/getSessions');
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson([]);
     }
 
     public function tryToGetSession(ApiTester $I)
     {
-        $event = $I->haveAnEvent(['name' => 'test', 'event_type' => 'session']);
-        $I->sendGET('v2/getSessions');
+        $event = $I->haveAnEvent(['name' => 'test', 'event_type' => 'session', 'conference_id' => $this->conference->id]);
+        $I->sendGET('v2/test/getSessions');
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson(['date' => $event->date]);
         $I->seeResponseContainsJson(['name' => 'test']);
@@ -31,9 +31,9 @@ class SessionsCest extends BaseCest
     public function tryToGetSessionWithIfModifiedSince(ApiTester $I)
     {
         $since = \Carbon\Carbon::parse('-1 hour');
-        $event = $I->haveAnEvent(['name' => 'test', 'event_type' => 'session']);
+        $event = $I->haveAnEvent(['name' => 'test', 'event_type' => 'session', 'conference_id' => $this->conference->id]);
         $I->haveHttpHeader('If-modified-since', $since->toIso8601String());
-        $I->sendGET('v2/getSessions');
+        $I->sendGET('v2/test/getSessions');
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson(['name' => 'test']);
     }
@@ -41,22 +41,22 @@ class SessionsCest extends BaseCest
     public function tryToGetSessionWithFutureIfModifiedSince(ApiTester $I)
     {
         $since = \Carbon\Carbon::parse('+5 hour');
-        $I->haveAnEvent(['name' => 'test', 'event_type' => 'session']);
+        $I->haveAnEvent(['name' => 'test', 'event_type' => 'session', 'conference_id' => $this->conference->id]);
         $I->haveHttpHeader('If-modified-since', $since->toIso8601String());
-        $I->sendGET('v2/getSessions');
+        $I->sendGET('v2/test/getSessions');
         $I->seeResponseCodeIs(304);
     }
 
     public function tryToGetDeletedSession(ApiTester $I)
     {
-        $event = $I->haveAnEvent(['name' => 'test', 'event_type' => 'session']);
-        $I->sendGET('v2/getSessions');
+        $event = $I->haveAnEvent(['name' => 'test', 'event_type' => 'session', 'conference_id' => $this->conference->id]);
+        $I->sendGET('v2/test/getSessions');
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson(['date' => $event->date]);
         $I->seeResponseContainsJson(['name' => 'test', 'deleted' => false]);
         $event->delete();
         $I->haveHttpHeader('If-modified-since', \Carbon\Carbon::now()->toIso8601String());
-        $I->sendGET('v2/getSessions');
+        $I->sendGET('v2/test/getSessions');
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson(['name' => 'test', 'deleted' => true]);
     }

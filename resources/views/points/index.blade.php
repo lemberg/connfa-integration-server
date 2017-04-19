@@ -4,9 +4,9 @@
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="pull-left">
-                {!! Breadcrumbs::render('breadcrumbs', ['label'=> trans('Points'), 'route' => 'points.index']) !!}
+                {!! Breadcrumbs::render('breadcrumbs', ['label'=> trans('Points'), 'route' => 'points.index', 'params' => ['conference_alias' => $conference->alias]]) !!}
             </div>
-            {{ Html::link(route('points.create'), trans('Create point'), ['class' => 'btn btn-primary pull-right']) }}
+            {{ Html::link(route('points.create', ['conference_alias' => $conference->alias]), trans('Create point'), ['class' => 'btn btn-primary pull-right']) }}
             <div class="x_panel">
                 <div class="x_title">
                     <h2>{{ trans('Points') }}</h2>
@@ -44,7 +44,7 @@
                                         {{ $item->order }}
                                     </td>
                                     <td class="text-right">
-                                        @include('partials/actions', ['route' => 'points', 'id' => $item->id])
+                                        @include('partials/actions', ['route' => 'points', 'id' => $item->id, 'conference_alias' => $conference->alias])
                                     </td>
                                 </tr>
                             @endforeach

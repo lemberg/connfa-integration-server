@@ -4,6 +4,7 @@ use App\Models\Event\Level;
 use App\Models\Event\Track;
 use App\Models\Event\Type;
 use App\Models\Speaker;
+use App\Models\Conference;
 use App\Repositories\Event\TypeRepository;
 use Illuminate\Database\Seeder;
 
@@ -23,6 +24,7 @@ class EventsTableSeeder extends Seeder
      */
     public function run()
     {
+        $conference = Conference::first();
         $levels = Level::all()->pluck('id')->toArray();
         $types = Type::all()->pluck('id')->toArray();
         $tracks = Track::all()->pluck('id')->toArray();
@@ -33,8 +35,10 @@ class EventsTableSeeder extends Seeder
             $levels,
             $tracks,
             $types,
-            $speakers
+            $speakers,
+            $conference
         ) {
+            $event->conference_id = $conference->id;
             $event->level_id = $this->faker->randomElement($levels);
             $event->type_id = $this->faker->randomElement($types);
             $event->track_id = $this->faker->randomElement($tracks);

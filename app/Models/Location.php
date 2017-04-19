@@ -17,5 +17,6 @@ class Location extends Model
         'lon',
         'address',
         'order',
+        'conference_id'
     ];
 }
