@@ -16,7 +16,7 @@ class EventLevelsController extends ApiController
      */
     public function index(LevelRepository $repository)
     {
-        $levels = $repository->getLevelsWithDeleted($this->since);
+        $levels = $repository->getLevelsWithDeleted($this->getConference()->id, $this->since);
         $this->checkModified($levels);
 
         return $this->response->collection($levels, new LevelTransformer(), ['key' => 'levels']);

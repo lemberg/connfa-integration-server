@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\CMS;
 
+use App\Http\Controllers\Controller;
 use App\Exceptions\DirectoryNotFoundException;
 use App\Repositories\SettingsRepository;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Support\Facades\View;
 use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Requests;
 use App\Repositories\BaseRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Support\Facades\Auth;
 use Yajra\Datatables\Datatables;
 
 /**
@@ -69,6 +69,8 @@ class BaseController extends Controller
         $this->viewsFolder = $this->getViewsFolder();
         $this->routeName = $this->getRouteName();
         $this->isSetTimezone();
+
+        View::share('conference', $this->getConference());
     }
 
     /**
@@ -78,7 +80,9 @@ class BaseController extends Controller
      */
     public function index()
     {
-        return $this->response->view($this->getViewName('index'), ['data' => $this->repository->paginate(25)]);
+        return $this->response->view($this->getViewName('index'), [
+            'data' => $this->repository->findByConference($this->getConference()->id)->paginate(25)
+        ]);
     }
 
     /**
@@ -88,7 +92,7 @@ class BaseController extends Controller
      */
     public function getData()
     {
-        return Datatables::of($this->repository->all())
+        return Datatables::of($this->repository->findByConference($this->getConference()->id))
             ->addColumn('actions', function ($data) {
                 return view('partials/actions', ['route' => $this->getRouteName(), 'id' => $data->id]);
             })
@@ -108,66 +112,83 @@ class BaseController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param string $conferenceAlias
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store()
+    public function store($conferenceAlias)
     {
-        $this->repository->create($this->request->all());
+        $data = $this->request->all();
+        $data['conference_id'] = $this->getConference()->id;
+        $this->repository->create($data);
 
-        return $this->redirectTo('index');
+        return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);
     }
 
     /**
      * Display the specified resource.
      *
+     * @param  string $conferenceAlias
      * @param  int $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($conferenceAlias, $id)
     {
+        $item = $this->repository->findOrFail($id);
+        $this->checkConference($item->conference_id);
 
-        return $this->response->view($this->getViewName('show'), ['data' => $this->repository->findOrFail($id)]);
+        return $this->response->view($this->getViewName('show'), ['data' => $item]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
+     * @param  string $conferenceAlias
      * @param  int $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($conferenceAlias, $id)
     {
-        return $this->response->view($this->getViewName('edit'), ['data' => $this->repository->findOrFail($id)]);
+        $item = $this->repository->findOrFail($id);
+        $this->checkConference($item->conference_id);
+
+        return $this->response->view($this->getViewName('edit'), ['data' => $item]);
     }
 
     /**
      * Update the specified resource in storage.
      *
+     * @param  string $conferenceAlias
      * @param  int $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update($conferenceAlias, $id)
     {
-        $this->repository->updateRich($this->request->except('_method', '_token'), $id);
+        $item = $this->repository->findOrFail($id);
+        $this->checkConference($item->conference_id);
+        $item->fill($this->request->except('_method', '_token'))->save();
 
-        return $this->redirectTo('index');
+        return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
+     * @param  string $conferenceAlias
      * @param  int $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($conferenceAlias, $id)
     {
-        $this->repository->delete($id);
+        $item = $this->repository->findOrFail($id);
+        $this->checkConference($item->conference_id);
+        $item->delete();
 
-        return $this->redirectTo('index');
+        return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);
     }
 
     /**
@@ -224,12 +245,13 @@ class BaseController extends Controller
      * Redirect to url
      *
      * @param string $url
+     * @param array  $parameters
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    protected function redirectTo($url)
+    protected function redirectTo($url, $parameters = [])
     {
-        return $this->response->redirectToRoute($this->getRouteName() . "." . $url);
+        return $this->response->redirectToRoute($this->getRouteName() . "." . $url, $parameters);
     }
 
     /**
@@ -272,8 +294,9 @@ class BaseController extends Controller
      */
     private function isSetTimezone()
     {
+        /** @var SettingsRepository $settingsRepository */
         $settingsRepository = \App::make(SettingsRepository::class);
-        $settings = $settingsRepository->getAllSettingInSingleArray();
+        $settings = $settingsRepository->getAllSettingInSingleArray($this->getConference()->id);
         if (!isset($settings['timezone'])) {
             session(['settings' => true]);
         } elseif (session()->has('settings')) {
@@ -284,23 +307,17 @@ class BaseController extends Controller
     }
 
     /**
-     * Is user has role
      *
-     * @param string $roleName
+     * Check if item belong to conference
      *
-     * @return bool
+     * @param integer $id
+     * @throws NotFoundHttpException
      */
-    public function isRole($roleName = 'admin')
+    protected function checkConference($id)
     {
-        if ($roles = Auth::user()->roles->toArray()) {
-            foreach ($roles as $role) {
-                if (array_get($role, 'name') == $roleName) {
-
-                    return true;
-                }
-            }
+        if (!$this->getConference() || $id !== $this->getConference()->id) {
+            throw new NotFoundHttpException();
         }
-
-        return false;
     }
+
 }

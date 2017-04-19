@@ -6,7 +6,7 @@
             <div class="pull-left">
                 {!! Breadcrumbs::render(
                     'breadcrumbs',
-                    [['label'=> trans('Settings'), 'route' => 'settings.index'], ['label'=> trans('Edit settings'), 'route' => 'settings.index']]
+                    [['label'=> trans('Settings'), 'route' => 'settings.index', 'params' => ['conference_alias' => $conference->alias]], ['label'=> trans('Edit settings'), 'route' => 'settings.index', 'params' => ['conference_alias' => $conference->alias]]]
                 ) !!}
             </div>
             <div class="x_panel">
@@ -16,7 +16,7 @@
                 </div>
                 <div class="x_content">
                     <br/>
-                    {!! Form::open(['route' => ['settings.update'], 'method' => 'PUT', 'class' => 'form-horizontal form-label-left']) !!}
+                    {!! Form::open(['route' => ['settings.update', 'conference_alias' => $conference->alias], 'method' => 'PUT', 'class' => 'form-horizontal form-label-left']) !!}
                         <div class="form-group{{ $errors->has('titleMajor') ? ' has-error' : '' }}">
                             {{ Form::label('titleMajor', trans('Title major'), ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">

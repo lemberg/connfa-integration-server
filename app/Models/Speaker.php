@@ -24,6 +24,7 @@ class Speaker extends Model
         'avatar',
         'email',
         'order',
+        'conference_id'
     ];
 
     protected $urlable = [
@@ -71,4 +72,13 @@ class Speaker extends Model
     {
          return $this->attributes['first_name'] . ' ' . $this->attributes['last_name'];
     }
+
+    /**
+     * Get the roles a user has
+     */
+    public function events()
+    {
+        return $this->belongsToMany(Event::class);
+    }
+
 }

@@ -14,15 +14,16 @@ class FloorRepository extends BaseRepository
     /**
      * Get floors with deleted since $since param if passed
      *
+     * @param integer     $conferenceId
      * @param string|bool $since
      * @return mixed
      */
-    public function getFloorsWithDeleted($since = false)
+    public function getFloorsWithDeleted($conferenceId, $since = false)
     {
         if ($since) {
-            return $this->model->withTrashed()->where('updated_at', '>=', $since->toDateTimeString())->get();
+            return $this->findByConference($conferenceId)->withTrashed()->where('updated_at', '>=', $since->toDateTimeString())->get();
         }
 
-        return $this->model->withTrashed()->get();
+        return $this->findByConference($conferenceId)->withTrashed()->get();
     }
 }

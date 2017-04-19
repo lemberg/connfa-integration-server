@@ -43,7 +43,7 @@
                     </li>
                 </ul>
             </div>
-            <a href="{{ route('speakers.show', ['id' => $speaker->id]) }}">
+            <a href="{{ route('speakers.show', ['id' => $speaker->id, 'conference_alias' => $conference->alias]) }}">
                 <h4 class="name">{{ $speaker->fullname }}</h4>
             </a>
             <div class="flex">

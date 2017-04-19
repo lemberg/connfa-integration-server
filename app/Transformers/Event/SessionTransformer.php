@@ -2,19 +2,31 @@
 
 namespace App\Transformers\Event;
 
-use App\Transformers\EmbeddedTransformer as EmbeddedTransformer;
-use vendocrat\Settings\SettingsManager;
+use App\Repositories\SettingsRepository;
+use App\Services\ConferenceService;
+use App\Transformers\EmbeddedTransformer;
 
 class SessionTransformer implements EmbeddedTransformer
 {
     /**
-     * @var Setting
+     * @var SettingsRepository
      */
-    protected $settings;
+    protected $settingsRepository;
 
-    public function __construct(SettingsManager $setting)
+    /**
+     * @var ConferenceService
+     */
+    protected $conferenceService;
+
+    /**
+     * SessionTransformer constructor.
+     * @param SettingsRepository $settingsRepository
+     * @param ConferenceService  $conferenceService
+     */
+    public function __construct(SettingsRepository $settingsRepository, ConferenceService $conferenceService)
     {
-        $this->settings = $setting;
+        $this->settingsRepository = $settingsRepository;
+        $this->conferenceService = $conferenceService;
     }
     /**
      * List of resources possible to include
@@ -38,7 +50,7 @@ class SessionTransformer implements EmbeddedTransformer
      */
     public function transform($event)
     {
-        $tz = $this->settings->get('timezone', 'UTC');
+        $tz = $this->settingsRepository->getValueByKey('timezone', $this->conferenceService->getModel()->id, 'UTC');
 
         $data = [
             'eventId'         => $event->id,

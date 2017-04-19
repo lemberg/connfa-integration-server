@@ -26,4 +26,12 @@ class UserRepository extends BaseRepository
         $user->password = $password;
         return $user->save();
     }
+
+    /**
+     * @return mixed
+     */
+    public function findByConference($id)
+    {
+        return $this->model;
+    }
 }

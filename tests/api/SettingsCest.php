@@ -15,15 +15,15 @@ class SettingsCest extends BaseCest
     // tests
     public function tryToGetSettingsWhenEmpty(ApiTester $I)
     {
-        $I->sendGET('v2/getSettings');
+        $I->sendGET('v2/test/getSettings');
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson([]);
     }
 
     public function tryToGetSetting(ApiTester $I)
     {
-        $I->haveASetting(['titleMajor' => 'test']);
-        $I->sendGET('v2/getSettings');
+        $I->haveASetting(['titleMajor' => 'test', 'conference_id' => $this->conference->id]);
+        $I->sendGET('v2/test/getSettings');
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson(['titleMajor' => 'test']);
     }
@@ -31,9 +31,9 @@ class SettingsCest extends BaseCest
     public function tryToGetSettingWithIfModifiedSince(ApiTester $I)
     {
         $since = \Carbon\Carbon::parse('-1 hour');
-        $I->haveASetting(['titleMajor' => 'test']);
+        $I->haveASetting(['titleMajor' => 'test', 'conference_id' => $this->conference->id]);
         $I->haveHttpHeader('If-modified-since', $since->toIso8601String());
-        $I->sendGET('v2/getSettings');
+        $I->sendGET('v2/test/getSettings');
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson(['titleMajor' => 'test']);
     }
@@ -41,9 +41,9 @@ class SettingsCest extends BaseCest
     public function tryToGetSettingWithFutureIfModifiedSince(ApiTester $I)
     {
         $since = \Carbon\Carbon::parse('+5 hour');
-        $I->haveASetting(['titleMajor' => 'test']);
+        $I->haveASetting(['titleMajor' => 'test', 'conference_id' => $this->conference->id]);
         $I->haveHttpHeader('If-modified-since', $since->toIso8601String());
-        $I->sendGET('v2/getSettings');
+        $I->sendGET('v2/test/getSettings');
         $I->seeResponseCodeIs(304);
     }
 }

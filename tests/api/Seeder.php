@@ -1,8 +1,6 @@
 <?php
 
-use App\Repositories\SettingsRepository;
 use Faker\Factory as Faker;
-use vendocrat\Settings\Facades\Setting;
 
 class Seeder
 {
@@ -95,11 +93,20 @@ class Seeder
             'timezone'           => $this->faker->timezone,
         ], $data);
 
-        foreach ($data as $key => $setting) {
-            Setting::set($key, $setting);
+        $repository = $this->app->make(\App\Repositories\SettingsRepository::class);
+
+        $settings = [];
+        foreach ($data as $key => $value) {
+            $settings[] = [
+                'key' => $key,
+                'value' => $value,
+                'conference_id' => 1
+            ];
         }
 
-        Setting::save();
+        foreach ($settings as $item) {
+            $repository->create($item);
+        }
     }
 
     protected function make($class, $attributes = [])

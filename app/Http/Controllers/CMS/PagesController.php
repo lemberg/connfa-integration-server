@@ -27,29 +27,35 @@ class PagesController extends BaseController
     /**
      * Overridden parent method, added check to unique alias
      *
+     * @param string  $conferenceAlias
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store()
+    public function store($conferenceAlias)
     {
         $data = $this->request->all();
+        $data['conference_id'] = $this->getConference()->id;
         $this->repository->create($this->checkAndMakeAlias($data));
 
-        return $this->redirectTo('index');
+        return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);
     }
 
     /**
      * Overridden parent method, added check to unique alias
-     * 
+     *
+     * @param string  $conferenceAlias
      * @param int $id
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($id)
+    public function update($conferenceAlias, $id)
     {
+        $item = $this->repository->findOrFail($id);
+        $this->checkConference($item->conference_id);
         $data = $this->request->all();
-        $this->repository->updateRich($this->checkAndMakeAlias($data), $id);
+        $item->fill($this->checkAndMakeAlias($data))->save();
 
-        return $this->redirectTo('index');
+        return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);
     }
 
     /**

@@ -2,23 +2,18 @@
 
 namespace App\Http\Controllers\CMS;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use App\Repositories\SettingsRepository;
 use App\Repositories\SpeakerRepository;
 use App\Repositories\EventRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Http\Request;
 
 /**
  * Class DashboardController
  * @package App\Http\Controllers\CMS
  */
-class DashboardController extends Controller
+class DashboardController extends BaseController
 {
-    /**
-     * @var ResponseFactory
-     */
-    protected $response;
 
     /**
      * @var SpeakerRepository
@@ -26,26 +21,28 @@ class DashboardController extends Controller
     protected $speakers;
 
     /**
-     * @var EventRepository
+     * @var string
      */
-    protected $repository;
+    protected $viewsFolder = '';
 
     /**
      * DashboardController constructor.
      *
+     * @param Request $request
      * @param ResponseFactory $response
      * @param SpeakerRepository $speakers
      * @param EventRepository $repository
      */
     public function __construct(
+        Request $request,
         ResponseFactory $response,
         SpeakerRepository $speakers,
         EventRepository $repository
     ) {
+        parent::__construct($request, $repository, $response);
         $this->middleware('auth');
-        $this->response = $response;
         $this->speakers = $speakers;
-        $this->repository = $repository;
+
         $this->isSetTimezone();
     }
 
@@ -57,10 +54,10 @@ class DashboardController extends Controller
     public function index()
     {
         return $this->response->view('dashboard', [
-            'speakers' => $this->speakers->getLimitLastUpdated(),
-            'sessions' => $this->repository->getEventByTypeOrderAndLimit('session'),
-            'social' => $this->repository->getEventByTypeOrderAndLimit('social'),
-            'bofs' => $this->repository->getEventByTypeOrderAndLimit('bof'),
+            'speakers' => $this->speakers->getLimitLastUpdated($this->getConference()->id),
+            'sessions' => $this->repository->getEventByTypeOrderAndLimit($this->getConference()->id, 'session'),
+            'social' => $this->repository->getEventByTypeOrderAndLimit($this->getConference()->id, 'social'),
+            'bofs' => $this->repository->getEventByTypeOrderAndLimit($this->getConference()->id, 'bof'),
         ]);
     }
 
@@ -72,7 +69,7 @@ class DashboardController extends Controller
     private function isSetTimezone()
     {
         $settingsRepository = \App::make(SettingsRepository::class);
-        $settings = $settingsRepository->getAllSettingInSingleArray();
+        $settings = $settingsRepository->getAllSettingInSingleArray($this->getConference()->id);
         if (!isset($settings['timezone'])) {
             session(['settings' => true]);
         } elseif (session()->has('settings')) {

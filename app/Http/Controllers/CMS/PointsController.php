@@ -27,9 +27,11 @@ class PointsController extends BaseController
     /**
      * Overridden parent method, added save image
      *
+     * @param string $conferenceAlias
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store()
+    public function store($conferenceAlias)
     {
         $data = $this->request->all();
         if ($this->request->get('image-switch') == 'image_file' AND $this->request->hasFile('image_file')) {
@@ -42,20 +44,24 @@ class PointsController extends BaseController
         }
 
         $data['image'] = $path;
+        $data['conference_id'] = $this->getConference()->id;
         $this->repository->create($data);
 
-        return $this->redirectTo('index');
+        return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);
     }
 
     /**
      * Overridden parent method, added update image
      *
+     * @param string $conferenceAlias
      * @param int $id
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($id)
+    public function update($conferenceAlias, $id)
     {
+        $item = $this->repository->findOrFail($id);
+        $this->checkConference($item->conference_id);
         $data = $this->request->all();
         $path = array_get($data, 'image');
         if (array_get($data, 'image_delete')) {
@@ -73,26 +79,28 @@ class PointsController extends BaseController
         }
 
         $data['image'] = $path;
-        $this->repository->updateRich($data, $id);
+        $item->fill($data)->save();
 
-        return $this->redirectTo('index');
+        return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);
     }
 
     /**
      * Overridden parent method, added delete image
      *
+     * @param string $conferenceAlias
      * @param int $id
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy($conferenceAlias, $id)
     {
         $repository = $this->repository->findOrFail($id);
+        $this->checkConference($repository->conference_id);
         if ($image = $repository->image) {
             $this->repository->deleteImage($image);
         }
         $this->repository->delete($id);
 
-        return $this->redirectTo('index');
+        return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);
     }
 }

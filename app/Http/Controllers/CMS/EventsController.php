@@ -87,58 +87,68 @@ class EventsController extends BaseController
     public function create()
     {
         return $this->response->view($this->getViewName('create'), [
-            'speakers' => $this->speakers->all()->pluck('full_name', 'id'),
-            'levels' => $this->levels->lists('name', 'id'),
-            'types' => $this->types->lists('name', 'id'),
-            'tracks' => $this->tracks->lists('name', 'id'),
+            'speakers' => $this->speakers->findByConference($this->getConference()->id)->get()->pluck('full_name', 'id')->toArray(),
+            'levels' => $this->levels->findByConference($this->getConference()->id)->get()->pluck('name', 'id')->toArray(),
+            'types' => $this->types->findByConference($this->getConference()->id)->get()->pluck('name', 'id')->toArray(),
+            'tracks' => $this->tracks->findByConference($this->getConference()->id)->get()->pluck('name', 'id')->toArray(),
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
+     * @param string $conferenceAlias
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store()
+    public function store($conferenceAlias)
     {
         $data = $this->request->all();
         $data['event_type'] = $this->eventType;
+        $data['conference_id'] = $this->getConference()->id;
         $event = $this->repository->create($data);
         $event->speakers()->sync(array_get($data, 'speakers', []));
 
-        return $this->redirectTo('index');
+        return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
+     * @param string $conferenceAlias
      * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($conferenceAlias, $id)
     {
+        $item = $this->repository->findOrFail($id);
+        $this->checkConference($item->conference_id);
+
         return $this->response->view($this->getViewName('edit'), [
-            'data' => $this->repository->findOrFail($id),
-            'speakers' => $this->speakers->all()->pluck('full_name', 'id'),
-            'levels' => $this->levels->lists('name', 'id'),
-            'types' => $this->types->lists('name', 'id'),
-            'tracks' => $this->tracks->lists('name', 'id'),
+            'data' => $item,
+            'speakers' => $this->speakers->findByConference($this->getConference()->id)->get()->pluck('full_name', 'id')->toArray(),
+            'levels' => $this->levels->findByConference($this->getConference()->id)->get()->pluck('name', 'id')->toArray(),
+            'types' => $this->types->findByConference($this->getConference()->id)->get()->pluck('name', 'id')->toArray(),
+            'tracks' => $this->tracks->findByConference($this->getConference()->id)->get()->pluck('name', 'id')->toArray(),
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
+     * @param string $conferenceAlias
      * @param int $id
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($id)
+    public function update($conferenceAlias, $id)
     {
-        $this->repository->updateWithSpeakers($id, $this->request->except('_method', '_token'));
+        $item = $this->repository->findOrFail($id);
+        $this->checkConference($item->conference_id);
+        $this->repository->updateWithSpeakers($item, $this->request->except('_method', '_token'));
 
-        return $this->redirectTo('index');
+        return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);
     }
 
     /**
@@ -148,7 +158,7 @@ class EventsController extends BaseController
      */
     public function getData()
     {
-        return Datatables::of($this->repository->findAllBy('event_type', $this->eventType))
+        return Datatables::of($this->repository->findWhere(['event_type' => $this->eventType, 'conference_id' => $this->getConference()->id]))
             ->addColumn('actions', function ($data) {
                 return view('partials/actions', ['route' => $this->getRouteName(), 'id' => $data->id]);
             })

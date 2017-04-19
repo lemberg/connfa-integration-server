@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="pull-left">
-                {!! Breadcrumbs::render('breadcrumbs', [['label'=> trans('Speakers'), 'route' => 'speakers.index'], ['label'=> trans('Create speaker'), 'route' => 'speakers.index']]) !!}
+                {!! Breadcrumbs::render('breadcrumbs', [['label'=> trans('Speakers'), 'route' => 'speakers.index', 'params' => ['conference_alias' => $conference->alias]], ['label'=> trans('Create speaker'), 'route' => 'speakers.index', 'params' => ['conference_alias' => $conference->alias]]]) !!}
             </div>
             <div class="x_panel">
                 <div class="x_title">
@@ -13,7 +13,7 @@
                 </div>
                 <div class="x_content">
                     <br/>
-                    {!! Form::open(['route' => ['speakers.store'], 'files' => true, 'method' => 'POST', 'class' => 'form-horizontal form-label-left']) !!}
+                    {!! Form::open(['route' => ['speakers.store', 'conference_alias' => $conference->alias], 'files' => true, 'method' => 'POST', 'class' => 'form-horizontal form-label-left']) !!}
                         <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
                             {{ Form::label('first_name', trans('First Name')." *", ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">

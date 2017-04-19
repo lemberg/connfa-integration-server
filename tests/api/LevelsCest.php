@@ -14,15 +14,15 @@ class LevelsCest extends BaseCest
     // tests
     public function tryToGetLevelsWhenEmpty(ApiTester $I)
     {
-        $I->sendGET('v2/getLevels');
+        $I->sendGET('v2/test/getLevels');
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson(['levels' => []]);
     }
 
     public function tryToGetLevel(ApiTester $I)
     {
-        $I->haveALevel(['name' => 'beginner']);
-        $I->sendGET('v2/getLevels');
+        $I->haveALevel(['name' => 'beginner', 'conference_id' => $this->conference->id]);
+        $I->sendGET('v2/test/getLevels');
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson(['levelName' => 'beginner']);
     }
@@ -30,9 +30,9 @@ class LevelsCest extends BaseCest
     public function tryToGetLevelWithIfModifiedSince(ApiTester $I)
     {
         $since = \Carbon\Carbon::parse('-1 hour');
-        $I->haveALevel(['name' => 'beginner']);
+        $I->haveALevel(['name' => 'beginner', 'conference_id' => $this->conference->id]);
         $I->haveHttpHeader('If-modified-since', $since->toIso8601String());
-        $I->sendGET('v2/getLevels');
+        $I->sendGET('v2/test/getLevels');
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson(['levelName' => 'beginner']);
     }
@@ -40,21 +40,21 @@ class LevelsCest extends BaseCest
     public function tryToGetLevelWithFutureIfModifiedSince(ApiTester $I)
     {
         $since = \Carbon\Carbon::parse('+5 hour');
-        $I->haveALevel(['name' => 'beginner']);
+        $I->haveALevel(['name' => 'beginner', 'conference_id' => $this->conference->id]);
         $I->haveHttpHeader('If-modified-since', $since->toIso8601String());
-        $I->sendGET('v2/getLevels');
+        $I->sendGET('v2/test/getLevels');
         $I->seeResponseCodeIs(304);
     }
 
     public function tryToGetDeletedLevel(ApiTester $I)
     {
-        $level = $I->haveALevel(['name' => 'beginner']);
-        $I->sendGET('v2/getLevels');
+        $level = $I->haveALevel(['name' => 'beginner', 'conference_id' => $this->conference->id]);
+        $I->sendGET('v2/test/getLevels');
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson(['levelName' => 'beginner', 'deleted' => false]);
         $level->delete();
         $I->haveHttpHeader('If-modified-since', \Carbon\Carbon::now()->toIso8601String());
-        $I->sendGET('v2/getLevels');
+        $I->sendGET('v2/test/getLevels');
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson(['levelName' => 'beginner', 'deleted' => true]);
 

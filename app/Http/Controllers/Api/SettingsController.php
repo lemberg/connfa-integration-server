@@ -16,7 +16,7 @@ class SettingsController extends ApiController
      */
     public function index(SettingsRepository $repository)
     {
-        $settings = $repository->getSettingsWithDeleted($this->since);
+        $settings = $repository->getSettingsWithDeleted($this->getConference()->id, $this->since);
         $this->checkModified($settings);
 
         $transformer = new SettingsTransformer();
@@ -33,7 +33,7 @@ class SettingsController extends ApiController
      */
     public function show($setting, SettingsRepository $repository)
     {
-        $value = $repository->getByKeyWithDeleted($setting, $this->since);
+        $value = $repository->getByKeyWithDeleted($this->getConference()->id, $setting, $this->since);
         $this->checkModified($value);
 
         return $this->response->array([$setting => $value]);

@@ -38,8 +38,8 @@ class UserRequest extends Request
             ];
         } elseif ($this->method() == "PUT") {
             $validation = [
-                'name' => 'required|unique:users,name,' . $this->route()->parameters()['users'] . ',id',
-                'email' => 'required|unique:users,email,' . $this->route()->parameters()['users'] . ',id|email',
+                'name' => 'required|unique:users,name,' . $this->route()->parameter('id') . ',id',
+                'email' => 'required|unique:users,email,' . $this->route()->parameter('id') . ',id|email',
                 'roles' => 'required',
             ];
 

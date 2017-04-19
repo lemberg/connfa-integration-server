@@ -6,14 +6,28 @@ use App\Http\Requests\UserRequest;
 use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 
 /**
  * Class UsersController
  * @package App\Http\Controllers\CMS
  */
-class UsersController extends BaseController
+class UsersController extends Controller
 {
+    /**
+     * @var Request
+     */
+    protected $request = null;
+
+    /**
+     * @var BaseRepository
+     */
+    protected $repository = null;
+
+    /**
+     * @var ResponseFactory
+     */
+    protected $response = null;
 
     /**
      * @var RoleRepository
@@ -35,7 +49,19 @@ class UsersController extends BaseController
         ResponseFactory $response
     ) {
         $this->roleRepository = $roleRepository;
-        parent::__construct($request, $repository, $response);
+        $this->request = $request;
+        $this->repository = $repository;
+        $this->response = $response;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return $this->response->view('users.index', ['data' => $this->repository->paginate(25)]);
     }
 
     /**
@@ -60,7 +86,19 @@ class UsersController extends BaseController
         $user = $this->repository->create($data);
         $user->roles()->sync(array_get($data, 'roles', []));
 
-        return $this->redirectTo('index');
+        return $this->response->redirectToRoute('users.index');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        return $this->response->view('users.show', ['data' => $this->repository->findOrFail($id)]);
     }
 
     /**
@@ -100,12 +138,7 @@ class UsersController extends BaseController
         $user = $this->repository->findOrFail($id);
         $user->roles()->sync($roles);
 
-        if (!$this->isRole()) {
-
-            return $this->response->redirectTo('/dashboard');
-        }
-
-        return $this->redirectTo('index');
+        return $this->response->redirectToRoute('users.index');
     }
 
     /**
@@ -121,6 +154,6 @@ class UsersController extends BaseController
         $user->roles()->sync([]);
         $this->repository->delete($id);
 
-        return $this->redirectTo('index');
+        return $this->response->redirectToRoute('users.index');
     }
 }

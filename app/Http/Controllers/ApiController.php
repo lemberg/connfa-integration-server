@@ -43,6 +43,7 @@ class ApiController extends Controller
         if ($since) {
             $this->since = Carbon::parse($since);
         }
+
     }
 
     /**
@@ -56,4 +57,5 @@ class ApiController extends Controller
             throw new HttpException(304);
         }
     }
+
 }

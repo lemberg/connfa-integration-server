@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="pull-left">
-                {!! Breadcrumbs::render('breadcrumbs', [['label'=> trans('Speakers'), 'route' => 'speakers.index'], ['label'=> trans('Speaker'), 'route' => 'speakers.index']]) !!}
+                {!! Breadcrumbs::render('breadcrumbs', [['label'=> trans('Speakers'), 'route' => 'speakers.index', 'params' => ['conference_alias' => $conference->alias]], ['label'=> trans('Speaker'), 'route' => 'speakers.index', 'params' => ['conference_alias' => $conference->alias]]]) !!}
             </div>
             <div class="x_panel">
                 <div class="x_title">
@@ -54,9 +54,8 @@
                                 </li>
                             @endif
                         </ul>
-                        <a href="{{ route('speakers.edit', ['id' => $data->id ]) }}" class="btn btn-success"><i class="fa fa-edit m-right-xs"></i> {{ trans('Edit') }}</a>
-                        {!! Form::open([route('speakers.destroy', ['id' => $data->id]), 'method' => 'POST', 'class' => '', 'style' => 'display:inline-block;vertical-align: middle;
-']) !!}
+                        <a href="{{ route('speakers.edit', ['id' => $data->id, 'conference_alias' => $conference->alias]) }}" class="btn btn-success"><i class="fa fa-edit m-right-xs"></i> {{ trans('Edit') }}</a>
+                        {!! Form::open([route('speakers.destroy', ['id' => $data->id, 'conference_alias' => $conference->alias]), 'method' => 'POST', 'class' => '', 'style' => 'display:inline-block;vertical-align: middle;']) !!}
                             {{ method_field('DELETE') }}
                             {{ Form::button("<i class='fa fa-trash-o'></i> Delete", ['onclick' => 'deleteItem(this)', 'class' => 'btn btn-danger']) }}
                         {!! Form::close() !!}

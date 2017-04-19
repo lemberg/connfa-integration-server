@@ -152,7 +152,7 @@ $(document).ready(function () {
 		placeholder: "With Max Selection limit 4",
 		allowClear: true
 	});
-	
+
 	$('.select2_roles').on('select2:unselecting', function (e) {
 		var selected = $(this).val();
 		// text('User Administrator') == id(1)
@@ -277,7 +277,9 @@ $(document).ready(function () {
 	 */
 	var o = $('#editor');
 	if (o.length > 0) {
-		CKEDITOR.replace('editor');
+		CKEDITOR.replace('editor', {
+            extraPlugins: 'justify'
+		});
 	}
 
 	// pages
@@ -334,6 +336,12 @@ $(document).ready(function () {
 	$('form').submit(function () {
 		$('input[type=submit]', $(this)).prop('disabled', true);
 	});
+
+	$('.action-change-conference').on('change', function (e) {
+		e.preventDefault();
+		var url = $(this).data('url').replace('__id__', $(this).val());
+		window.location.href = url;
+    })
 });
 
 /**

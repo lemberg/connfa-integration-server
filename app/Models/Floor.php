@@ -17,6 +17,7 @@ class Floor extends Model
         'name',
         'image',
         'order',
+        'conference_id'
     ];
 
     protected $urlable = [

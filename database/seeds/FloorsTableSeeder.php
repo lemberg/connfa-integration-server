@@ -1,8 +1,9 @@
 <?php
 
+use App\Models\Conference;
 use Illuminate\Database\Seeder;
 
-class FloorTableSeeder extends Seeder
+class FloorsTableSeeder extends Seeder
 {
 
     /**
@@ -12,6 +13,10 @@ class FloorTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Floor::class, 3)->create();
+        $conference = Conference::first();
+        factory(App\Models\Floor::class, 3)->create()->each(function ($floor) use ($conference) {
+            $floor->conference_id = $conference->id;
+            $floor->save();
+        });
     }
 }

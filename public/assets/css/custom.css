@@ -325,7 +325,7 @@ body .container.body .right_col {
 .navbar-nav>li>a, .navbar-brand, .navbar-nav>li>a {
   color: #fff !important;
 }
-.top_nav .nav>li>a:focus, .top_nav .nav>li>a:hover, .top_nav .nav .open>a, .top_nav .nav .open>a:focus, .top_nav .nav .open>a:hover {
+.top_nav .nav>li>a:focus, .top_nav .nav>li>a:hover, .top_nav .nav .open>a, .top_nav .nav .open>a:focus, .top_nav .nav .open>a:hover, .top_nav .nav>li.active>a {
   background: #D9DEE4;
 }
 body {
@@ -4852,4 +4852,23 @@ ul.widget_profile_box li{
 .dash-circle-profile-img-height{
   height: auto;
   width: 85px;
+}
+
+/* Conference template styles */
+.nav-md .container.body.conference .right_col,
+.nav-md .container.body.conference .top_nav,
+.nav-md .container.body.conference footer {
+  margin-left: 0;
+}
+
+.table .column-title.last {
+  width: 300px;
+}
+
+.change-conference {
+  padding: 13px 30px 12px 0;
+}
+
+.select2-container--default .select2-results__option[aria-selected=true] {
+  display: none;
 }
