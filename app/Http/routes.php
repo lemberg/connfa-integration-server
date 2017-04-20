@@ -23,6 +23,8 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
     $app->get('/', function () {
         return redirect()->route('conferences.index');
     });
+
+    // Conferences
     $app->get('conferences/data', 'ConferencesController@getData')->name('conferences.data');
     $app->get('conference/{id}/select', 'ConferencesController@select')->name('conferences.select');
 
@@ -33,6 +35,7 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
     $app->put('conferences/{id}', 'ConferencesController@update')->name('conferences.update');
     $app->delete('conferences/{id}', 'ConferencesController@destroy')->name('conferences.destroy');
 
+    // Users
     $app->group(['middleware' => ['permission:edit-user']], function($app) {
         // Users
         $app->get('users', 'UsersController@index')->name('users.index');
@@ -44,6 +47,8 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
         $app->delete('users/{id}', 'UsersController@destroy')->name('users.destroy');
     });
 
+    // Upload files
+    $app->post('upload/image', 'UploadController@image')->name('upload.image');
 });
 
 $app->group(['middleware' => ['auth'], 'namespace' => 'CMS', 'prefix' => '{conference_alias}'], function ($app) {
