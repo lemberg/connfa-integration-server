@@ -19,7 +19,8 @@ class Point extends Model
         'description',
         'image',
         'details_url',
-        'order'
+        'order',
+        'conference_id'
     ];
 
     protected $urlable = [

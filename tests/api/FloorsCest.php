@@ -14,15 +14,15 @@ class FloorsCest extends BaseCest
     // tests
     public function tryToGetFloorsWhenEmpty(ApiTester $I)
     {
-        $I->sendGET('v2/getFloorPlans');
+        $I->sendGET('v2/test/getFloorPlans');
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson(['floorPlans' => []]);
     }
 
     public function tryToGetFloor(ApiTester $I)
     {
-        $I->haveAFloor(['name' => 'test']);
-        $I->sendGET('v2/getFloorPlans');
+        $I->haveAFloor(['name' => 'test', 'conference_id' => $this->conference->id]);
+        $I->sendGET('v2/test/getFloorPlans');
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson(['floorPlanName' => 'test']);
     }
@@ -30,9 +30,9 @@ class FloorsCest extends BaseCest
     public function tryToGetFloorWithIfModifiedSince(ApiTester $I)
     {
         $since = \Carbon\Carbon::parse('-1 hour');
-        $I->haveAFloor(['name' => 'test']);
+        $I->haveAFloor(['name' => 'test', 'conference_id' => $this->conference->id]);
         $I->haveHttpHeader('If-modified-since', $since->toIso8601String());
-        $I->sendGET('v2/getFloorPlans');
+        $I->sendGET('v2/test/getFloorPlans');
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson(['floorPlanName' => 'test']);
     }
@@ -40,21 +40,21 @@ class FloorsCest extends BaseCest
     public function tryToGetFloorWithFutureIfModifiedSince(ApiTester $I)
     {
         $since = \Carbon\Carbon::parse('+5 hour');
-        $I->haveAFloor(['name' => 'test']);
+        $I->haveAFloor(['name' => 'test', 'conference_id' => $this->conference->id]);
         $I->haveHttpHeader('If-modified-since', $since->toIso8601String());
-        $I->sendGET('v2/getFloorPlans');
+        $I->sendGET('v2/test/getFloorPlans');
         $I->seeResponseCodeIs(304);
     }
 
     public function tryToGetDeletedFloor(ApiTester $I)
     {
-        $type = $I->haveAFloor(['name' => 'test']);
-        $I->sendGET('v2/getFloorPlans');
+        $type = $I->haveAFloor(['name' => 'test', 'conference_id' => $this->conference->id]);
+        $I->sendGET('v2/test/getFloorPlans');
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson(['floorPlanName' => 'test', 'deleted' => false]);
         $type->delete();
         $I->haveHttpHeader('If-modified-since', \Carbon\Carbon::now()->toIso8601String());
-        $I->sendGET('v2/getFloorPlans');
+        $I->sendGET('v2/test/getFloorPlans');
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson(['floorPlanName' => 'test', 'deleted' => true]);
     }

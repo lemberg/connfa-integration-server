@@ -15,6 +15,7 @@ class Track extends Model
 
     protected $fillable = [
         'name',
-        'order'
+        'order',
+        'conference_id'
     ];
 }

@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Conference;
 use App\Models\Event;
 use App\Repositories\Event\LevelRepository;
 use App\Repositories\Event\TrackRepository;
@@ -20,7 +21,7 @@ class SeedEvents extends Command
      *
      * @var string
      */
-    protected $signature = 'events:seed {--count=50} {--start_date=+5 days}';
+    protected $signature = 'events:seed {--conference_id=0} {--count=50} {--start_date=+5 days}';
 
     /**
      * The console command description.
@@ -67,6 +68,7 @@ class SeedEvents extends Command
         TrackRepository $trackRepository,
         SpeakerRepository $speakerRepository
     ) {
+        $conferenceId = $this->option('conference_id');
         $count = $this->option('count');
         $startDate = $this->option('start_date');
 
@@ -78,22 +80,30 @@ class SeedEvents extends Command
             DB::table('events')->truncate();
         }
 
+        $conference = null;
+        if ($conferenceId) {
+            $conference = Conference::find($conferenceId);
+        } else {
+            $conference = Conference::first();
+        }
+
         $levels = $levelRepository->all()->pluck('id')->toArray();
         $types = $typeRepository->all()->pluck('id')->toArray();
         $tracks = $trackRepository->all()->pluck('id')->toArray();
         $speakers = $speakerRepository->all()->pluck('id')->toArray();
-
 
         $events = factory(Event::class)->times($count)->create()->each(function ($event) use (
             $levels,
             $types,
             $tracks,
             $speakers,
+            $conference,
             $startDate
         ) {
             $startDate = $this->faker->dateTimeBetween($startDate, strtotime('+3 days', strtotime($startDate)));
             $endDate = $this->faker->dateTimeBetween($startDate, strtotime('+8 hours', $startDate->getTimestamp()));
 
+            $event->conference_id = $conference->id;
             $event->start_at = $startDate->format('Y-m-d H:00:00');
             $event->end_at = $endDate->format('Y-m-d H:00:00');
             $event->level_id = $this->faker->randomElement($levels);

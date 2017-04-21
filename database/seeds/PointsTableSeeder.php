@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Conference;
 use Illuminate\Database\Seeder;
 
 class PointsTableSeeder extends Seeder
@@ -11,6 +12,10 @@ class PointsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Point::class, 5)->create();
+        $conference = Conference::first();
+        factory(App\Models\Point::class, 5)->create()->each(function ($point) use ($conference) {
+            $point->conference_id = $conference->id;
+            $point->save();
+        });
     }
 }

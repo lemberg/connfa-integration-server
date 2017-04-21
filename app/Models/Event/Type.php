@@ -18,5 +18,6 @@ class Type extends Model
     protected $fillable = [
         'name',
         'order',
+        'conference_id'
     ];
 }

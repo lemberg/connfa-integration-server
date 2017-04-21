@@ -48,7 +48,7 @@ class PointsController extends ApiController
      */
     public function index(PointRepository $repository)
     {
-        $points = $repository->getPointsWithDeleted($this->since);
+        $points = $repository->getPointsWithDeleted($this->getConference()->id, $this->since);
         $this->checkModified($points);
 
         return $this->response->collection($points, new PointTransformer(), ['key' => 'poi']);

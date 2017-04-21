@@ -278,8 +278,26 @@ $(document).ready(function () {
 	var o = $('#editor');
 	if (o.length > 0) {
 		CKEDITOR.replace('editor', {
-            extraPlugins: 'justify',
-            disallowedContent: 'img{width,height}'
+            extraPlugins: 'justify,uploadimage,image2',
+            height: 500,
+
+            // Upload images to a CKFinder connector (note that the response type is set to JSON).
+            uploadUrl: '/upload/image',
+
+            // Configure your file manager integration. This example uses CKFinder 3 for PHP.
+            filebrowserUploadUrl: '/upload/image',
+            filebrowserImageUploadUrl: '/upload/image',
+
+            // The following options are not necessary and are used here for presentation purposes only.
+            // They configure the Styles drop-down list and widgets to use classes.
+            stylesSet: [
+                { name: 'Narrow image', type: 'widget', widget: 'image', attributes: { 'class': 'image-narrow' } },
+                { name: 'Wide image', type: 'widget', widget: 'image', attributes: { 'class': 'image-wide' } }
+            ],
+
+            // Load the default contents.css file plus customizations for this sample.
+            contentsCss: [ CKEDITOR.basePath + 'contents.css', 'http://sdk.ckeditor.com/samples/assets/css/widgetstyles.css' ],
+            image2_disableResizer: true
 		});
 	}
 
@@ -337,6 +355,12 @@ $(document).ready(function () {
 	$('form').submit(function () {
 		$('input[type=submit]', $(this)).prop('disabled', true);
 	});
+
+	$('.action-change-conference').on('change', function (e) {
+		e.preventDefault();
+		var url = $(this).data('url').replace('__id__', $(this).val());
+		window.location.href = url;
+    })
 });
 
 /**

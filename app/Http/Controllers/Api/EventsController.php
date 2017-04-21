@@ -180,7 +180,7 @@ class EventsController extends ApiController
      */
     private function fetchEventsByType($type)
     {
-        $events = $this->repository->getEventsByTypeWithDeleted($type, $this->since);
+        $events = $this->repository->getEventsByTypeWithDeleted($this->getConference()->id, $type, $this->since);
         $this->checkModified($events);
 
         return $events;

@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="pull-left">
-                {!! Breadcrumbs::render('breadcrumbs', [['label'=> trans('Session events'), 'route' => 'sessions.index'], ['label'=> trans('Create Session event'), 'route' => 'sessions.index']]) !!}
+                {!! Breadcrumbs::render('breadcrumbs', [['label'=> trans('Session events'), 'route' => 'sessions.index', 'params' => ['conference_alias' => $conference->alias]], ['label'=> trans('Create Session event'), 'route' => 'sessions.index', 'params' => ['conference_alias' => $conference->alias]]]) !!}
             </div>
             <div class="x_panel">
                 <div class="x_title">
@@ -13,7 +13,7 @@
                 </div>
                 <div class="x_content">
                     <br/>
-                    {!! Form::open(['route' => ['sessions.store'], 'method' => 'POST', 'class' => 'form-horizontal form-label-left']) !!}
+                    {!! Form::open(['route' => ['sessions.store', 'conference_alias' => $conference->alias], 'method' => 'POST', 'class' => 'form-horizontal form-label-left']) !!}
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             {{ Form::label('name', trans('Name')." *", ['class' => "control-label col-md-3 col-sm-3 col-xs-12"]) }}
                             <div class="col-md-6 col-sm-6 col-xs-12">

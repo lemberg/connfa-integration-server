@@ -48,7 +48,7 @@ class EventTypesController extends ApiController
      */
     public function index(TypeRepository $repository)
     {
-        $types = $repository->getTypesWithDeleted($this->since);
+        $types = $repository->getTypesWithDeleted($this->getConference()->id, $this->since);
         $this->checkModified($types);
 
         return $this->response->collection($types, new TypeTransformer(), ['key' => 'types']);

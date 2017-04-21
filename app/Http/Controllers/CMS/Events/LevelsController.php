@@ -8,6 +8,7 @@ use App\Repositories\EventRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use App\Http\Controllers\CMS\BaseController;
 
+
 /**
  * Class LevelsController
  * @package App\Http\Controllers\CMS\Events
@@ -41,15 +42,18 @@ class LevelsController extends BaseController
     /**
      * Remove the specified resource from storage.
      *
+     * @param  string $conferenceAlias
      * @param  int $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($conferenceAlias, $id)
     {
-        $this->event->updateByField('level_id', $id);
-        $this->repository->delete($id);
+        $item = $this->repository->findOrFail($id);
+        $this->checkConference($item->conference_id);
+        $this->event->updateByField('level_id', $item->id);
+        $item->delete();
 
-        return $this->redirectTo('index');
+        return $this->redirectTo('index', ['conference_alias' => $conferenceAlias]);
     }
 }

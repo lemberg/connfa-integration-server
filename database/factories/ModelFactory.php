@@ -44,15 +44,15 @@ $getImagesFromFolder = function ($path = 'uploads/fakers') use(&$getImagesFromFo
     return $images;
 };
 
+/**
+ * Upload image to folder use faker
+ *
+ * @param int $countImages
+ * @param string $path
+ *
+ * @return array
+ */
 if (!function_exists('uploadImages')) {
-    /**
-     * Upload image to folder use faker
-     *
-     * @param int $countImages
-     * @param string $path
-     *
-     * @return array
-     */
     function uploadImages($countImages = 5, $path = 'uploads/fakers')
     {
         $faker = Faker\Factory::create();
@@ -68,14 +68,14 @@ if (!function_exists('uploadImages')) {
     }
 }
 
+/**
+ * Check directory, if not exist then create it
+ *
+ * @param $path
+ *
+ * @return bool
+ */
 if (!function_exists('checkAndMakeDirectory')) {
-    /**
-     * Check directory, if not exist then create it
-     *
-     * @param $path
-     *
-     * @return bool
-     */
     function checkAndMakeDirectory($path)
     {
         if (!File::exists($path)) {
@@ -189,9 +189,10 @@ $factory->define(App\Models\Point::class, function (Faker\Generator $faker) use 
     ];
 });
 
-$factory->define(App\Models\Schedule::class, function (Faker\Generator $faker) {
-    $repository = App::make(\App\Repositories\ScheduleRepository::class);
+$factory->define(App\Models\Conference::class, function (Faker\Generator $faker) {
+    $name = $faker->city . ' ' . date('Y');
     return [
-        'code' => $repository->generateCode()
+        'name' => $name,
+        'alias' => str_slug($name)
     ];
 });

@@ -15,27 +15,36 @@ class SpeakerRepository extends BaseRepository
     /**
      * Get speakers with deleted since $since param if passed
      *
+     * @param integer     $conferenceId
      * @param string|bool $since
      * @return mixed
      */
-    public function getSpeakersWithDeleted($since = false)
+    public function getSpeakersWithDeleted($conferenceId, $since = false)
     {
         if ($since) {
-            return $this->model->withTrashed()->where('updated_at', '>=', $since->toDateTimeString())->get();
+            return $this->findByConference($conferenceId)->withTrashed()->where('updated_at', '>=', $since->toDateTimeString())->get();
         }
 
-        return $this->model->withTrashed()->get();
+        return $this->findByConference($conferenceId)->withTrashed()->get();
     }
 
     /**
      * Get limit last updated speakers
      *
+     * @param int $conferenceId
      * @param int $limit
      *
      * @return mixed
      */
-    public function getLimitLastUpdated($limit = 5)
+    public function getLimitLastUpdated($conferenceId, $limit = 5)
     {
-        return $this->model->orderBy('updated_at', 'DESC')->limit($limit)->get();
+        return $this->model
+            ->whereHas('events', function ($query) use ($conferenceId) {
+                $query->where('conference_id', $conferenceId);
+            })
+            ->orderBy('updated_at', 'DESC')
+            ->limit($limit)
+            ->get();
     }
+
 }

@@ -2,10 +2,9 @@
 
 namespace App\Repositories;
 
+use App\Models\Setting;
 use Illuminate\Support\Collection;
 use Illuminate\Container\Container as App;
-use vendocrat\Settings\Models\Setting;
-use vendocrat\Settings\Facades\Setting as SettingFacade;
 use \DateTimeZone;
 
 class SettingsRepository extends BaseRepository
@@ -36,13 +35,14 @@ class SettingsRepository extends BaseRepository
     /**
      * Get settings with deleted since $since param if passed
      *
+     * @param integer     $conferenceId
      * @param string|bool $since
      *
      * @return mixed
      */
-    public function getSettingsWithDeleted($since = false)
+    public function getSettingsWithDeleted($conferenceId, $since = false)
     {
-        $settings = $this->model->withTrashed();
+        $settings = $this->findByConference($conferenceId)->withTrashed();
 
         if ($since) {
             $settings->where('updated_at', '>=', $since->toDateTimeString());
@@ -54,14 +54,15 @@ class SettingsRepository extends BaseRepository
     /**
      * Get Setting by key since $since param if passed
      *
+     * @param integer $conferenceId
      * @param $setting
      * @param $since
      *
      * @return mixed
      */
-    public function getByKeyWithDeleted($setting, $since = false)
+    public function getByKeyWithDeleted($conferenceId, $setting, $since = false)
     {
-        $settings = $this->model->withTrashed()->where('key', $setting);
+        $settings = $this->findByConference($conferenceId)->withTrashed()->where('key', $setting);
 
         if ($since) {
             $settings->where('updated_at', '>=', $since->toDateTimeString());
@@ -70,9 +71,16 @@ class SettingsRepository extends BaseRepository
         return $settings->first();
     }
 
-    public function getByKey($setting)
+    /**
+     * Get setting value by key
+     *
+     * @param string $setting
+     * @param integer $conferenceId
+     * @return mixed
+     */
+    public function getByKey($setting, $conferenceId)
     {
-        $settings = $this->model->where('key', $setting);
+        $settings = $this->findByConference($conferenceId)->where('key', $setting);
 
         return $settings->first();
     }
@@ -80,41 +88,56 @@ class SettingsRepository extends BaseRepository
     /**
      * Create twitter objects
      *
-     * @param $data
+     * @param array $data
+     * @param integer $conferenceId
      */
-    public function createTwitter($data)
+    public function createTwitter($data, $conferenceId)
     {
         if (array_get($data, 'twitterSearchQuery')) {
-            SettingFacade::set('twitterSearchQuery', array_get($data, 'twitterSearchQuery'));
+            $setting = $this->getByKey('twitterSearchQuery', $conferenceId);
+            $setting->value = array_get($data, 'twitterSearchQuery');
+            $setting->conference_id = $conferenceId;
+            $setting->save();
         }
         if (array_get($data, 'twitterWidget')) {
-            SettingFacade::set('twitterWidget', array_get($data, 'twitterWidget'));
+            $setting = $this->getByKey('twitterWidget', $conferenceId);
+            $setting->value = array_get($data, 'twitterWidget');
+            $setting->conference_id = $conferenceId;
+            $setting->save();
         }
-        SettingFacade::save();
     }
 
     /**
      * Save settings
      *
      * @param array $settings
+     * @param int $conferenceId
      *
      * @return mixed
      */
-    public function saveSettings(array $settings = [])
+    public function saveSettings(array $settings = [], $conferenceId)
     {
         if (empty($settings)) {
             return false;
         }
 
         foreach ($settings as $key => $value) {
-            if ($key == 'timezone' && SettingFacade::get($key) != $value) {
+            $setting = $this->getByKey($key, $conferenceId);
+            if ($key == 'timezone' && $setting && $setting->value != $value) {
                 $this->eventRepository->forceUpdateAllEvents();
             }
-
-            SettingFacade::set($key, $value);
+            if (!$setting) {
+                $setting = new Setting();
+                $setting->key = $key;
+                $setting->value = $value;
+                $setting->conference_id = $conferenceId;
+            } else {
+                $setting->value = $value;
+            }
+            $setting->save();
         }
 
-        return SettingFacade::save();
+        return true;
     }
 
 
@@ -133,12 +156,14 @@ class SettingsRepository extends BaseRepository
     /**
      * Get settings in single array
      *
+     * @param int $conferenceId
+     *
      * @return array
      */
-    public function getAllSettingInSingleArray()
+    public function getAllSettingInSingleArray($conferenceId)
     {
         $transformSettings = [];
-        $settings = $this->model->all()->toArray();
+        $settings = $this->findByConference($conferenceId)->get()->toArray();
         if (!empty($settings)) {
             foreach ($settings as $setting) {
                 $transformSettings[$setting['key']] = $setting['value'];
@@ -146,5 +171,21 @@ class SettingsRepository extends BaseRepository
         }
 
         return $transformSettings;
+    }
+
+    /**
+     * Get value of setting by key or return default vale
+     *
+     * @param string $key
+     * @param integer $conferenceId
+     * @param string|null $default
+     *
+     * @return string
+     */
+    public function getValueByKey($key, $conferenceId, $default = null)
+    {
+        $setting = $this->getByKey($key, $conferenceId);
+
+        return $setting ? $setting->value : $default;
     }
 }

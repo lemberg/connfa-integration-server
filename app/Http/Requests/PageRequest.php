@@ -34,8 +34,8 @@ class PageRequest extends Request
             ];
         } elseif ($this->method() == 'PUT') {
             $validation = [
-                'name' => 'required|unique:pages,name,' . $this->route()->parameters()['pages'] . ',id,deleted_at,NULL',
-                'alias' => 'required|unique:pages,alias,' . $this->route()->parameters()['pages'] . ',id,deleted_at,NULL',
+                'name' => 'required|unique:pages,name,' . $this->route()->parameter('id') . ',id,deleted_at,NULL',
+                'alias' => 'required|unique:pages,alias,' . $this->route()->parameter('id') . ',id,deleted_at,NULL',
                 'content' => 'required',
             ];
         }

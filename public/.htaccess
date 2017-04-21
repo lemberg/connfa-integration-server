@@ -18,3 +18,9 @@
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 </IfModule>
+
+<IfModule mod_headers.c>
+    <FilesMatch "(?i)\.(ico|jpg|jpeg|png|gif)$">
+        Header set Cache-Control "max-age=172800, public, must-revalidate"
+    </FilesMatch>
+</IfModule>

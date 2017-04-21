@@ -16,5 +16,6 @@ class Page extends Model
         'alias',
         'content',
         'order',
+        'conference_id'
     ];
 }

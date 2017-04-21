@@ -74,11 +74,12 @@ class UpdateRepository
     /**
      * Get array of updated resources
      *
+     * @param integer $conferenceId
      * @param $since
      * @param array $params
      * @return array
      */
-    public function getLastUpdate($since, $params = [])
+    public function getLastUpdate($conferenceId, $since, $params = [])
     {
         $updates = [];
 
@@ -87,7 +88,7 @@ class UpdateRepository
 
             $params = array_get($item, 'params', []);
 
-            if ($repository->checkLastUpdate($since, $params)) {
+            if ($repository->checkLastUpdate($conferenceId, $since, $params)) {
                 $updates[] = $item['id'];
             }
         }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Conference;
 
 class SpeakersTableSeeder extends Seeder
 {
@@ -11,6 +12,10 @@ class SpeakersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Speaker::class, 50)->create();
+        $conference = Conference::first();
+        factory(App\Models\Speaker::class, 50)->create()->each(function ($speaker) use ($conference) {
+            $speaker->conference_id = $conference->id;
+            $speaker->save();
+        });
     }
 }
