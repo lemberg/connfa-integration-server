@@ -4,11 +4,7 @@
         "title": "Connfa API",
         "version": "2.0"
     },
-    "host": "local.connfa",
-    "basePath": "/api/v2",
-    "schemes": [
-        "http"
-    ],
+    "basePath": "/api/v2/euna-mcdermott-dds",
     "paths": {
         "/getLevels": {
             "get": {

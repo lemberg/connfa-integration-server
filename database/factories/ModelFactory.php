@@ -196,3 +196,10 @@ $factory->define(App\Models\Conference::class, function (Faker\Generator $faker)
         'alias' => str_slug($name)
     ];
 });
+
+$factory->define(App\Models\Schedule::class, function (Faker\Generator $faker) {
+    $repository = App::make(\App\Repositories\ScheduleRepository::class);
+    return [
+        'code' => $repository->generateCode()
+    ];
+});
