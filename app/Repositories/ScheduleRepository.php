@@ -61,4 +61,34 @@ class ScheduleRepository extends BaseRepository
         return $this->model->whereIn('code', $codes)->get();
     }
 
+    /**
+     * Check if resource was updated since $since param
+     *
+     * @param integer $conferenceId
+     * @param Carbon $since date from If-Modified-Since header
+     * @param array $params
+     *
+     * @return bool
+     */
+    public function checkLastUpdate($conferenceId, $since, $params = [])
+    {
+        $data = $this->model->withTrashed();
+
+        if ($since) {
+            $data = $data->where('updated_at', '>=', $since->toDateTimeString());
+        }
+
+        if ($params) {
+            $data = $data->where($params);
+        }
+
+        $data = $data->withTrashed()->first();
+
+        if ($data) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
