@@ -179,11 +179,12 @@ class SchedulesController extends ApiController
      * )
      *
      *
+     * @param string $conferenceAlias
      * @param integer $code
      * @param ScheduleRepository $repository
      * @return \Dingo\Api\Http\Response
      */
-    public function update($code, ScheduleRepository $repository)
+    public function update($conferenceAlias, $code, ScheduleRepository $repository)
     {
         $eventIds = $this->request->json('data');
         /** @var Schedule $schedule */
