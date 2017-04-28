@@ -216,4 +216,22 @@ class SchedulesController extends ApiController
         return $this->response->array(['code' => $schedule->code]);
     }
 
+    /**
+     * Share code, launch app by redirect
+     *
+     * @param string  $conferenceAlias
+     * @param integer $code
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function share($conferenceAlias, $code)
+    {
+        $scheme = env('API_LAUNCH_APP_SCHEME');
+        if (!$scheme) {
+            throw new NotFoundHttpException('Redirect scheme not found');
+        }
+        $appUrl = sprintf('%s://schedule/insert?code=%s', $scheme, $code);
+
+        return redirect($appUrl);
+    }
+
 }
