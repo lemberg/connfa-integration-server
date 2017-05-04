@@ -213,6 +213,10 @@ class SchedulesController extends ApiController
             $schedule->events()->attach($attachIds);
         }
 
+        if (count($detachIds) || count($attachIds)) {
+            $schedule->touch();
+        }
+
         return $this->response->array(['code' => $schedule->code]);
     }
 
