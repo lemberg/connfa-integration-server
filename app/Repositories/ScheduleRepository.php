@@ -82,13 +82,7 @@ class ScheduleRepository extends BaseRepository
             $data = $data->where($params);
         }
 
-        $data = $data->withTrashed()->first();
-
-        if ($data) {
-            return true;
-        } else {
-            return false;
-        }
+        return $data->withTrashed()->first() ? true : false;
     }
 
 }
