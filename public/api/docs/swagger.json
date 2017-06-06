@@ -491,6 +491,9 @@
                     },
                     "302": {
                         "description": "No updates"
+                    },
+                    "404": {
+                        "description": "Request contains nonexistent codes"
                     }
                 }
             }

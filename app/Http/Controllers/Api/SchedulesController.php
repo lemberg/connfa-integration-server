@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiController;
 use App\Models\Schedule;
 use App\Repositories\ScheduleRepository;
 use App\Transformers\ScheduleTransformer;
+use Illuminate\Database\Eloquent\Collection;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SchedulesController extends ApiController
@@ -52,6 +53,10 @@ class SchedulesController extends ApiController
      *     @SWG\Response(
      *         response=302,
      *         description="No updates"
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="Request contains nonexistent codes"
      *     )
      * )
      *
@@ -62,8 +67,18 @@ class SchedulesController extends ApiController
     public function index(ScheduleRepository $repository)
     {
         $codes = $this->request->query('codes', []);
+        if (!count($codes)) {
+
+            return $this->response->errorNotFound('Schedule codes are required');
+        }
+        /** @var Collection $schedules */
         $schedules = $repository->findByCodes($codes, $this->since);
         $this->checkModified($schedules);
+
+        if (count($codes) !== $schedules->count()) {
+
+            return $this->response->errorNotFound('Request contains nonexistent codes');
+        }
 
         return $this->response->collection($schedules, new ScheduleTransformer(), ['key' => 'schedules']);
     }
