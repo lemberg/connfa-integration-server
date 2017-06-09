@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+    {
+      "appID": "KFCNEC27GU.com.razeware.UniveralLinksTutorial",
+      "paths": ["*"]
+    }
+    ]
+  }
+}
