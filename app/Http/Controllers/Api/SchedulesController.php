@@ -67,10 +67,6 @@ class SchedulesController extends ApiController
     public function index(ScheduleRepository $repository)
     {
         $codes = $this->request->query('codes', []);
-        if (!count($codes)) {
-
-            return $this->response->errorBadRequest('Schedule codes are required');
-        }
         /** @var Collection $schedules */
         $schedules = $repository->findByCodes($codes, $this->since);
         $this->checkModified($schedules);
