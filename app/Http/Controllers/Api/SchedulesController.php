@@ -55,8 +55,8 @@ class SchedulesController extends ApiController
      *         description="No updates"
      *     ),
      *     @SWG\Response(
-     *         response=404,
-     *         description="Request contains nonexistent codes"
+     *         response=400,
+     *         description="Schedule codes are required"
      *     )
      * )
      *
@@ -69,18 +69,61 @@ class SchedulesController extends ApiController
         $codes = $this->request->query('codes', []);
         if (!count($codes)) {
 
-            return $this->response->errorNotFound('Schedule codes are required');
+            return $this->response->errorBadRequest('Schedule codes are required');
         }
         /** @var Collection $schedules */
         $schedules = $repository->findByCodes($codes, $this->since);
         $this->checkModified($schedules);
 
-        if (count($codes) !== $schedules->count()) {
+        return $this->response->collection($schedules, new ScheduleTransformer(), ['key' => 'schedules']);
+    }
 
-            return $this->response->errorNotFound('Request contains nonexistent codes');
+    /**
+     * Get schedule
+     *
+     * @SWG\Get(
+     *     path="/getSchedule/{code}",
+     *     summary="Get one schedule by code",
+     *     tags={"Schedule"},
+     *     description="Return one schedule by code",
+     *     operationId="show",
+     *     produces={"application/json"},
+     *    @SWG\Parameter(
+     *         description="Schedule unique code",
+     *         in="path",
+     *         name="code",
+     *         required=true,
+     *         type="integer",
+     *         format="int32"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @SWG\Schema(ref="#/definitions/Schedule")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="Schedule with code {code} not found"
+     *     )
+     * )
+     *
+     *
+     * @param string             $conferenceAlias
+     * @param integer            $code
+     * @param ScheduleRepository $repository
+     *
+     * @return \Dingo\Api\Http\Response
+     */
+    public function show($conferenceAlias, $code, ScheduleRepository $repository)
+    {
+        $schedule = $repository->findOneByCode($code);
+        if (!$schedule) {
+
+            return $this->response->errorNotFound(sprintf('Schedule with code "%s" not found', $code));
         }
 
-        return $this->response->collection($schedules, new ScheduleTransformer(), ['key' => 'schedules']);
+        return $this->response->item($schedule, new ScheduleTransformer());
+
     }
 
     /**
@@ -194,9 +237,10 @@ class SchedulesController extends ApiController
      * )
      *
      *
-     * @param string $conferenceAlias
-     * @param integer $code
+     * @param string             $conferenceAlias
+     * @param integer            $code
      * @param ScheduleRepository $repository
+     *
      * @return \Dingo\Api\Http\Response
      */
     public function update($conferenceAlias, $code, ScheduleRepository $repository)
@@ -240,6 +284,7 @@ class SchedulesController extends ApiController
      *
      * @param string  $conferenceAlias
      * @param integer $code
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function share($conferenceAlias, $code)

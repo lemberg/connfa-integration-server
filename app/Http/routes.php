@@ -181,6 +181,7 @@ $api->version('v2', [
     $api->get('getPOI', 'PointsController@index');
 
     $api->get('getSchedules', 'SchedulesController@index');
+    $api->get('getSchedule/{code}', 'SchedulesController@show');
     $api->post('createSchedule', 'SchedulesController@create');
     $api->put('updateSchedule/{code}', 'SchedulesController@update');
     $api->get('schedule/share/{code}', 'SchedulesController@share');

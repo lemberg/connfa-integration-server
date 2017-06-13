@@ -492,8 +492,42 @@
                     "302": {
                         "description": "No updates"
                     },
+                    "400": {
+                        "description": "Schedule codes are required"
+                    }
+                }
+            }
+        },
+        "/getSchedule/{code}": {
+            "get": {
+                "tags": [
+                    "Schedule"
+                ],
+                "summary": "Get one schedule by code",
+                "description": "Return one schedule by code",
+                "operationId": "show",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "code",
+                        "in": "path",
+                        "description": "Schedule unique code",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Schedule"
+                        }
+                    },
                     "404": {
-                        "description": "Request contains nonexistent codes"
+                        "description": "Schedule with code {code} not found"
                     }
                 }
             }
