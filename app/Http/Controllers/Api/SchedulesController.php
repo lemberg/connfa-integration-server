@@ -67,6 +67,9 @@ class SchedulesController extends ApiController
     public function index(ScheduleRepository $repository)
     {
         $codes = $this->request->query('codes', []);
+        if (!is_array($codes)) {
+            $codes = [];
+        }
         /** @var Collection $schedules */
         $schedules = $repository->findByCodes($codes, $this->since);
         $this->checkModified($schedules);
