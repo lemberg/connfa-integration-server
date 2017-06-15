@@ -51,12 +51,8 @@ class SchedulesController extends ApiController
      *         )
      *     ),
      *     @SWG\Response(
-     *         response=302,
+     *         response=304,
      *         description="No updates"
-     *     ),
-     *     @SWG\Response(
-     *         response=400,
-     *         description="Schedule codes are required"
      *     )
      * )
      *

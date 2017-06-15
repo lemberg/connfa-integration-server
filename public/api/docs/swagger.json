@@ -42,7 +42,7 @@
                             }
                         }
                     },
-                    "302": {
+                    "304": {
                         "description": "No updates"
                     }
                 }
@@ -84,7 +84,7 @@
                             }
                         }
                     },
-                    "302": {
+                    "304": {
                         "description": "No updates"
                     }
                 }
@@ -126,7 +126,7 @@
                             }
                         }
                     },
-                    "302": {
+                    "304": {
                         "description": "No updates"
                     }
                 }
@@ -168,7 +168,7 @@
                             }
                         }
                     },
-                    "302": {
+                    "304": {
                         "description": "No updates"
                     }
                 }
@@ -210,7 +210,7 @@
                             }
                         }
                     },
-                    "302": {
+                    "304": {
                         "description": "No updates"
                     }
                 }
@@ -252,7 +252,7 @@
                             }
                         }
                     },
-                    "302": {
+                    "304": {
                         "description": "No updates"
                     }
                 }
@@ -294,7 +294,7 @@
                             }
                         }
                     },
-                    "302": {
+                    "304": {
                         "description": "No updates"
                     }
                 }
@@ -336,7 +336,7 @@
                             }
                         }
                     },
-                    "302": {
+                    "304": {
                         "description": "No updates"
                     }
                 }
@@ -394,7 +394,7 @@
                             }
                         }
                     },
-                    "302": {
+                    "304": {
                         "description": "No updates"
                     }
                 }
@@ -436,7 +436,7 @@
                             }
                         }
                     },
-                    "302": {
+                    "304": {
                         "description": "No updates"
                     }
                 }
@@ -489,11 +489,8 @@
                             }
                         }
                     },
-                    "302": {
+                    "304": {
                         "description": "No updates"
-                    },
-                    "400": {
-                        "description": "Schedule codes are required"
                     }
                 }
             }
@@ -704,7 +701,7 @@
                             }
                         }
                     },
-                    "302": {
+                    "304": {
                         "description": "No updates"
                     }
                 }

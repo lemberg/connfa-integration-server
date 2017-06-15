@@ -61,7 +61,7 @@ class EventsController extends ApiController
      *         )
      *     ),
      *     @SWG\Response(
-     *         response=302,
+     *         response=304,
      *         description="No updates"
      *     )
      * )
@@ -108,7 +108,7 @@ class EventsController extends ApiController
      *         )
      *     ),
      *     @SWG\Response(
-     *         response=302,
+     *         response=304,
      *         description="No updates"
      *     )
      * )
@@ -155,7 +155,7 @@ class EventsController extends ApiController
      *         )
      *     ),
      *     @SWG\Response(
-     *         response=302,
+     *         response=304,
      *         description="No updates"
      *     )
      * )
