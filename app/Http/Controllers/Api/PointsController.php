@@ -12,12 +12,19 @@ class PointsController extends ApiController
      * Get list of Points of Interests
      *
      * @SWG\Get(
-     *     path="/getPOI",
+     *     path="/{conference_alias}/getPOI",
      *     summary="Get all points",
      *     tags={"Point"},
      *     description="Returns all points, since 'If-Modified-Since'",
      *     operationId="index",
      *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="Conference alias",
+     *         in="path",
+     *         name="conference_alias",
+     *         required=true,
+     *         type="string"
+     *     ),
      *     @SWG\Parameter(
      *         name="If-Modified-Since",
      *         in="header",

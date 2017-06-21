@@ -16,7 +16,7 @@ class SchedulesController extends ApiController
      *  Get schedules
      *
      * @SWG\Get(
-     *     path="/getSchedules",
+     *     path="/{conference_alias}/getSchedules",
      *     summary="Get all schedules",
      *     tags={"Schedule"},
      *     description="Returns all schedules by codes, since 'If-Modified-Since'",
@@ -29,6 +29,13 @@ class SchedulesController extends ApiController
      *         type="string",
      *         description="Date, for example: Tue, 4 Apr 2017 09:50:24 +0000",
      *         default="Tue, 4 Apr 2017 09:50:24 +0000"
+     *     ),
+     *     @SWG\Parameter(
+     *         description="Conference alias",
+     *         in="path",
+     *         name="conference_alias",
+     *         required=true,
+     *         type="string"
      *     ),
      *     @SWG\Parameter(
      *         name="codes[]",
@@ -77,13 +84,20 @@ class SchedulesController extends ApiController
      * Get schedule
      *
      * @SWG\Get(
-     *     path="/getSchedule/{code}",
+     *     path="/{conference_alias}/getSchedule/{code}",
      *     summary="Get one schedule by code",
      *     tags={"Schedule"},
      *     description="Return one schedule by code",
      *     operationId="show",
      *     produces={"application/json"},
-     *    @SWG\Parameter(
+     *     @SWG\Parameter(
+     *         description="Conference alias",
+     *         in="path",
+     *         name="conference_alias",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
      *         description="Schedule unique code",
      *         in="path",
      *         name="code",
@@ -125,12 +139,19 @@ class SchedulesController extends ApiController
      * Create schedule
      *
      * @SWG\Post(
-     *     path="/createSchedule",
+     *     path="/{conference_alias}/createSchedule",
      *     summary="Create schedule",
      *     tags={"Schedule"},
      *     description="Create schedule",
      *     operationId="create",
      *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="Conference alias",
+     *         in="path",
+     *         name="conference_alias",
+     *         required=true,
+     *         type="string"
+     *     ),
      *     @SWG\Parameter(
      *         name="body",
      *         in="body",
@@ -182,12 +203,19 @@ class SchedulesController extends ApiController
      * Update schedule
      *
      * @SWG\Put(
-     *     path="/updateSchedule/{code}",
+     *     path="/{conference_alias}/updateSchedule/{code}",
      *     summary="Update schedule",
      *     tags={"Schedule"},
      *     description="Update schedule",
      *     operationId="update",
      *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="Conference alias",
+     *         in="path",
+     *         name="conference_alias",
+     *         required=true,
+     *         type="string"
+     *     ),
      *     @SWG\Parameter(
      *         description="Schedule unique code",
      *         in="path",

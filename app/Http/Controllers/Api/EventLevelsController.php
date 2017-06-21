@@ -12,12 +12,19 @@ class EventLevelsController extends ApiController
      * Get list of Event Levels
      *
      * @SWG\Get(
-     *     path="/getLevels",
+     *     path="/{conference_alias}/getLevels",
      *     summary="Get all event levels",
      *     tags={"Event"},
      *     description="Returns all event levels, since 'If-Modified-Since'",
      *     operationId="index",
      *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="Conference alias",
+     *         in="path",
+     *         name="conference_alias",
+     *         required=true,
+     *         type="string"
+     *     ),
      *     @SWG\Parameter(
      *         name="If-Modified-Since",
      *         in="header",

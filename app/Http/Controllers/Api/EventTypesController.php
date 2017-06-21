@@ -12,12 +12,19 @@ class EventTypesController extends ApiController
      * Get list of Event Types
      *
      * @SWG\Get(
-     *     path="/getTypes",
+     *     path="/{conference_alias}/getTypes",
      *     summary="Get all event types",
      *     tags={"Event"},
      *     description="Returns all event types, since 'If-Modified-Since'",
      *     operationId="index",
      *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="Conference alias",
+     *         in="path",
+     *         name="conference_alias",
+     *         required=true,
+     *         type="string"
+     *     ),
      *     @SWG\Parameter(
      *         name="If-Modified-Since",
      *         in="header",

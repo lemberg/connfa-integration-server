@@ -12,12 +12,19 @@ class LocationsController extends ApiController
      * Get list of Locations
      *
      * @SWG\Get(
-     *     path="/getLocations",
+     *     path="/{conference_alias}/getLocations",
      *     summary="Get all locations",
      *     tags={"Location"},
      *     description="Returns all locations, since 'If-Modified-Since'",
      *     operationId="index",
      *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="Conference alias",
+     *         in="path",
+     *         name="conference_alias",
+     *         required=true,
+     *         type="string"
+     *     ),
      *     @SWG\Parameter(
      *         name="If-Modified-Since",
      *         in="header",

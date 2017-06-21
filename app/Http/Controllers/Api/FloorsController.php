@@ -12,12 +12,19 @@ class FloorsController extends ApiController
      * Get list of Floor plans
      *
      * @SWG\Get(
-     *     path="/getFloorPlans",
+     *     path="/{conference_alias}/getFloorPlans",
      *     summary="Get all floor plans",
      *     tags={"Floor"},
      *     description="Returns all floor plans, since 'If-Modified-Since'",
      *     operationId="index",
      *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="Conference alias",
+     *         in="path",
+     *         name="conference_alias",
+     *         required=true,
+     *         type="string"
+     *     ),
      *     @SWG\Parameter(
      *         name="If-Modified-Since",
      *         in="header",

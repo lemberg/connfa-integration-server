@@ -12,12 +12,19 @@ class SpeakersController extends ApiController
      * Get list of Speakers
      *
      * @SWG\Get(
-     *     path="/getSpeakers",
+     *     path="/{conference_alias}/getSpeakers",
      *     summary="Get all speakers",
      *     tags={"Speaker"},
      *     description="Returns all speakers, since 'If-Modified-Since'",
      *     operationId="index",
      *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="Conference alias",
+     *         in="path",
+     *         name="conference_alias",
+     *         required=true,
+     *         type="string"
+     *     ),
      *     @SWG\Parameter(
      *         name="If-Modified-Since",
      *         in="header",

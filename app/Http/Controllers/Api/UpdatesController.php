@@ -13,12 +13,19 @@ class UpdatesController extends ApiController
      *
      *
      * @SWG\Get(
-     *     path="/checkUpdates",
+     *     path="/{conference_alias}/checkUpdates",
      *     summary="Get entities for update",
      *     tags={"Updates"},
      *     description="Return ids of entities for update.<br>The ids of methods application should call to update data.<br>Methods:<br>0 getSettings<br>1 getTypes<br>2 getLevels<br>3 getTracks<br>4 getSpeakers<br>5 getLocations<br>6 getFloorPlans<br>7 getSessions<br>8 getBofs<br>9 getSocialEvents<br>10 getPOI<br>11 getInfo<br>12 getSchedules",
      *     operationId="index",
      *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="Conference alias",
+     *         in="path",
+     *         name="conference_alias",
+     *         required=true,
+     *         type="string"
+     *     ),
      *     @SWG\Parameter(
      *         name="If-Modified-Since",
      *         in="header",

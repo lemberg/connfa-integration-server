@@ -12,12 +12,19 @@ class EventTracksController extends ApiController
      * Get list of Events Tracks
      *
      *  @SWG\Get(
-     *     path="/getTracks",
+     *     path="/{conference_alias}/getTracks",
      *     summary="Get all event tracks",
      *     tags={"Event"},
      *     description="Returns all event tracks, since 'If-Modified-Since'",
      *     operationId="index",
      *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="Conference alias",
+     *         in="path",
+     *         name="conference_alias",
+     *         required=true,
+     *         type="string"
+     *     ),
      *     @SWG\Parameter(
      *         name="If-Modified-Since",
      *         in="header",

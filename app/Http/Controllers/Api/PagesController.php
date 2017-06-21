@@ -13,12 +13,19 @@ class PagesController extends ApiController
      * Get lists of info pages and info titles
      *
      * @SWG\Get(
-     *     path="/getInfo",
+     *     path="/{conference_alias}/getInfo",
      *     summary="Get all info",
      *     tags={"Info"},
      *     description="Returns all info, since 'If-Modified-Since'",
      *     operationId="index",
      *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="Conference alias",
+     *         in="path",
+     *         name="conference_alias",
+     *         required=true,
+     *         type="string"
+     *     ),
      *     @SWG\Parameter(
      *         name="If-Modified-Since",
      *         in="header",

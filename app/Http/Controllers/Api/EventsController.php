@@ -35,12 +35,19 @@ class EventsController extends ApiController
      * Get list of sessions
      *
      * @SWG\Get(
-     *     path="/getSessions",
+     *     path="/{conference_alias}/getSessions",
      *     summary="Get all sessions",
      *     tags={"Event"},
      *     description="Returns all sessions",
      *     operationId="getSessions",
      *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="Conference alias",
+     *         in="path",
+     *         name="conference_alias",
+     *         required=true,
+     *         type="string"
+     *     ),
      *     @SWG\Parameter(
      *         name="If-Modified-Since",
      *         in="header",
@@ -82,12 +89,19 @@ class EventsController extends ApiController
      * Get list of bofs
      *
      * @SWG\Get(
-     *     path="/getBofs",
+     *     path="/{conference_alias}/getBofs",
      *     summary="Get all bofs",
      *     tags={"Event"},
      *     description="Returns all bofs",
      *     operationId="getBofs",
      *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="Conference alias",
+     *         in="path",
+     *         name="conference_alias",
+     *         required=true,
+     *         type="string"
+     *     ),
      *     @SWG\Parameter(
      *         name="If-Modified-Since",
      *         in="header",
@@ -129,12 +143,19 @@ class EventsController extends ApiController
      * Get list of social events
      *
      * @SWG\Get(
-     *     path="/getSocialEvents",
+     *     path="/{conference_alias}/getSocialEvents",
      *     summary="Get all social events",
      *     tags={"Event"},
      *     description="Returns all social events, since 'If-Modified-Since'",
      *     operationId="getSocialEvents",
      *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="Conference alias",
+     *         in="path",
+     *         name="conference_alias",
+     *         required=true,
+     *         type="string"
+     *     ),
      *     @SWG\Parameter(
      *         name="If-Modified-Since",
      *         in="header",
