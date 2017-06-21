@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Http\Controllers\ApiController;
+use App\Http\Controllers\Controller;
 
-class SchedulesController extends ApiController
+class SchedulesController extends Controller
 {
 
     /**
