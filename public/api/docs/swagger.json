@@ -4,7 +4,7 @@
         "title": "Connfa API",
         "version": "2.0"
     },
-    "basePath": "/api/v2/euna-mcdermott-dds",
+    "basePath": "/api/v2",
     "paths": {
         "/{conference_alias}/getLevels": {
             "get": {
