@@ -33,10 +33,10 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="buttons">
                         <h3 class="text-center">Install app</h3>
-                        <a href="{{ env('API_GOOGLE_PLAY_LINK') }}">
+                        <a href="{{ env('APP_LINK_GOOGLE_PLAY') }}">
                             <img src="{{ URL::asset('assets/images/google-play-icon.png') }}">
                         </a>
-                        <a href="{{ env('API_APPLE_STORE_LINK') }}">
+                        <a href="{{ env('APP_LINK_APPLE_STORE') }}">
                             <img src="{{ URL::asset('assets/images/apple-store-icon.png') }}">
                         </a>
                     </div>
