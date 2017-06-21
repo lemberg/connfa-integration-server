@@ -51,6 +51,13 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
     $app->post('upload/image', 'UploadController@image')->name('upload.image');
 });
 
+/**
+ * CMS routes
+ */
+$app->group(['middleware' => [], 'namespace' => 'Web'], function ($app) {
+    $app->get('schedule/share', 'SchedulesController@share')->name('schedules.share');
+});
+
 $app->group(['middleware' => ['auth'], 'namespace' => 'CMS', 'prefix' => '{conference_alias}'], function ($app) {
     $app->get('/', function () {
         return redirect()->route('dashboard', ['conference_alias' => request()->route()->parameter('conference_alias')]);
@@ -184,7 +191,6 @@ $api->version('v2', [
     $api->get('getSchedule/{code}', 'SchedulesController@show');
     $api->post('createSchedule', 'SchedulesController@create');
     $api->put('updateSchedule/{code}', 'SchedulesController@update');
-    $api->get('schedule/share/{code}', 'SchedulesController@share');
 
     $api->get('checkUpdates', 'UpdatesController@index');
 });

@@ -4857,7 +4857,10 @@ ul.widget_profile_box li{
 /* Conference template styles */
 .nav-md .container.body.conference .right_col,
 .nav-md .container.body.conference .top_nav,
-.nav-md .container.body.conference footer {
+.nav-md .container.body.conference footer,
+.nav-md .container.body.launch-application .right_col,
+.nav-md .container.body.launch-application .top_nav,
+.nav-md .container.body.launch-application footer{
   margin-left: 0;
 }
 
@@ -4871,4 +4874,17 @@ ul.widget_profile_box li{
 
 .select2-container--default .select2-results__option[aria-selected=true] {
   display: none;
+}
+
+.nav-md .container.body.launch-application .right_col {
+  height: calc(100vh - 52px);
+}
+
+.nav-md .container.body.launch-application .buttons {
+  width: 605px;
+  margin: 0 auto;
+}
+
+.nav-md .container.body.launch-application .buttons img {
+  width: 300px;
 }
