@@ -525,14 +525,6 @@
                 ],
                 "parameters": [
                     {
-                        "name": "If-Modified-Since",
-                        "in": "header",
-                        "description": "Date, for example: Tue, 4 Apr 2017 09:50:24 +0000",
-                        "required": false,
-                        "type": "string",
-                        "default": "Tue, 4 Apr 2017 09:50:24 +0000"
-                    },
-                    {
                         "name": "conference_alias",
                         "in": "path",
                         "description": "Conference alias",
@@ -549,6 +541,14 @@
                             "type": "integer"
                         },
                         "collectionFormat": "multi"
+                    },
+                    {
+                        "name": "If-Modified-Since",
+                        "in": "header",
+                        "description": "Date, for example: Tue, 4 Apr 2017 09:50:24 +0000",
+                        "required": false,
+                        "type": "string",
+                        "default": "Tue, 4 Apr 2017 09:50:24 +0000"
                     }
                 ],
                 "responses": {
