@@ -23,14 +23,6 @@ class SchedulesController extends ApiController
      *     operationId="index",
      *     produces={"application/json"},
      *     @SWG\Parameter(
-     *         name="If-Modified-Since",
-     *         in="header",
-     *         required=false,
-     *         type="string",
-     *         description="Date, for example: Tue, 4 Apr 2017 09:50:24 +0000",
-     *         default="Tue, 4 Apr 2017 09:50:24 +0000"
-     *     ),
-     *     @SWG\Parameter(
      *         description="Conference alias",
      *         in="path",
      *         name="conference_alias",
@@ -45,6 +37,14 @@ class SchedulesController extends ApiController
      *         type="array",
      *         @SWG\Items(type="integer"),
      *         collectionFormat="multi"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="If-Modified-Since",
+     *         in="header",
+     *         required=false,
+     *         type="string",
+     *         description="Date, for example: Tue, 4 Apr 2017 09:50:24 +0000",
+     *         default="Tue, 4 Apr 2017 09:50:24 +0000"
      *     ),
      *     @SWG\Response(
      *         response=200,
