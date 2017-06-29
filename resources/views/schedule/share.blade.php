@@ -54,14 +54,6 @@
         <!-- /footer content -->
     </div>
 </div>
-<!-- jQuery -->
-<script src="{{ URL::asset('assets/vendors/jquery/dist/jquery.min.js') }}"></script>
-<script>
-    $(document).ready(function () {
-        var url = 'connfa.scheme://schedule/insert?code={{ app('request')->query('code') }}';
-        $.get(url);
-    });
-</script>
 </body>
 </html>
 
