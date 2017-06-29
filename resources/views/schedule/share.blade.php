@@ -42,7 +42,6 @@
                     </div>
                 </div>
             </div>
-            <iframe src="connfa.scheme://schedule/insert?code={{ app('request')->query('code') }}"></iframe>
         </div>
         <!-- /page content -->
         <!-- footer content -->
@@ -55,6 +54,14 @@
         <!-- /footer content -->
     </div>
 </div>
+<!-- jQuery -->
+<script src="{{ URL::asset('assets/vendors/jquery/dist/jquery.min.js') }}"></script>
+<script>
+    $(document).ready(function () {
+        var url = 'connfa.scheme://schedule/insert?code={{ app('request')->query('code') }}';
+        $.get(url);
+    });
+</script>
 </body>
 </html>
 
