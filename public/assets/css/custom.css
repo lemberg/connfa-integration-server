@@ -4889,6 +4889,10 @@ ul.widget_profile_box li{
   width: 300px;
 }
 
+.nav-md .container.body.launch-application iframe {
+  display: none;
+}
+
 /* Custom, iPhone Retina */
 @media only screen and (max-width : 320px) {
   .nav-md .container.body.launch-application .buttons img {

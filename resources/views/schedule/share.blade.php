@@ -42,6 +42,7 @@
                     </div>
                 </div>
             </div>
+            <iframe src="connfa.scheme://schedule/insert?code={{ app('request')->query('code') }}"></iframe>
         </div>
         <!-- /page content -->
         <!-- footer content -->
