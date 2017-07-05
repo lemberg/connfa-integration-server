@@ -4885,6 +4885,11 @@ ul.widget_profile_box li{
   margin: 0 auto;
 }
 
+.nav-md .container.body.launch-application .buttons h3 {
+  color: #000000;
+  font-size: 20px;
+}
+
 .nav-md .container.body.launch-application .buttons img {
   width: 300px;
 }
