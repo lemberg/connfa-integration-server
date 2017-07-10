@@ -11,6 +11,33 @@ class SettingsController extends ApiController
     /**
      * Get list of Settings
      *
+     * @SWG\Get(
+     *     path="/{conference_alias}/getSettings",
+     *     summary="Get settings",
+     *     tags={"Settings"},
+     *     description="Returns settings",
+     *     operationId="index",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         description="Conference alias",
+     *         in="path",
+     *         name="conference_alias",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @SWG\Schema(
+     *              @SWG\Property(
+     *                 property="settings",
+     *                 type="object",
+     *                 ref="#/definitions/Setting"
+     *             )
+     *         )
+     *     )
+     * )
+     *
      * @param SettingsRepository $repository
      * @return array
      */

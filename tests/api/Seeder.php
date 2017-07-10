@@ -83,6 +83,14 @@ class Seeder
         return $factory;
     }
 
+    public function schedule($data = [])
+    {
+        $factory = factory(App\Models\Schedule::class, 1)->make($data);
+        $factory->save();
+
+        return $factory;
+    }
+
     public function setting($data = [])
     {
         $data = array_merge([

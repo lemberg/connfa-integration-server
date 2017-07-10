@@ -23,7 +23,44 @@ class PageTransformer implements EmbeddedTransformer
     /**
      * Transform object into a generic array
      *
-     * @var  object
+     * @SWG\Definition(
+     *      definition="Page",
+     *      required={"infoId", "infoTitle", "html", "order", "deleted"},
+     *      @SWG\Property(
+     *          property="infoId",
+     *          type="integer",
+     *          format="int32",
+     *          example=1,
+     *          description="Info id"
+     *      ),
+     *      @SWG\Property(
+     *          property="infoTitle",
+     *          type="string",
+     *          example="sapiente",
+     *          description="Info title"
+     *      ),
+     *      @SWG\Property(
+     *          property="html",
+     *          type="string",
+     *          example="Qui ea et nobis adipisci pariatur. Quisquam laborum vitae veniam non. Quas et possimus ea eos vel exercitationem fuga eius.",
+     *          description="Content"
+     *      ),
+     *      @SWG\Property(
+     *          property="order",
+     *          type="integer",
+     *          format="int32",
+     *          example=1,
+     *          description="Position for sorting"
+     *      ),
+     *      @SWG\Property(
+     *          property="deleted",
+     *          type="boolean",
+     *          example=false,
+     *          description="Is item deleted"
+     *      )
+     * )
+     *
+     * @param  $page
      * @return array
      */
     public function transform($page)

@@ -8,6 +8,16 @@ use Illuminate\Contracts\Container\Container;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
+/**
+ * @SWG\Swagger(
+ *     basePath="/api/v2",
+ *     @SWG\Info(
+ *          title="Connfa API",
+ *          version="2.0"
+ *     )
+ * )
+ */
+
 class ApiController extends Controller
 {
     use Helpers;

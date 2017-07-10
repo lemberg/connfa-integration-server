@@ -64,6 +64,10 @@ class UpdateRepository
         'info'      => array(
             'id'         => 11,
             'repository' => PageRepository::class,
+        ),
+        'schedule'      => array(
+            'id'         => 12,
+            'repository' => ScheduleRepository::class,
         )
     );
 
