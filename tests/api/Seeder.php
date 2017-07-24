@@ -91,6 +91,18 @@ class Seeder
         return $factory;
     }
 
+    public function scheduleWithEvents($data = [])
+    {
+        $factory = factory(App\Models\Schedule::class, 1)->make($data['schedule']);
+        $factory->save();
+
+        if (isset($data['events'])) {
+            $factory->events()->attach($data['events']);
+        }
+
+        return $factory;
+    }
+
     public function setting($data = [])
     {
         $data = array_merge([

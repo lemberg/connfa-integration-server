@@ -16,7 +16,7 @@ class SchedulesCest extends BaseCest
     public function tryToGetSchedulesWhenEmpty(ApiTester $I)
     {
         $code = 1111;
-        $I->sendGET('v2/getSchedules?codes[]=' . $code);
+        $I->sendGET('v2/test/getSchedules?codes[]=' . $code);
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson(['schedules' => []]);
     }
@@ -25,7 +25,7 @@ class SchedulesCest extends BaseCest
     {
         $code = 1111;
         $I->haveASchedule(['code' => $code]);
-        $I->sendGET('v2/getSchedules?codes[]=' . $code);
+        $I->sendGET('v2/test/getSchedules?codes[]=' . $code);
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson([
             'schedules' => [
@@ -43,7 +43,7 @@ class SchedulesCest extends BaseCest
         $since = \Carbon\Carbon::parse('-1 hour');
         $schedule = $I->haveASchedule(['code' => $code]);
         $I->haveHttpHeader('If-modified-since', $since->toIso8601String());
-        $I->sendGET('v2/getSchedules?codes[]=' . $code);
+        $I->sendGET('v2/test/getSchedules?codes[]=' . $code);
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson([
             'schedules' => [
@@ -61,19 +61,19 @@ class SchedulesCest extends BaseCest
         $since = \Carbon\Carbon::parse('+5 hour');
         $I->haveASchedule(['code' => $code]);
         $I->haveHttpHeader('If-modified-since', $since->toIso8601String());
-        $I->sendGET('v2/getSchedules?codes[]=' . $code);
+        $I->sendGET('v2/test/getSchedules?codes[]=' . $code);
         $I->seeResponseCodeIs(304);
     }
 
     public function tryToCreateScheduleWhenEmpty(ApiTester $I)
     {
-        $I->sendPOST('v2/createSchedule');
+        $I->sendPOST('v2/test/createSchedule');
         $I->seeResponseCodeIs(200);
     }
 
     public function tryToCreateSchedule(ApiTester $I)
     {
-        $I->sendPOST('v2/createSchedule', ['data' => $this->generateEventIds($I)]);
+        $I->sendPOST('v2/test/createSchedule', ['data' => $this->generateEventIds($I)]);
         $I->seeResponseCodeIs(200);
         $I->seeResponseMatchesJsonType(['code' => 'integer']);
     }
@@ -83,9 +83,20 @@ class SchedulesCest extends BaseCest
         $code = 1111;
         $I->haveASchedule(['code' => $code]);
         $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->sendPUT('v2/updateSchedule/' . $code, ['data' => $this->generateEventIds($I, 4)]);
+        $I->sendPUT('v2/test/updateSchedule/' . $code, ['data' => $this->generateEventIds($I, 4)]);
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson(['code' => $code]);
+    }
+
+    public function tryToGetOneSchedule(ApiTester $I)
+    {
+        $code = 1111;
+        $eventIds = $this->generateEventIds($I, 4);
+        $I->haveAScheduleWithEvents(['schedule' => ['code' => $code], 'events' => $eventIds]);
+        $I->haveHttpHeader('Content-Type', 'application/json');
+        $I->sendGET('v2/test/getSchedule/' . $code);
+        $I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson(['code' => $code, 'events' => $eventIds]);
     }
 
     /**
