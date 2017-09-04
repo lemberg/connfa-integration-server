@@ -61,6 +61,14 @@ class Event extends Model
         return $this->belongsToMany(Speaker::class);
     }
 
+    /**
+     * Get users with a certain role
+     */
+    public function schedules()
+    {
+        return $this->belongsToMany(Schedule::class, 'schedule_event');
+    }
+
     public function getFormattedStartAt($tz)
     {
         return $this->getFormattedDate($this->start_at, $tz);

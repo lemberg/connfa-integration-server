@@ -44,7 +44,7 @@
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 {{ Form::text('twitterSearchQuery', array_get($data, 'twitterSearchQuery'), ['class' => 'form-control col-md-7 col-xs-12']) }}
                                 <span class="help-block">
-                                    Enter twitter search query for mobile clients
+                                    Enter twitter search query for mobile clients. In case of more than one tag, separate them by &lt;whitespace&gt;OR&lt;whitespace&gt;
                                 </span>
                                 @if ($errors->has('twitterSearchQuery'))
                                     <span class="help-block">

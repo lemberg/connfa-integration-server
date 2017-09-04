@@ -2,6 +2,7 @@
 
 namespace App\Transformers\Event;
 
+use App\Models\Event\Type;
 use League\Fractal\TransformerAbstract;
 
 class TypeTransformer extends TransformerAbstract
@@ -23,10 +24,47 @@ class TypeTransformer extends TransformerAbstract
     /**
      * Transform object into a generic array
      *
-     * @var  object
+     * @SWG\Definition(
+     *      definition="Type",
+     *      required={"typeId", "typeName", "typeIconURL", "order", "deleted"},
+     *      @SWG\Property(
+     *          property="typeId",
+     *          type="integer",
+     *          format="int32",
+     *          example=1,
+     *          description="Type id"
+     *      ),
+     *      @SWG\Property(
+     *          property="typeName",
+     *          type="string",
+     *          example="Speech",
+     *          description="Type name"
+     *      ),
+     *      @SWG\Property(
+     *          property="typeIconURL",
+     *          type="string|null",
+     *          example="https://www.w3schools.com/css/img_fjords.jpg",
+     *          description="Icon url"
+     *      ),
+     *      @SWG\Property(
+     *          property="order",
+     *          type="integer",
+     *          format="int32",
+     *          example=1,
+     *          description="Position for sorting"
+     *      ),
+     *      @SWG\Property(
+     *          property="deleted",
+     *          type="boolean",
+     *          example=false,
+     *          description="Is type deleted"
+     *      )
+     *  )
+     *
+     * @param Type $type
      * @return array
      */
-    public function transform($type)
+    public function transform(Type $type)
     {
         $data = [
             'typeId'      => $type->id,

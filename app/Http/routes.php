@@ -23,6 +23,8 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
     $app->get('/', function () {
         return redirect()->route('conferences.index');
     });
+
+    // Conferences
     $app->get('conferences/data', 'ConferencesController@getData')->name('conferences.data');
     $app->get('conference/{id}/select', 'ConferencesController@select')->name('conferences.select');
 
@@ -33,6 +35,7 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
     $app->put('conferences/{id}', 'ConferencesController@update')->name('conferences.update');
     $app->delete('conferences/{id}', 'ConferencesController@destroy')->name('conferences.destroy');
 
+    // Users
     $app->group(['middleware' => ['permission:edit-user']], function($app) {
         // Users
         $app->get('users', 'UsersController@index')->name('users.index');
@@ -44,6 +47,15 @@ $app->group(['middleware' => ['auth'], 'namespace' => 'CMS'], function ($app) {
         $app->delete('users/{id}', 'UsersController@destroy')->name('users.destroy');
     });
 
+    // Upload files
+    $app->post('upload/image', 'UploadController@image')->name('upload.image');
+});
+
+/**
+ * CMS routes
+ */
+$app->group(['middleware' => [], 'namespace' => 'Web'], function ($app) {
+    $app->get('schedule/share', 'SchedulesController@share')->name('schedules.share');
 });
 
 $app->group(['middleware' => ['auth'], 'namespace' => 'CMS', 'prefix' => '{conference_alias}'], function ($app) {
@@ -174,5 +186,11 @@ $api->version('v2', [
     $api->get('getInfo', 'PagesController@index');
     $api->get('getLocations', 'LocationsController@index');
     $api->get('getPOI', 'PointsController@index');
+
+    $api->get('getSchedules', 'SchedulesController@index');
+    $api->get('getSchedule/{code}', 'SchedulesController@show');
+    $api->post('createSchedule', 'SchedulesController@create');
+    $api->put('updateSchedule/{code}', 'SchedulesController@update');
+
     $api->get('checkUpdates', 'UpdatesController@index');
 });

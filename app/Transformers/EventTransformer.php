@@ -29,7 +29,23 @@ class EventTransformer extends TransformerAbstract
     /**
      * Transform object into a generic array
      *
-     * @var  object
+     * @SWG\Definition(
+     *      definition="EventList",
+     *      required={"date", "events"},
+     *      @SWG\Property(
+     *          property="date",
+     *          type="string",
+     *          example="17-04-2017",
+     *          description="Date of event"
+     *      ),
+     *      @SWG\Property(
+     *          property="events",
+     *          type="array",
+     *          @SWG\Items(ref="#/definitions/Event")
+     *      )
+     * )
+     *
+     * @param  $data
      * @return array
      */
     public function transform($data)

@@ -1,6 +1,7 @@
 /vendor
 /node_modules
 /public/storage
+/public/apple-app-site-association
 Homestead.yaml
 Homestead.json
 .env
@@ -11,3 +12,4 @@ tests/_output/*
 tests/_envs/*
 tests/_support/_generated/*
 public/uploads/*
+public/api/docs/swagger.json

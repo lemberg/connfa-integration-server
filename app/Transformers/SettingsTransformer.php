@@ -24,7 +24,32 @@ class SettingsTransformer extends TransformerAbstract
     /**
      * Transform object into a generic array
      *
-     * @var  object
+     * @SWG\Definition(
+     *      definition="Setting",
+     *      required={"titleMajor", "titleMinor", "twitterSearchQuery", "timezone"},
+     *      @SWG\Property(
+     *          property="titleMajor",
+     *          type="string",
+     *          example="Barcelona"
+     *      ),
+     *      @SWG\Property(
+     *          property="titleMinor",
+     *          type="string",
+     *          example="Drupalcon 2015"
+     *      ),
+     *      @SWG\Property(
+     *          property="twitterSearchQuery",
+     *          type="string",
+     *          example="#drupalcon"
+     *      ),
+     *      @SWG\Property(
+     *          property="timezone",
+     *          type="string",
+     *          example="Europe/Kiev",
+     *      )
+     * )
+     *
+     * @param  $data
      * @return array
      */
     public function transform($data)
