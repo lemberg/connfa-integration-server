@@ -16,7 +16,7 @@
         "intervention/image": "dev-master",
         "davejamesmiller/laravel-breadcrumbs": "^3.0",
         "yajra/laravel-datatables-oracle": "~6.0",
-        "zizaco/entrust": "5.2.x-dev",
+        "zizaco/entrust": "dev-master",
         "fzaninotto/faker": "~1.4",
         "zircote/swagger-php": "^2.0"
     },
