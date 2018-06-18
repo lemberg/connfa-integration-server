@@ -13,16 +13,17 @@ class CreateSchedulesEventsTable extends Migration
     public function up()
     {
         Schema::create('schedule_event', function (Blueprint $table) {
-
             $table->integer('schedule_id')->unsigned()->nullable();
-            $table->foreign('schedule_id')->references('id')
-                ->on('schedules')->onDelete('cascade');
-
             $table->integer('event_id')->unsigned()->nullable();
-            $table->foreign('event_id')->references('id')
-                ->on('events')->onDelete('cascade');
 
             $table->primary(['schedule_id', 'event_id']);
+        });
+
+        Schema::table('schedule_event', function (Blueprint $table) {
+            $table->foreign('schedule_id')->references('id')
+                  ->on('schedules')->onDelete('cascade');
+            $table->foreign('event_id')->references('id')
+                  ->on('events')->onDelete('cascade');
         });
     }
 

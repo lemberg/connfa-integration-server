@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Services\ConferenceService;
+
 /**
  * Class PageRequest
  * @package App\Http\Requests
@@ -26,16 +28,18 @@ class PageRequest extends Request
     public function rules()
     {
         $validation = [];
+        $conference = \App::make(ConferenceService::class)->getModel();
+
         if ($this->method() == 'POST') {
             $validation = [
-                'name' => 'required|unique:pages,name,NULL,id,deleted_at,NULL',
-                'alias' => 'required|unique:pages,alias,NULL,id,deleted_at,NULL',
+                'name' => 'required|unique:pages,name,NULL,id,deleted_at,NULL,conference_id,' . $conference->id,
+                'alias' => 'required|unique:pages,alias,NULL,id,deleted_at,NULL,conference_id,' . $conference->id,
                 'content' => 'required',
             ];
         } elseif ($this->method() == 'PUT') {
             $validation = [
-                'name' => 'required|unique:pages,name,' . $this->route()->parameter('id') . ',id,deleted_at,NULL',
-                'alias' => 'required|unique:pages,alias,' . $this->route()->parameter('id') . ',id,deleted_at,NULL',
+                'name' => 'required|unique:pages,name,' . $this->route()->parameter('id') . ',id,deleted_at,NULL,conference_id,' . $conference->id,
+                'alias' => 'required|unique:pages,alias,' . $this->route()->parameter('id') . ',id,deleted_at,NULL,conference_id,' . $conference->id,
                 'content' => 'required',
             ];
         }
